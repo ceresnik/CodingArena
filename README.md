@@ -21,7 +21,9 @@ Turn is divided into three phases: pre, main, post phase.
 * Move is performed in pre phase
 * Attack is performed in main phase
 * Idle is performed in post phase
+
 or...
+
 Turn actions are ordered by the bot positions in battlefield (e.g. closer to the middle sooner bot do the action)
 
 ### Bot Strategy
