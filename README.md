@@ -2,10 +2,14 @@
 
 A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more.
 
+### Language
+Current version will only supports `C#` programming language.
+
 ### Bot
 Implement bot (robot) which wins against other bots implemented by other players - programmers.
 
 ### Match
+Bots are qualified at the start of the match if player's implementations (assemblies) are present at the server's location from which the game engine loads the assemblies and tries to create bot strategy objects.
 
 ### Rounds
 Game consists from repeating rounds. Each round bot which remains last gain points. Player with most points wins a match.
