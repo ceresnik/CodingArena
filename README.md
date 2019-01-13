@@ -3,7 +3,7 @@
 A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more.
 
 ### Language
-Current version will only supports `C#` programming language.
+Current version will only supports C# programming language.
 
 ### Bot
 Implement bot (robot) which wins against other bots implemented by other players - programmers.
