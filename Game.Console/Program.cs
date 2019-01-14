@@ -5,7 +5,7 @@ namespace Game.Console
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             WriteLine("Starting Coding Arena Game...");
             var config = new GameConfiguration();
