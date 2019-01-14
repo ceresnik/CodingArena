@@ -7,7 +7,7 @@ namespace Game.Console
     {
         public Task<RoundResult> StartRoundAsync(IEnumerable<IBot> bots, Battlefield battlefield)
         {
-            return Task.FromResult<RoundResult>(new RoundResult());
+            return Task.FromResult(new RoundResult());
         }
     }
 }

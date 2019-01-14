@@ -19,8 +19,9 @@ namespace Game.Console
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartRoundAsync(bots, battlefield);
                 roundResult.DisplayTo(Out);
-                await match.WaitForNextRoundAsync();
+                await match.WaitForNextRoundAsync(Out);
             }
+            ReadKey();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace Game.Console
 {
@@ -14,7 +15,11 @@ namespace Game.Console
         public Task<IRound> CreateRoundAsync() => 
             Task.FromResult<IRound>(new Round());
 
-        public Task WaitForNextRoundAsync() => 
-            Task.Delay(config.DelayForNextRound);
+        public Task WaitForNextRoundAsync(TextWriter textWriter)
+        {
+            textWriter.WriteLine($"Next round in {config.DelayForNextRound:g}");
+            textWriter.WriteLine("Waiting for next round...");
+            return Task.Delay(config.DelayForNextRound);
+        }
     }
 }

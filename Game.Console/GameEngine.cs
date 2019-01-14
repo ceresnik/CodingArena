@@ -9,6 +9,6 @@
             config = configuration;
         }
 
-        public IMatch CreateMatch() => new Match();
+        public IMatch CreateMatch() => new Match(config);
     }
 }
