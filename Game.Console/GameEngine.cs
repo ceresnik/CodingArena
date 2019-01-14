@@ -1,14 +1,18 @@
-﻿namespace Game.Console
+﻿using System.IO;
+
+namespace Game.Console
 {
     internal class GameEngine
     {
-        private readonly GameConfiguration config;
+        private readonly GameConfiguration configuration;
+        private readonly TextWriter textWriter;
 
-        public GameEngine(GameConfiguration configuration)
+        public GameEngine(GameConfiguration configuration, TextWriter textWriter)
         {
-            config = configuration;
+            this.configuration = configuration;
+            this.textWriter = textWriter;
         }
 
-        public IMatch CreateMatch() => new Match(config);
+        public IMatch CreateMatch() => new Match(configuration, textWriter);
     }
 }

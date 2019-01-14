@@ -6,7 +6,8 @@ namespace Game.Console
     {
         public GameConfiguration()
         {
-            DelayForNextRound = TimeSpan.FromMinutes(5);
+            //DelayForNextRound = TimeSpan.FromMinutes(5);
+            DelayForNextRound = TimeSpan.FromMinutes(1);
             BattlefieldSize = new Size(100, 100);
             MaxRounds = 24; // 24 * 5 min = 2 hours
             MaxTurns = 100;

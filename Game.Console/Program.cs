@@ -9,7 +9,7 @@ namespace Game.Console
         {
             WriteLine("Starting Coding Arena Game...");
             var config = new GameConfiguration();
-            var engine = new GameEngine(config);
+            var engine = new GameEngine(config, Out);
             var factory = new BotFactory();
             var battlefield = new Battlefield(config.BattlefieldSize);
             var match = engine.CreateMatch();
@@ -19,8 +19,10 @@ namespace Game.Console
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartRoundAsync(bots, battlefield);
                 roundResult.DisplayTo(Out);
-                await match.WaitForNextRoundAsync(Out);
+                await match.WaitForNextRoundAsync();
             }
+
+            WriteLine("Press any key to exit...");
             ReadKey();
         }
     }
