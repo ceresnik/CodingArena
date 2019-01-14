@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Game.Console
+﻿namespace Game.Console
 {
     internal class GameEngine
     {
@@ -12,7 +10,5 @@ namespace Game.Console
         }
 
         public IMatch CreateMatch() => new Match();
-
-        public Task WaitForNextRoundAsync() => Task.Delay(config.DelayForNextRound);
     }
 }

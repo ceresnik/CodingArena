@@ -4,6 +4,7 @@ namespace Game.Console
 {
     internal interface IMatch
     {
-        Task<IRound> StartMatchAsync();
+        Task<IRound> CreateRoundAsync();
+        Task WaitForNextRoundAsync();
     }
 }

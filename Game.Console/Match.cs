@@ -1,14 +1,20 @@
 ﻿using System.Threading.Tasks;
-using static System.Console;
 
 namespace Game.Console
 {
     internal class Match : IMatch
     {
-        public Task<IRound> StartMatchAsync()
+        private readonly GameConfiguration config;
+
+        public Match(GameConfiguration config)
         {
-            WriteLine("Match started...");
-            return Task.FromResult<IRound>(new Round());
+            this.config = config;
         }
+
+        public Task<IRound> CreateRoundAsync() => 
+            Task.FromResult<IRound>(new Round());
+
+        public Task WaitForNextRoundAsync() => 
+            Task.Delay(config.DelayForNextRound);
     }
 }

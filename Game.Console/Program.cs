@@ -13,10 +13,14 @@ namespace Game.Console
             var factory = new BotFactory();
             var battlefield = new Battlefield(config.BattlefieldSize);
             var match = engine.CreateMatch();
-            var bots = factory.CreateBots();
-            var round = await match.StartMatchAsync();
-            var roundResult = await round.StartRoundAsync(bots, battlefield);
-            await engine.WaitForNextRoundAsync();
+            for (int i = 0; i < config.MaxRounds; i++)
+            {
+                var bots = factory.CreateBots();
+                var round = await match.CreateRoundAsync();
+                var roundResult = await round.StartRoundAsync(bots, battlefield);
+                roundResult.DisplayTo(Out);
+                await match.WaitForNextRoundAsync();
+            }
         }
     }
 }
