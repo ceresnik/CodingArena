@@ -2,6 +2,8 @@
 {
     internal interface IBot
     {
+        string Name { get; }
+
         int MaxHealthPoints { get; }
         int HealthPoints { get; }
         double HealthPercentage { get; }

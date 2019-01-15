@@ -5,6 +5,6 @@ namespace Game.Console
 {
     internal interface IRound
     {
-        Task<RoundResult> StartRoundAsync(IEnumerable<IBot> bots, Battlefield battlefield);
+        Task<RoundResult> StartRoundAsync(ICollection<IBot> bots, Battlefield battlefield);
     }
 }

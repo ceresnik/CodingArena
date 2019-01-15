@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Game.Console
@@ -13,9 +14,20 @@ namespace Game.Console
             this.textWriter = textWriter;
         }
 
-        public Task<RoundResult> StartRoundAsync(IEnumerable<IBot> bots, Battlefield battlefield)
+        public Task<RoundResult> StartRoundAsync(ICollection<IBot> bots, Battlefield battlefield)
         {
-            bots.OnEmpty(() => textWriter.WriteLine("No bots found."));
+            if (bots.Any())
+            {
+                textWriter.WriteLine("Bots qualified:");
+                foreach (var bot in bots)
+                {
+                    textWriter.WriteLine(bot.Name);
+                }
+            }
+            else
+            {
+                textWriter.WriteLine("No bots found.");
+            }
             return Task.FromResult(new RoundResult());
         }
     }

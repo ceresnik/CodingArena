@@ -1,12 +1,51 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Game.Console
 {
     internal class BotFactory
     {
-        public IEnumerable<IBot> CreateBots()
+        public virtual ICollection<IBot> CreateBots() => new Collection<IBot>();
+    }
+
+    internal class TestBotFactory : BotFactory
+    {
+        public override ICollection<IBot> CreateBots()
         {
-            return new List<IBot>();
+            return new List<IBot>
+            {
+                new TestBotA(),
+                new TestBotB(),
+                new TestBotC(),
+            };
         }
+    }
+
+    internal class TestBotA : SimpleBot
+    {
+        public TestBotA() : base("TestBotA")
+        {
+        }
+    }
+
+    internal class SimpleBot : IBot
+    {
+        public SimpleBot(string name)
+        {
+            Name = name;
+            MaxHealthPoints = 1000;
+            HealthPoints = MaxHealthPoints;
+        }
+
+        public string Name { get; }
+        public int MaxHealthPoints { get; }
+        public int HealthPoints { get; }
+
+        public double HealthPercentage => HealthPoints * 100 / (double) MaxHealthPoints;
+
+        public int MaxShieldPoints { get; }
+        public int ShieldPoints { get; }
+        public double ShieldPercentage { get; }
+        public BattlefieldPosition Position { get; }
     }
 }

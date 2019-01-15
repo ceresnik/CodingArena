@@ -13,6 +13,7 @@ namespace Game.Console
             var factory = new BotFactory();
             var battlefield = new Battlefield(config.BattlefieldSize);
             var match = engine.CreateMatch();
+
             for (int i = 0; i < config.MaxRounds; i++)
             {
                 var bots = factory.CreateBots();
