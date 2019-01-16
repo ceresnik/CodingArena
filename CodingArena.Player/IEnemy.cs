@@ -1,6 +1,6 @@
 ﻿namespace CodingArena.Player
 {
-    public interface ITurnAction
+    public interface IEnemy
     {
     }
 }
