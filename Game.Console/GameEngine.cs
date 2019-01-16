@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     internal class GameEngine
     {

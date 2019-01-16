@@ -1,4 +1,4 @@
-﻿namespace Game.Console
+﻿namespace CodingArena.Game.Console
 {
     internal interface IBot
     {
