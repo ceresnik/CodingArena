@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     internal class Match : IMatch
     {

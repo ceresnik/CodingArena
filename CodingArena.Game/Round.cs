@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     internal class Round : IRound
     {
@@ -15,7 +15,7 @@ namespace CodingArena.Game.Console
             this.textWriter = textWriter;
         }
 
-        public Task<RoundResult> StartRoundAsync(ICollection<IBot> bots, Battlefield battlefield)
+        public Task<RoundResult> StartRoundAsync(ICollection<IBot> bots, IBattlefield battlefield)
         {
             if (bots.Any())
             {

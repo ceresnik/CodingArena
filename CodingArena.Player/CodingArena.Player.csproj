@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBattlefield.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="IBotAI.cs" />
     <Compile Include="IEnemy.cs" />

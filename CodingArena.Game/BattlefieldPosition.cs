@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
-    internal class BattlefieldPosition
+    public class BattlefieldPosition
     {
         private int X { get; }
         private int Y { get; }
         private Battlefield Battlefield { get; }
 
-        public BattlefieldPosition(int x, int y, Battlefield battlefield)
+        internal BattlefieldPosition(int x, int y, Battlefield battlefield)
         {
             X = x;
             Y = y;

@@ -1,4 +1,4 @@
-﻿namespace CodingArena.Game.Console
+﻿namespace CodingArena.Player
 {
     internal class Size
     {

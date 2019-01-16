@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using CodingArena.Player;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     internal class BotFactory
     {

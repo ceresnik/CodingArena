@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     internal interface IMatch
     {

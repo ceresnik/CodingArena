@@ -1,4 +1,6 @@
-﻿namespace CodingArena.Game.Console
+﻿using CodingArena.Player;
+
+namespace CodingArena.Game
 {
     internal class Battlefield : IBattlefield
     {
