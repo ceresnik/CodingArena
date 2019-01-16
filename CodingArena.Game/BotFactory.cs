@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CodingArena.Player;
 
 namespace CodingArena.Game.Console
 {
@@ -31,6 +32,7 @@ namespace CodingArena.Game.Console
         }
 
         public string Name { get; }
+        public IBotAI AI { get; }
         public int MaxHealthPoints { get; }
         public int HealthPoints { get; }
 

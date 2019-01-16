@@ -51,7 +51,6 @@
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IBattlefield.cs" />
-    <Compile Include="IBot.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
@@ -63,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
+      <Project>{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}</Project>
+      <Name>CodingArena.Player</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
