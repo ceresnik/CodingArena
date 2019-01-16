@@ -2,7 +2,7 @@
 
 namespace CodingArena.Player.TurnActions
 {
-    public class IdleTurnAction : ITurnAction
+    public class RechargeBattery : ITurnAction
     {
         public Task ExecuteAsync()
         {
