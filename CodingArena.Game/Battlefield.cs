@@ -1,4 +1,4 @@
-﻿namespace Game.Console
+﻿namespace CodingArena.Game.Console
 {
     internal class Battlefield : IBattlefield
     {

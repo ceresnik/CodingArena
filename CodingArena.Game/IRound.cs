@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CodingArena.Player;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     internal interface IRound
     {

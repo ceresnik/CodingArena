@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
-using static System.Console;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     class Program
     {
         static async Task Main()
         {
-            WriteLine("Starting Coding Arena Game...");
+            System.Console.WriteLine("Starting Coding Arena Game...");
             var config = new GameConfiguration();
-            var engine = new GameEngine(config, Out);
+            var engine = new GameEngine(config, System.Console.Out);
             var factory = new BotFactory();
             var battlefield = new Battlefield(config.BattlefieldSize);
             var match = engine.CreateMatch();
@@ -19,12 +18,12 @@ namespace Game.Console
                 var bots = factory.CreateBots();
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartRoundAsync(bots, battlefield);
-                roundResult.DisplayTo(Out);
+                roundResult.DisplayTo(System.Console.Out);
                 await match.WaitForNextRoundAsync();
             }
 
-            WriteLine("Press any key to exit...");
-            ReadKey();
+            System.Console.WriteLine("Press any key to exit...");
+            System.Console.ReadKey();
         }
     }
 }

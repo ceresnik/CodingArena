@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using CodingArena.Player;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     internal class BotFactory
     {
@@ -14,17 +15,10 @@ namespace Game.Console
         {
             return new List<IBot>
             {
-                new TestBotA(),
-                new TestBotB(),
-                new TestBotC(),
+                new SimpleBot("BotA"),
+                new SimpleBot("BotB"),
+                new SimpleBot("BotC"),
             };
-        }
-    }
-
-    internal class TestBotA : SimpleBot
-    {
-        public TestBotA() : base("TestBotA")
-        {
         }
     }
 
@@ -38,6 +32,7 @@ namespace Game.Console
         }
 
         public string Name { get; }
+        public IBotAI AI { get; }
         public int MaxHealthPoints { get; }
         public int HealthPoints { get; }
 

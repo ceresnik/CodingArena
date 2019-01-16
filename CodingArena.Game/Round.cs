@@ -2,8 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Player;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     internal class Round : IRound
     {

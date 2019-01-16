@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Console
+namespace CodingArena.Game.Console
 {
     internal class BattlefieldPosition
     {
