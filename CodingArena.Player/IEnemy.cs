@@ -2,5 +2,6 @@
 {
     public interface IEnemy
     {
+        string Name { get; }
     }
 }
