@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Restricted - Copyright (C) Siemens Healthcare GmbH/Siemens Medical Solutions USA, Inc., 2019. All rights reserved
-   ------------------------------------------------------------------------------------------------- */
-   
-namespace CodingArena.Player
+﻿namespace CodingArena.Player
 {
     public interface IRobot
     {
