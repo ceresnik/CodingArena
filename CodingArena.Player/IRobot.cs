@@ -1,6 +1,8 @@
-﻿namespace CodingArena.Player
+﻿using CodingArena.Player.Battlefield;
+
+namespace CodingArena.Player
 {
-    public interface IRobot
+    public interface IRobot : IBattlefieldObject
     {
         int HealthPoints { get; }
         double HealthPercentage { get; }

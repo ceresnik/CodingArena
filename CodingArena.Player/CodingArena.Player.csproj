@@ -41,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBattlefield.cs" />
-    <Compile Include="IBattlefieldPlace.cs" />
-    <Compile Include="IBattlefieldSize.cs" />
+    <Compile Include="Battlefield\IBattlefield.cs" />
+    <Compile Include="Battlefield\IBattlefieldPlace.cs" />
+    <Compile Include="Battlefield\IBattlefieldSize.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
+    <Compile Include="Battlefield\IBattlefieldObject.cs" />
     <Compile Include="IRobot.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="TurnActions\Attack.cs" />
