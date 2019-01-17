@@ -2,7 +2,7 @@
 
 namespace CodingArena.Player.TurnActions
 {
-    public class Attack : ITurnAction
+    public sealed class Attack : ITurnAction
     {
         public Task ExecuteAsync()
         {
