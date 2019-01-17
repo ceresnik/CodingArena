@@ -1,15 +1,7 @@
 ﻿namespace CodingArena.Player
 {
-    public interface IEnemy
+    public interface IEnemy : IRobot
     {
         string Name { get; }
-
-        int HealthPoints { get; }
-
-        double HealthPercentage { get; }
-
-        int ShieldPoints { get; }
-
-        double ShieldPercentage { get; }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="IBot.cs" />
     <Compile Include="IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
+    <Compile Include="IRobot.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="TurnActions\Attack.cs" />
     <Compile Include="TurnActions\RechargeBattery.cs" />
