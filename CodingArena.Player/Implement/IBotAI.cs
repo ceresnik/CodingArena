@@ -1,6 +1,6 @@
 ﻿using CodingArena.Player.TurnActions;
 
-namespace CodingArena.Player
+namespace CodingArena.Player.Implement
 {
     public interface IBotAI
     {

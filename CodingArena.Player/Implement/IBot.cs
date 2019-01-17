@@ -1,4 +1,4 @@
-﻿namespace CodingArena.Player
+﻿namespace CodingArena.Player.Implement
 {
     public interface IBot
     {

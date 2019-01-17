@@ -44,8 +44,8 @@
     <Compile Include="Battlefield\IBattlefield.cs" />
     <Compile Include="Battlefield\IBattlefieldPlace.cs" />
     <Compile Include="Battlefield\IBattlefieldSize.cs" />
-    <Compile Include="IBot.cs" />
-    <Compile Include="IBotAI.cs" />
+    <Compile Include="Implement\IBot.cs" />
+    <Compile Include="Implement\IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
     <Compile Include="IRobot.cs" />
