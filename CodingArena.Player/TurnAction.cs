@@ -57,7 +57,14 @@ namespace CodingArena.Player
 
         public sealed class Attack : ITurnAction
         {
+            private Attack(IEnemy enemy)
+            {
+                Enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
+            }
 
+            public static Attack Target(IEnemy enemy) => new Attack(enemy);
+
+            public IEnemy Enemy { get; }
         }
 
         public static class Recharge
