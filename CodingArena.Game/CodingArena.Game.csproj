@@ -60,7 +60,6 @@
     <Compile Include="Robot.cs" />
     <Compile Include="Round.cs" />
     <Compile Include="RoundResult.cs" />
-    <Compile Include="Size.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

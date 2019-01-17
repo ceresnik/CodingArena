@@ -17,9 +17,9 @@ namespace CodingArena.Game
             Object = battlefieldObject;
         }
 
-        private int X { get; }
+        public int X { get; }
 
-        private int Y { get; }
+        public int Y { get; }
 
         public bool IsEmpty => Object == null;
 
@@ -30,11 +30,12 @@ namespace CodingArena.Game
 
         public double DistanceTo(IBattlefieldPlace place)
         {
-            if (place is BattlefieldPlace p)
-                return DistanceTo(p.X, p.Y);
+            if (place == null)
+            {
+                throw new ArgumentNullException(nameof(place));
+            }
 
-            throw new InvalidCastException(
-                $"Invalid implementation of {typeof(IBattlefieldPlace)} interface.");
+            return DistanceTo(place.X, place.Y);
         }
     }
 }

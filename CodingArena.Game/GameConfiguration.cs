@@ -1,5 +1,6 @@
 ﻿using System;
 using CodingArena.Player;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -11,7 +12,7 @@ namespace CodingArena.Game
             DelayForNextRound = TimeSpan.FromMinutes(1);
             MaxRounds = 24; // 24 * 5 min = 2 hours
             MaxTurns = 100;
-            BattlefieldSize = new Size(100, 100);
+            BattlefieldSize = new BattlefieldSize(100, 100);
         }
 
         public TimeSpan DelayForNextRound { get; set; }
@@ -20,6 +21,6 @@ namespace CodingArena.Game
 
         public int MaxTurns { get; set; }
 
-        public Size BattlefieldSize { get; set; }
+        public IBattlefieldSize BattlefieldSize { get; set; }
     }
 }
