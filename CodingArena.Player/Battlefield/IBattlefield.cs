@@ -4,5 +4,6 @@
     {
         IBattlefieldSize Size { get; }
         IBattlefieldPlace this[int x, int y] { get; }
+        IBattlefieldPlace this[IRobot robot] { get; }
     }
 }
