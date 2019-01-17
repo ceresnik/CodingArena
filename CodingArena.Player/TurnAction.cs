@@ -33,34 +33,34 @@ namespace CodingArena.Player
                     return new Move(Direction.None);
 
                 if (difX > 0 && difY == 0)
-                    return new Move(Direction.East);
+                    return East();
                 if (difX < 0 && difY == 0)
-                    return new Move(Direction.West);
+                    return West();
 
                 if (difX == 0 && difY > 0)
-                    return new Move(Direction.South);
+                    return South();
                 if (difX == 0 && difY < 0)
-                    return new Move(Direction.North);
+                    return North();
 
                 if (difX > 0 && difY > 0 && difX > difY)
-                    return new Move(Direction.East);
+                    return East();
                 if (difX > 0 && difY > 0 && difX < difY)
-                    return new Move(Direction.South);
+                    return South();
 
                 if (difX < 0 && difY > 0 && Math.Abs(difX) > difY)
-                    return new Move(Direction.West);
+                    return West();
                 if (difX < 0 && difY > 0 && Math.Abs(difX) < difY)
-                    return new Move(Direction.South);
+                    return South();
 
                 if (difX < 0 && difY < 0 && Math.Abs(difX) > Math.Abs(difY))
-                    return new Move(Direction.West);
+                    return West();
                 if (difX < 0 && difY < 0 && Math.Abs(difX) < Math.Abs(difY))
-                    return new Move(Direction.North);
+                    return North();
 
                 if (difX > 0 && difY < 0 && difX > Math.Abs(difY))
-                    return new Move(Direction.East);
+                    return East();
                 if (difX > 0 && difY < 0 && difX < Math.Abs(difY))
-                    return new Move(Direction.North);
+                    return North();
 
                 throw new NotSupportedException();
             }
