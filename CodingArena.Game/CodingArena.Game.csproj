@@ -49,6 +49,7 @@
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="BattlefieldSize.cs" />
     <Compile Include="BotFactory.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
