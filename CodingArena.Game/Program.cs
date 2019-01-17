@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -10,7 +11,8 @@ namespace CodingArena.Game
             var config = new GameConfiguration();
             var engine = new GameEngine(config, System.Console.Out);
             var factory = new BotFactory();
-            var battlefield = new Battlefield(config.BattlefieldSize);
+            IBattlefieldSize size = config.BattlefieldSize;
+            var battlefield = new Battlefield(size, new IBattlefieldPlace[size.Width, size.Height]);
             var match = engine.CreateMatch();
 
             for (int i = 0; i < config.MaxRounds; i++)

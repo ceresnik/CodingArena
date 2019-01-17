@@ -1,47 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CodingArena.Player;
 using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
-    internal class BotFactory
+    internal sealed class BotFactory
     {
-        public virtual ICollection<IBot> CreateBots() => new Collection<IBot>();
-    }
-
-    internal class TestBotFactory : BotFactory
-    {
-        public override ICollection<IBot> CreateBots()
-        {
-            return new List<IBot>
-            {
-                new SimpleBot("BotA"),
-                new SimpleBot("BotB"),
-                new SimpleBot("BotC"),
-            };
-        }
-    }
-
-    internal class SimpleBot : IBot
-    {
-        public SimpleBot(string name)
-        {
-            Name = name;
-            MaxHealthPoints = 1000;
-            HealthPoints = MaxHealthPoints;
-        }
-
-        public string Name { get; }
-        public IBotAI AI { get; }
-        public int MaxHealthPoints { get; }
-        public int HealthPoints { get; }
-
-        public double HealthPercentage => HealthPoints * 100 / (double) MaxHealthPoints;
-
-        public int MaxShieldPoints { get; }
-        public int ShieldPoints { get; }
-        public double ShieldPercentage { get; }
-        public BattlefieldPosition Position { get; }
+        public ICollection<IBot> CreateBots() => new Collection<IBot>();
     }
 }
