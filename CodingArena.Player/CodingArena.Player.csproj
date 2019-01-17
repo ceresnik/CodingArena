@@ -52,6 +52,8 @@
     <Compile Include="ITurn.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TurnActions\Attack.cs" />
+    <Compile Include="TurnActions\Move.cs" />
     <Compile Include="TurnActions\TurnAction.cs" />
   </ItemGroup>
   <ItemGroup />
