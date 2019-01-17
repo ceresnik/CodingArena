@@ -50,12 +50,9 @@
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
     <Compile Include="IRobot.cs" />
     <Compile Include="ITurn.cs" />
-    <Compile Include="TurnActions\Attack.cs" />
-    <Compile Include="TurnActions\RechargeBattery.cs" />
-    <Compile Include="TurnActions\ITurnAction.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnActions\Move.cs" />
-    <Compile Include="TurnActions\RechargeShield.cs" />
+    <Compile Include="TurnAction.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
