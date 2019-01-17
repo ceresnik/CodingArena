@@ -1,7 +1,7 @@
 ﻿using System;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Player
+namespace CodingArena.Player.TurnActions
 {
     public interface ITurnAction
     {
