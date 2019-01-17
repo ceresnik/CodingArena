@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IBattlefield.cs" />
     <Compile Include="IBattlefieldPlace.cs" />
+    <Compile Include="IBattlefieldSize.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
