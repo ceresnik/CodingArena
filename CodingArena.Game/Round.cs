@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 
@@ -24,6 +25,12 @@ namespace CodingArena.Game
                 foreach (var bot in bots)
                 {
                     textWriter.WriteLine(bot.Name);
+                }
+
+                int maxTurns = 100;
+                for (int i = 0; i < maxTurns; i++)
+                {
+                    
                 }
             }
             else
