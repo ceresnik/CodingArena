@@ -2,8 +2,8 @@
 {
     public interface IMyRobot : IRobot
     {
-        int MaxEnergy { get; }
-        int RemainingEnergy { get; }
+        int MaxEnergyPoints { get; }
+        int EnergyPoints { get; }
         double EnergyPercentage { get; }
     }
 }

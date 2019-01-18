@@ -3,7 +3,7 @@ using CodingArena.Player;
 
 namespace CodingArena.Game
 {
-    internal class Robot : IRobot
+    public class Robot : IRobot
     {
         public Robot(int maxHP, int hp, int maxSP, int sp)
         {
@@ -19,6 +19,13 @@ namespace CodingArena.Game
             if (sp < 0)
                 throw new ArgumentOutOfRangeException(nameof(sp), sp,
                     "Value is less than 0.");
+            if (maxHP < hp)
+                throw new ArgumentOutOfRangeException(nameof(maxHP), maxHP,
+                    $"Value is less than parameter {nameof(hp)} value {hp}.");
+            if (maxSP < sp)
+                throw new ArgumentOutOfRangeException(nameof(maxSP), maxSP,
+                    $"Value is less than parameter {nameof(sp)} value {sp}.");
+
             MaxHealthPoints = maxHP;
             HealthPoints = hp;
             MaxShieldPoints = maxSP;
