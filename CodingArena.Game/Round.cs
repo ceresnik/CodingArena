@@ -16,7 +16,7 @@ namespace CodingArena.Game
             this.textWriter = textWriter;
         }
 
-        public Task<RoundResult> StartRoundAsync(ICollection<IBot> bots, IBattlefield battlefield)
+        public Task<RoundResult> StartAsync(ICollection<IBot> bots, IBattlefield battlefield)
         {
             if (bots.Any())
             {

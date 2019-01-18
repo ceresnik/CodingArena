@@ -19,7 +19,7 @@ namespace CodingArena.Game
             {
                 var bots = factory.CreateBots();
                 var round = await match.CreateRoundAsync();
-                var roundResult = await round.StartRoundAsync(bots, battlefield);
+                var roundResult = await round.StartAsync(bots, battlefield);
                 roundResult.DisplayTo(System.Console.Out);
                 await match.WaitForNextRoundAsync();
             }
