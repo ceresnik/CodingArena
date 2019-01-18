@@ -16,13 +16,10 @@
 
         public static class Recharge
         {
-            public sealed class Battery : ITurnAction
-            {
-            }
-
-            public sealed class Shield : ITurnAction
-            {
-            }
+            public static ITurnAction Battery() => new RechargeBatteryTurnAction();
+            public static ITurnAction Shield() => new RechargeShieldTurnAction();
         }
+
+        public static ITurnAction Idle() => new IdleTurnAction();
     }
 }

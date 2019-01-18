@@ -54,7 +54,10 @@
     <Compile Include="Direction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnActions\Attack.cs" />
+    <Compile Include="TurnActions\IdleTurnAction.cs" />
     <Compile Include="TurnActions\Move.cs" />
+    <Compile Include="TurnActions\RechargeBatteryTurnAction.cs" />
+    <Compile Include="TurnActions\RechargeShieldTurnAction.cs" />
     <Compile Include="TurnActions\TurnAction.cs" />
   </ItemGroup>
   <ItemGroup>

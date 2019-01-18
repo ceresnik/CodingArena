@@ -4,7 +4,7 @@ namespace CodingArena.Player.TurnActions
 {
     public static partial class TurnAction
     {
-        public sealed partial class Attack
+        public sealed partial class Attack : ITurnAction
         {
             private Attack(IEnemy enemy)
             {

@@ -5,7 +5,7 @@ namespace CodingArena.Player.TurnActions
 {
     public static partial class TurnAction
     {
-        public sealed partial class Move
+        public sealed partial class Move : ITurnAction
         {
             private Move(Direction direction)
             {
