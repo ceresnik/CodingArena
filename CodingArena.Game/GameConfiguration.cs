@@ -1,5 +1,4 @@
 ﻿using System;
-using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
