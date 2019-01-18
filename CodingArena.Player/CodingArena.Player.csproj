@@ -48,6 +48,7 @@
     <Compile Include="Implement\IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
+    <Compile Include="IMyRobot.cs" />
     <Compile Include="IRobot.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="Direction.cs" />

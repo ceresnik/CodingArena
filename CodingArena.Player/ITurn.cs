@@ -5,7 +5,7 @@ namespace CodingArena.Player
 {
     public interface ITurn
     {
-        IRobot MyRobot { get; }
+        IMyRobot MyRobot { get; }
 
         IReadOnlyCollection<IEnemy> Enemies { get; }
 
