@@ -6,9 +6,9 @@ namespace CodingArena.Player.TurnActions
     {
         internal AttackTurnAction(IEnemy enemy)
         {
-            Enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
+            Target = enemy ?? throw new ArgumentNullException(nameof(enemy));
         }
 
-        public IEnemy Enemy { get; }
+        public IEnemy Target { get; }
     }
 }
