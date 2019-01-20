@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
@@ -7,5 +8,7 @@ namespace CodingArena.Game
         public void DisplayTo(TextWriter textWriter)
         {
         }
+
+        public string Winner { get; set; }
     }
 }
