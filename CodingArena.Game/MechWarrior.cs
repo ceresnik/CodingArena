@@ -1,15 +1,17 @@
 ﻿using System;
+using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
     internal class MechWarrior
     {
         private readonly Battlefield battlefield;
+        private readonly IBot bot;
 
-        public MechWarrior(Battlefield battlefield, string name, int maxHP, int maxSP, int maxEP)
+        public MechWarrior(Battlefield battlefield, IBot bot, int maxHP, int maxSP, int maxEP)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
             this.battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
+            this.bot = bot ?? throw new ArgumentNullException(nameof(bot));
             MaxHP = maxHP;
             HP = maxHP;
             MaxSP = maxSP;
@@ -18,7 +20,7 @@ namespace CodingArena.Game
             EP = maxEP;
         }
 
-        public string Name { get; }
+        public string Name => bot.Name;
 
         public int MaxHP { get; }
 
@@ -32,7 +34,7 @@ namespace CodingArena.Game
 
         public int EP { get; }
 
-        public void PlaceTo(int x, int y)
+        public void Execute(Turn turn)
         {
             // TODO
         }

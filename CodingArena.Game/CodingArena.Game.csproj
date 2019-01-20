@@ -48,7 +48,7 @@
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="BattlefieldSize.cs" />
-    <Compile Include="BotFactory.cs" />
+    <Compile Include="MechWarriorFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />

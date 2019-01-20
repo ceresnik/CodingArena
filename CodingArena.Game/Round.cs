@@ -20,13 +20,13 @@ namespace CodingArena.Game
             this.robots = new Dictionary<string, IMyRobot>();
         }
 
-        public Task<RoundResult> StartAsync(ICollection<IBot> bots, Battlefield battlefield)
+        public Task<RoundResult> StartAsync(ICollection<MechWarrior> mechWarriors, Battlefield battlefield)
         {
             var roundResult = new RoundResult();
-            if (bots.Any())
+            if (mechWarriors.Any())
             {
                 textWriter.WriteLine("Bots qualified:");
-                foreach (var bot in bots)
+                foreach (var bot in mechWarriors)
                 {
                     textWriter.WriteLine(bot.Name);
                     int maxEP = 1000;
@@ -35,57 +35,61 @@ namespace CodingArena.Game
                     robots.Add(bot.Name, new MyRobot(maxEP, maxEP, maxHP, maxHP, maxSP, maxSP));
                 }
 
-                if (bots.Count == 1)
+                if (mechWarriors.Count == 1)
                 {
-                    roundResult.Winner = bots.First().Name;
-                }
-                int maxTurns = 100;
-                for (int i = 0; i < maxTurns; i++)
-                {
-                    foreach (var bot in bots)
-                    {
-                        var enemyBots = bots.Except(new[] {bot});
-                        var enemies = new List<IEnemy>();
-                        foreach (var enemyBot in enemyBots)
-                        {
-                            var robot = robots[enemyBot.Name];
-                            var enemy = new Enemy(
-                                enemyBot.Name, 
-                                robot.MaxHealthPoints, robot.HealthPoints, 
-                                robot.MaxShieldPoints, robot.ShieldPoints);
-                            enemies.Add(enemy);
-                        }
-
-                        var thisRobot = robots[bot.Name];
-                        var turn = new Turn(thisRobot, enemies, battlefield);
-                        var turnAction = bot.AI.CreateTurnAction(turn);
-                        if (turnAction is MoveTurnAction move)
-                        {
-                            // TODO
-                        }
-                    }
-                }
-
-                if (robots.Values.Count(r => r.HealthPoints > 0) > 0)
-                {
-                    Console.WriteLine("No winner after 100 turns. Remaining bots found:");
-                    foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
-                    {
-                        Console.WriteLine(robot.Key);
-                    }
+                    roundResult.Winner = mechWarriors.First().Name;
                 }
                 else
                 {
-                    foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
+                    int maxTurns = 100;
+                    for (int i = 0; i < maxTurns; i++)
                     {
-                        roundResult.Winner = robot.Key;
-                        break;
+                        foreach (var mechWarrior in mechWarriors)
+                        {
+                            var enemyBots = mechWarriors.Except(new[] {mechWarrior});
+                            var enemies = new List<IEnemy>();
+                            foreach (var enemyBot in enemyBots)
+                            {
+                                var robot = robots[enemyBot.Name];
+                                var enemy = new Enemy(
+                                    enemyBot.Name,
+                                    robot.MaxHealthPoints, robot.HealthPoints,
+                                    robot.MaxShieldPoints, robot.ShieldPoints);
+                                enemies.Add(enemy);
+                            }
+
+                            var thisRobot = robots[mechWarrior.Name];
+                            var turn = new Turn(thisRobot, enemies, battlefield);
+                            mechWarrior.Execute(turn);
+                        }
+                    }
+
+                    if (robots.Values.Count(r => r.HealthPoints > 0) > 0)
+                    {
+                        Console.WriteLine("No winner after 100 turns. Remaining bots found:");
+                        foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
+                        {
+                            Console.WriteLine(robot.Key);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
+                        {
+                            roundResult.Winner = robot.Key;
+                            break;
+                        }
                     }
                 }
             }
             else
             {
                 textWriter.WriteLine("No bots found.");
+            }
+
+            if (roundResult.Winner != null)
+            {
+                Console.WriteLine($"Winner is {roundResult.Winner}");
             }
 
             return Task.FromResult(roundResult);
