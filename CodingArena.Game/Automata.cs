@@ -3,12 +3,12 @@ using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
-    internal class MechWarrior
+    internal class Automata
     {
         private readonly Battlefield battlefield;
         private readonly IBot bot;
 
-        public MechWarrior(Battlefield battlefield, IBot bot, int maxHP, int maxSP, int maxEP)
+        public Automata(Battlefield battlefield, IBot bot, int maxHP, int maxSP, int maxEP)
         {
             this.battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
             this.bot = bot ?? throw new ArgumentNullException(nameof(bot));

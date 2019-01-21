@@ -5,6 +5,6 @@ namespace CodingArena.Game
 {
     internal interface IRound
     {
-        Task<RoundResult> StartAsync(ICollection<MechWarrior> mechWarriors, Battlefield battlefield);
+        Task<RoundResult> StartAsync(ICollection<Automata> mechWarriors, Battlefield battlefield);
     }
 }

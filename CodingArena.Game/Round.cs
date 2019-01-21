@@ -20,7 +20,7 @@ namespace CodingArena.Game
             this.robots = new Dictionary<string, IMyRobot>();
         }
 
-        public Task<RoundResult> StartAsync(ICollection<MechWarrior> mechWarriors, Battlefield battlefield)
+        public Task<RoundResult> StartAsync(ICollection<Automata> mechWarriors, Battlefield battlefield)
         {
             var roundResult = new RoundResult();
             if (mechWarriors.Any())

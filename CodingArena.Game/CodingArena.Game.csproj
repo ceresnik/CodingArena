@@ -48,14 +48,14 @@
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="BattlefieldSize.cs" />
-    <Compile Include="MechWarriorFactory.cs" />
+    <Compile Include="AutomataFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
-    <Compile Include="MechWarrior.cs" />
+    <Compile Include="Automata.cs" />
     <Compile Include="MyRobot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

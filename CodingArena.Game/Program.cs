@@ -12,7 +12,7 @@ namespace CodingArena.Game
             var engine = new GameEngine(config, System.Console.Out);
             IBattlefieldSize size = config.BattlefieldSize;
             var battlefield = new Battlefield(size, new IBattlefieldPlace[size.Width, size.Height]);
-            var factory = new MechWarriorFactory(battlefield);
+            var factory = new AutomataFactory(battlefield);
             var match = engine.CreateMatch();
 
             for (int i = 0; i < config.MaxRounds; i++)
