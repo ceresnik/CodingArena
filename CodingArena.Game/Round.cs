@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player;
-using CodingArena.Player.Implement;
-using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
@@ -20,7 +18,7 @@ namespace CodingArena.Game
             this.robots = new Dictionary<string, IMyRobot>();
         }
 
-        public Task<RoundResult> StartAsync(ICollection<Automata> mechWarriors, Battlefield battlefield)
+        public Task<RoundResult> StartAsync(ICollection<Bot> mechWarriors, Battlefield battlefield)
         {
             if (mechWarriors == null) throw new ArgumentNullException(nameof(mechWarriors));
             if (battlefield == null) throw new ArgumentNullException(nameof(battlefield));

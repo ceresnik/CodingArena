@@ -16,9 +16,9 @@ namespace CodingArena.Game
             this.battlefield = battlefield;
         }
 
-        public ICollection<Automata> Create()
+        public ICollection<Bot> Create()
         {
-            var result = new Collection<Automata>();
+            var result = new Collection<Bot>();
 
             Console.WriteLine("Loading bots...");
             var directoryPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -39,7 +39,7 @@ namespace CodingArena.Game
                 if (botType != null)
                 {
                     var bot = Activator.CreateInstance(botType) as IBot;
-                    var mechWarrior = new Automata(battlefield, bot, 1000, 1000, 1000);
+                    var mechWarrior = new Bot(battlefield, bot, 1000, 1000, 1000);
                     Console.WriteLine($" * {mechWarrior.Name}");
                     result.Add(mechWarrior);
                 }

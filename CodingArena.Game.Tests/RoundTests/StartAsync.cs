@@ -8,10 +8,12 @@ namespace CodingArena.Game.Tests.RoundTests
     {
         [Test]
         public void StartAsync_NullBots_ArgumentNullException() => 
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await Round.StartAsync(null, new Battlefield(1000, 1000)));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await Round.StartAsync(null, new Battlefield(1000, 1000)));
 
         [Test]
         public void StartAsync_NullBattlefield_ArgumentNullException() =>
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await Round.StartAsync(new List<Automata>(), null));
+            Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await Round.StartAsync(new List<Bot>(), null));
     }
 }
