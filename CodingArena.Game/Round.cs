@@ -18,16 +18,16 @@ namespace CodingArena.Game
             this.robots = new Dictionary<string, IMyRobot>();
         }
 
-        public Task<RoundResult> StartAsync(ICollection<Bot> mechWarriors, Battlefield battlefield)
+        public Task<RoundResult> StartAsync(ICollection<Bot> bots, Battlefield battlefield)
         {
-            if (mechWarriors == null) throw new ArgumentNullException(nameof(mechWarriors));
+            if (bots == null) throw new ArgumentNullException(nameof(bots));
             if (battlefield == null) throw new ArgumentNullException(nameof(battlefield));
 
             var roundResult = new RoundResult();
-            if (mechWarriors.Any())
+            if (bots.Any())
             {
                 textWriter.WriteLine("Bots qualified:");
-                foreach (var bot in mechWarriors)
+                foreach (var bot in bots)
                 {
                     textWriter.WriteLine(bot.Name);
                     int maxEP = 1000;
@@ -36,18 +36,18 @@ namespace CodingArena.Game
                     robots.Add(bot.Name, new MyRobot(bot.Name, maxEP, maxEP, maxHP, maxHP, maxSP, maxSP));
                 }
 
-                if (mechWarriors.Count == 1)
+                if (bots.Count == 1)
                 {
-                    roundResult.Winner = mechWarriors.First().Name;
+                    roundResult.Winner = bots.First().Name;
                 }
                 else
                 {
                     int maxTurns = 100;
                     for (int i = 0; i < maxTurns; i++)
                     {
-                        foreach (var mechWarrior in mechWarriors)
+                        foreach (var mechWarrior in bots)
                         {
-                            var enemyBots = mechWarriors.Except(new[] {mechWarrior});
+                            var enemyBots = bots.Except(new[] {mechWarrior});
                             var enemies = new List<IEnemy>();
                             foreach (var enemyBot in enemyBots)
                             {
