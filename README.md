@@ -47,7 +47,7 @@ Automata is a robot which act based on the Bot AI (implemented by a player) with
 
 ### Weapons
 
-| Weapon     | Max Range  | Energy Cost  | Damage   | Notes                  |
-|:-----------|-----------:|-------------:|---------:|------------------------|
-|Machine Gun | 10         | 5            |    0-100 | damage depend on range |
+| Weapon      | Max Range  | Energy Cost  | Damage   | Notes                           |
+|:------------|-----------:|-------------:|---------:|---------------------------------|
+| Machine Gun | 10         | 5            |    0-100 | damage depend on range, default |
 
