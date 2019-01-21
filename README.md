@@ -52,3 +52,7 @@ Automata is a robot which act based on the Bot AI (implemented by a player) with
 |:------------|-----------:|-------------:|---------:|----------------------------------|
 | Machine Gun | 10         | 5            |    0-100 | damage depends on range, default |
 
+### Battlefield
+
+A battlefield is area where automatas (bots) fight against each other.
+Battlefield size is `100x100`
