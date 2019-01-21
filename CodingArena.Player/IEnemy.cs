@@ -2,6 +2,5 @@
 {
     public interface IEnemy : IRobot
     {
-        string Name { get; }
     }
 }
