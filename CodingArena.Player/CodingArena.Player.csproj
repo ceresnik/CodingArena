@@ -44,11 +44,13 @@
     <Compile Include="Battlefield\IBattlefield.cs" />
     <Compile Include="Battlefield\IBattlefieldPlace.cs" />
     <Compile Include="Battlefield\IBattlefieldSize.cs" />
+    <Compile Include="IBotState.cs" />
     <Compile Include="Implement\IBot.cs" />
     <Compile Include="Implement\IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
     <Compile Include="IMyRobot.cs" />
+    <Compile Include="IValueState.cs" />
     <Compile Include="IRobot.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="Direction.cs" />

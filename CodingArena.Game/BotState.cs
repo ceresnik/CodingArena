@@ -1,20 +1,21 @@
 ﻿using System;
+using CodingArena.Player;
 
 namespace CodingArena.Game
 {
-    internal class BotState
+    internal class BotState : IBotState
     {
-        public BotState(ValueState health, ValueState shield, ValueState energy)
+        public BotState(IValueState health, IValueState shield, IValueState energy)
         {
             Health = health ?? throw new ArgumentNullException(nameof(health));
             Shield = shield ?? throw new ArgumentNullException(nameof(shield));
             Energy = energy ?? throw new ArgumentNullException(nameof(energy));
         }
 
-        public ValueState Health { get; }
+        public IValueState Health { get; }
 
-        public ValueState Shield { get; }
+        public IValueState Shield { get; }
 
-        public ValueState Energy { get; }
+        public IValueState Energy { get; }
     }
 }

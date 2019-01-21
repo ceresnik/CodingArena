@@ -2,7 +2,7 @@
 
 namespace CodingArena.Game
 {
-    internal class ValueState
+    internal class ValueState : IValueState
     {
         public ValueState(int max)
             :this(max, max)

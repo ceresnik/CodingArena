@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CodingArena.Player;
 
 namespace CodingArena.Game
 {
     internal class Round : IRound
     {
         private readonly TextWriter textWriter;
-        private readonly IDictionary<string, IMyRobot> robots;
 
         public Round(TextWriter textWriter)
         {
             this.textWriter = textWriter;
-            this.robots = new Dictionary<string, IMyRobot>();
         }
 
         public Task<RoundResult> StartAsync(ICollection<Bot> bots, Battlefield battlefield)
@@ -30,10 +27,6 @@ namespace CodingArena.Game
                 foreach (var bot in bots)
                 {
                     textWriter.WriteLine(bot.Name);
-                    int maxEP = 1000;
-                    int maxHP = 1000;
-                    int maxSP = 1000;
-                    robots.Add(bot.Name, new MyRobot(bot.Name, maxEP, maxEP, maxHP, maxHP, maxSP, maxSP));
                 }
 
                 if (bots.Count == 1)
@@ -45,41 +38,22 @@ namespace CodingArena.Game
                     int maxTurns = 100;
                     for (int i = 0; i < maxTurns; i++)
                     {
-                        foreach (var mechWarrior in bots)
+                        foreach (var bot in bots)
                         {
-                            var enemyBots = bots.Except(new[] {mechWarrior});
-                            var enemies = new List<IEnemy>();
-                            foreach (var enemyBot in enemyBots)
-                            {
-                                var robot = robots[enemyBot.Name];
-                                var enemy = new Enemy(
-                                    enemyBot.Name,
-                                    robot.MaxHP, robot.HP,
-                                    robot.MaxSP, robot.SP);
-                                enemies.Add(enemy);
-                            }
-
-                            var thisRobot = robots[mechWarrior.Name];
-                            var turn = new Turn(thisRobot, enemies, battlefield);
-                            mechWarrior.Execute(turn);
+                            var enemies = bots.Except(new[] {bot}).ToList();                            
+                            bot.Execute(enemies.Select(e => new Enemy(e.Name, e.State.Health, e.State.Shield)));
                         }
                     }
 
-                    if (robots.Values.Count(r => r.HP > 0) > 0)
+                    var aliveBots = bots.Where(b => b.State.Health.Actual > 0).ToList();
+                    if (aliveBots.Count > 1)
                     {
-                        Console.WriteLine("No winner after 100 turns. Remaining bots found:");
-                        foreach (var robot in robots.Where(r => r.Value.HP > 0))
-                        {
-                            Console.WriteLine(robot.Key);
-                        }
+                        Console.WriteLine($"No winner after {maxTurns} turns. Remaining bots found:");
+                        aliveBots.ForEach(b => Console.WriteLine(b.Name));
                     }
                     else
                     {
-                        foreach (var robot in robots.Where(r => r.Value.HP > 0))
-                        {
-                            roundResult.Winner = robot.Key;
-                            break;
-                        }
+                        roundResult.Winner = aliveBots.First().Name;
                     }
                 }
             }

@@ -2,10 +2,19 @@
 
 namespace CodingArena.Game
 {
-    internal class Enemy : Robot, IEnemy
+    internal class Enemy : IEnemy
     {
-        public Enemy(string name, int maxHP, int hp, int maxSP, int sp) : base(name, maxHP, hp, maxSP, sp)
+        public Enemy(string name, IValueState health, IValueState shield)
         {
+            Name = name;
+            Health = health;
+            Shield = shield;
         }
+
+        public string Name { get; }
+
+        public IValueState Health { get; }
+
+        public IValueState Shield { get; }
     }
 }

@@ -1,9 +1,11 @@
-﻿using CodingArena.Player.TurnActions;
+﻿using System.Collections.Generic;
+using CodingArena.Player.Battlefield;
+using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Player.Implement
 {
     public interface IBotAI
     {
-        ITurnAction CreateTurnAction(ITurn turn);
+        ITurnAction CreateTurnAction(IBotState botState, IEnumerable<IEnemy> enemies, IBattlefield battlefield);
     }
 }

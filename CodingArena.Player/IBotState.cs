@@ -1,8 +1,9 @@
 ﻿namespace CodingArena.Player
 {
-    public interface IEnemy : IRobot
+    public interface IBotState
     {
         IValueState Health { get; }
         IValueState Shield { get; }
+        IValueState Energy { get; }
     }
 }

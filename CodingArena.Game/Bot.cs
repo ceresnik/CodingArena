@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using CodingArena.Player;
 using CodingArena.Player.Implement;
+using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
@@ -22,9 +25,18 @@ namespace CodingArena.Game
 
         public BotState State { get; }
 
-        public void Execute(Turn turn)
+        public void Execute(IEnumerable<IEnemy> enemies)
         {
-            // TODO
+            var turnAction = ai.CreateTurnAction(State, enemies, battlefield);
+            if (turnAction is MoveTurnAction move)
+            {
+                switch (move.Direction)
+                {
+                    case Direction.West:
+                        
+                        break;
+                }
+            }
         }
     }
 }
