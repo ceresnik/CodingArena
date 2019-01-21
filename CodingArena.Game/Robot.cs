@@ -5,8 +5,10 @@ namespace CodingArena.Game
 {
     public class Robot : IRobot
     {
-        public Robot(int maxHP, int hp, int maxSP, int sp)
+        public Robot(string name, int maxHP, int hp, int maxSP, int sp)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
             if (maxHP <= 0)
                 throw new ArgumentOutOfRangeException(nameof(maxHP), maxHP,
                     "Value is less than zero or equal to 0.");
@@ -26,11 +28,14 @@ namespace CodingArena.Game
                 throw new ArgumentOutOfRangeException(nameof(maxSP), maxSP,
                     $"Value is less than parameter {nameof(sp)} value {sp}.");
 
+            Name = name;
             MaxHP = maxHP;
             HP = hp;
             MaxSP = maxSP;
             SP = sp;
         }
+
+        public string Name { get; }
 
         public int MaxHP { get; }
 

@@ -5,8 +5,8 @@ namespace CodingArena.Game
 {
     public class MyRobot : Robot, IMyRobot
     {
-        public MyRobot(int maxEP, int ep, int maxHP, int hp, int maxSP, int sp) 
-            : base(maxHP, hp, maxSP, sp)
+        public MyRobot(string name, int maxEP, int ep, int maxHP, int hp, int maxSP, int sp) 
+            : base(name, maxHP, hp, maxSP, sp)
         {
             if (maxEP < 0)
                 throw new ArgumentOutOfRangeException(nameof(maxEP), maxEP,

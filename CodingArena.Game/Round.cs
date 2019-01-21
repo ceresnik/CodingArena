@@ -32,7 +32,7 @@ namespace CodingArena.Game
                     int maxEP = 1000;
                     int maxHP = 1000;
                     int maxSP = 1000;
-                    robots.Add(bot.Name, new MyRobot(maxEP, maxEP, maxHP, maxHP, maxSP, maxSP));
+                    robots.Add(bot.Name, new MyRobot(bot.Name, maxEP, maxEP, maxHP, maxHP, maxSP, maxSP));
                 }
 
                 if (mechWarriors.Count == 1)
