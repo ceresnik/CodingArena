@@ -6,10 +6,17 @@ namespace CodingArena.Game
 {
     internal class Battlefield : IBattlefield
     {
-        public Battlefield(IBattlefieldSize size, IBattlefieldPlace[,] places)
+        public Battlefield(int width, int height)
         {
-            Size = size;
-            Places = places;
+            Size = new BattlefieldSize(width, height);
+            Places = new IBattlefieldPlace[width, height];
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Places[x, y] = new BattlefieldPlace(x, y);
+                }
+            }
         }
 
         private IBattlefieldPlace[,] Places { get; }

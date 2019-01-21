@@ -22,6 +22,9 @@ namespace CodingArena.Game
 
         public Task<RoundResult> StartAsync(ICollection<Automata> mechWarriors, Battlefield battlefield)
         {
+            if (mechWarriors == null) throw new ArgumentNullException(nameof(mechWarriors));
+            if (battlefield == null) throw new ArgumentNullException(nameof(battlefield));
+
             var roundResult = new RoundResult();
             if (mechWarriors.Any())
             {

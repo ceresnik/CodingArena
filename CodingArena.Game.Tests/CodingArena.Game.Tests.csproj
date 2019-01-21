@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundTests\StartAsync.cs" />
+    <Compile Include="RoundTests\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -62,6 +64,10 @@
     <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.csproj">
       <Project>{72b1f276-eb5c-4f06-a50a-84fd1e97082e}</Project>
       <Name>CodingArena.Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
+      <Project>{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}</Project>
+      <Name>CodingArena.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
