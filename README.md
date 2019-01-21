@@ -32,3 +32,11 @@ Turn actions are ordered by the bot positions in battlefield (e.g. closer to the
 
 ### Bot Strategy
 Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
+
+### Weapons
+
++------------+-----------+--------------+----------+------------------------+
+| Weapon     | MaxRange :| Energy Cost :| Damage  :| Notes                  |
++------------+-----------+--------------+----------+------------------------+
+|Machine Gun | 10        | 5            |    0-100 | damage depend on range |
++------------+-----------+--------------+----------+------------------------+
