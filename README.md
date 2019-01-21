@@ -35,7 +35,7 @@ Player (a programmer) implements strategy for their bot to fight against other b
 
 ### Weapons
 
-| Weapon     | MaxRange  | Energy Cost  | Damage   | Notes                  |
-|:-----------|----------:|-------------:|---------:|------------------------|
-|Machine Gun | 10        | 5            |    0-100 | damage depend on range |
+| Weapon     | Max Range  | Energy Cost  | Damage   | Notes                  |
+|:-----------|-----------:|-------------:|---------:|------------------------|
+|Machine Gun | 10         | 5            |    0-100 | damage depend on range |
 
