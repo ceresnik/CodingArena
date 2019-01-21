@@ -55,4 +55,4 @@ Automata is a robot which act based on the Bot AI (implemented by a player) with
 ### Battlefield
 
 A battlefield is area where automatas (bots) fight against each other.
-Battlefield size is `100x100`
+Battlefield size is `100 x 100`
