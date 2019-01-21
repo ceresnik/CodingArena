@@ -4,11 +4,11 @@ namespace CodingArena.Player
 {
     public interface IRobot : IBattlefieldObject
     {
-        int MaxHealthPoints { get; }
-        int HealthPoints { get; }
-        double HealthPercentage { get; }
-        int MaxShieldPoints { get; }
-        int ShieldPoints { get; }
-        double ShieldPercentage { get; }
+        int MaxHP { get; }
+        int HP { get; }
+        double HPPercentage { get; }
+        int MaxSP { get; }
+        int SP { get; }
+        double SPPercentage { get; }
     }
 }

@@ -53,8 +53,8 @@ namespace CodingArena.Game
                                 var robot = robots[enemyBot.Name];
                                 var enemy = new Enemy(
                                     enemyBot.Name,
-                                    robot.MaxHealthPoints, robot.HealthPoints,
-                                    robot.MaxShieldPoints, robot.ShieldPoints);
+                                    robot.MaxHP, robot.HP,
+                                    robot.MaxSP, robot.SP);
                                 enemies.Add(enemy);
                             }
 
@@ -64,17 +64,17 @@ namespace CodingArena.Game
                         }
                     }
 
-                    if (robots.Values.Count(r => r.HealthPoints > 0) > 0)
+                    if (robots.Values.Count(r => r.HP > 0) > 0)
                     {
                         Console.WriteLine("No winner after 100 turns. Remaining bots found:");
-                        foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
+                        foreach (var robot in robots.Where(r => r.Value.HP > 0))
                         {
                             Console.WriteLine(robot.Key);
                         }
                     }
                     else
                     {
-                        foreach (var robot in robots.Where(r => r.Value.HealthPoints > 0))
+                        foreach (var robot in robots.Where(r => r.Value.HP > 0))
                         {
                             roundResult.Winner = robot.Key;
                             break;

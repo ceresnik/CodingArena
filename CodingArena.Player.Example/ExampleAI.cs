@@ -13,10 +13,10 @@ namespace CodingArena.Player.Example
                 var robot = turn.MyRobot;
                 var battlefield = turn.Battlefield;
 
-                if (robot.EnergyPercentage < 50)
+                if (robot.EPPercentage < 50)
                     return TurnAction.Recharge.Battery();
 
-                if (robot.ShieldPercentage < 50)
+                if (robot.SPPercentage < 50)
                     return TurnAction.Recharge.Shield();
 
                 var closestEnemy = FindClosestEnemy(turn);

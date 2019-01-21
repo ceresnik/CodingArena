@@ -18,13 +18,13 @@ namespace CodingArena.Game
                 throw new ArgumentOutOfRangeException(nameof(maxEP), maxEP,
                     $"Value is less than parameter {nameof(ep)} value {ep}.");
 
-            MaxEnergyPoints = maxEP;
-            EnergyPoints = ep;
+            MaxEP = maxEP;
+            EP = ep;
         }
 
-        public int MaxEnergyPoints { get; }
-        public int EnergyPoints { get; }
-        public double EnergyPercentage =>
-            EnergyPoints * 100 / (double)MaxEnergyPoints;
+        public int MaxEP { get; }
+        public int EP { get; }
+        public double EPPercentage =>
+            EP * 100 / (double)MaxEP;
     }
 }

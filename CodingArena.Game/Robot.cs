@@ -26,24 +26,24 @@ namespace CodingArena.Game
                 throw new ArgumentOutOfRangeException(nameof(maxSP), maxSP,
                     $"Value is less than parameter {nameof(sp)} value {sp}.");
 
-            MaxHealthPoints = maxHP;
-            HealthPoints = hp;
-            MaxShieldPoints = maxSP;
-            ShieldPoints = sp;
+            MaxHP = maxHP;
+            HP = hp;
+            MaxSP = maxSP;
+            SP = sp;
         }
 
-        public int MaxHealthPoints { get; }
+        public int MaxHP { get; }
 
-        public int HealthPoints { get; }
+        public int HP { get; }
 
-        public double HealthPercentage => 
-            HealthPoints * 100 / (double) MaxHealthPoints;
+        public double HPPercentage => 
+            HP * 100 / (double) MaxHP;
 
-        public int MaxShieldPoints { get; }
+        public int MaxSP { get; }
 
-        public int ShieldPoints { get; }
+        public int SP { get; }
 
-        public double ShieldPercentage =>
-            ShieldPoints * 100 / (double) MaxShieldPoints;
+        public double SPPercentage =>
+            SP * 100 / (double) MaxSP;
     }
 }
