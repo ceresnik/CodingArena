@@ -5,34 +5,22 @@ namespace CodingArena.Game
 {
     internal class Bot
     {
+        private readonly IBotAI ai;
         private readonly Battlefield battlefield;
-        private readonly IBot bot;
 
-        public Bot(Battlefield battlefield, IBot bot, int maxHP, int maxSP, int maxEP)
+        public Bot(string name, IBotAI ai, BotState state, Battlefield battlefield)
         {
+            this.ai = ai ?? throw new ArgumentNullException(nameof(ai));
             this.battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
-            this.bot = bot ?? throw new ArgumentNullException(nameof(bot));
-            MaxHP = maxHP;
-            HP = maxHP;
-            MaxSP = maxSP;
-            SP = maxSP;
-            MaxEP = maxEP;
-            EP = maxEP;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            State = state ?? throw new ArgumentNullException(nameof(state));
         }
 
-        public string Name => bot.Name;
+        public string Name { get; }
 
-        public int MaxHP { get; }
+        public IBotAI AI { get; }
 
-        public int HP { get; }
-
-        public int MaxSP { get; }
-
-        public int SP { get; }
-
-        public int MaxEP { get; }
-
-        public int EP { get; }
+        public BotState State { get; }
 
         public void Execute(Turn turn)
         {

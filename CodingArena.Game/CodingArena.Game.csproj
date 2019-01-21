@@ -49,6 +49,7 @@
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="BattlefieldSize.cs" />
     <Compile Include="AutomataFactory.cs" />
+    <Compile Include="BotState.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Round.cs" />
     <Compile Include="RoundResult.cs" />
     <Compile Include="Turn.cs" />
+    <Compile Include="ValueState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
