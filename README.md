@@ -30,8 +30,20 @@ or...
 
 Turn actions are ordered by the bot positions in battlefield (e.g. closer to the middle sooner bot do the action)
 
-### Bot Strategy
+### Bot AI
 Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
+
+### Automata
+> A mechanical figure or contrivance constructed to act as if by its own motive power; robot.
+Automata is a robot which act based on the Bot AI (implemented by a player) with following starting properties:
+
+| Max HP | Max SP | Max EP |
+|-------:|-------:|-------:|
+|   1000 |   1000 |   1000 |
+
+> HP = Health Points
+> SP = Shield Points
+> EP = Energy Points
 
 ### Weapons
 
