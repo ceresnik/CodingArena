@@ -41,8 +41,8 @@ Automata is a robot which act based on the Bot AI (implemented by a player) with
 |-------:|-------:|-------:|
 |   1000 |   1000 |   1000 |
 
-> HP = Health Points
-> SP = Shield Points
+> HP = Health Points  
+> SP = Shield Points  
 > EP = Energy Points
 
 ### Weapons
