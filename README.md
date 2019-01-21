@@ -6,7 +6,7 @@ A game for programmers to compete against each other to show best skills for cre
 Current version will only supports C# programming language.
 
 ### Bot
-Implement bot (robot) which wins against other bots implemented by other players - programmers.
+Implement bot AI which wins against other bots implemented by other players - programmers.
 
 ### Match
 Bots are qualified at the start of the match if player's implementations (assemblies) are present at the server's location from which the game engine loads the assemblies and tries to create bot strategy objects.
@@ -30,5 +30,29 @@ or...
 
 Turn actions are ordered by the bot positions in battlefield (e.g. closer to the middle sooner bot do the action)
 
-### Bot Strategy
+### Bot AI
 Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
+
+### Automata
+> A mechanical figure or contrivance constructed to act as if by its own motive power; robot.
+
+Automata is a robot which act based on the Bot AI (implemented by a player) with following starting properties:
+
+| Max HP | Max SP | Max EP |
+|-------:|-------:|-------:|
+|   1000 |   1000 |   1000 |
+
+> HP = Health Points  
+> SP = Shield Points  
+> EP = Energy Points
+
+### Weapons
+
+| Weapon      | Max Range  | Energy Cost  | Damage   | Notes                            |
+|:------------|-----------:|-------------:|---------:|----------------------------------|
+| Machine Gun | 10         | 5            |    0-100 | damage depends on range, default |
+
+### Battlefield
+
+A battlefield is area where automatas (bots) fight against each other.
+Battlefield size is `100 x 100`
