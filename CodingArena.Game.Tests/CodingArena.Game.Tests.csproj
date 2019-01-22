@@ -53,9 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotTests\Created.cs" />
+    <Compile Include="BotTests\BotAIStub.cs" />
+    <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundTests\StartAsync.cs" />
     <Compile Include="RoundTests\TestFixture.cs" />
+    <Compile Include="TurnTests\StartTurn.cs" />
+    <Compile Include="TurnTests\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

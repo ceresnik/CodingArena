@@ -28,19 +28,19 @@ namespace CodingArena.Game
 
         public string Name => BotAI.BotName;
         public float Damage => 100 - Health;
-        public float Shield => SP / (float)MaxSP;
-        public float Energy => EP / (float)MaxEP;
+        public float Shield => SP * 100 / (float)MaxSP;
+        public float Energy => EP * 100 / (float)MaxEP;
         public IBattlefieldPlace Position => Battlefield[this];
         private TextWriter Output { get; }
         private IBotAI BotAI { get; }
         private Battlefield Battlefield { get; }
-        private int MaxHP { get; set; }
-        private int HP { get; set; }
-        private float Health => HP / (float) MaxHP;
-        private int MaxSP { get; set; }
-        private int SP { get; set; }
-        private int MaxEP { get; set; }
-        private int EP { get; set; }
+        public int MaxHP { get; set; }
+        public int HP { get; set; }
+        public float Health => HP * 100 / (float) MaxHP;
+        public int MaxSP { get; set; }
+        public int SP { get; set; }
+        public int MaxEP { get; set; }
+        public int EP { get; set; }
         private IOwnBot InsideView => new OwnBot(this);
         private IEnemy OutsideView => new Enemy(this);
 
