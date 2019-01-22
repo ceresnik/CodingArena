@@ -76,20 +76,20 @@ namespace CodingArena.Game
             }
         }
 
-        public IBattlefieldPlace this[IRobot robot]
+        public IBattlefieldPlace this[IBot bot]
         {
             get
             {
-                if (robot == null)
+                if (bot == null)
                 {
-                    throw new ArgumentNullException(nameof(robot));
+                    throw new ArgumentNullException(nameof(bot));
                 }
 
                 for (int y = 0; y < Size.Height; y++)
                 {
                     for (int x = 0; x < Size.Width; x++)
                     {
-                        if (Places[x, y]?.Object as IRobot == robot)
+                        if (Places[x, y]?.Object as IBot == bot)
                         {
                             return Places[x, y];
                         }

@@ -2,7 +2,7 @@
 
 namespace CodingArena.Player
 {
-    public interface IRobot : IBattlefieldObject
+    public interface IBot : IBattlefieldObject
     {
     }
 }

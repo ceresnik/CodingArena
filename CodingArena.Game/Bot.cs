@@ -1,42 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using CodingArena.Player;
+using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
-using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
-    internal class Bot
+    internal class Bot : IBattlefieldObject
     {
-        private readonly IBotAI ai;
-        private readonly Battlefield battlefield;
-
-        public Bot(string name, IBotAI ai, BotState state, Battlefield battlefield)
+        public Bot(IBotAI botAI, Battlefield battlefield)
         {
-            this.ai = ai ?? throw new ArgumentNullException(nameof(ai));
-            this.battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            State = state ?? throw new ArgumentNullException(nameof(state));
+            BotAI = botAI ?? throw new ArgumentNullException(nameof(botAI));
+            Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
+            if (string.IsNullOrWhiteSpace(botAI.BotName))
+                throw new ArgumentException($"{nameof(botAI)} does not define {nameof(botAI.BotName)}.");
+            MaxHP = 1000;
+            HP = MaxHP;
+            MaxSP = 1000;
+            SP = MaxSP;
+            MaxEP = 1000;
+            EP = MaxEP;
         }
 
-        public string Name { get; }
-
-        public IBotAI AI { get; }
-
-        public BotState State { get; }
-
-        public void Execute(IEnumerable<IEnemy> enemies)
-        {
-            var turnAction = ai.CreateTurnAction(State, enemies, battlefield);
-            if (turnAction is MoveTurnAction move)
-            {
-                switch (move.Direction)
-                {
-                    case Direction.West:
-                        
-                        break;
-                }
-            }
-        }
+        public string Name => BotAI.BotName;
+        public IBattlefieldPlace Position { get; set; }
+        private IBotAI BotAI { get; }
+        private Battlefield Battlefield { get; }
+        private int MaxHP { get; set; }
+        private int HP { get; set; }
+        private float Health => HP / (float) MaxHP;
+        private float Damage => 100 - Health;
+        private int MaxSP { get; set; }
+        private int SP { get; set; }
+        private float Shield => SP / (float) MaxSP;
+        private int MaxEP { get; set; }
+        private int EP { get; set; }
+        private float Energy => EP / (float) MaxEP;
     }
 }

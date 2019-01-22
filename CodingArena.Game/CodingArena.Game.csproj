@@ -48,23 +48,17 @@
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="BattlefieldSize.cs" />
-    <Compile Include="AutomataFactory.cs" />
-    <Compile Include="BotState.cs" />
-    <Compile Include="Enemy.cs" />
+    <Compile Include="Bot.cs" />
+    <Compile Include="BotFactory.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
-    <Compile Include="Bot.cs" />
-    <Compile Include="MyRobot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robot.cs" />
     <Compile Include="Round.cs" />
     <Compile Include="RoundResult.cs" />
-    <Compile Include="Turn.cs" />
-    <Compile Include="ValueState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

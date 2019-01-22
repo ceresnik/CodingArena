@@ -1,8 +1,15 @@
 ﻿namespace CodingArena.Player
 {
-    public interface IEnemy : IRobot
+    public interface IEnemy : IBot
     {
-        IValueState Health { get; }
-        IValueState Shield { get; }
+        /// <summary>
+        /// Gets a damage of enemy bot in percent (0-100%).
+        /// </summary>
+        float Damage { get; }
+
+        /// <summary>
+        /// Gets a shield status of enemy bot in percent (0-100%).
+        /// </summary>
+        float Shield { get; }
     }
 }

@@ -6,6 +6,19 @@ namespace CodingArena.Player.Implement
 {
     public interface IBotAI
     {
-        ITurnAction CreateTurnAction(IBotState botState, IEnumerable<IEnemy> enemies, IBattlefield battlefield);
+        /// <summary>
+        /// Gets a name identification for the bot.
+        /// Could not be <c>null</c>, <c>empty</c> or <c>whitespace</c>.
+        /// </summary>
+        string BotName { get; }
+
+        /// <summary>
+        /// Returns a turn action for the specified input parameters.
+        /// </summary>
+        /// <param name="ownBot">Your own bot.</param>
+        /// <param name="enemies">Enemy bots.</param>
+        /// <param name="battlefield">Battlefield.</param>
+        /// <returns>Turn action that is used in actual turn to battle against other enemy bots.</returns>
+        ITurnAction TurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield);
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 
@@ -6,33 +8,42 @@ namespace CodingArena.Player.Example
 {
     public class ExampleAI : IBotAI
     {
-        public ITurnAction CreateTurnAction(ITurn turn)
+        public string BotName => "Example Bot";
+
+        public ITurnAction TurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
         {
-            if (turn.Enemies.Any())
-            {
-                var robot = turn.MyRobot;
-                var battlefield = turn.Battlefield;
+            if (enemies.Any())
+            {              
+                if (ownBot.Energy < 50)
+                    return TurnActions.TurnAction.Recharge.Battery();
 
-                if (robot.EPPercentage < 50)
-                    return TurnAction.Recharge.Battery();
+                if (ownBot.Shield < 50)
+                    return TurnActions.TurnAction.Recharge.Shield();
 
-                if (robot.SPPercentage < 50)
-                    return TurnAction.Recharge.Shield();
+                var closestEnemy = FindClosestEnemy(ownBot, enemies);
 
-                var closestEnemy = FindClosestEnemy(turn);
+                if (ownBot.Position.DistanceTo(closestEnemy.Position) < 7)
+                    return TurnActions.TurnAction.Attack(closestEnemy);
 
-                if (battlefield[robot].DistanceTo(battlefield[closestEnemy]) < 50)
-                    return TurnAction.Attack(closestEnemy);
-
-                return TurnAction.Move.Towards(battlefield[robot], battlefield[closestEnemy]);
+                return TurnActions.TurnAction.Move.Towards(battlefield[ownBot], battlefield[closestEnemy]);
             }
 
-            return TurnAction.Idle();
+            return TurnActions.TurnAction.Idle();
         }
 
-        private IEnemy FindClosestEnemy(ITurn turn) => 
-            turn.Enemies
-                .OrderBy(e => turn.Battlefield[e].DistanceTo(turn.Battlefield[turn.MyRobot]))
-                .First();
+        private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies)
+        {
+            var closestEnemy = enemies.First();
+            foreach (var enemy in enemies.Except(new[] {closestEnemy}))
+            {
+                if (ownBot.Position.DistanceTo(enemy.Position) < ownBot.Position.DistanceTo(closestEnemy.Position))
+                {
+                    closestEnemy = enemy;
+                }
+            }
+
+            return closestEnemy;
+        }
+            
     }
 }

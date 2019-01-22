@@ -7,11 +7,11 @@ using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
-    internal sealed class AutomataFactory
+    internal sealed class BotFactory
     {
         private readonly Battlefield battlefield;
 
-        public AutomataFactory(Battlefield battlefield)
+        public BotFactory(Battlefield battlefield)
         {
             this.battlefield = battlefield;
         }
@@ -29,7 +29,7 @@ namespace CodingArena.Game
                 Type botType = null;
                 foreach (var t in assembly.ExportedTypes)
                 {
-                    if (typeof(IBot).IsAssignableFrom(t) && t.IsClass)
+                    if (typeof(IBotAI).IsAssignableFrom(t) && t.IsClass)
                     {
                         botType = t;
                         break;
@@ -38,10 +38,10 @@ namespace CodingArena.Game
 
                 if (botType != null)
                 {
-                    var bot = Activator.CreateInstance(botType) as IBot;
-                    var mechWarrior = new Bot(battlefield, bot, 1000, 1000, 1000);
-                    Console.WriteLine($" * {mechWarrior.Name}");
-                    result.Add(mechWarrior);
+                    var ai = Activator.CreateInstance(botType) as IBotAI;
+                    var bot = new Bot(ai, battlefield);
+                    Console.WriteLine($" * {bot.Name}");
+                    result.Add(bot);
                 }
             }
 
