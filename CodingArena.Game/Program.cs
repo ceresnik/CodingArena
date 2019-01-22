@@ -12,12 +12,12 @@ namespace CodingArena.Game
             var output = System.Console.Out;
             var engine = new GameEngine(config, output);
             IBattlefieldSize size = config.BattlefieldSize;
-            var battlefield = new Battlefield(size.Width, size.Height);
-            var factory = new BotFactory(output, battlefield);
             var match = engine.CreateMatch();
 
             for (int i = 0; i < config.MaxRounds; i++)
             {
+                var battlefield = new Battlefield(size.Width, size.Height);
+                var factory = new BotFactory(output, battlefield);
                 var bots = factory.CreateBots();
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartAsync(bots, battlefield);
