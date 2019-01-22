@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using CodingArena.Player.Implement;
 
@@ -9,43 +10,49 @@ namespace CodingArena.Game
 {
     internal sealed class BotFactory
     {
-        private readonly Battlefield battlefield;
-
-        public BotFactory(Battlefield battlefield)
+        public BotFactory(TextWriter output, Battlefield battlefield)
         {
-            this.battlefield = battlefield;
+            Output = output ?? throw new ArgumentNullException(nameof(output));
+            Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
         }
+
+        private TextWriter Output { get; }
+
+        private Battlefield Battlefield { get; }
 
         public ICollection<Bot> Create()
         {
             var result = new Collection<Bot>();
 
-            Console.WriteLine("Loading bots...");
-            var directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-            var files = Directory.GetFiles(directoryPath, "*.dll", SearchOption.AllDirectories);
-            foreach (var file in files)
+            Output.WriteLine("Loading bots...");
+            foreach (var file in AssemblyFiles())
             {
-                var assembly = Assembly.LoadFile(file);
-                Type botType = null;
-                foreach (var t in assembly.ExportedTypes)
-                {
-                    if (typeof(IBotAI).IsAssignableFrom(t) && t.IsClass)
-                    {
-                        botType = t;
-                        break;
-                    }
-                }
+                var assembly = Load(file);
+                var botAIType = FindBotAIType(assembly);
 
-                if (botType != null)
+                if (botAIType != null)
                 {
-                    var ai = Activator.CreateInstance(botType) as IBotAI;
-                    var bot = new Bot(ai, battlefield);
-                    Console.WriteLine($" * {bot.Name}");
+                    var bot = CreateBotInstance(botAIType);
+                    Output.WriteLine($" * {bot.Name}");
                     result.Add(bot);
                 }
             }
 
             return result;
         }
+
+        private static Assembly Load(string file) => Assembly.LoadFile(file);
+
+        private static string[] AssemblyFiles() => Directory.GetFiles(SearchDirectory(), "*.dll", SearchOption.AllDirectories);
+
+        private static string SearchDirectory() => AppDomain.CurrentDomain.BaseDirectory;
+
+        private static Type FindBotAIType(Assembly assembly) => assembly.ExportedTypes.FirstOrDefault(IsBotAIType);
+
+        private static bool IsBotAIType(Type t) => typeof(IBotAI).IsAssignableFrom(t) && t.IsClass;
+
+        private static IBotAI CreateBotAI(Type botAIType) => Activator.CreateInstance(botAIType) as IBotAI;
+
+        private Bot CreateBotInstance(Type botAIType) => new Bot(CreateBotAI(botAIType), Battlefield);
     }
 }

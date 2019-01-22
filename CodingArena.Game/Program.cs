@@ -9,10 +9,11 @@ namespace CodingArena.Game
         {
             System.Console.WriteLine("Starting Coding Arena Game...");
             var config = new GameConfiguration();
-            var engine = new GameEngine(config, System.Console.Out);
+            var output = System.Console.Out;
+            var engine = new GameEngine(config, output);
             IBattlefieldSize size = config.BattlefieldSize;
             var battlefield = new Battlefield(size.Width, size.Height);
-            var factory = new BotFactory(battlefield);
+            var factory = new BotFactory(output, battlefield);
             var match = engine.CreateMatch();
 
             for (int i = 0; i < config.MaxRounds; i++)
@@ -20,7 +21,7 @@ namespace CodingArena.Game
                 var mechWarriors = factory.Create();
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartAsync(mechWarriors, battlefield);
-                roundResult.DisplayTo(System.Console.Out);
+                roundResult.DisplayTo(output);
                 await match.WaitForNextRoundAsync();
             }
 
