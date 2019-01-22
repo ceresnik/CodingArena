@@ -53,6 +53,6 @@ namespace CodingArena.Game
 
         private static IBotAI CreateBotAI(Type botAIType) => Activator.CreateInstance(botAIType) as IBotAI;
 
-        private Bot CreateBotInstance(Type botAIType) => new Bot(CreateBotAI(botAIType), Battlefield);
+        private Bot CreateBotInstance(Type botAIType) => new Bot(Output, CreateBotAI(botAIType), Battlefield);
     }
 }
