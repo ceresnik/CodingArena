@@ -50,6 +50,7 @@ namespace CodingArena.Game
 
                 return Places[x, y];
             }
+            private set => Places[x, y] = value;
         }
 
         public IBattlefieldPlace this[IBattlefieldObject battlefieldObject]
@@ -98,6 +99,21 @@ namespace CodingArena.Game
 
                 return null;
             }
+        }
+
+        public bool Move(Bot bot, int newX, int newY)
+        {
+            int oldX = bot.Position.X;
+            int oldY = bot.Position.Y;
+
+            if (this[newX, newY].IsEmpty)
+            {
+                this[oldX, oldY] = new BattlefieldPlace(oldX, oldY);
+                this[newX, newY] = new BattlefieldPlace(newX, newY, bot);
+                return true;
+            }
+
+            return false;
         }
     }
 }
