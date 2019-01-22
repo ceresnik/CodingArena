@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.RoundTests
@@ -15,5 +16,9 @@ namespace CodingArena.Game.Tests.RoundTests
         public void NullBattlefield_ThrowsArgumentNullException() =>
             Assert.ThrowsAsync<ArgumentNullException>(
                 () => Round.StartAsync(Bots, null));
+
+        [Test]
+        public void RoundResult_NotNull() => 
+            Round.StartAsync(Bots, Battlefield).Should().NotBeNull();
     }
 }
