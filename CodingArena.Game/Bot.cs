@@ -1,4 +1,5 @@
 ﻿using System;
+using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 
@@ -21,18 +22,20 @@ namespace CodingArena.Game
         }
 
         public string Name => BotAI.BotName;
+        public float Damage => 100 - Health;
+        public float Shield => SP / (float)MaxSP;
+        public float Energy => EP / (float)MaxEP;
         public IBattlefieldPlace Position { get; set; }
         private IBotAI BotAI { get; }
         private Battlefield Battlefield { get; }
         private int MaxHP { get; set; }
         private int HP { get; set; }
         private float Health => HP / (float) MaxHP;
-        private float Damage => 100 - Health;
         private int MaxSP { get; set; }
         private int SP { get; set; }
-        private float Shield => SP / (float) MaxSP;
         private int MaxEP { get; set; }
         private int EP { get; set; }
-        private float Energy => EP / (float) MaxEP;
+        private IOwnBot InsideView => new OwnBot(this);
+        private IEnemy OutsideView => new Enemy(this);
     }
 }

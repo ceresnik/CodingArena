@@ -50,11 +50,13 @@
     <Compile Include="BattlefieldSize.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="BotFactory.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="OwnBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Round.cs" />
