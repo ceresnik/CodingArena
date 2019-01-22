@@ -60,5 +60,5 @@ A battlefield is area where automatas (bots) fight against each other.
 Battlefield size is `100 x 100`
 
 ### Game Rules
-1. Do not use `System.Console`.
+1. Don't use `System.Console`.
 2. Don't try to beat the game.
