@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -40,6 +41,8 @@ namespace CodingArena.Game
 
         private Task<RoundResult> MoreThanOneBotsQualified(ICollection<Bot> bots, Battlefield battlefield)
         {
+            PlaceBotsOnBattlefield(bots, battlefield);
+
             var roundResult = new RoundResult();
             DisplayQualifiedBots(bots);
             const int maxTurns = 100;
@@ -61,6 +64,39 @@ namespace CodingArena.Game
                 Output.WriteLine($"No winner after {maxTurns} turns.");
             }
             return Task.FromResult(roundResult);
+        }
+
+        private void PlaceBotsOnBattlefield(ICollection<Bot> bots, Battlefield battlefield)
+        {
+            var random = new Random((int) DateTime.Now.Ticks);
+
+            foreach (var bot in bots)
+            {
+                var place = FindEmptyPlace(battlefield, random);
+                battlefield[place.X, place.Y] = new BattlefieldPlace(place.X, place.Y, bot);
+            }
+        }
+
+        private static IBattlefieldPlace FindEmptyPlace(Battlefield battlefield, Random random)
+        {
+            var emptyPlaces = new List<IBattlefieldPlace>();
+            for (int y = 0; y < battlefield.Size.Height; y++)
+            {
+                for (int x = 0; x < battlefield.Size.Width; x++)
+                {
+                    if (battlefield[x, y].IsEmpty)
+                    {
+                        emptyPlaces.Add(battlefield[x, y]);
+                    }
+                }
+            }
+
+            if (emptyPlaces.Any())
+            {
+                return emptyPlaces[random.Next(emptyPlaces.Count - 1)];
+            }
+
+            throw new InvalidOperationException("Failed to find empty place on battlefield.");
         }
 
         private void DisplayQualifiedBots(ICollection<Bot> bots)

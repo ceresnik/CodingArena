@@ -14,15 +14,10 @@ namespace CodingArena.Player.Example
         {
             if (enemies.Any())
             {              
-                if (ownBot.Energy < 50)
-                    return TurnActions.TurnAction.Recharge.Battery();
-
-                if (ownBot.Shield < 50)
-                    return TurnActions.TurnAction.Recharge.Shield();
-
                 var closestEnemy = FindClosestEnemy(ownBot, enemies);
 
-                if (ownBot.Position.DistanceTo(closestEnemy.Position) < 7)
+                var minAttackDistance = 6;
+                if (ownBot.Position.DistanceTo(closestEnemy.Position) < minAttackDistance)
                     return TurnActions.TurnAction.Attack(closestEnemy);
 
                 return TurnActions.TurnAction.Move.Towards(battlefield[ownBot], battlefield[closestEnemy]);

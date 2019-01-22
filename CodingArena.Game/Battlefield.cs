@@ -50,7 +50,7 @@ namespace CodingArena.Game
 
                 return Places[x, y];
             }
-            private set => Places[x, y] = value;
+            set => Places[x, y] = value;
         }
 
         public IBattlefieldPlace this[IBattlefieldObject battlefieldObject]
