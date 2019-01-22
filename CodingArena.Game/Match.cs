@@ -23,5 +23,9 @@ namespace CodingArena.Game
             textWriter.WriteLine("Waiting for next round...");
             return Task.Delay(config.DelayForNextRound);
         }
+
+        public void Process(RoundResult roundResult)
+        {            
+        }
     }
 }

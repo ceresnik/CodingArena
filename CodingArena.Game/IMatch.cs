@@ -6,5 +6,6 @@ namespace CodingArena.Game
     {
         Task<IRound> CreateRoundAsync();
         Task WaitForNextRoundAsync();
+        void Process(RoundResult roundResult);
     }
 }
