@@ -1,5 +1,4 @@
 # CodingArena.Game
-
 A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more.
 
 ### Language
@@ -20,6 +19,11 @@ Each bot chooses which turn action will perform that turn
 ### TurnAction
 A bot chooses turn action (e.g. move, attack, idle). 
 
+| Turn Action | Energy Cost |
+|:------------|------------:|
+| Move        |           1 |
+| Attack      |           5 |
+
 #### Order of TurnActions
 Turn is divided into three phases: pre, main, post phase. 
 * Move is performed in pre phase
@@ -33,10 +37,8 @@ Turn actions are ordered by the bot positions in battlefield (e.g. closer to the
 ### Bot AI
 Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
 
-### Automata
-> A mechanical figure or contrivance constructed to act as if by its own motive power; robot.
-
-Automata is a robot which act based on the Bot AI (implemented by a player) with following starting properties:
+### Bot
+Bot acts based on the Bot AI (implemented by a player) with following starting properties:
 
 | Max HP | Max SP | Max EP |
 |-------:|-------:|-------:|
