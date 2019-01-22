@@ -101,7 +101,7 @@ namespace CodingArena.Game.Tests.BotTests
         }
 
         [Test]
-        public void Attack_NextPlace()
+        public void Attack_NearestEnemy()
         {
             var enemy = new Bot(Console.Out, new BotAIStub {Action = TurnAction.Idle()}, Battlefield);
             Battlefield[0, 0] = new BattlefieldPlace(0, 0, Bot);
