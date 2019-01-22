@@ -20,7 +20,7 @@ namespace CodingArena.Game
 
         private Battlefield Battlefield { get; }
 
-        public ICollection<Bot> Create()
+        public ICollection<Bot> CreateBots()
         {
             var result = new Collection<Bot>();
 

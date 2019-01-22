@@ -18,9 +18,9 @@ namespace CodingArena.Game
 
             for (int i = 0; i < config.MaxRounds; i++)
             {
-                var mechWarriors = factory.Create();
+                var bots = factory.CreateBots();
                 var round = await match.CreateRoundAsync();
-                var roundResult = await round.StartAsync(mechWarriors, battlefield);
+                var roundResult = await round.StartAsync(bots, battlefield);
                 roundResult.DisplayTo(output);
                 await match.WaitForNextRoundAsync();
             }
