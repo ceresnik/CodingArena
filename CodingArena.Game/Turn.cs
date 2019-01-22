@@ -26,7 +26,7 @@ namespace CodingArena.Game
                 foreach (var bot in Bots)
                 {
                     var enemies = Bots.Except(new[] {bot}).ToList();
-                    bot.ExecuteTurnAction(enemies, Battlefield); // TODO: consider change to async
+                    bot.ExecuteTurnAction(enemies); // TODO: consider change to async
                 }
                 var remainingBots = Bots.Except(Bots.Where(b => b.Damage > 100f)).ToList();
                 return new Turn(Number + 1, remainingBots, Battlefield);

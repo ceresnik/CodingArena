@@ -31,9 +31,6 @@ namespace CodingArena.Game
         public float Shield => SP * 100 / (float)MaxSP;
         public float Energy => EP * 100 / (float)MaxEP;
         public IBattlefieldPlace Position => Battlefield[this];
-        private TextWriter Output { get; }
-        private IBotAI BotAI { get; }
-        private Battlefield Battlefield { get; }
         public int MaxHP { get; set; }
         public int HP { get; set; }
         public float Health => HP * 100 / (float) MaxHP;
@@ -43,13 +40,16 @@ namespace CodingArena.Game
         public int EP { get; set; }
         public IOwnBot InsideView => new OwnBot(this);
         public IEnemy OutsideView => new Enemy(this);
+        private TextWriter Output { get; }
+        private IBotAI BotAI { get; }
+        private Battlefield Battlefield { get; }
 
-        public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies, Battlefield battlefield)
+        public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
         {
-            var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), battlefield);
+            var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
             if (turnAction is MoveTurnAction move)
             {
-                ExecuteMoveTurnAction(move, battlefield);
+                ExecuteMoveTurnAction(move, Battlefield);
             }
 
             if (turnAction is AttackTurnAction attack)
@@ -92,7 +92,7 @@ namespace CodingArena.Game
             if (battlefield.Move(this, newX, newY))
             {
                 EP -= energyCost;
-                Output.WriteLine($"{Name} moved to {newX}, {newY}.");
+                Output.WriteLine($"{Name} moved to [{newX}, {newY}].");
             }
             else
             {

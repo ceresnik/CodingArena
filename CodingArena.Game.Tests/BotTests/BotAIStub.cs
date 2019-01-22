@@ -10,7 +10,7 @@ namespace CodingArena.Game.Tests.BotTests
     {
         public BotAIStub()
         {
-            BotName = "TestBotName";
+            BotName = "TestBot";
         }
 
         public string BotName { get; }
