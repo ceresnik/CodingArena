@@ -18,6 +18,9 @@ namespace CodingArena.Game
 
         public Task<RoundResult> StartAsync(ICollection<Bot> bots, Battlefield battlefield)
         {
+            if (bots == null) throw new ArgumentNullException(nameof(bots));
+            if (battlefield == null) throw new ArgumentNullException(nameof(battlefield));
+
             Output.WriteLine($"Starting round {DateTime.Now} ...");
             return bots.Any() == false
                 ? NoBotsQualified()
