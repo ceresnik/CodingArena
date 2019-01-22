@@ -99,5 +99,17 @@ namespace CodingArena.Game.Tests.BotTests
             Bot.ExecuteTurnAction(Enemies);
             Bot.Position.Should().Be(Battlefield[x, y]);
         }
+
+        [Test]
+        public void Attack_NextPlace()
+        {
+            var enemy = new Bot(Console.Out, new BotAIStub {Action = TurnAction.Idle()}, Battlefield);
+            Battlefield[0, 0] = new BattlefieldPlace(0, 0, Bot);
+            Battlefield[0, 1] = new BattlefieldPlace(0, 1, enemy);
+            Enemies.Add(enemy);
+            BotAI.Action = TurnAction.Attack(enemy.OutsideView);
+            Bot.ExecuteTurnAction(Enemies);
+            enemy.SP.Should().Be(Bot.MaxSP - 100);
+        }
     }
 }

@@ -124,7 +124,7 @@ namespace CodingArena.Game
                 return;
             }
 
-            double chance = (maxRange - distance + 1) / maxRange;
+            double chance = (maxRange - distance) / maxRange;
             const int maxDamage = 100;
             int damage = (int) (maxDamage * chance);
 
