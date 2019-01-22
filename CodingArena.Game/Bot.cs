@@ -92,7 +92,7 @@ namespace CodingArena.Game
             if (battlefield.Move(this, newX, newY))
             {
                 EP -= energyCost;
-                Output.WriteLine($"{Name} moved {move.Direction}.");
+                Output.WriteLine($"{Name} moved to {newX}, {newY}.");
             }
             else
             {

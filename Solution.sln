@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Player.Example"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game.Tests", "CodingArena.Game.Tests\CodingArena.Game.Tests.csproj", "{B0B11497-EFB8-4CD0-9D83-54B2A4C878A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Player.Example2", "CodingArena.Player.Example2\CodingArena.Player.Example2.csproj", "{FDEA6A59-C089-40BE-B3B2-4734B2BF66FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B0B11497-EFB8-4CD0-9D83-54B2A4C878A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0B11497-EFB8-4CD0-9D83-54B2A4C878A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0B11497-EFB8-4CD0-9D83-54B2A4C878A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDEA6A59-C089-40BE-B3B2-4734B2BF66FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEA6A59-C089-40BE-B3B2-4734B2BF66FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEA6A59-C089-40BE-B3B2-4734B2BF66FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEA6A59-C089-40BE-B3B2-4734B2BF66FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

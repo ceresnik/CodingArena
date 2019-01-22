@@ -3,7 +3,7 @@ using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Player.TurnActions
 {
-    public static partial class TurnAction
+    public static class TurnAction
     {
         public static ITurnAction Attack(IEnemy enemy) => new AttackTurnAction(enemy);
 
@@ -16,6 +16,9 @@ namespace CodingArena.Player.TurnActions
 
             public static ITurnAction Towards(IBattlefieldPlace from, IBattlefieldPlace to)
             {
+                if (from == null) throw new ArgumentNullException(nameof(from));
+                if (to == null) throw new ArgumentNullException(nameof(to));
+
                 int difX = to.X - from.X;
                 int difY = to.Y - from.Y;
 

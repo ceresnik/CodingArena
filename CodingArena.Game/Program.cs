@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
@@ -7,27 +8,36 @@ namespace CodingArena.Game
     {
         static async Task Main()
         {
-            System.Console.WriteLine("Starting Coding Arena Game...");
-            var config = new GameConfiguration();
-            var output = System.Console.Out;
-            var engine = new GameEngine(config, output);
-            IBattlefieldSize size = config.BattlefieldSize;
-            var match = engine.CreateMatch();
-
-            for (int i = 0; i < config.MaxRounds; i++)
+            Console.WriteLine("Starting Coding Arena Game...");
+            try
             {
-                var battlefield = new Battlefield(size.Width, size.Height);
-                var factory = new BotFactory(output, battlefield);
-                var bots = factory.CreateBots();
-                var round = await match.CreateRoundAsync();
-                var roundResult = await round.StartAsync(bots, battlefield);
-                roundResult.DisplayTo(output);
-                match.Process(roundResult);
-                await match.WaitForNextRoundAsync();
+                var config = new GameConfiguration();
+                var output = Console.Out;
+                var engine = new GameEngine(config, output);
+                IBattlefieldSize size = config.BattlefieldSize;
+                var match = engine.CreateMatch();
+
+                for (int i = 0; i < config.MaxRounds; i++)
+                {
+                    var battlefield = new Battlefield(size.Width, size.Height);
+                    output.WriteLine($"Battlefield initialized to width:{size.Width} height:{size.Height}.");
+                    var factory = new BotFactory(output, battlefield);
+                    var bots = factory.CreateBots();
+                    var round = await match.CreateRoundAsync();
+                    var roundResult = await round.StartAsync(bots, battlefield);
+                    roundResult.DisplayTo(output);
+                    match.Process(roundResult);
+                    await match.WaitForNextRoundAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Game is broken.");
+                Console.WriteLine($"Error message: {e}");
             }
 
-            System.Console.WriteLine("Press any key to exit...");
-            System.Console.ReadKey();
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
     }
 }

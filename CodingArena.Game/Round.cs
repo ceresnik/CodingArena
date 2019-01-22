@@ -74,6 +74,7 @@ namespace CodingArena.Game
             {
                 var place = FindEmptyPlace(battlefield, random);
                 battlefield[place.X, place.Y] = new BattlefieldPlace(place.X, place.Y, bot);
+                Output.WriteLine($"{bot.Name} is placed on battlefield at {place.X}, {place.Y}");
             }
         }
 

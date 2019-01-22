@@ -4,16 +4,16 @@ using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 
-namespace CodingArena.Player.Example
+namespace CodingArena.Player.Example2
 {
     public class ExampleAI : IBotAI
     {
-        public string BotName => "Example Bot";
+        public string BotName => "Example Bot 2";
 
         public ITurnAction TurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
         {
             if (enemies.Any())
-            {              
+            {
                 var closestEnemy = FindClosestEnemy(ownBot, enemies);
 
                 var minAttackDistance = 6;
@@ -31,7 +31,7 @@ namespace CodingArena.Player.Example
         private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies)
         {
             var closestEnemy = enemies.First();
-            foreach (var enemy in enemies.Except(new[] {closestEnemy}))
+            foreach (var enemy in enemies.Except(new[] { closestEnemy }))
             {
                 if (ownBot.Position.DistanceTo(enemy.Position) < ownBot.Position.DistanceTo(closestEnemy.Position))
                 {
@@ -41,6 +41,6 @@ namespace CodingArena.Player.Example
 
             return closestEnemy;
         }
-            
+
     }
 }

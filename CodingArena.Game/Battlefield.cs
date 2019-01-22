@@ -1,5 +1,4 @@
 ﻿using System;
-using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
@@ -66,31 +65,7 @@ namespace CodingArena.Game
                 {
                     for (int x = 0; x < Size.Width; x++)
                     {
-                        if (Places[x, y]?.Object == battlefieldObject)
-                        {
-                            return Places[x, y];
-                        }
-                    }
-                }
-
-                return null;
-            }
-        }
-
-        public IBattlefieldPlace this[IBot bot]
-        {
-            get
-            {
-                if (bot == null)
-                {
-                    throw new ArgumentNullException(nameof(bot));
-                }
-
-                for (int y = 0; y < Size.Height; y++)
-                {
-                    for (int x = 0; x < Size.Width; x++)
-                    {
-                        if (Places[x, y]?.Object as IBot == bot)
+                        if (Places[x, y]?.Object?.Name == battlefieldObject.Name)
                         {
                             return Places[x, y];
                         }
