@@ -41,8 +41,8 @@ namespace CodingArena.Game
         public int SP { get; set; }
         public int MaxEP { get; set; }
         public int EP { get; set; }
-        private IOwnBot InsideView => new OwnBot(this);
-        private IEnemy OutsideView => new Enemy(this);
+        public IOwnBot InsideView => new OwnBot(this);
+        public IEnemy OutsideView => new Enemy(this);
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies, Battlefield battlefield)
         {

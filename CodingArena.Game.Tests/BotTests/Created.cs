@@ -40,5 +40,23 @@ namespace CodingArena.Game.Tests.BotTests
 
         [Test]
         public void Position() => Bot.Position.Should().BeNull();
+
+        [Test]
+        public void InsideView()
+        {
+            Bot.InsideView.Should().NotBeNull();
+            Bot.InsideView.Damage.Should().Be(Bot.Damage);
+            Bot.InsideView.Shield.Should().Be(Bot.Shield);
+            Bot.InsideView.Energy.Should().Be(Bot.Energy);
+        }
+
+        [Test]
+        public void OutsideView()
+        {
+            Bot.OutsideView.Should().NotBeNull();
+            Bot.OutsideView.Name.Should().Be(Bot.Name);
+            Bot.OutsideView.Damage.Should().Be(Bot.Damage);
+            Bot.OutsideView.Shield.Should().Be(Bot.Shield);
+        }
     }
 }
