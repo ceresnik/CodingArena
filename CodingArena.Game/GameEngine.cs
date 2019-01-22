@@ -13,6 +13,6 @@ namespace CodingArena.Game
             this.textWriter = textWriter;
         }
 
-        public IMatch CreateMatch() => new Match(configuration, textWriter);
+        public IMatch CreateMatch() => new Match(textWriter, configuration);
     }
 }

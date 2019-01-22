@@ -1,27 +1,28 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game
 {
     internal class Match : IMatch
     {
-        private readonly GameConfiguration config;
-        private readonly TextWriter textWriter;
-
-        public Match(GameConfiguration config, TextWriter textWriter)
+        public Match(TextWriter output, GameConfiguration config)
         {
-            this.config = config;
-            this.textWriter = textWriter;
+            Output = output ?? throw new ArgumentNullException(nameof(output));
+            Config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
+        private TextWriter Output { get; }
+        private GameConfiguration Config { get; }
+
         public Task<IRound> CreateRoundAsync() => 
-            Task.FromResult<IRound>(new Round(textWriter));
+            Task.FromResult<IRound>(new Round(Output));
 
         public Task WaitForNextRoundAsync()
         {
-            textWriter.WriteLine($"Next round in {config.DelayForNextRound:g}");
-            textWriter.WriteLine("Waiting for next round...");
-            return Task.Delay(config.DelayForNextRound);
+            Output.WriteLine($"Next round in {Config.DelayForNextRound:g}");
+            Output.WriteLine("Waiting for next round...");
+            return Task.Delay(Config.DelayForNextRound);
         }
 
         public void Process(RoundResult roundResult)
