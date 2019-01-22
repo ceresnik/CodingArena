@@ -6,11 +6,11 @@ namespace CodingArena.Game
 {
     internal class Round : IRound
     {
-        private readonly TextWriter output;
+        private TextWriter Output { get; }
 
         public Round(TextWriter output)
         {
-            this.output = output;
+            Output = output;
         }
 
         public Task<RoundResult> StartAsync(ICollection<Bot> bots, Battlefield battlefield)
