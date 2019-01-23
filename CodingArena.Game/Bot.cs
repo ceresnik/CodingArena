@@ -64,7 +64,7 @@ namespace CodingArena.Game
                     break;
                 case RechargeShieldTurnAction rechargeShield:
                     break;
-                case RechargeBatteryTurnAction rechargeBattery:
+                case RechargeBattery rechargeBattery:
                     break;
             }
         }
