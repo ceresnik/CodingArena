@@ -46,6 +46,10 @@ namespace CodingArena.Game
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
         {
+            if (HP <= 0)
+            {
+                return;
+            }
             var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
             if (turnAction is MoveTurnAction move)
             {
@@ -92,7 +96,7 @@ namespace CodingArena.Game
             if (battlefield.Move(this, newX, newY))
             {
                 EP -= energyCost;
-                Output.WriteLine($"{Name} moved to [{newX}, {newY}].");
+                Output.WriteLine($"{Name} moved {move.Direction} to [{newX}, {newY}].");
             }
             else
             {

@@ -27,20 +27,20 @@ namespace CodingArena.Player.TurnActions
                 if (difX > 0 && difY == 0) return East();
                 if (difX < 0 && difY == 0) return West();
 
-                if (difX == 0 && difY > 0) return South();
-                if (difX == 0 && difY < 0) return North();
+                if (difX == 0 && difY > 0) return North();
+                if (difX == 0 && difY < 0) return South();
 
-                if (difX > 0 && difY > 0 && difX > difY) return East();
-                if (difX > 0 && difY > 0 && difX < difY) return South();
+                if (difX > 0 && difY > 0 && difX >= difY) return East();
+                if (difX > 0 && difY > 0 && difX <= difY) return North();
 
-                if (difX < 0 && difY > 0 && Math.Abs(difX) > difY) return West();
-                if (difX < 0 && difY > 0 && Math.Abs(difX) < difY) return South();
+                if (difX < 0 && difY > 0 && Math.Abs(difX) >= difY) return West();
+                if (difX < 0 && difY > 0 && Math.Abs(difX) <= difY) return North();
 
-                if (difX < 0 && difY < 0 && Math.Abs(difX) > Math.Abs(difY)) return West();
-                if (difX < 0 && difY < 0 && Math.Abs(difX) < Math.Abs(difY)) return North();
+                if (difX < 0 && difY < 0 && Math.Abs(difX) >= Math.Abs(difY)) return West();
+                if (difX < 0 && difY < 0 && Math.Abs(difX) <= Math.Abs(difY)) return South();
 
-                if (difX > 0 && difY < 0 && difX > Math.Abs(difY)) return East();
-                if (difX > 0 && difY < 0 && difX < Math.Abs(difY)) return North();
+                if (difX > 0 && difY < 0 && difX >= Math.Abs(difY)) return East();
+                if (difX > 0 && difY < 0 && difX <= Math.Abs(difY)) return South();
 
                 throw new NotSupportedException();
             }

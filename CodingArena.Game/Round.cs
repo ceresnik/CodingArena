@@ -54,11 +54,11 @@ namespace CodingArena.Game
             {
                 turn = turn.StartTurn();
 
-            } while (bots.Count > 1 && turn.Number < maxTurns);
+            } while (bots.Count(b => b.HP > 0) > 1 && turn.Number < maxTurns);
 
-            if (bots.Count == 1)
+            if (bots.Count(b => b.HP > 0) == 1)
             {
-                var winner = bots.First();
+                var winner = bots.First(b => b.HP > 0);
                 Output.WriteLine($"Winner is {winner.Name}.");
                 return Task.FromResult(new RoundResult { Winner = winner.Name });
             }

@@ -8,7 +8,7 @@ namespace CodingArena.Player.Example
 {
     public class ExampleAI : IBotAI
     {
-        public string BotName => "Example Bot";
+        public string BotName => "Example Bot 1";
 
         public ITurnAction TurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
         {
@@ -41,6 +41,5 @@ namespace CodingArena.Player.Example
 
             return closestEnemy;
         }
-            
     }
 }
