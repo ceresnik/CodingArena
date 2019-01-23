@@ -2,9 +2,9 @@
 
 namespace CodingArena.Player.TurnActions
 {
-    public sealed class AttackTurnAction : ITurnAction
+    public sealed class Attack : ITurnAction
     {
-        internal AttackTurnAction(IEnemy enemy)
+        internal Attack(IEnemy enemy)
         {
             Target = enemy ?? throw new ArgumentNullException(nameof(enemy));
         }
