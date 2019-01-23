@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
@@ -46,6 +47,7 @@ namespace CodingArena.Game
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
         {
+            Thread.Sleep(1000);
             if (HP <= 0)
             {
                 return;

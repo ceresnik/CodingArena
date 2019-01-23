@@ -18,8 +18,12 @@ namespace CodingArena.Game
             CursorVisible = false;
         }
 
-        public void StartRound() => 
+        public void StartRound()
+        {
+            Clear();
+            DisplayRow(0, "CodingArena");
             DisplayRow(RoundRow, $"Starting round {DateTime.Now} ...");
+        }
 
         public void NextRoundIn(TimeSpan delayForNextRound) =>
             DisplayRow(RoundRow, $"Next round in {delayForNextRound:g}");
@@ -54,9 +58,9 @@ namespace CodingArena.Game
 
         public void TurnAction(Bot bot, string message)
         {
+            Qualified(qualifiedBots);
             var index = qualifiedBots.IndexOf(bot);
             DisplayRow(BotsRow + index, message);
-            Qualified(qualifiedBots);
         }
 
         public void RoundResult(RoundResult roundResult)
@@ -78,7 +82,7 @@ namespace CodingArena.Game
         {
             CursorTop = row;
             CursorLeft = 0;
-            WriteLine(string.Join("", Enumerable.Repeat(s, BufferWidth)));
+            WriteLine(string.Join("", Enumerable.Repeat(s, BufferWidth - 1)));
         }
 
         private static string DisplayBot(Bot bot)
