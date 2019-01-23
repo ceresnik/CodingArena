@@ -6,6 +6,6 @@
         {
         }
 
-        public int EnergyCost => 0;
+        public int EnergyCost => 5;
     }
 }

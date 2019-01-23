@@ -7,7 +7,7 @@
             Direction = direction;
         }
 
-        public int EnergyCost => 1;
+        public int EnergyCost => 5;
 
         public Direction Direction { get; }
     }
