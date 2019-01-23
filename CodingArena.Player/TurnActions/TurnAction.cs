@@ -52,6 +52,6 @@ namespace CodingArena.Player.TurnActions
             public static ITurnAction Shield() => new RechargeShieldTurnAction();
         }
 
-        public static ITurnAction Idle() => new IdleTurnAction();
+        public static ITurnAction Idle() => new Idle();
     }
 }

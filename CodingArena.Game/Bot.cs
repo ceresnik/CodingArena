@@ -61,7 +61,7 @@ namespace CodingArena.Game
                 ExecuteAttackTurnAction(attack, enemies);
             }
 
-            if (turnAction is IdleTurnAction)
+            if (turnAction is Idle)
             {
                 Output.WriteLine($"{Name} is idle.");
             }
