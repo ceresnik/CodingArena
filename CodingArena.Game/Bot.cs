@@ -62,6 +62,10 @@ namespace CodingArena.Game
                 case Idle _:
                     Output.WriteLine($"{Name} is idle.");
                     break;
+                case RechargeShieldTurnAction rechargeShield:
+                    break;
+                case RechargeBatteryTurnAction rechargeBattery:
+                    break;
             }
         }
 
