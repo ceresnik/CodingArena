@@ -1,6 +1,6 @@
 ﻿namespace CodingArena.Player.TurnActions
 {
-    public class IdleTurnAction : ITurnAction
+    public sealed class IdleTurnAction : ITurnAction
     {
         internal IdleTurnAction()
         {
