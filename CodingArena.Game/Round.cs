@@ -32,21 +32,20 @@ namespace CodingArena.Game
         private Task<RoundResult> NoBotsQualified()
         {
             Output.WriteLine("No bots are qualified.");
-            return Task.FromResult(new RoundResult());
+            return Task.FromResult(RoundResult.NoWinner());
         }
 
         private Task<RoundResult> OnlyOneBotQualified(Bot bot)
         {
             Output.WriteLine("Only one bot is qualified.");
             Output.WriteLine($"Winner is {bot.Name}.");
-            return Task.FromResult(new RoundResult {Winner = bot.Name});
+            return Task.FromResult(RoundResult.Winner(bot.Name));
         }
 
         private Task<RoundResult> MoreThanOneBotsQualified(ICollection<Bot> bots, Battlefield battlefield)
         {
             PlaceBotsOnBattlefield(bots, battlefield);
 
-            var roundResult = new RoundResult();
             DisplayQualifiedBots(bots);
             const int maxTurns = 100;
             var turn = new Turn(0, bots, battlefield);
@@ -58,15 +57,15 @@ namespace CodingArena.Game
 
             if (bots.Count(b => b.HP > 0) == 1)
             {
-                var winner = bots.First(b => b.HP > 0);
-                Output.WriteLine($"Winner is {winner.Name}.");
-                return Task.FromResult(new RoundResult { Winner = winner.Name });
+                var bot = bots.First(b => b.HP > 0);
+                Output.WriteLine($"Winner is {bot.Name}.");
+                return Task.FromResult(RoundResult.Winner(bot.Name));
             }
             if (bots.Count > 1)
             {
                 Output.WriteLine($"No winner after {maxTurns} turns.");
             }
-            return Task.FromResult(roundResult);
+            return Task.FromResult(RoundResult.NoWinner());
         }
 
         private void PlaceBotsOnBattlefield(ICollection<Bot> bots, Battlefield battlefield)
