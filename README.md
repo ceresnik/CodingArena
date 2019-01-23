@@ -27,14 +27,8 @@ A bot chooses turn action (e.g. move, attack, idle).
 | Recharge.Energy | +20 EP       |           5 |
 
 #### Order of TurnActions
-Turn is divided into three phases: pre, main, post phase. 
-* Move is performed in pre phase
-* Attack is performed in main phase
-* Idle is performed in post phase
-
-or...
-
-Turn actions are ordered by the bot positions in battlefield (e.g. closer to the middle sooner bot do the action)
+Turn actions are ordered by the bot age:
+> Oldest assembly file that contains implementation of bot AI goes first, newest goes last.
 
 ### Bot AI
 Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
