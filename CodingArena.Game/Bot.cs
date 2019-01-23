@@ -51,19 +51,17 @@ namespace CodingArena.Game
                 return;
             }
             var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
-            if (turnAction is Move move)
+            switch (turnAction)
             {
-                ExecuteMoveTurnAction(move, Battlefield);
-            }
-
-            if (turnAction is Attack attack)
-            {
-                ExecuteAttackTurnAction(attack, enemies);
-            }
-
-            if (turnAction is Idle)
-            {
-                Output.WriteLine($"{Name} is idle.");
+                case Move move:
+                    ExecuteMoveTurnAction(move, Battlefield);
+                    break;
+                case Attack attack:
+                    ExecuteAttackTurnAction(attack, enemies);
+                    break;
+                case Idle _:
+                    Output.WriteLine($"{Name} is idle.");
+                    break;
             }
         }
 
