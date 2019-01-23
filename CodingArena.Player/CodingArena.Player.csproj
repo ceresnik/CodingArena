@@ -56,7 +56,7 @@
     <Compile Include="TurnActions\ITurnAction.cs" />
     <Compile Include="TurnActions\Move.cs" />
     <Compile Include="TurnActions\RechargeBattery.cs" />
-    <Compile Include="TurnActions\RechargeShieldTurnAction.cs" />
+    <Compile Include="TurnActions\RechargeShield.cs" />
     <Compile Include="TurnActions\TurnAction.cs" />
   </ItemGroup>
   <ItemGroup>

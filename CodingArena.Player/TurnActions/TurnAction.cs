@@ -48,8 +48,8 @@ namespace CodingArena.Player.TurnActions
 
         public static class Recharge
         {
-            public static ITurnAction Battery() => new RechargeBatteryTurnAction();
-            public static ITurnAction Shield() => new RechargeShieldTurnAction();
+            public static ITurnAction Battery() => new RechargeBattery();
+            public static ITurnAction Shield() => new RechargeShield();
         }
 
         public static ITurnAction Idle() => new Idle();

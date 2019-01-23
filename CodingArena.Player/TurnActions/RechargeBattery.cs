@@ -1,8 +1,8 @@
 ﻿namespace CodingArena.Player.TurnActions
 {
-    public sealed class RechargeBatteryTurnAction : ITurnAction
+    public sealed class RechargeBattery : ITurnAction
     {
-        internal RechargeBatteryTurnAction()
+        internal RechargeBattery()
         {
         }
 
