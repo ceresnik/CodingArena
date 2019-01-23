@@ -51,7 +51,7 @@
     <Compile Include="IBot.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnActions\AttackTurnAction.cs" />
+    <Compile Include="TurnActions\Attack.cs" />
     <Compile Include="TurnActions\IdleTurnAction.cs" />
     <Compile Include="TurnActions\ITurnAction.cs" />
     <Compile Include="TurnActions\Move.cs" />

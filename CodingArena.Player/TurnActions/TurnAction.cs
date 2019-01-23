@@ -5,14 +5,14 @@ namespace CodingArena.Player.TurnActions
 {
     public static class TurnAction
     {
-        public static ITurnAction Attack(IEnemy enemy) => new AttackTurnAction(enemy);
+        public static ITurnAction Attack(IEnemy enemy) => new Attack(enemy);
 
         public class Move
         {
-            public static ITurnAction North() => new MoveTurnAction(Direction.North);
-            public static ITurnAction East() => new MoveTurnAction(Direction.East);
-            public static ITurnAction West() => new MoveTurnAction(Direction.West);
-            public static ITurnAction South() => new MoveTurnAction(Direction.South);
+            public static ITurnAction North() => new TurnActions.Move(Direction.North);
+            public static ITurnAction East() => new TurnActions.Move(Direction.East);
+            public static ITurnAction West() => new TurnActions.Move(Direction.West);
+            public static ITurnAction South() => new TurnActions.Move(Direction.South);
 
             public static ITurnAction Towards(IBattlefieldPlace from, IBattlefieldPlace to)
             {
@@ -22,7 +22,7 @@ namespace CodingArena.Player.TurnActions
                 int difX = to.X - from.X;
                 int difY = to.Y - from.Y;
 
-                if (difX == 0 && difY == 0) return new MoveTurnAction(Direction.None);
+                if (difX == 0 && difY == 0) return new TurnActions.Move(Direction.None);
 
                 if (difX > 0 && difY == 0) return East();
                 if (difX < 0 && difY == 0) return West();

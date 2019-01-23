@@ -51,12 +51,12 @@ namespace CodingArena.Game
                 return;
             }
             var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
-            if (turnAction is MoveTurnAction move)
+            if (turnAction is Move move)
             {
                 ExecuteMoveTurnAction(move, Battlefield);
             }
 
-            if (turnAction is AttackTurnAction attack)
+            if (turnAction is Attack attack)
             {
                 ExecuteAttackTurnAction(attack, enemies);
             }
@@ -67,7 +67,7 @@ namespace CodingArena.Game
             }
         }
 
-        private void ExecuteMoveTurnAction(MoveTurnAction move, Battlefield battlefield)
+        private void ExecuteMoveTurnAction(Move move, Battlefield battlefield)
         {
             if (move.Direction == Direction.None)
             {
@@ -103,7 +103,7 @@ namespace CodingArena.Game
             }
         }
 
-        private void ExecuteAttackTurnAction(AttackTurnAction attack, IReadOnlyCollection<Bot> enemies)
+        private void ExecuteAttackTurnAction(Attack attack, IReadOnlyCollection<Bot> enemies)
         {
             var target = enemies.FirstOrDefault(e => e.Name == attack.Target.Name);
             if (target == null)
