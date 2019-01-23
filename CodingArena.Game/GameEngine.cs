@@ -1,18 +1,16 @@
-﻿using System.IO;
-
-namespace CodingArena.Game
+﻿namespace CodingArena.Game
 {
     internal class GameEngine
     {
         private readonly GameConfiguration configuration;
-        private readonly TextWriter textWriter;
+        private readonly Output output;
 
-        public GameEngine(GameConfiguration configuration, TextWriter textWriter)
+        public GameEngine(GameConfiguration configuration, Output output)
         {
             this.configuration = configuration;
-            this.textWriter = textWriter;
+            this.output = output;
         }
 
-        public IMatch CreateMatch() => new Match(textWriter, configuration);
+        public IMatch CreateMatch() => new Match(output, configuration);
     }
 }

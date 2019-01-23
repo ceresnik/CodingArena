@@ -6,13 +6,13 @@ namespace CodingArena.Game
 {
     internal class Match : IMatch
     {
-        public Match(TextWriter output, GameConfiguration config)
+        public Match(Output output, GameConfiguration config)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
-        private TextWriter Output { get; }
+        private Output Output { get; }
         private GameConfiguration Config { get; }
 
         public Task<IRound> CreateRoundAsync() => 
@@ -20,8 +20,7 @@ namespace CodingArena.Game
 
         public Task WaitForNextRoundAsync()
         {
-            Output.WriteLine($"Next round in {Config.DelayForNextRound:g}");
-            Output.WriteLine("Waiting for next round...");
+            Output.NextRoundIn(Config.DelayForNextRound);
             return Task.Delay(Config.DelayForNextRound);
         }
 

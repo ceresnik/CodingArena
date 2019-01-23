@@ -17,7 +17,7 @@ namespace CodingArena.Game.Tests.BotTests
         {
             BotAI = new BotAIStub();
             Battlefield = new Battlefield(100, 100);
-            Bot = new Bot(Console.Out, BotAI, Battlefield);
+            Bot = new Bot(new Output(), BotAI, Battlefield);
             Enemies = new List<Bot>();
         }
     }

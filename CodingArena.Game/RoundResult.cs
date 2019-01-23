@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace CodingArena.Game
+﻿namespace CodingArena.Game
 {
     internal class RoundResult
     {
@@ -11,10 +9,5 @@ namespace CodingArena.Game
         private RoundResult(string name) => WinnerName = name;
 
         public string WinnerName { get; }
-
-        public void DisplayTo(TextWriter output) =>
-            output.WriteLine(string.IsNullOrWhiteSpace(WinnerName)
-                ? "No winner."
-                : $"Winner is {WinnerName}.");
     }
 }

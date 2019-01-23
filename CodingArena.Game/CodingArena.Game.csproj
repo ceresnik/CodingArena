@@ -56,6 +56,7 @@
     <Compile Include="IMatch.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="Output.cs" />
     <Compile Include="OwnBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

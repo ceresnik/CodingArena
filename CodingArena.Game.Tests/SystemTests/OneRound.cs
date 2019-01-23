@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player;
@@ -14,9 +13,6 @@ namespace CodingArena.Game.Tests.SystemTests
 {
     internal class OneRound
     {
-        private TextWriter Output { get; set; }
-        private Battlefield Battlefield { get; set; }
-
         [Test]
         public async Task TwoAttackerAIs()
         {
@@ -24,21 +20,21 @@ namespace CodingArena.Game.Tests.SystemTests
             try
             {
                 var config = new GameConfiguration();
-                Output = Console.Out;
-                var engine = new GameEngine(config, Output);
+                var output = new Output();
+                var engine = new GameEngine(config, output);
                 IBattlefieldSize size = config.BattlefieldSize;
                 var match = engine.CreateMatch();
 
-                Battlefield = new Battlefield(size.Width, size.Height);
-                Output.WriteLine($"Battlefield initialized to width:{size.Width} height:{size.Height}.");
+                var battlefield = new Battlefield(size.Width, size.Height);
+                output.Battlefield(battlefield);
                 var bots = new Collection<Bot>
                 {
-                    new Bot(Output, new AttackerAI("BotA"), Battlefield),
-                    new Bot(Output, new AttackerAI("BotB"), Battlefield),
+                    new Bot(output, new AttackerAI("BotA"), battlefield),
+                    new Bot(output, new AttackerAI("BotB"), battlefield),
                 };
                 var round = await match.CreateRoundAsync();
-                var roundResult = await round.StartAsync(bots, Battlefield);
-                roundResult.DisplayTo(Output);
+                var roundResult = await round.StartAsync(bots, battlefield);
+                output.RoundResult(roundResult);
             }
             catch (Exception e)
             {

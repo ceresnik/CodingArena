@@ -14,7 +14,7 @@ namespace CodingArena.Game.Tests.RoundTests
         [SetUp]
         public virtual void SetUp()
         {
-            Round = new Round(Console.Out);
+            Round = new Round(new Output());
             Bots = new List<Bot>();
             Battlefield = new Battlefield(100, 100);
         }

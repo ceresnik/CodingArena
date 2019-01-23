@@ -12,7 +12,7 @@ namespace CodingArena.Game
             try
             {
                 var config = new GameConfiguration();
-                var output = Console.Out;
+                var output = new Output();
                 var engine = new GameEngine(config, output);
                 IBattlefieldSize size = config.BattlefieldSize;
                 var match = engine.CreateMatch();
@@ -20,12 +20,13 @@ namespace CodingArena.Game
                 for (int i = 0; i < config.MaxRounds; i++)
                 {
                     var battlefield = new Battlefield(size.Width, size.Height);
-                    output.WriteLine($"Battlefield initialized to width:{size.Width} height:{size.Height}.");
+                    output.Battlefield(battlefield);
                     var factory = new BotFactory(output, battlefield);
                     var bots = factory.CreateBots();
                     var round = await match.CreateRoundAsync();
                     var roundResult = await round.StartAsync(bots, battlefield);
-                    roundResult.DisplayTo(output);
+                    output.RoundResult(roundResult);
+
                     match.Process(roundResult);
                     await match.WaitForNextRoundAsync();
                 }

@@ -11,7 +11,7 @@ namespace CodingArena.Game
 {
     internal class Bot : IBattlefieldObject
     {
-        public Bot(TextWriter output, IBotAI botAI, Battlefield battlefield)
+        public Bot(Output output, IBotAI botAI, Battlefield battlefield)
         {
             Output = output;
             BotAI = botAI ?? throw new ArgumentNullException(nameof(botAI));
@@ -40,7 +40,7 @@ namespace CodingArena.Game
         public int EP { get; set; }
         public IOwnBot InsideView => new OwnBot(this);
         public IEnemy OutsideView => new Enemy(this);
-        private TextWriter Output { get; }
+        private Output Output { get; }
         private IBotAI BotAI { get; }
         private Battlefield Battlefield { get; }
 
@@ -60,7 +60,7 @@ namespace CodingArena.Game
                     Execute(attack, enemies);
                     break;
                 case Idle _:
-                    Output.WriteLine($"{Name} is idle.");
+                    Output.TurnAction(this, $"{Name} is idle.");
                     break;
                 case RechargeShield rechargeShield:
                     Execute(rechargeShield);
@@ -75,7 +75,7 @@ namespace CodingArena.Game
         {
             if (move.Direction == Direction.None)
             {
-                Output.WriteLine($"{Name} doesn't move.");
+                Output.TurnAction(this, $"{Name} doesn't move.");
                 return;
             }
 
@@ -93,17 +93,17 @@ namespace CodingArena.Game
 
             if (EP < move.EnergyCost)
             {
-                Output.WriteLine($"{Name} doesn't have enough energy to move.");
+                Output.TurnAction(this, $"{Name} doesn't have enough energy to move.");
                 return;
             }
             if (battlefield.Move(this, newX, newY))
             {
                 EP -= move.EnergyCost;
-                Output.WriteLine($"{Name} moved {move.Direction} to [{newX}, {newY}].");
+                Output.TurnAction(this, $"{Name} moved {move.Direction}.");
             }
             else
             {
-                Output.WriteLine($"{Name} cannot move {move.Direction}.");
+                Output.TurnAction(this, $"{Name} cannot move {move.Direction}.");
             }
         }
 
@@ -112,7 +112,7 @@ namespace CodingArena.Game
             var target = enemies.FirstOrDefault(e => e.Name == attack.Target.Name);
             if (target == null)
             {
-                Output.WriteLine($"{Name} cannot attack {attack.Target.Name}.");
+                Output.TurnAction(this, $"{Name} cannot attack {attack.Target.Name}.");
                 return;
             }
 
@@ -120,13 +120,13 @@ namespace CodingArena.Game
             const int maxRange = 10;
             if (distance > 10)
             {
-                Output.WriteLine($"{Name} cannot attack {target.Name}. Target is out of range.");
+                Output.TurnAction(this, $"{Name} cannot attack {target.Name}. Target is out of range.");
                 return;
             }
 
             if (EP < attack.EnergyCost)
             {
-                Output.WriteLine($"{Name} doesn't have enough energy to attack.");
+                Output.TurnAction(this, $"{Name} doesn't have enough energy to attack.");
                 return;
             }
 
@@ -138,15 +138,15 @@ namespace CodingArena.Game
 
             if (damage <= 0)
             {
-                Output.WriteLine($"{Name} attacks {target.Name} with no damage.");
+                Output.TurnAction(this, $"{Name} attacks {target.Name} with no damage.");
             }
             else
             {
                 target.TakeDamage(damage);
-                Output.WriteLine($"{Name} attacks {target.Name} with {damage} damage.");
+                Output.TurnAction(this, $"{Name} attacks {target.Name} with {damage} damage.");
                 if (target.HP <= 0)
                 {
-                    Output.WriteLine($"{target.Name} explodes.");
+                    Output.TurnAction(target, $"{target.Name} explodes.");
                 }
             }
         }
@@ -155,7 +155,7 @@ namespace CodingArena.Game
         {
             if (EP < rechargeShield.EnergyCost)
             {
-                Output.WriteLine($"{Name} doesn't have enough energy to recharge shield.");
+                Output.TurnAction(this, $"{Name} doesn't have enough energy to recharge shield.");
                 return;
             }
 
@@ -169,15 +169,15 @@ namespace CodingArena.Game
             {
                 SP = MaxSP;
             }
-            
-            Output.WriteLine($"{Name} recharges shield to {Shield:F0}%.");
+
+            Output.TurnAction(this, $"{Name} recharges shield.");
         }
 
         private void Execute(RechargeBattery rechargeBattery)
         {
             if (EP < rechargeBattery.EnergyCost)
             {
-                Output.WriteLine($"{Name} doesn't have enough energy to recharge battery.");
+                Output.TurnAction(this, $"{Name} doesn't have enough energy to recharge battery.");
                 return;
             }
 
@@ -192,7 +192,7 @@ namespace CodingArena.Game
                 EP = MaxEP;
             }
 
-            Output.WriteLine($"{Name} recharges battery.");
+            Output.TurnAction(this, $"{Name} recharges battery.");
         }
 
         private void TakeDamage(int damage)

@@ -10,21 +10,19 @@ namespace CodingArena.Game
 {
     internal sealed class BotFactory
     {
-        public BotFactory(TextWriter output, Battlefield battlefield)
+        public BotFactory(Output output, Battlefield battlefield)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
         }
 
-        private TextWriter Output { get; }
+        private Output Output { get; }
 
         private Battlefield Battlefield { get; }
 
-        public ICollection<Bot> CreateBots()
+        public IList<Bot> CreateBots()
         {
             var result = new Collection<Bot>();
-
-            Output.WriteLine("Loading bots...");
             foreach (var file in AssemblyFiles())
             {
                 var assembly = Load(file);
@@ -33,7 +31,6 @@ namespace CodingArena.Game
                 if (botAIType != null)
                 {
                     var bot = CreateBotInstance(botAIType);
-                    Output.WriteLine($" * {bot.Name}");
                     result.Add(bot);
                 }
             }
