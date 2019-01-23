@@ -1,8 +1,8 @@
 ﻿namespace CodingArena.Player.TurnActions
 {
-    public sealed class MoveTurnAction : ITurnAction
+    public sealed class Move : ITurnAction
     {
-        internal MoveTurnAction(Direction direction)
+        internal Move(Direction direction)
         {
             Direction = direction;
         }
