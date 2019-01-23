@@ -12,6 +12,9 @@ namespace CodingArena.Game
 
         public string WinnerName { get; }
 
-        public void DisplayTo(TextWriter output) => output.WriteLine($"Winner is {WinnerName}.");
+        public void DisplayTo(TextWriter output) =>
+            output.WriteLine(string.IsNullOrWhiteSpace(WinnerName)
+                ? "No winner."
+                : $"Winner is {WinnerName}.");
     }
 }

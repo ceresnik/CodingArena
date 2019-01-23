@@ -38,7 +38,6 @@ namespace CodingArena.Game
         private Task<RoundResult> OnlyOneBotQualified(Bot bot)
         {
             Output.WriteLine("Only one bot is qualified.");
-            Output.WriteLine($"Winner is {bot.Name}.");
             return Task.FromResult(RoundResult.Winner(bot.Name));
         }
 
@@ -58,7 +57,6 @@ namespace CodingArena.Game
             if (bots.Count(b => b.HP > 0) == 1)
             {
                 var bot = bots.First(b => b.HP > 0);
-                Output.WriteLine($"Winner is {bot.Name}.");
                 return Task.FromResult(RoundResult.Winner(bot.Name));
             }
             if (bots.Count > 1)
@@ -88,16 +86,12 @@ namespace CodingArena.Game
                 for (int x = 0; x < battlefield.Size.Width; x++)
                 {
                     if (battlefield[x, y].IsEmpty)
-                    {
                         emptyPlaces.Add(battlefield[x, y]);
-                    }
                 }
             }
 
             if (emptyPlaces.Any())
-            {
                 return emptyPlaces[random.Next(emptyPlaces.Count - 1)];
-            }
 
             throw new InvalidOperationException("Failed to find empty place on battlefield.");
         }
