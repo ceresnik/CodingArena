@@ -26,7 +26,7 @@ A bot chooses turn action (e.g. move, attack, idle).
 | Recharge.Shield | +50 SP       |          50 |
 | Recharge.Energy | +20 EP       |           5 |
 
-#### Order of TurnActions
+#### Order of TurnActions (not implemented yet)
 Turn actions are ordered by the bot age:
 > Oldest assembly file that contains implementation of bot AI goes first, newest goes last.
 
