@@ -87,15 +87,14 @@ namespace CodingArena.Game
             if (move.Direction == Direction.South && Position.Y > 0)
                 newY = Position.Y - 1;
 
-            const int energyCost = 1;
-            if (EP < energyCost)
+            if (EP < move.EnergyCost)
             {
                 Output.WriteLine($"{Name} doesn't have enough energy to move.");
                 return;
             }
             if (battlefield.Move(this, newX, newY))
             {
-                EP -= energyCost;
+                EP -= move.EnergyCost;
                 Output.WriteLine($"{Name} moved {move.Direction} to [{newX}, {newY}].");
             }
             else
@@ -121,8 +120,7 @@ namespace CodingArena.Game
                 return;
             }
 
-            const int energyCost = 5;
-            if (Energy < energyCost)
+            if (Energy < attack.EnergyCost)
             {
                 Output.WriteLine($"{Name} doesn't have enough energy to attack.");
                 return;
@@ -132,7 +130,7 @@ namespace CodingArena.Game
             const int maxDamage = 100;
             int damage = (int) (maxDamage * chance);
 
-            EP -= energyCost;
+            EP -= attack.EnergyCost;
 
             if (damage <= 0)
             {

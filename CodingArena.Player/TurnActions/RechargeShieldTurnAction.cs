@@ -5,5 +5,7 @@
         internal RechargeShieldTurnAction()
         {
         }
+
+        public int EnergyCost => 50;
     }
 }

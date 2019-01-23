@@ -5,5 +5,7 @@
         internal RechargeBatteryTurnAction()
         {
         }
+
+        public int EnergyCost => 0;
     }
 }

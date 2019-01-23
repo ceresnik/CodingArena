@@ -9,6 +9,8 @@ namespace CodingArena.Player.TurnActions
             Target = enemy ?? throw new ArgumentNullException(nameof(enemy));
         }
 
+        public int EnergyCost => 10;
+
         public IEnemy Target { get; }
     }
 }

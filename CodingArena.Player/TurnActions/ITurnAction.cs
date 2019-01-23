@@ -2,5 +2,6 @@
 {
     public interface ITurnAction
     {
+        int EnergyCost { get; }
     }
 }
