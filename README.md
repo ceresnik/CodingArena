@@ -23,7 +23,7 @@ A bot chooses turn action (e.g. move, attack, idle).
 |:----------------|-------------:|------------:|
 | Move            | 1 place      |           5 |
 | Attack          | 0-100 damage |          10 |
-| Recharge.Shield | +50 SP       |          50 |
+| Recharge.Shield | +20 SP       |          20 |
 | Recharge.Energy | +20 EP       |           5 |
 
 #### Order of TurnActions (not implemented yet)
