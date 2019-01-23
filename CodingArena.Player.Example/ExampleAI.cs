@@ -10,22 +10,26 @@ namespace CodingArena.Player.Example
     {
         public string BotName => "Example Bot 1";
 
-        public ITurnAction TurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
+        public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
         {
             if (enemies.Any())
-            {              
+            {
+                if (ownBot.Shield < 50)
+                {
+                    return TurnAction.Recharge.Shield();
+                }
                 var closestEnemy = FindClosestEnemy(ownBot, enemies);
 
                 var minAttackDistance = 6;
                 if (ownBot.Position.DistanceTo(closestEnemy.Position) < minAttackDistance)
-                    return TurnActions.TurnAction.Attack(closestEnemy);
+                    return TurnAction.Attack(closestEnemy);
 
                 var fromPlace = battlefield[ownBot];
                 var toPlace = battlefield[closestEnemy];
-                return TurnActions.TurnAction.Move.Towards(fromPlace, toPlace);
+                return TurnAction.Move.Towards(fromPlace, toPlace);
             }
 
-            return TurnActions.TurnAction.Idle();
+            return TurnAction.Idle();
         }
 
         private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies)

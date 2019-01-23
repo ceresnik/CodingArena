@@ -50,26 +50,28 @@ namespace CodingArena.Game
             {
                 return;
             }
-            var turnAction = BotAI.TurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+            var turnAction = BotAI.GetTurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
             switch (turnAction)
             {
                 case Move move:
-                    ExecuteMoveTurnAction(move, Battlefield);
+                    Execute(move, Battlefield);
                     break;
                 case Attack attack:
-                    ExecuteAttackTurnAction(attack, enemies);
+                    Execute(attack, enemies);
                     break;
                 case Idle _:
                     Output.WriteLine($"{Name} is idle.");
                     break;
                 case RechargeShield rechargeShield:
+                    Execute(rechargeShield);
                     break;
                 case RechargeBattery rechargeBattery:
+                    Execute(rechargeBattery);
                     break;
             }
         }
 
-        private void ExecuteMoveTurnAction(Move move, Battlefield battlefield)
+        private void Execute(Move move, Battlefield battlefield)
         {
             if (move.Direction == Direction.None)
             {
@@ -105,7 +107,7 @@ namespace CodingArena.Game
             }
         }
 
-        private void ExecuteAttackTurnAction(Attack attack, IReadOnlyCollection<Bot> enemies)
+        private void Execute(Attack attack, IReadOnlyCollection<Bot> enemies)
         {
             var target = enemies.FirstOrDefault(e => e.Name == attack.Target.Name);
             if (target == null)
@@ -122,7 +124,7 @@ namespace CodingArena.Game
                 return;
             }
 
-            if (Energy < attack.EnergyCost)
+            if (EP < attack.EnergyCost)
             {
                 Output.WriteLine($"{Name} doesn't have enough energy to attack.");
                 return;
@@ -147,6 +149,50 @@ namespace CodingArena.Game
                     Output.WriteLine($"{target.Name} explodes.");
                 }
             }
+        }
+
+        private void Execute(RechargeShield rechargeShield)
+        {
+            if (EP < rechargeShield.EnergyCost)
+            {
+                Output.WriteLine($"{Name} doesn't have enough energy to recharge shield.");
+                return;
+            }
+
+            EP -= rechargeShield.EnergyCost;
+
+            if (SP + rechargeShield.RechargeAmount < MaxSP)
+            {
+                SP += rechargeShield.RechargeAmount;
+            }
+            else
+            {
+                SP = MaxSP;
+            }
+            
+            Output.WriteLine($"{Name} recharges shield to {Shield:F0}%.");
+        }
+
+        private void Execute(RechargeBattery rechargeBattery)
+        {
+            if (EP < rechargeBattery.EnergyCost)
+            {
+                Output.WriteLine($"{Name} doesn't have enough energy to recharge battery.");
+                return;
+            }
+
+            EP -= rechargeBattery.EnergyCost;
+
+            if (EP + rechargeBattery.RechargeAmount < MaxEP)
+            {
+                EP += rechargeBattery.RechargeAmount;
+            }
+            else
+            {
+                EP = MaxEP;
+            }
+
+            Output.WriteLine($"{Name} recharges battery.");
         }
 
         private void TakeDamage(int damage)

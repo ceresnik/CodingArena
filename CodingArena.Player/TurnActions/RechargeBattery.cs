@@ -7,5 +7,7 @@
         }
 
         public int EnergyCost => 5;
+
+        public int RechargeAmount => 20;
     }
 }

@@ -17,7 +17,7 @@ namespace CodingArena.Game.Tests.BotTests
 
         public ITurnAction Action { get; set; }
 
-        public ITurnAction TurnAction(
+        public ITurnAction GetTurnAction(
             IOwnBot ownBot, 
             IReadOnlyCollection<IEnemy> enemies, 
             IBattlefield battlefield)
