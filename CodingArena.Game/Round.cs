@@ -8,9 +8,9 @@ namespace CodingArena.Game
 {
     internal class Round : IRound
     {
-        private Output Output { get; }
+        private IOutput Output { get; }
 
-        public Round(Output output)
+        public Round(IOutput output)
         {
             Output = output;
         }

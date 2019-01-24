@@ -3,9 +3,9 @@
     internal class GameEngine
     {
         private readonly GameConfiguration configuration;
-        private readonly Output output;
+        private readonly IOutput output;
 
-        public GameEngine(GameConfiguration configuration, Output output)
+        public GameEngine(GameConfiguration configuration, IOutput output)
         {
             this.configuration = configuration;
             this.output = output;

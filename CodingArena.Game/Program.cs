@@ -21,7 +21,7 @@ namespace CodingArena.Game
                 {
                     var battlefield = new Battlefield(size.Width, size.Height);
                     output.Battlefield(battlefield);
-                    var factory = new BotFactory(output, battlefield);
+                    var factory = new BotFactory(output, battlefield, config);
                     var bots = factory.CreateBots();
                     var round = await match.CreateRoundAsync();
                     var roundResult = await round.StartAsync(bots, battlefield);

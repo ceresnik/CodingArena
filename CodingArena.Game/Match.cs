@@ -6,13 +6,13 @@ namespace CodingArena.Game
 {
     internal class Match : IMatch
     {
-        public Match(Output output, GameConfiguration config)
+        public Match(IOutput output, GameConfiguration config)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
-        private Output Output { get; }
+        private IOutput Output { get; }
         private GameConfiguration Config { get; }
 
         public Task<IRound> CreateRoundAsync() => 

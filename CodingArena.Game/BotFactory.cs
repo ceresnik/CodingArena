@@ -10,15 +10,16 @@ namespace CodingArena.Game
 {
     internal sealed class BotFactory
     {
-        public BotFactory(Output output, Battlefield battlefield)
+        public BotFactory(Output output, Battlefield battlefield, GameConfiguration config)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
+            Config = config;
         }
 
         private Output Output { get; }
-
         private Battlefield Battlefield { get; }
+        private GameConfiguration Config { get; }
 
         public IList<Bot> CreateBots()
         {
@@ -50,6 +51,6 @@ namespace CodingArena.Game
 
         private static IBotAI CreateBotAI(Type botAIType) => Activator.CreateInstance(botAIType) as IBotAI;
 
-        private Bot CreateBotInstance(Type botAIType) => new Bot(Output, CreateBotAI(botAIType), Battlefield);
+        private Bot CreateBotInstance(Type botAIType) => new Bot(Output, CreateBotAI(botAIType), Battlefield, Config);
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CodingArena.Game.Tests.SystemTests;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.RoundTests
@@ -14,7 +14,7 @@ namespace CodingArena.Game.Tests.RoundTests
         [SetUp]
         public virtual void SetUp()
         {
-            Round = new Round(new Output());
+            Round = new Round(new TestOutput());
             Bots = new List<Bot>();
             Battlefield = new Battlefield(100, 100);
         }

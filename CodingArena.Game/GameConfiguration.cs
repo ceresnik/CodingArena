@@ -21,5 +21,6 @@ namespace CodingArena.Game
         public int MaxTurns { get; set; }
 
         public IBattlefieldSize BattlefieldSize { get; set; }
+        public TimeSpan TurnActionDelay { get; set; }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="RoundTests\StartAsync.cs" />
     <Compile Include="RoundTests\TestFixture.cs" />
     <Compile Include="SystemTests\OneRound.cs" />
+    <Compile Include="SystemTests\TestOutput.cs" />
     <Compile Include="TurnTests\StartTurn.cs" />
     <Compile Include="TurnTests\TestFixture.cs" />
   </ItemGroup>

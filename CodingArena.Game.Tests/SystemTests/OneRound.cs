@@ -20,7 +20,8 @@ namespace CodingArena.Game.Tests.SystemTests
             try
             {
                 var config = new GameConfiguration();
-                var output = new Output();
+                config.TurnActionDelay = TimeSpan.FromMilliseconds(0);
+                var output = new TestOutput();
                 var engine = new GameEngine(config, output);
                 IBattlefieldSize size = config.BattlefieldSize;
                 var match = engine.CreateMatch();
@@ -29,8 +30,8 @@ namespace CodingArena.Game.Tests.SystemTests
                 output.Battlefield(battlefield);
                 var bots = new Collection<Bot>
                 {
-                    new Bot(output, new AttackerAI("BotA"), battlefield),
-                    new Bot(output, new AttackerAI("BotB"), battlefield),
+                    new Bot(output, new AttackerAI("BotA"), battlefield, config),
+                    new Bot(output, new AttackerAI("BotB"), battlefield, config),
                 };
                 var round = await match.CreateRoundAsync();
                 var roundResult = await round.StartAsync(bots, battlefield);

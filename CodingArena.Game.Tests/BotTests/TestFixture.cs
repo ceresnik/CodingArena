@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodingArena.Game.Tests.SystemTests;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests
@@ -17,7 +18,8 @@ namespace CodingArena.Game.Tests.BotTests
         {
             BotAI = new BotAIStub();
             Battlefield = new Battlefield(100, 100);
-            Bot = new Bot(new Output(), BotAI, Battlefield);
+            Bot = new Bot(new TestOutput(), BotAI, Battlefield,
+                new GameConfiguration {TurnActionDelay = TimeSpan.FromMilliseconds(0)});
             Enemies = new List<Bot>();
         }
     }

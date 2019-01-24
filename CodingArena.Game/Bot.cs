@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using CodingArena.Player;
@@ -12,11 +11,12 @@ namespace CodingArena.Game
 {
     internal class Bot : IBattlefieldObject
     {
-        public Bot(Output output, IBotAI botAI, Battlefield battlefield)
+        public Bot(IOutput output, IBotAI botAI, Battlefield battlefield, GameConfiguration config)
         {
             Output = output;
             BotAI = botAI ?? throw new ArgumentNullException(nameof(botAI));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
+            Config = config;
             if (string.IsNullOrWhiteSpace(botAI.BotName))
                 throw new ArgumentException($"{nameof(botAI)} does not define {nameof(botAI.BotName)}.");
             MaxHP = 1000;
@@ -41,13 +41,14 @@ namespace CodingArena.Game
         public int EP { get; set; }
         public IOwnBot InsideView => new OwnBot(this);
         public IEnemy OutsideView => new Enemy(this);
-        private Output Output { get; }
+        private IOutput Output { get; }
         private IBotAI BotAI { get; }
         private Battlefield Battlefield { get; }
+        private GameConfiguration Config { get; }
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(Config.TurnActionDelay);
             if (HP <= 0)
             {
                 return;
