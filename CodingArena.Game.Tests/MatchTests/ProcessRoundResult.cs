@@ -11,7 +11,7 @@ namespace CodingArena.Game.Tests.MatchTests
         public override void SetUp()
         {
             base.SetUp();
-            Match.Process(RoundResult.Winner(WinnerName));
+            SUT.Process(RoundResult.Winner(WinnerName));
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace CodingArena.Game.Tests.MatchTests
         [Test]
         public void SameWinnerTwice()
         {
-            Match.Process(RoundResult.Winner(WinnerName));
+            SUT.Process(RoundResult.Winner(WinnerName));
             Output.Winners[WinnerName].Should().Be(2);
         }
 
@@ -28,7 +28,7 @@ namespace CodingArena.Game.Tests.MatchTests
         public void DifferentWinner()
         {
             const string name = "OtherWinner";
-            Match.Process(RoundResult.Winner(name));
+            SUT.Process(RoundResult.Winner(name));
             Output.Winners[WinnerName].Should().Be(1);
             Output.Winners[name].Should().Be(1);
         }
