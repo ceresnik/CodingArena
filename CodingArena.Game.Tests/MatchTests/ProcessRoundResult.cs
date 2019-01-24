@@ -23,5 +23,14 @@ namespace CodingArena.Game.Tests.MatchTests
             Match.Process(RoundResult.Winner(WinnerName));
             Output.Winners[WinnerName].Should().Be(2);
         }
+
+        [Test]
+        public void DifferentWinner()
+        {
+            const string name = "OtherWinner";
+            Match.Process(RoundResult.Winner(name));
+            Output.Winners[WinnerName].Should().Be(1);
+            Output.Winners[name].Should().Be(1);
+        }
     }
 }
