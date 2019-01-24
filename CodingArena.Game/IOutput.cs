@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CodingArena.Game
 {
-    internal interface IOutput
+    public interface IOutput
     {
         void StartRound();
         void NextRoundIn(TimeSpan delayForNextRound);

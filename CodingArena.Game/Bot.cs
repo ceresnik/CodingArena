@@ -9,7 +9,7 @@ using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
-    internal class Bot : IBattlefieldObject
+    public class Bot : IBattlefieldObject
     {
         public Bot(IOutput output, IBotAI botAI, Battlefield battlefield, GameConfiguration config)
         {

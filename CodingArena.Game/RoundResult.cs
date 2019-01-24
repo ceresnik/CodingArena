@@ -1,6 +1,6 @@
 ﻿namespace CodingArena.Game
 {
-    internal class RoundResult
+    public class RoundResult
     {
         public static RoundResult NoWinner() => new RoundResult(null);
 

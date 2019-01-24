@@ -3,7 +3,7 @@ using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
-    internal class GameConfiguration
+    public class GameConfiguration
     {
         public GameConfiguration()
         {

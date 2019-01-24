@@ -3,7 +3,7 @@ using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
-    internal class Battlefield : IBattlefield
+    public class Battlefield : IBattlefield
     {
         public Battlefield(int width, int height)
         {

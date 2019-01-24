@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace CodingArena.Game
 {
-    internal interface IRound
+    public interface IRound
     {
         Task<RoundResult> StartAsync(IList<Bot> bots, Battlefield battlefield);
     }

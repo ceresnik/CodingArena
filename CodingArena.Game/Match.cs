@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game
 {
-    internal class Match : IMatch
+    public class Match : IMatch
     {
         public Match(IOutput output, GameConfiguration config)
         {
