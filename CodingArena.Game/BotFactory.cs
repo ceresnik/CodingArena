@@ -21,7 +21,7 @@ namespace CodingArena.Game
         private Battlefield Battlefield { get; }
         private GameConfiguration Config { get; }
 
-        public IList<Bot> CreateBots()
+        public IEnumerable<Bot> CreateBots()
         {
             var result = new Collection<Bot>();
             foreach (var file in AssemblyFiles())

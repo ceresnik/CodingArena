@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player.Battlefield;
 
@@ -22,7 +23,7 @@ namespace CodingArena.Game
                     var battlefield = new Battlefield(size.Width, size.Height);
                     output.Battlefield(battlefield);
                     var factory = new BotFactory(output, battlefield, config);
-                    var bots = factory.CreateBots();
+                    var bots = factory.CreateBots().ToList();
                     var round = await match.CreateRoundAsync();
                     var roundResult = await round.StartAsync(bots, battlefield);
                     output.RoundResult(roundResult);
