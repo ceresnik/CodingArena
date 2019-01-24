@@ -5,9 +5,9 @@ using static System.Console;
 
 namespace CodingArena.Game
 {
-    internal class Output
+    internal class Output : IOutput
     {
-        private IList<Bot> qualifiedBots;
+        private IList<Bot> QualifiedBots { get; set; }
         private const int RoundRow = 1;
         private const int BattlefieldRow = 2;
         private const int QualificationRow = 3;
@@ -49,7 +49,7 @@ namespace CodingArena.Game
 
         public void Qualified(IList<Bot> bots)
         {
-            qualifiedBots = bots;
+            QualifiedBots = bots;
             FullRow(QualificationRow, "-");
             DisplayRow(QualificationRow + 1, "Bots qualified:");
             for (int i = 0; i < bots.Count; i++)
@@ -58,8 +58,8 @@ namespace CodingArena.Game
 
         public void TurnAction(Bot bot, string message)
         {
-            Qualified(qualifiedBots);
-            var index = qualifiedBots.IndexOf(bot);
+            Qualified(QualifiedBots);
+            var index = QualifiedBots.IndexOf(bot);
             DisplayRow(BotsRow + index, message);
         }
 

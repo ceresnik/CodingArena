@@ -54,6 +54,7 @@
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
+    <Compile Include="IOutput.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Output.cs" />
