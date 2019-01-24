@@ -10,7 +10,7 @@ namespace CodingArena.Game
         public GameConfiguration()
         {
             //DelayForNextRound = TimeSpan.FromMinutes(5);
-            DelayForNextRound = TimeSpan.FromMinutes(1);
+            DelayForNextRound = TimeSpan.FromSeconds(10);
             MaxRounds = 24; // 24 * 5 min = 2 hours
             MaxTurns = 100;
             BattlefieldSize = new BattlefieldSize(100, 100);

@@ -31,6 +31,10 @@ namespace CodingArena.Game
 
         public void Process(RoundResult roundResult)
         {
+            if (roundResult.WinnerName == null)
+            {
+                return;
+            }
             if (Winners.ContainsKey(roundResult.WinnerName))
             {
                 Winners[roundResult.WinnerName]++;
