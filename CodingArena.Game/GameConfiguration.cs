@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
+    [Export(typeof(GameConfiguration))]
     public class GameConfiguration
     {
         public GameConfiguration()

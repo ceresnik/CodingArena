@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using static System.Console;
 
 namespace CodingArena.Game
 {
+    [Export(typeof(IOutput))]
     internal class Output : IOutput
     {
         private IList<Bot> QualifiedBots { get; set; }

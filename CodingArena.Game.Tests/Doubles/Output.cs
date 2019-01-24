@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
-namespace CodingArena.Game.Tests.SystemTests
+namespace CodingArena.Game.Tests.Doubles
 {
-    internal class TestOutput : IOutput
+    [Export(typeof(IOutput))]
+    internal class Output : IOutput
     {
         public Dictionary<string, int> Winners { get; private set; }
 

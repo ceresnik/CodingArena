@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game
 {
-    public class Match : IMatch
+    [Export(typeof(IMatch))]
+    internal class Match : IMatch
     {
+        [ImportingConstructor]
         public Match(IOutput output, GameConfiguration config)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));

@@ -1,18 +1,18 @@
 ﻿using System;
-using CodingArena.Game.Tests.SystemTests;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.MatchTests
 {
-    internal class TestFixture
+    internal class TestFixture : TestFixture<IMatch>
     {
         protected Match Match { get; private set; }
-        protected TestOutput Output { get; private set; }
+        protected Doubles.Output Output { get; private set; }
 
         [SetUp]
-        public virtual void SetUp()
+        public override void SetUp()
         {
-            Output = new TestOutput();
+            base.SetUp();
+            Output = Get<IOutput>() as Doubles.Output;
             Match = new Match(Output, new GameConfiguration {TurnActionDelay = TimeSpan.MinValue});
         }
     }

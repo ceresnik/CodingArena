@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Tests.Doubles;
 using CodingArena.Game.Tests.SystemTests;
 using NUnit.Framework;
 
@@ -14,7 +15,7 @@ namespace CodingArena.Game.Tests.RoundTests
         [SetUp]
         public virtual void SetUp()
         {
-            Round = new Round(new TestOutput());
+            Round = new Round(new Doubles.Output());
             Bots = new List<Bot>();
             Battlefield = new Battlefield(100, 100);
         }
