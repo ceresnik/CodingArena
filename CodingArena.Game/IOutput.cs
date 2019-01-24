@@ -13,5 +13,6 @@ namespace CodingArena.Game
         void Qualified(IList<Bot> bots);
         void TurnAction(Bot bot, string message);
         void RoundResult(RoundResult roundResult);
+        void MatchResult(Dictionary<string, int> winners);
     }
 }

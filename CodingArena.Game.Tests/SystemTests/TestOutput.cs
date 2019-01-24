@@ -5,6 +5,8 @@ namespace CodingArena.Game.Tests.SystemTests
 {
     internal class TestOutput : IOutput
     {
+        public Dictionary<string, int> Winners { get; private set; }
+
         public void StartRound()
         {
         }
@@ -36,5 +38,7 @@ namespace CodingArena.Game.Tests.SystemTests
         public void RoundResult(RoundResult roundResult)
         {
         }
+
+        public void MatchResult(Dictionary<string, int> winners) => Winners = winners;
     }
 }

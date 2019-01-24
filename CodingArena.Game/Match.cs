@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game
@@ -9,8 +10,10 @@ namespace CodingArena.Game
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Config = config ?? throw new ArgumentNullException(nameof(config));
+            Winners = new Dictionary<string, int>();
         }
 
+        private Dictionary<string, int> Winners { get; }
         private IOutput Output { get; }
         private GameConfiguration Config { get; }
 
@@ -24,7 +27,16 @@ namespace CodingArena.Game
         }
 
         public void Process(RoundResult roundResult)
-        {            
+        {
+            if (Winners.ContainsKey(roundResult.WinnerName))
+            {
+                Winners[roundResult.WinnerName]++;
+            }
+            else
+            {
+                Winners.Add(roundResult.WinnerName, 1);
+            }
+            Output.MatchResult(Winners);
         }
     }
 }

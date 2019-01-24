@@ -70,6 +70,11 @@ namespace CodingArena.Game
                 : $"Round winner is {roundResult.WinnerName}.");
         }
 
+        public void MatchResult(Dictionary<string, int> winners)
+        {
+            // TODO
+        }
+
         private void DisplayRow(int row, string message)
         {
             FullRow(row, " ");

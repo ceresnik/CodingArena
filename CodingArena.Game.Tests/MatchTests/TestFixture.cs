@@ -4,14 +4,16 @@ using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.MatchTests
 {
-    public class TestFixture
+    internal class TestFixture
     {
         protected Match Match { get; private set; }
+        protected TestOutput Output { get; private set; }
 
         [SetUp]
         public virtual void SetUp()
         {
-            Match = new Match(new TestOutput(), new GameConfiguration {TurnActionDelay = TimeSpan.MinValue});
+            Output = new TestOutput();
+            Match = new Match(Output, new GameConfiguration {TurnActionDelay = TimeSpan.MinValue});
         }
     }
 }
