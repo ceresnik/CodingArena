@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CodingArena.Player")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A reference assembly for playing CodingGame, which contains interface(s) to be implemented by players.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Peter Milovcik")]
 [assembly: AssemblyProduct("CodingArena.Player")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
