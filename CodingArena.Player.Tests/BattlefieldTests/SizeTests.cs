@@ -24,5 +24,8 @@ namespace CodingArena.Player.Tests.BattlefieldTests
 
         [Test]
         public void Height_Negative() => Assert.Throws<ArgumentException>(() => new Size(76, -1));
+
+        [Test]
+        public void Equality() => new Size(1, 2).Should().Be(new Size(1, 2));
     }
 }
