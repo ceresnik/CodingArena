@@ -27,5 +27,8 @@ namespace CodingArena.Player.Tests.BattlefieldTests
 
         [Test]
         public void Equality() => new Size(1, 2).Should().Be(new Size(1, 2));
+
+        [Test]
+        public void Format() => new Size(1, 2).ToString().Should().Be("[Width: 1, Height: 2]");
     }
 }
