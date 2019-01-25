@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -15,7 +14,7 @@ namespace CodingArena.Game
                 var config = new GameConfiguration();
                 var output = new Output();
                 var engine = new GameEngine(config, output);
-                IBattlefieldSize size = config.BattlefieldSize;
+                var size = config.BattlefieldSize;
                 var match = engine.CreateMatch();
 
                 for (int i = 0; i < config.MaxRounds; i++)

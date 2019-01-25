@@ -2,7 +2,7 @@
 {
     public interface IBattlefield
     {
-        IBattlefieldSize Size { get; }
+        Size Size { get; }
         IBattlefieldPlace this[int x, int y] { get; }
         IBattlefieldPlace this[IBattlefieldObject battlefieldObject] { get; }
     }

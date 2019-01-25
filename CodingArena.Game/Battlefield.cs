@@ -7,7 +7,7 @@ namespace CodingArena.Game
     {
         public Battlefield(int width, int height)
         {
-            Size = new BattlefieldSize(width, height);
+            Size = new Size(width, height);
             Places = new IBattlefieldPlace[width, height];
             for (int y = 0; y < height; y++)
             {
@@ -20,7 +20,7 @@ namespace CodingArena.Game
 
         private IBattlefieldPlace[,] Places { get; }
 
-        public IBattlefieldSize Size { get; }
+        public Size Size { get; }
 
         public IBattlefieldPlace this[int x, int y]
         {

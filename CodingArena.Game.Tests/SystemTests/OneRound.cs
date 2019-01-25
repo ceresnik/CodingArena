@@ -23,7 +23,7 @@ namespace CodingArena.Game.Tests.SystemTests
                 config.TurnActionDelay = TimeSpan.FromMilliseconds(0);
                 var output = new Doubles.Output();
                 var engine = new GameEngine(config, output);
-                IBattlefieldSize size = config.BattlefieldSize;
+                var size = config.BattlefieldSize;
                 var match = engine.CreateMatch();
 
                 var battlefield = new Battlefield(size.Width, size.Height);

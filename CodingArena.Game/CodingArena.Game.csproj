@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,9 +49,9 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattlefieldPlace.cs" />
-    <Compile Include="BattlefieldSize.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="BotFactory.cs" />
+    <Compile Include="DefaultSettings.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
