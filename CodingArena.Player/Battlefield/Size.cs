@@ -1,9 +1,15 @@
-﻿namespace CodingArena.Player.Battlefield
+﻿using System;
+
+namespace CodingArena.Player.Battlefield
 {
     public sealed class Size
     {
         public Size(int width, int height)
         {
+            if (width <= 0)
+                throw new ArgumentException("Value must be positive number.", nameof(width));
+            if (height <= 0)
+                throw new ArgumentException("Value must be positive number.", nameof(width));
             Width = width;
             Height = height;
         }
