@@ -59,6 +59,8 @@
     <Compile Include="BotTests\ExecuteTurnAction.cs" />
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
+    <Compile Include="DefaultSettingsTests\TestFixture.cs" />
+    <Compile Include="Doubles\TestSettings.cs" />
     <Compile Include="MatchTests\ProcessRoundResult.cs" />
     <Compile Include="MatchTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +73,9 @@
     <Compile Include="TurnTests\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\CodingArena.Game\App.config">
+      <Link>App.config</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

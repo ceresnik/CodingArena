@@ -19,11 +19,13 @@ namespace CodingArena.Game.Tests.SystemTests
             Console.WriteLine("Starting Coding Arena Game...");
             try
             {
+                var container = CompositionContainerFactory.Create();
+
                 var config = new GameConfiguration();
                 config.TurnActionDelay = TimeSpan.FromMilliseconds(0);
                 var output = new Doubles.Output();
                 var engine = new GameEngine(config, output);
-                var size = config.BattlefieldSize;
+                var size = container.GetExportedValue<ISettings>().BattlefieldSize;
                 var match = engine.CreateMatch();
 
                 var battlefield = new Battlefield(size.Width, size.Height);

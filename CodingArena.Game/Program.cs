@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game
@@ -11,10 +13,13 @@ namespace CodingArena.Game
             Console.WriteLine("Starting Coding Arena Game...");
             try
             {
+                var container = CreateCompositionContainer();
+
                 var config = new GameConfiguration();
                 var output = new Output();
                 var engine = new GameEngine(config, output);
-                var size = config.BattlefieldSize;
+                var settings = container.GetExportedValue<ISettings>();
+                var size = settings.BattlefieldSize;
                 var match = engine.CreateMatch();
 
                 for (int i = 0; i < config.MaxRounds; i++)
@@ -39,6 +44,13 @@ namespace CodingArena.Game
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
+        }
+
+        private static CompositionContainer CreateCompositionContainer()
+        {
+            var catalog = new AggregateCatalog(new AssemblyCatalog(Assembly.Load("CodingArena.Game")));
+            var container = new CompositionContainer(catalog);
+            return container;
         }
     }
 }
