@@ -90,5 +90,10 @@ namespace CodingArena.Game
 
             return false;
         }
+
+        public override string ToString()
+        {
+            return $"Battlefield {nameof(Size)}: {Size}";
+        }
     }
 }

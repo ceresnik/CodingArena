@@ -13,5 +13,7 @@ namespace CodingArena.Game
         public int Width { get; }
 
         public int Height { get; }
+
+        public override string ToString() => $"[{nameof(Width)}: {Width}, {nameof(Height)}: {Height}]";
     }
 }
