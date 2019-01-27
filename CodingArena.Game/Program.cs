@@ -22,7 +22,7 @@ namespace CodingArena.Game
                 var size = settings.BattlefieldSize;
                 var match = engine.CreateMatch();
 
-                for (int i = 0; i < config.MaxRounds; i++)
+                for (int i = 0; i < settings.MaxRounds; i++)
                 {
                     var battlefield = new Battlefield(size.Width, size.Height);
                     output.Battlefield(battlefield);

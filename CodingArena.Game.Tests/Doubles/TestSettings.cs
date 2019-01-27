@@ -9,9 +9,11 @@ namespace CodingArena.Game.Tests.Doubles
         {
             BattlefieldSize = new Size(100, 100);
             NextRoundDelay = TimeSpan.MinValue;
+            MaxRounds = 12;
         }
 
         public Size BattlefieldSize { get; set; }
+        public int MaxRounds { get; set; }
         public TimeSpan NextRoundDelay { get; set; }
     }
 }

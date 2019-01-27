@@ -23,6 +23,12 @@ namespace CodingArena.Game
             }
         }
 
+        public int MaxRounds
+        {
+            get => int.Parse(ConfigurationManager.AppSettings["MaxRounds"]);
+            set => ConfigurationManager.AppSettings["MaxRounds"] = value.ToString();
+        }
+
         public TimeSpan NextRoundDelay
         {
             get
