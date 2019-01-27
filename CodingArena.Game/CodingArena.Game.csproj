@@ -58,6 +58,7 @@
     <Compile Include="IMatch.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IRound.cs" />
+    <Compile Include="ISettings.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="OwnBot.cs" />

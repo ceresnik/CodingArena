@@ -24,8 +24,9 @@ namespace CodingArena.Game.Tests.SystemTests
                 var config = new GameConfiguration();
                 config.TurnActionDelay = TimeSpan.FromMilliseconds(0);
                 var output = new Doubles.Output();
-                var engine = new GameEngine(config, output);
-                var size = container.GetExportedValue<ISettings>().BattlefieldSize;
+                var settings = container.GetExportedValue<ISettings>();
+                var engine = new GameEngine(config, output, settings);
+                var size = settings.BattlefieldSize;
                 var match = engine.CreateMatch();
 
                 var battlefield = new Battlefield(size.Width, size.Height);

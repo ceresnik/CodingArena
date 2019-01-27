@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Configuration;
 using CodingArena.Player.Battlefield;
 
@@ -21,10 +22,15 @@ namespace CodingArena.Game
                 ConfigurationManager.AppSettings["BattlefieldHeight"] = value.Height.ToString();
             }
         }
-    }
 
-    public interface ISettings
-    {
-        Size BattlefieldSize { get; set; }
+        public TimeSpan NextRoundDelay
+        {
+            get
+            {
+                int totalSeconds = int.Parse(ConfigurationManager.AppSettings["NextRoundDelayInSeconds"]);
+                return new TimeSpan(0, 0, 0, totalSeconds);
+            }
+            set => ConfigurationManager.AppSettings["NextRoundDelayInSeconds"] = ((int)value.TotalSeconds).ToString();
+        }
     }
 }

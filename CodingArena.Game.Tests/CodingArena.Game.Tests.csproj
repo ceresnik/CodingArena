@@ -59,6 +59,7 @@
     <Compile Include="BotTests\ExecuteTurnAction.cs" />
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
+    <Compile Include="DefaultSettingsTests\DefaultValues.cs" />
     <Compile Include="DefaultSettingsTests\TestFixture.cs" />
     <Compile Include="Doubles\TestSettings.cs" />
     <Compile Include="MatchTests\ProcessRoundResult.cs" />

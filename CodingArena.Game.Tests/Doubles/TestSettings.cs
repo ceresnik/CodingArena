@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.Battlefield;
+﻿using System;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Tests.Doubles
 {
@@ -7,8 +8,10 @@ namespace CodingArena.Game.Tests.Doubles
         public TestSettings()
         {
             BattlefieldSize = new Size(100, 100);
+            NextRoundDelay = TimeSpan.MinValue;
         }
 
         public Size BattlefieldSize { get; set; }
+        public TimeSpan NextRoundDelay { get; set; }
     }
 }
