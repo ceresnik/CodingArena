@@ -44,5 +44,15 @@ namespace CodingArena.Game
             }
             set => ConfigurationManager.AppSettings["NextRoundDelayInSeconds"] = ((int)value.TotalSeconds).ToString();
         }
+
+        public TimeSpan NextTurnActionDelay
+        {
+            get
+            {
+                int totalMilliseconds = int.Parse(ConfigurationManager.AppSettings["NextTurnActionDelayInMilliseconds"]);
+                return new TimeSpan(0, 0, 0, 0, totalMilliseconds);
+            }
+            set => ConfigurationManager.AppSettings["NextTurnActionDelayInMilliseconds"] = ((int) value.TotalMilliseconds).ToString();
+        }
     }
 }

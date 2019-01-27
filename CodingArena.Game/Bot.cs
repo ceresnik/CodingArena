@@ -11,12 +11,12 @@ namespace CodingArena.Game
 {
     public class Bot : IBattlefieldObject
     {
-        public Bot(IOutput output, IBotAI botAI, Battlefield battlefield, GameConfiguration config)
+        public Bot(IOutput output, IBotAI botAI, Battlefield battlefield, ISettings settings)
         {
             Output = output;
             BotAI = botAI ?? throw new ArgumentNullException(nameof(botAI));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
-            Config = config;
+            Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             if (string.IsNullOrWhiteSpace(botAI.BotName))
                 throw new ArgumentException($"{nameof(botAI)} does not define {nameof(botAI.BotName)}.");
             MaxHP = 1000;
@@ -44,11 +44,11 @@ namespace CodingArena.Game
         private IOutput Output { get; }
         private IBotAI BotAI { get; }
         private Battlefield Battlefield { get; }
-        private GameConfiguration Config { get; }
+        private ISettings Settings { get; }
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
         {
-            Thread.Sleep(Config.TurnActionDelay);
+            Thread.Sleep(Settings.NextTurnActionDelay);
             if (HP <= 0)
             {
                 return;

@@ -15,7 +15,6 @@ namespace CodingArena.Game
             {
                 var container = CreateCompositionContainer();
 
-                var config = new GameConfiguration();
                 var output = new Output();
                 var settings = container.GetExportedValue<ISettings>();
                 var engine = container.GetExportedValue<IGameEngine>();
@@ -26,7 +25,7 @@ namespace CodingArena.Game
                 {
                     var battlefield = new Battlefield(size.Width, size.Height);
                     output.Battlefield(battlefield);
-                    var factory = new BotFactory(output, battlefield, config);
+                    var factory = new BotFactory(output, battlefield, settings);
                     var bots = factory.CreateBots().ToList();
                     var round = await match.CreateRoundAsync();
                     var roundResult = await round.StartAsync(bots, battlefield);

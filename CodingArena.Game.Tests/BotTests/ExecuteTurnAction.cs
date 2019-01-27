@@ -1,6 +1,4 @@
 ﻿using System;
-using CodingArena.Game.Tests.Doubles;
-using CodingArena.Game.Tests.SystemTests;
 using CodingArena.Player.TurnActions;
 using FluentAssertions;
 using NUnit.Framework;
@@ -106,8 +104,7 @@ namespace CodingArena.Game.Tests.BotTests
         public void Attack_NearestEnemy()
         {
             var enemyAI = new BotAIStub {Action = TurnAction.Idle()};
-            var enemy = new Bot(new Doubles.Output(), enemyAI, Battlefield,
-                new GameConfiguration {TurnActionDelay = TimeSpan.FromMilliseconds(0)});
+            var enemy = new Bot(new Doubles.Output(), enemyAI, Battlefield, Settings);
             Battlefield[0, 0] = new BattlefieldPlace(0, 0, Bot);
             Battlefield[0, 1] = new BattlefieldPlace(0, 1, enemy);
             Enemies.Add(enemy);
