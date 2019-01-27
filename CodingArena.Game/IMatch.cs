@@ -2,7 +2,7 @@
 
 namespace CodingArena.Game
 {
-    internal interface IMatch
+    public interface IMatch
     {
         Task<IRound> CreateRoundAsync();
         Task WaitForNextRoundAsync();

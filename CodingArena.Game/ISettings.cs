@@ -7,6 +7,7 @@ namespace CodingArena.Game
     {
         Size BattlefieldSize { get; set; }
         int MaxRounds { get; set; }
+        int MaxTurns { get; set; }
         TimeSpan NextRoundDelay { get; set; }
     }
 }

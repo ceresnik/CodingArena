@@ -1,18 +1,24 @@
-﻿namespace CodingArena.Game
-{
-    internal class GameEngine
-    {
-        private ISettings Settings { get; }
-        private readonly GameConfiguration configuration;
-        private readonly IOutput output;
+﻿using System.ComponentModel.Composition;
 
-        public GameEngine(GameConfiguration configuration, IOutput output, ISettings settings)
+namespace CodingArena.Game
+{
+    public interface IGameEngine
+    {
+        IMatch CreateMatch();
+    }
+
+    [Export(typeof(IGameEngine))]
+    internal class GameEngine : IGameEngine
+    {
+        private IOutput Output { get; }
+        private ISettings Settings { get; }
+
+        public GameEngine(IOutput output, ISettings settings)
         {
+            Output = output;
             Settings = settings;
-            this.configuration = configuration;
-            this.output = output;
         }
 
-        public IMatch CreateMatch() => new Match(output, configuration, Settings);
+        public IMatch CreateMatch() => new Match(Output, Settings);
     }
 }

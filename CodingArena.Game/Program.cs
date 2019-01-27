@@ -18,7 +18,7 @@ namespace CodingArena.Game
                 var config = new GameConfiguration();
                 var output = new Output();
                 var settings = container.GetExportedValue<ISettings>();
-                var engine = new GameEngine(config, output, settings);
+                var engine = container.GetExportedValue<IGameEngine>();
                 var size = settings.BattlefieldSize;
                 var match = engine.CreateMatch();
 

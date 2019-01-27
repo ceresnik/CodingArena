@@ -9,21 +9,19 @@ namespace CodingArena.Game
     internal class Match : IMatch
     {
         [ImportingConstructor]
-        public Match(IOutput output, GameConfiguration config, ISettings settings)
+        public Match(IOutput output, ISettings settings)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
-            Config = config ?? throw new ArgumentNullException(nameof(config));
             Settings = settings;
             Winners = new Dictionary<string, int>();
         }
 
         private Dictionary<string, int> Winners { get; }
         private IOutput Output { get; }
-        private GameConfiguration Config { get; }
         private ISettings Settings { get; }
 
         public Task<IRound> CreateRoundAsync() => 
-            Task.FromResult<IRound>(new Round(Output));
+            Task.FromResult<IRound>(new Round(Output, Settings));
 
         public Task WaitForNextRoundAsync()
         {

@@ -9,10 +9,12 @@ namespace CodingArena.Game
     internal class Round : IRound
     {
         private IOutput Output { get; }
+        private ISettings Settings { get; }
 
-        public Round(IOutput output)
+        public Round(IOutput output, ISettings settings)
         {
             Output = output;
+            Settings = settings;
         }
 
         public Task<RoundResult> StartAsync(IList<Bot> bots, Battlefield battlefield)
@@ -44,12 +46,11 @@ namespace CodingArena.Game
         {
             PlaceBotsOnBattlefield(bots, battlefield);
             Output.Qualified(bots);
-            const int maxTurns = 100;
             var turn = new Turn(0, bots, battlefield);
             do
             {
                 turn = turn.StartTurn();
-            } while (bots.Count(b => b.HP > 0) > 1 && turn.Number < maxTurns);
+            } while (bots.Count(b => b.HP > 0) > 1 && turn.Number < Settings.MaxTurns);
 
             if (bots.Count(b => b.HP > 0) == 1)
             {
