@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     internal class Round : IRound
     {

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using static System.Console;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     [Export(typeof(IOutput))]
     internal class Output : IOutput
@@ -15,7 +14,7 @@ namespace CodingArena.Game
 
         public Output()
         {
-            CursorVisible = false;
+            System.Console.CursorVisible = false;
             actions = new Dictionary<Bot, string>();
         }
 
@@ -68,14 +67,14 @@ namespace CodingArena.Game
 
         private void Update()
         {
-            Clear();
+            System.Console.Clear();
             int row = 0;
             DisplayRow(0, "CodingArena");
             row++;
             FullRow(row, "=");
-            CursorTop = row;
-            CursorLeft = 1;
-            WriteLine(" Match ");
+            System.Console.CursorTop = row;
+            System.Console.CursorLeft = 1;
+            System.Console.WriteLine(" Match ");
             if (winners != null)
             {
                 int number = 1;
@@ -89,9 +88,9 @@ namespace CodingArena.Game
 
             row++;
             FullRow(row, "=");
-            CursorTop = row;
-            CursorLeft = 1;
-            WriteLine(" Round ");
+            System.Console.CursorTop = row;
+            System.Console.CursorLeft = 1;
+            System.Console.WriteLine(" Round ");
 
             if (bots != null)
             {
@@ -104,9 +103,9 @@ namespace CodingArena.Game
 
             row++;
             FullRow(row, "=");
-            CursorTop = row;
-            CursorLeft = 1;
-            WriteLine(" Actions ");
+            System.Console.CursorTop = row;
+            System.Console.CursorLeft = 1;
+            System.Console.WriteLine(" Actions ");
 
             if (actions != null)
             {
@@ -121,16 +120,16 @@ namespace CodingArena.Game
         private void DisplayRow(int row, string message)
         {
             FullRow(row, " ");
-            CursorTop = row;
-            CursorLeft = 0;
-            WriteLine(message);
+            System.Console.CursorTop = row;
+            System.Console.CursorLeft = 0;
+            System.Console.WriteLine(message);
         }
 
         private void FullRow(int row, string s)
         {
-            CursorTop = row;
-            CursorLeft = 0;
-            WriteLine(string.Join("", Enumerable.Repeat(s, BufferWidth - 1)));
+            System.Console.CursorTop = row;
+            System.Console.CursorLeft = 0;
+            System.Console.WriteLine(string.Join("", Enumerable.Repeat(s, System.Console.BufferWidth - 1)));
         }
 
         private static string DisplayBot(Bot bot)

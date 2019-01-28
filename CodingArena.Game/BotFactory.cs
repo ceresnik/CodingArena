@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using CodingArena.Player.Implement;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     [Export(typeof(IBotFactory))]
     internal sealed class BotFactory : IBotFactory

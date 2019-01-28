@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Player", "CodingArena.Player\CodingArena.Player.csproj", "{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game", "CodingArena.Game\CodingArena.Game.csproj", "{72B1F276-EB5C-4F06-A50A-84FD1E97082E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game.Console", "CodingArena.Game\CodingArena.Game.Console.csproj", "{72B1F276-EB5C-4F06-A50A-84FD1E97082E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Player.Example", "CodingArena.Player.Example\CodingArena.Player.Example.csproj", "{037FF1FA-431A-462F-8DD2-DF0F149068E3}"
 EndProject

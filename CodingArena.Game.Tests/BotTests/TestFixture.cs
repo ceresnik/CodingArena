@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Console;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests

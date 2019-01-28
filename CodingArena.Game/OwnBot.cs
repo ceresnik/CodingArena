@@ -1,7 +1,7 @@
 ﻿using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     internal class OwnBot : IOwnBot
     {

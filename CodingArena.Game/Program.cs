@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     class Program
     {
         static async Task Main()
         {
-            Console.WriteLine("Starting Coding Arena Game...");
+            System.Console.WriteLine("Starting Coding Arena Game...");
             try
             {
                 var container = CreateCompositionContainer();
@@ -37,12 +37,12 @@ namespace CodingArena.Game
             }
             catch (Exception e)
             {
-                Console.WriteLine("Game is broken.");
-                Console.WriteLine($"Error message: {e}");
+                System.Console.WriteLine("Game is broken.");
+                System.Console.WriteLine($"Error message: {e}");
             }
 
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+            System.Console.WriteLine("Press any key to exit...");
+            System.Console.ReadKey();
         }
 
         private static CompositionContainer CreateCompositionContainer()

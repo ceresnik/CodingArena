@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Game.Console;
 using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 using NUnit.Framework;
+using static System.Console;
 
 namespace CodingArena.Game.Tests.SystemTests
 {
     internal class OneRound
     {
-        [Test]
+        [Test, Ignore("blocking")]
         public async Task TwoAttackerAIs()
         {
-            Console.WriteLine("Starting Coding Arena Game...");
+            WriteLine("Starting Coding Arena Game...");
             try
             {
                 var container = CompositionContainerFactory.Create();
@@ -39,8 +41,8 @@ namespace CodingArena.Game.Tests.SystemTests
             }
             catch (Exception e)
             {
-                Console.WriteLine("Game is broken.");
-                Console.WriteLine($"Error message: {e}");
+                WriteLine("Game is broken.");
+                WriteLine($"Error message: {e}");
             }
         }
     }

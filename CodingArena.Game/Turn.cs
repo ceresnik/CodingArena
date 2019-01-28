@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     internal class Turn : ITurn
     {

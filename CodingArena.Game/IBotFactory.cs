@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     internal interface IBotFactory
     {

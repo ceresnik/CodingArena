@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     [Export(typeof(IBattlefield))]
     [Export(typeof(Battlefield))]

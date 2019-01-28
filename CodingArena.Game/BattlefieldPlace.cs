@@ -1,7 +1,7 @@
 ﻿using System;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     internal class BattlefieldPlace : IBattlefieldPlace
     {

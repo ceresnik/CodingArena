@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     [Export(typeof(IMatch))]
     internal class Match : IMatch

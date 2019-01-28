@@ -80,9 +80,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.csproj">
+    <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.Console.csproj">
       <Project>{72b1f276-eb5c-4f06-a50a-84fd1e97082e}</Project>
-      <Name>CodingArena.Game</Name>
+      <Name>CodingArena.Game.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
       <Project>{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}</Project>

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CodingArena.Game.Console;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.TurnTests

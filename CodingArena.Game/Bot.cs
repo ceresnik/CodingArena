@@ -7,7 +7,7 @@ using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     public class Bot : IBattlefieldObject
     {

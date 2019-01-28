@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Console;
 using CodingArena.Game.Tests.Doubles;
 using NUnit.Framework;
 

@@ -1,4 +1,4 @@
-﻿namespace CodingArena.Game
+﻿namespace CodingArena.Game.Console
 {
     public class RoundResult
     {

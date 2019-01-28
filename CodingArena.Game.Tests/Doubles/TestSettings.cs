@@ -1,4 +1,5 @@
 ﻿using System;
+using CodingArena.Game.Console;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Tests.Doubles
@@ -10,8 +11,8 @@ namespace CodingArena.Game.Tests.Doubles
             BattlefieldSize = new Size(100, 100);
             MaxRounds = 12;
             MaxTurns = 100;
-            NextRoundDelay = TimeSpan.MinValue;
-            NextTurnActionDelay = TimeSpan.MinValue;
+            NextRoundDelay = TimeSpan.FromMilliseconds(1);
+            NextTurnActionDelay = TimeSpan.FromMilliseconds(1);
         }
 
         public Size BattlefieldSize { get; set; }

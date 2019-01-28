@@ -1,4 +1,5 @@
 ﻿using System;
+using CodingArena.Game.Console;
 using CodingArena.Player.TurnActions;
 using FluentAssertions;
 using NUnit.Framework;

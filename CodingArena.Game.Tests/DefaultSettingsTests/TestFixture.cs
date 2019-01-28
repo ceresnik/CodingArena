@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CodingArena.Game.Console;
+using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.DefaultSettingsTests
 {

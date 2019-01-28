@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using System.Configuration;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Console
 {
     [Export(typeof(ISettings))]
     internal class DefaultSettings : ISettings
