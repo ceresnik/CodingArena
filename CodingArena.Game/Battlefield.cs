@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
+    [Export(typeof(IBattlefield))]
+    [Export(typeof(Battlefield))]
     public class Battlefield : IBattlefield
     {
         public Battlefield(int width, int height)
