@@ -1,5 +1,5 @@
 # CodingArena
-A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more.
+A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more by implementing bot artificial intelligence to fight against other bots.
 
 ### Language
 Current version will only supports C# programming language.
