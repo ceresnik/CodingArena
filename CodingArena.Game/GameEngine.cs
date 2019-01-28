@@ -13,6 +13,7 @@ namespace CodingArena.Game
         private IOutput Output { get; }
         private ISettings Settings { get; }
 
+        [ImportingConstructor]
         public GameEngine(IOutput output, ISettings settings)
         {
             Output = output;

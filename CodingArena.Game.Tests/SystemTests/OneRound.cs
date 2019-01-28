@@ -26,7 +26,7 @@ namespace CodingArena.Game.Tests.SystemTests
                 var engine = container.GetExportedValue<IGameEngine>();
                 var match = engine.CreateMatch();
 
-                var battlefield = new Battlefield(settings);
+                var battlefield = container.GetExportedValue<Battlefield>();
                 output.Battlefield(battlefield);
                 var bots = new Collection<Bot>
                 {
