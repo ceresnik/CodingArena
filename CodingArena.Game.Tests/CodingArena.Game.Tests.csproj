@@ -74,14 +74,14 @@
     <Compile Include="TurnTests\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\CodingArena.Game\App.config">
+    <None Include="..\CodingArena.Game.Console\App.config">
       <Link>App.config</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.Console.csproj">
-      <Project>{72b1f276-eb5c-4f06-a50a-84fd1e97082e}</Project>
+    <ProjectReference Include="..\CodingArena.Game.Console\CodingArena.Game.Console.csproj">
+      <Project>{72B1F276-EB5C-4F06-A50A-84FD1E97082E}</Project>
       <Name>CodingArena.Game.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
