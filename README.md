@@ -49,9 +49,10 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 
 ### Battlefield
 
-A battlefield is area where automatas (bots) fight against each other.
-Battlefield size is `100 x 100`
+A battlefield is area where bots fight against each other.
+Configured battlefield size is `100 x 100`.
 
 ### Game Rules
 1. Don't use `System.Console`.
-2. Don't try to beat the game.
+2. Don't use reflection.
+3. Don't try to beat the game.
