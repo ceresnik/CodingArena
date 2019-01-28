@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattlefieldFactoryTests\Create.cs" />
+    <Compile Include="BattlefieldFactoryTests\TestFixture.cs" />
     <Compile Include="BotTests\Created.cs" />
     <Compile Include="BotTests\BotAIStub.cs" />
     <Compile Include="BotTests\ExecuteTurnAction.cs" />

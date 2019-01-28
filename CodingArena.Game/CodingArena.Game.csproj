@@ -43,11 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
+    <Compile Include="DefaultBattlefieldFactory.cs" />
     <Compile Include="BattlefieldPlace.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="BotFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="IBattlefieldFactory.cs" />
     <Compile Include="IBotFactory.cs" />
     <Compile Include="IGameEngine.cs" />
     <Compile Include="IMatch.cs" />
