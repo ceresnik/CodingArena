@@ -1,4 +1,4 @@
-# CodingArena.Game
+# CodingArena
 A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more.
 
 ### Language
