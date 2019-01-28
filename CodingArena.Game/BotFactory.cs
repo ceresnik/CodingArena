@@ -12,14 +12,15 @@ namespace CodingArena.Game
     [Export(typeof(IBotFactory))]
     internal sealed class BotFactory : IBotFactory
     {
-        public BotFactory(Output output, Battlefield battlefield, ISettings settings)
+        [ImportingConstructor]
+        public BotFactory(IOutput output, Battlefield battlefield, ISettings settings)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
             Settings = settings;
         }
 
-        private Output Output { get; }
+        private IOutput Output { get; }
         private Battlefield Battlefield { get; }
         private ISettings Settings { get; }
 
