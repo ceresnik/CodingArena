@@ -41,12 +41,6 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 > SP = Shield Points  
 > EP = Energy Points
 
-### Weapons
-
-| Weapon      | Max Range  | Energy Cost  | Damage   | Notes                            |
-|:------------|-----------:|-------------:|---------:|----------------------------------|
-| Machine Gun | 10         | 5            |    0-100 | damage depends on range, default |
-
 ### Battlefield
 
 A battlefield is area where bots fight against each other.
