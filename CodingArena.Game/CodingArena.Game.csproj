@@ -53,6 +53,7 @@
     <Compile Include="IBotFactory.cs" />
     <Compile Include="IGameEngine.cs" />
     <Compile Include="IMatch.cs" />
+    <Compile Include="IMovableObject.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
