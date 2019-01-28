@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +9,8 @@ using CodingArena.Player.Implement;
 
 namespace CodingArena.Game
 {
-    internal sealed class BotFactory
+    [Export(typeof(IBotFactory))]
+    internal sealed class BotFactory : IBotFactory
     {
         public BotFactory(Output output, Battlefield battlefield, ISettings settings)
         {

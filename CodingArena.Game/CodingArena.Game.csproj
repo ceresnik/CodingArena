@@ -54,6 +54,7 @@
     <Compile Include="DefaultSettings.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="IBotFactory.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IRound.cs" />
