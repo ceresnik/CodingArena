@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using CodingArena.Game.Console;
 using static System.Console;
 
 namespace CodingArena.Game.Tests.Doubles

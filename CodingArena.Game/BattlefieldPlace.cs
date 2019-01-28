@@ -1,9 +1,9 @@
 ﻿using System;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
-    internal class BattlefieldPlace : IBattlefieldPlace
+    public class BattlefieldPlace : IBattlefieldPlace
     {
         public BattlefieldPlace(int x, int y)
             :this(x,y, null)

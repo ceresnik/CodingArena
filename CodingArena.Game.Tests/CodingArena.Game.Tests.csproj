@@ -84,6 +84,10 @@
       <Project>{72B1F276-EB5C-4F06-A50A-84FD1E97082E}</Project>
       <Name>CodingArena.Game.Console</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.csproj">
+      <Project>{49C54CD4-4577-405A-93E7-386BDE6D5743}</Project>
+      <Name>CodingArena.Game</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
       <Project>{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}</Project>
       <Name>CodingArena.Player</Name>

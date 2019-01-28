@@ -1,7 +1,7 @@
 ﻿using System;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     public interface ISettings
     {

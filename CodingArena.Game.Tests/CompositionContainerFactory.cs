@@ -7,7 +7,7 @@ namespace CodingArena.Game.Tests
     {
         public static CompositionContainer Create()
         {
-            var productCatalog = new AggregateCatalog(new AssemblyCatalog(Assembly.Load("CodingArena.Game.Console")));
+            var productCatalog = new AggregateCatalog(new AssemblyCatalog(Assembly.Load("CodingArena.Game")));
             var exportProvider = new CatalogExportProvider(productCatalog);
             var testCatalog = new AssemblyCatalog(Assembly.Load("CodingArena.Game.Tests"));
 

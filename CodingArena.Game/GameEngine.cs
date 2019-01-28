@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     [Export(typeof(IGameEngine))]
     internal class GameEngine : IGameEngine

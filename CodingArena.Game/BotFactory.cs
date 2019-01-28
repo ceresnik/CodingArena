@@ -7,10 +7,10 @@ using System.Linq;
 using System.Reflection;
 using CodingArena.Player.Implement;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     [Export(typeof(IBotFactory))]
-    internal sealed class BotFactory : IBotFactory
+    public sealed class BotFactory : IBotFactory
     {
         [ImportingConstructor]
         public BotFactory(IOutput output, Battlefield battlefield, ISettings settings)

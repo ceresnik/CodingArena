@@ -1,11 +1,11 @@
 ﻿using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
-    internal class Enemy : IEnemy
+    internal class OwnBot : IOwnBot
     {
-        public Enemy(Bot bot)
+        public OwnBot(Bot bot)
         {
             Bot = bot;
         }
@@ -14,6 +14,7 @@ namespace CodingArena.Game.Console
         public IBattlefieldPlace Position => Bot.Position;
         public float Damage => Bot.Damage;
         public float Shield => Bot.Shield;
+        public float Energy => Bot.Energy;
         private Bot Bot { get; }
     }
 }

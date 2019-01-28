@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
-    internal class Turn : ITurn
+    public class Turn : ITurn
     {
         public Turn(int number, ICollection<Bot> bots, Battlefield battlefield)
         {

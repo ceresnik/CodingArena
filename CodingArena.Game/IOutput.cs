@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
     public interface IOutput
     {

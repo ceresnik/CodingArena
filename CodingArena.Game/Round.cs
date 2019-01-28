@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game.Console
+namespace CodingArena.Game
 {
-    internal class Round : IRound
+    public class Round : IRound
     {
         private IOutput Output { get; }
         private ISettings Settings { get; }

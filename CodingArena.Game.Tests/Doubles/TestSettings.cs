@@ -1,9 +1,10 @@
 ﻿using System;
-using CodingArena.Game.Console;
+using System.ComponentModel.Composition;
 using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Tests.Doubles
 {
+    [Export(typeof(ISettings))]
     internal class TestSettings : ISettings
     {
         public TestSettings()

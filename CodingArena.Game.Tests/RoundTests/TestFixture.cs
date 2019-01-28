@@ -8,7 +8,7 @@ namespace CodingArena.Game.Tests.RoundTests
     [TestFixture]
     internal class TestFixture
     {
-        protected Round Round { get; private set; }
+        protected IRound Round { get; private set; }
         protected IList<Bot> Bots { get; private set; }
         protected Battlefield Battlefield { get; private set; }
 
