@@ -53,7 +53,6 @@
     <Compile Include="BotFactory.cs" />
     <Compile Include="DefaultSettings.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="GameConfiguration.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="IMatch.cs" />
     <Compile Include="IOutput.cs" />

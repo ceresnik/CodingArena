@@ -21,8 +21,6 @@ namespace CodingArena.Game.Tests.SystemTests
             {
                 var container = CompositionContainerFactory.Create();
 
-                var config = new GameConfiguration();
-                config.TurnActionDelay = TimeSpan.FromMilliseconds(0);
                 var output = new Doubles.Output();
                 var settings = container.GetExportedValue<ISettings>();
                 var engine = container.GetExportedValue<IGameEngine>();
