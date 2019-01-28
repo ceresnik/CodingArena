@@ -24,10 +24,9 @@ namespace CodingArena.Game.Tests.SystemTests
                 var output = new Doubles.Output();
                 var settings = container.GetExportedValue<ISettings>();
                 var engine = container.GetExportedValue<IGameEngine>();
-                var size = settings.BattlefieldSize;
                 var match = engine.CreateMatch();
 
-                var battlefield = new Battlefield(size.Width, size.Height);
+                var battlefield = new Battlefield(settings);
                 output.Battlefield(battlefield);
                 var bots = new Collection<Bot>
                 {

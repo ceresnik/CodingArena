@@ -23,7 +23,7 @@ namespace CodingArena.Game
 
                 for (int i = 0; i < settings.MaxRounds; i++)
                 {
-                    var battlefield = new Battlefield(size.Width, size.Height);
+                    var battlefield = new Battlefield(settings);
                     output.Battlefield(battlefield);
                     var factory = new BotFactory(output, battlefield, settings);
                     var bots = factory.CreateBots().ToList();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Tests.Doubles;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.TurnTests
@@ -14,7 +15,8 @@ namespace CodingArena.Game.Tests.TurnTests
         public virtual void SetUp()
         {
             Bots = new List<Bot>();
-            Battlefield = new Battlefield(100, 100);
+            var settings = new TestSettings();
+            Battlefield = new Battlefield(settings);
             Turn = new Turn(0, Bots, Battlefield);
         }
     }

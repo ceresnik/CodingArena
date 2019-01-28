@@ -8,8 +8,11 @@ namespace CodingArena.Game
     [Export(typeof(Battlefield))]
     public class Battlefield : IBattlefield
     {
-        public Battlefield(int width, int height)
+        [ImportingConstructor]
+        public Battlefield(ISettings settings)
         {
+            int width = settings.BattlefieldSize.Width;
+            int height = settings.BattlefieldSize.Height;
             Size = new Size(width, height);
             Places = new IBattlefieldPlace[width, height];
             for (int y = 0; y < height; y++)

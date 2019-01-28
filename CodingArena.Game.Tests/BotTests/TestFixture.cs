@@ -17,8 +17,8 @@ namespace CodingArena.Game.Tests.BotTests
         {
             var container = CompositionContainerFactory.Create();
             BotAI = new BotAIStub();
-            Battlefield = new Battlefield(100, 100);
             Settings = container.GetExportedValue<ISettings>();
+            Battlefield = new Battlefield(Settings);
             Bot = new Bot(new Doubles.Output(), BotAI, Battlefield, Settings);
             Enemies = new List<Bot>();
         }
