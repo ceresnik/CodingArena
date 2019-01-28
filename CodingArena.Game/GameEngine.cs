@@ -2,11 +2,6 @@
 
 namespace CodingArena.Game
 {
-    public interface IGameEngine
-    {
-        IMatch CreateMatch();
-    }
-
     [Export(typeof(IGameEngine))]
     internal class GameEngine : IGameEngine
     {
