@@ -34,7 +34,7 @@ namespace CodingArena.Game.Tests.SystemTests
                     new Bot(output, new AttackerAI("BotA"), battlefield, settings),
                     new Bot(output, new AttackerAI("BotB"), battlefield, settings),
                 };
-                var round = await match.CreateRoundAsync();
+                var round = match.CreateRound();
                 var roundResult = await round.StartAsync(bots, battlefield);
                 output.RoundResult(roundResult);
             }

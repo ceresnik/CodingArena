@@ -20,8 +20,6 @@ namespace CodingArena.Game
         private IOutput Output { get; }
         private ISettings Settings { get; }
 
-        public Task<IRound> CreateRoundAsync() => Task.FromResult(CreateRound());
-
         public IRound CreateRound() => new Round(Output, Settings);
 
         public Task WaitForNextRoundAsync()
