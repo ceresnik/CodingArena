@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CodingArena.Game
 {
-    internal class Turn
+    internal class Turn : ITurn
     {
         public Turn(int number, ICollection<Bot> bots, Battlefield battlefield)
         {
@@ -19,7 +19,7 @@ namespace CodingArena.Game
 
         private Battlefield Battlefield { get; }
 
-        public Turn StartTurn()
+        public ITurn StartTurn()
         {
             if (Bots.Count > 1)
             {

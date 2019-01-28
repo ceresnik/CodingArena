@@ -46,7 +46,7 @@ namespace CodingArena.Game
         {
             PlaceBotsOnBattlefield(bots, battlefield);
             Output.Qualified(bots);
-            var turn = new Turn(0, bots, battlefield);
+            ITurn turn = new Turn(0, bots, battlefield);
             do
             {
                 turn = turn.StartTurn();

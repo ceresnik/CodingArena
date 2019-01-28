@@ -11,7 +11,7 @@ namespace CodingArena.Game.Tests.TurnTests
             NewTurn = Turn.StartTurn();
         }
 
-        protected Turn NewTurn { get; set; }
+        protected ITurn NewTurn { get; set; }
 
         [Test]
         public void IncreaseTurnNumber() => NewTurn.Number.Should().Be(Turn.Number + 1);
