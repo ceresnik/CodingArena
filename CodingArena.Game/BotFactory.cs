@@ -49,8 +49,6 @@ namespace CodingArena.Game
             }
         }
 
-        private static Assembly Load(string file) => Assembly.LoadFile(file);
-
         private static string[] AssemblyFiles()
         {
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
