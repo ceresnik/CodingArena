@@ -30,7 +30,7 @@ namespace CodingArena.Game
                 var files = AssemblyFiles();
                 foreach (var file in files)
                 {
-                    var assembly = Load(file);
+                    var assembly = Assembly.Load(File.ReadAllBytes(file));
                     var botAIType = FindBotAIType(assembly);
 
                     if (botAIType != null)
@@ -38,7 +38,6 @@ namespace CodingArena.Game
                         var bot = CreateBotInstance(botAIType, battlefield);
                         result.Add(bot);
                     }
-                    // TODO: consider loading assemblies in new app domain and unload this new app domain when next round (bot factory create) is needed.
                 }
 
                 return result;
