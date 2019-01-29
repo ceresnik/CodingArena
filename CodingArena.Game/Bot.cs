@@ -9,7 +9,7 @@ using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
-    public class Bot : IBattlefieldObject, IMovableObject
+    public class Bot : IBattlefieldObject, IMovableObject, IEquatable<Bot>, IEquatable<IOwnBot>, IEquatable<IEnemy>
     {
         public Bot(IOutput output, IBotAI botAI, IBattlefield battlefield, ISettings settings)
         {
@@ -25,9 +25,10 @@ namespace CodingArena.Game
             SP = MaxSP;
             MaxEP = 1000;
             EP = MaxEP;
+            Name = BotAI.BotName;
         }
 
-        public string Name => BotAI.BotName;
+        public string Name { get; }
         public float Damage => 100 - Health;
         public float Shield => SP * 100 / (float)MaxSP;
         public float Energy => EP * 100 / (float)MaxEP;
@@ -52,7 +53,16 @@ namespace CodingArena.Game
             {
                 return;
             }
-            var turnAction = BotAI.GetTurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+
+            ITurnAction turnAction;
+            try
+            {
+                turnAction = BotAI.GetTurnAction(InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+            }
+            catch (Exception e)
+            {
+                turnAction = new MalfunctionTurnAction(e.Message);
+            }
             switch (turnAction)
             {
                 case Move move:
@@ -69,6 +79,9 @@ namespace CodingArena.Game
                     break;
                 case RechargeBattery rechargeBattery:
                     Execute(rechargeBattery);
+                    break;
+                case MalfunctionTurnAction malfunction:
+                    Execute(malfunction);
                     break;
             }
         }
@@ -202,6 +215,12 @@ namespace CodingArena.Game
             Output.TurnAction(this, $"{Name} recharges battery.");
         }
 
+        private void Execute(MalfunctionTurnAction malfunction)
+        {
+            Output.Error($"{Name} exploded due to malfunction. Error Code: {malfunction.Message}");
+            TakeDamage(HP);
+        }
+
         private void TakeDamage(int damage)
         {
             if (SP >= damage)
@@ -235,5 +254,45 @@ namespace CodingArena.Game
 
             return false;
         }
+
+        public override string ToString() => $"Bot: {Name}";
+
+        public bool Equals(Bot other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return string.Equals(Name, other.Name);
+        }
+
+        public bool Equals(IOwnBot other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(InsideView, other)) return true;
+            return string.Equals(Name, other.Name);
+        }
+
+        public bool Equals(IEnemy other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(OutsideView, other)) return true;
+            return string.Equals(Name, other.Name);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Bot) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Name != null ? Name.GetHashCode() : 0);
+        }
+
+        public static bool operator ==(Bot left, Bot right) => Equals(left, right);
+
+        public static bool operator !=(Bot left, Bot right) => !Equals(left, right);
     }
 }

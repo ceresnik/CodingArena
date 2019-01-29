@@ -33,14 +33,15 @@ namespace CodingArena.Game.Console
 
         public void SetBattlefield(IBattlefield battlefield) => Battlefield = battlefield;
 
-        public void NoBotsQualified()
+        public void NoBotsQualified() => Qualified(new List<Bot>());
+
+        public void Qualified(Bot bot) => Qualified(new List<Bot> {bot});
+
+        public void Qualified(IList<Bot> bots)
         {
-
+            Bots = bots;
+            Update();
         }
-
-        public void Qualified(Bot bot) => Qualified(new List<Bot>{bot});
-
-        public void Qualified(IList<Bot> bots) => Bots = bots;
 
         public void TurnAction(Bot bot, string message)
         {
@@ -70,7 +71,6 @@ namespace CodingArena.Game.Console
             ForegroundColor = ConsoleColor.Red;
             WriteLine(message);
             ForegroundColor = previousColor;
-            ReadKey();
         }
 
         private void Update()
@@ -151,7 +151,7 @@ namespace CodingArena.Game.Console
         private string DisplayBot(Bot bot)
         {
             string position = "";
-            if (Battlefield.Objects.Contains(bot))
+            if (Battlefield != null && Battlefield.Objects.Contains(bot))
             {
                 var place = Battlefield[bot];
                 position = $"[X: {place.X,2}, Y: {place.Y,2}]";

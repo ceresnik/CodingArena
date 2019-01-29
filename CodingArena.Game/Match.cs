@@ -29,6 +29,7 @@ namespace CodingArena.Game
         public IRound CreateRound()
         {
             var battlefield = BattlefieldFactory.Create();
+            Output.SetBattlefield(battlefield);
             var bots = BotFactory.CreateBots(battlefield).ToList();
             return new Round(Output, Settings, battlefield, bots);
         }

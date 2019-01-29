@@ -60,6 +60,7 @@
     <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITurn.cs" />
+    <Compile Include="MalfunctionTurnAction.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="OwnBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
