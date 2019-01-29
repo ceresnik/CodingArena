@@ -35,7 +35,9 @@ namespace CodingArena.Game
 
                     if (botAIType != null)
                     {
-                        var bot = CreateBotInstance(botAIType, battlefield);
+                        var botAI = Activator.CreateInstance(botAIType) as IBotAI;
+                        var bot = new Bot(Output, botAI, battlefield, Settings);
+                        battlefield.Position(bot, battlefield.GetRandomEmptyPlace());
                         result.Add(bot);
                     }
                 }
@@ -109,9 +111,5 @@ namespace CodingArena.Game
         }
 
         private static bool IsBotAIType(Type t) => typeof(IBotAI).IsAssignableFrom(t) && t.IsClass;
-
-        private static IBotAI CreateBotAI(Type botAIType) => Activator.CreateInstance(botAIType) as IBotAI;
-
-        private Bot CreateBotInstance(Type botAIType, IBattlefield battlefield) => new Bot(Output, CreateBotAI(botAIType), battlefield, Settings);
     }
 }

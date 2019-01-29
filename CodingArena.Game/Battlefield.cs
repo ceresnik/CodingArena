@@ -9,10 +9,12 @@ namespace CodingArena.Game
     public interface IBattlefield : IBattlefieldView
     {
         void Position(IBattlefieldObject battlefieldObject, IBattlefieldPlace battlefieldPlace);
+        IBattlefieldPlace GetRandomEmptyPlace();
     }
 
     internal class Battlefield : IBattlefield
     {
+        private Random Random { get; }
         private IDictionary<IBattlefieldObject, IBattlefieldPlace> Dictionary { get; }
 
         public Battlefield(int width, int height)
@@ -20,6 +22,7 @@ namespace CodingArena.Game
             Width = width;
             Height = height;
             Dictionary = new Dictionary<IBattlefieldObject, IBattlefieldPlace>();
+            Random = new Random();
         }
 
         public int Width { get; }
@@ -85,13 +88,42 @@ namespace CodingArena.Game
             if (battlefieldPlace == null)
                 throw new ArgumentNullException(nameof(battlefieldPlace));
 
-            if (!Dictionary.ContainsKey(battlefieldObject))
-                throw new ArgumentException("Failed to find specified object on battlefield.", nameof(battlefieldObject));
+            if (Dictionary.ContainsKey(battlefieldObject))
+            {
+                Dictionary[battlefieldObject] = battlefieldPlace;
+            }
+            else
+            {
+                Dictionary.Add(battlefieldObject, battlefieldPlace);
+            }
+        }
 
-            Dictionary[battlefieldObject] = battlefieldPlace;
+        public IBattlefieldPlace GetRandomEmptyPlace()
+        {
+            var emptyPlaces = GetEmptyBattlefieldPlaces();
+            return emptyPlaces.Any() ? emptyPlaces[Random.Next(emptyPlaces.Count - 1)] : null;
+        }
+
+        private List<IBattlefieldPlace> GetEmptyBattlefieldPlaces()
+        {
+            var emptyPlaces = new List<IBattlefieldPlace>();
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    var place = this[x, y];
+                    if (IsEmpty(place))
+                    {
+                        emptyPlaces.Add(place);
+                    }
+                }
+            }
+
+            return emptyPlaces;
         }
 
         public override string ToString() => $"Battlefield [{nameof(Width)}: {Width}, {nameof(Height)}: {Height}]";
+
         public IBattlefieldView View => this;
     }
 }
