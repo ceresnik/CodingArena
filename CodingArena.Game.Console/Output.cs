@@ -151,7 +151,7 @@ namespace CodingArena.Game.Console
         private string DisplayBot(Bot bot)
         {
             string position = "";
-            if (Battlefield != null && Battlefield.Objects.Contains(bot))
+            if (Battlefield != null)
             {
                 var place = Battlefield[bot];
                 position = $"[X: {place.X,2}, Y: {place.Y,2}]";

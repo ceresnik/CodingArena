@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CodingArena.Player.Exceptions;
 
 namespace CodingArena.Player.Battlefield
@@ -20,11 +19,6 @@ namespace CodingArena.Player.Battlefield
         int Height { get; }
 
         /// <summary>
-        ///     Gets a read-only collection of objects placed on the battlefield.
-        /// </summary>
-        IReadOnlyCollection<IBattlefieldObject> Objects { get; }
-
-        /// <summary>
         ///     Gets a place on the battlefield specified by coordinates.
         /// </summary>
         /// <param name="x">X-axis coordinate.</param>
@@ -36,24 +30,39 @@ namespace CodingArena.Player.Battlefield
         IBattlefieldPlace this[int x, int y] { get; }
 
         /// <summary>
-        ///     Gets a place on the battlefield for the specified battlefield object or throws exception.
+        ///     Gets a place on the battlefield for the specified own bot or throws exception.
         /// </summary>
-        /// <param name="battlefieldObject">An object on the battlefield.</param>
-        /// <returns>A place for <paramref name="battlefieldObject"/> on the battlefield.</returns>
+        /// <param name="ownBot">An own bot.</param>
+        /// <returns>A place for <paramref name="ownBot"/> on the battlefield.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     Thrown when <paramref name="battlefieldObject"/> is <c>null</c>.
+        ///     Thrown when <paramref name="ownBot"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="BattlefieldPlaceNotFoundException">
-        ///     Thrown when <paramref name="battlefieldObject"/> does not have a place on battlefield.
+        ///     Thrown when <paramref name="ownBot"/> does not have a place on battlefield.
         /// </exception>
-        IBattlefieldPlace this[IBattlefieldObject battlefieldObject] { get; }
+        IBattlefieldPlace this[IOwnBot ownBot] { get; }
+
+        /// <summary>
+        ///     Gets a place on the battlefield for the specified enemy bot or throws exception.
+        /// </summary>
+        /// <param name="enemy">An enemy bot.</param>
+        /// <returns>A place for <paramref name="enemy"/> on the battlefield.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="enemy"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="BattlefieldPlaceNotFoundException">
+        ///     Thrown when <paramref name="enemy"/> does not have a place on battlefield.
+        /// </exception>
+        IBattlefieldPlace this[IEnemy enemy] { get; }
 
         /// <summary>
         ///     Gets a value whether specified battlefield place is empty or not.
         /// </summary>
         /// <param name="battlefieldPlace">A place on the battlefield.</param>
         /// <returns><c>true</c> if place is empty; otherwise <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="battlefieldPlace"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="battlefieldPlace"/> is <c>null</c>.
+        /// </exception>
         bool IsEmpty(IBattlefieldPlace battlefieldPlace);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Exceptions;
 
@@ -10,6 +11,7 @@ namespace CodingArena.Game
     {
         void Position(IBattlefieldObject battlefieldObject, IBattlefieldPlace battlefieldPlace);
         IBattlefieldPlace GetRandomEmptyPlace();
+        IBattlefieldPlace this[Bot bot] { get; }
     }
 
     internal class Battlefield : IBattlefield
@@ -60,21 +62,56 @@ namespace CodingArena.Game
             }
         }
 
-        public IBattlefieldPlace this[IBattlefieldObject battlefieldObject]
+        public IBattlefieldPlace this[IOwnBot ownBot]
         {
             get
             {
-                if (battlefieldObject == null)
+                if (ownBot == null) throw new ArgumentNullException(nameof(ownBot));
+
+                foreach (var pair in Dictionary)
                 {
-                    throw new ArgumentNullException(nameof(battlefieldObject));
+                    if (pair.Key is Bot bot &&
+                        bot.InsideView == ownBot &&
+                        Dictionary.ContainsKey(bot))
+                    {
+                        return Dictionary[bot];
+                    }
                 }
-                if (!Dictionary.ContainsKey(battlefieldObject))
+                throw new BattlefieldPlaceNotFoundException($"{ownBot.Name} not found on battlefield.");
+            }
+        }
+
+        public IBattlefieldPlace this[IEnemy enemy]
+        {
+            get
+            {
+                if (enemy == null) throw new ArgumentNullException(nameof(enemy));
+
+                foreach (var pair in Dictionary)
                 {
-                    throw new BattlefieldPlaceNotFoundException(
-                        $"Failed to find battlefield place for {battlefieldObject.Name}");
+                    if (pair.Key is Bot bot &&
+                        bot.OutsideView == enemy &&
+                        Dictionary.ContainsKey(bot))
+                    {
+                        return Dictionary[bot];
+                    }
+                }
+                throw new BattlefieldPlaceNotFoundException($"{enemy.Name} not found on battlefield.");
+            }
+        }
+
+        public IBattlefieldPlace this[Bot bot]
+        {
+            get
+            {
+                if (bot == null) throw new ArgumentNullException(nameof(bot));
+
+                if (Dictionary.ContainsKey(bot))
+                {
+                    return Dictionary[bot];
                 }
 
-                return Dictionary[battlefieldObject];
+                throw new BattlefieldPlaceNotFoundException($"{bot.Name} not found on battlefield.");
             }
         }
 

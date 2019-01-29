@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CodingArena.Player.Battlefield;
+﻿using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Player.Example
 {
@@ -38,7 +38,7 @@ namespace CodingArena.Player.Example
         {
             var closestEnemy = enemies.First();
             var minDistance = GetDistance(battlefield, ownBot, closestEnemy);
-            foreach (var enemy in enemies.Except(new[] {closestEnemy}))
+            foreach (var enemy in enemies.Except(new[] { closestEnemy }))
             {
                 var distance = GetDistance(battlefield, ownBot, enemy);
                 if (minDistance < distance)
@@ -51,11 +51,11 @@ namespace CodingArena.Player.Example
             return closestEnemy;
         }
 
-        private static double GetDistance(IBattlefieldView battlefield, IBattlefieldObject obj1, IBattlefieldObject obj2)
+        private static double GetDistance(IBattlefieldView battlefield, IOwnBot ownBot, IEnemy enemy)
         {
-            var place1 = battlefield[obj1];
-            var place2 = battlefield[obj2];
-            return place1.DistanceTo(place2);
+            var ownPlace = battlefield[ownBot];
+            var enemyPlace = battlefield[enemy];
+            return ownPlace.DistanceTo(enemyPlace);
         }
     }
 }

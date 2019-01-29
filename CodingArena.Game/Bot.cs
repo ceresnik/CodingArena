@@ -86,7 +86,7 @@ namespace CodingArena.Game
             }
         }
 
-        private void Execute(Move move, IBattlefieldView battlefield)
+        private void Execute(Move move, IBattlefield battlefield)
         {
             if (move.Direction == Direction.None)
             {
