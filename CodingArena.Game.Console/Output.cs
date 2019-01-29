@@ -27,7 +27,7 @@ namespace CodingArena.Game.Console
         }
 
         public void NextRoundIn(TimeSpan delayForNextRound)
-        { 
+        {
             Bots = new List<Bot>();
         }
 
@@ -35,7 +35,7 @@ namespace CodingArena.Game.Console
 
         public void NoBotsQualified() => Qualified(new List<Bot>());
 
-        public void Qualified(Bot bot) => Qualified(new List<Bot> {bot});
+        public void Qualified(Bot bot) => Qualified(new List<Bot> { bot });
 
         public void Qualified(IList<Bot> bots)
         {
@@ -53,6 +53,7 @@ namespace CodingArena.Game.Console
             {
                 Actions.Add(bot, message);
             }
+            Update();
         }
 
         public void RoundResult(RoundResult roundResult)

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using CodingArena.Player;
+﻿using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace CodingArena.Game
 {
@@ -34,7 +34,7 @@ namespace CodingArena.Game
         public float Energy => EP * 100 / (float)MaxEP;
         public int MaxHP { get; set; }
         public int HP { get; set; }
-        public float Health => HP * 100 / (float) MaxHP;
+        public float Health => HP * 100 / (float)MaxHP;
         public int MaxSP { get; set; }
         public int SP { get; set; }
         public int MaxEP { get; set; }
@@ -152,7 +152,7 @@ namespace CodingArena.Game
 
             double chance = (maxRange - distance) / maxRange;
             const int maxDamage = 100;
-            int damage = (int) (maxDamage * chance);
+            int damage = (int)(maxDamage * chance);
 
             EP -= attack.EnergyCost;
 
@@ -248,7 +248,7 @@ namespace CodingArena.Game
         {
             if (CanMoveTo(newPlace))
             {
-                
+                Battlefield.Position(this, newPlace);
                 return true;
             }
 
@@ -283,7 +283,7 @@ namespace CodingArena.Game
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Bot) obj);
+            return Equals((Bot)obj);
         }
 
         public override int GetHashCode()

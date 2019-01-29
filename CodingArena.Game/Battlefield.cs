@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CodingArena.Player;
+﻿using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Game
 {
@@ -56,7 +56,7 @@ namespace CodingArena.Game
                 {
                     throw new ArgumentOutOfRangeException(nameof(y), y,
                         $"{nameof(y)} could not be greater than {Height}.");
-                }                
+                }
 
                 return new BattlefieldPlace(x, y);
             }
@@ -71,7 +71,7 @@ namespace CodingArena.Game
                 foreach (var pair in Dictionary)
                 {
                     if (pair.Key is Bot bot &&
-                        bot.InsideView == ownBot &&
+                        bot.InsideView.Equals(ownBot) &&
                         Dictionary.ContainsKey(bot))
                     {
                         return Dictionary[bot];
@@ -90,7 +90,7 @@ namespace CodingArena.Game
                 foreach (var pair in Dictionary)
                 {
                     if (pair.Key is Bot bot &&
-                        bot.OutsideView == enemy &&
+                        bot.OutsideView.Equals(enemy) &&
                         Dictionary.ContainsKey(bot))
                     {
                         return Dictionary[bot];
