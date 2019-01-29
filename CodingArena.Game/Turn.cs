@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
     public class Turn : ITurn
     {
-        public Turn(int number, ICollection<Bot> bots, Battlefield battlefield)
+        public Turn(int number, ICollection<Bot> bots, IBattlefieldView battlefield)
         {
             Number = number;
             Bots = bots ?? throw new ArgumentNullException(nameof(bots));
@@ -17,7 +18,7 @@ namespace CodingArena.Game
 
         private ICollection<Bot> Bots { get; }
 
-        private Battlefield Battlefield { get; }
+        private IBattlefieldView Battlefield { get; }
 
         public ITurn StartTurn()
         {

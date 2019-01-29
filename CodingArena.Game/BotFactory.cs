@@ -13,47 +13,108 @@ namespace CodingArena.Game
     public sealed class BotFactory : IBotFactory
     {
         [ImportingConstructor]
-        public BotFactory(IOutput output, Battlefield battlefield, ISettings settings)
+        public BotFactory(IOutput output, ISettings settings)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
-            Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
             Settings = settings;
         }
 
         private IOutput Output { get; }
-        private Battlefield Battlefield { get; }
         private ISettings Settings { get; }
 
-        public IEnumerable<Bot> CreateBots()
+        public IEnumerable<Bot> CreateBots(IBattlefield battlefield)
         {
-            var result = new Collection<Bot>();
-            foreach (var file in AssemblyFiles())
+            try
             {
-                var assembly = Load(file);
-                var botAIType = FindBotAIType(assembly);
-
-                if (botAIType != null)
+                var result = new Collection<Bot>();
+                var files = AssemblyFiles();
+                foreach (var file in files)
                 {
-                    var bot = CreateBotInstance(botAIType);
-                    result.Add(bot);
-                }
-            }
+                    var assembly = Load(file);
+                    var botAIType = FindBotAIType(assembly);
 
-            return result;
+                    if (botAIType != null)
+                    {
+                        var bot = CreateBotInstance(botAIType, battlefield);
+                        result.Add(bot);
+                    }
+                    // TODO: consider loading assemblies in new app domain and unload this new app domain when next round (bot factory create) is needed.
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Output.Error(e.Message);
+                return new List<Bot>();
+            }
         }
 
         private static Assembly Load(string file) => Assembly.LoadFile(file);
 
-        private static string[] AssemblyFiles() => Directory.GetFiles(SearchDirectory(), "*.dll", SearchOption.AllDirectories);
+        private static string[] AssemblyFiles()
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var sourceDir = Path.Combine(baseDirectory, "Bots");
+            if (!Directory.Exists(sourceDir))
+            {
+                throw new DirectoryNotFoundException(
+                    $"Directory {sourceDir} not found. " +
+                    "Create directory and share it for players, " +
+                    "so that they can copy their class libraries with bot implementation into it.");
+            }
+            var targetDir = Path.Combine(baseDirectory, "BotCopies");
+            if (!Directory.Exists(targetDir))
+            {
+                Directory.CreateDirectory(targetDir);
+            }
 
-        private static string SearchDirectory() => AppDomain.CurrentDomain.BaseDirectory;
+            var files = Directory.GetFiles(targetDir, "*.dll", SearchOption.AllDirectories);
 
-        private static Type FindBotAIType(Assembly assembly) => assembly.ExportedTypes.FirstOrDefault(IsBotAIType);
+            if (files.Any())
+            {
+                foreach (var file in files)
+                {
+                    File.Delete(file);
+                }
+            }
+
+            files = Directory.GetFiles(sourceDir, "*.dll", SearchOption.AllDirectories);
+
+            if (files.Any())
+            {
+                foreach (var file in files)
+                {
+                    var fileName = Path.GetFileName(file);
+                    if (fileName != null)
+                    {
+                        File.Copy(file, Path.Combine(targetDir, fileName));
+                    }
+                }
+            }
+
+            return Directory.GetFiles(targetDir, "*.dll", SearchOption.AllDirectories);
+        }
+
+        private Type FindBotAIType(Assembly assembly)
+        {
+            try
+            {
+                return assembly.ExportedTypes.FirstOrDefault(IsBotAIType);
+            }
+            catch (TypeLoadException e)
+            {
+                Output.Error($"Failed to load exported types for assembly {assembly.GetName()}. " + Environment.NewLine + 
+                             $"Check if latest version of {typeof(IBotAI).Assembly} is referenced. " + Environment.NewLine +
+                             $"Error message: {e.Message}");
+                return null;
+            }
+        }
 
         private static bool IsBotAIType(Type t) => typeof(IBotAI).IsAssignableFrom(t) && t.IsClass;
 
         private static IBotAI CreateBotAI(Type botAIType) => Activator.CreateInstance(botAIType) as IBotAI;
 
-        private Bot CreateBotInstance(Type botAIType) => new Bot(Output, CreateBotAI(botAIType), Battlefield, Settings);
+        private Bot CreateBotInstance(Type botAIType, IBattlefield battlefield) => new Bot(Output, CreateBotAI(botAIType), battlefield, Settings);
     }
 }

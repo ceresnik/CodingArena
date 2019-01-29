@@ -11,7 +11,6 @@ namespace CodingArena.Game
         }
 
         public string Name => Bot.Name;
-        public IBattlefieldPlace Position => Bot.Position;
         public float Damage => Bot.Damage;
         public float Shield => Bot.Shield;
         public float Energy => Bot.Energy;

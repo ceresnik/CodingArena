@@ -10,7 +10,7 @@ namespace CodingArena.Player.Example2
     {
         public string BotName => "Example Bot 2";
 
-        public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield)
+        public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {
             if (enemies.Any())
             {
@@ -18,10 +18,12 @@ namespace CodingArena.Player.Example2
                 {
                     return TurnAction.Recharge.Shield();
                 }
-                var closestEnemy = FindClosestEnemy(ownBot, enemies);
+                var closestEnemy = FindClosestEnemy(ownBot, enemies, battlefield);
 
                 var minAttackDistance = 6;
-                if (ownBot.Position.DistanceTo(closestEnemy.Position) < minAttackDistance)
+                var place = battlefield[ownBot];
+                var closestEnemyPlace = battlefield[closestEnemy];
+                if (place.DistanceTo(closestEnemyPlace) < minAttackDistance)
                     return TurnAction.Attack(closestEnemy);
 
                 var fromPlace = battlefield[ownBot];
@@ -32,18 +34,28 @@ namespace CodingArena.Player.Example2
             return TurnAction.Idle();
         }
 
-        private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies)
+        private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {
             var closestEnemy = enemies.First();
-            foreach (var enemy in enemies.Except(new[] {closestEnemy}))
+            var minDistance = GetDistance(battlefield, ownBot, closestEnemy);
+            foreach (var enemy in enemies.Except(new[] { closestEnemy }))
             {
-                if (ownBot.Position.DistanceTo(enemy.Position) < ownBot.Position.DistanceTo(closestEnemy.Position))
+                var distance = GetDistance(battlefield, ownBot, enemy);
+                if (minDistance < distance)
                 {
                     closestEnemy = enemy;
+                    minDistance = distance;
                 }
             }
 
             return closestEnemy;
+        }
+
+        private static double GetDistance(IBattlefieldView battlefield, IBattlefieldObject obj1, IBattlefieldObject obj2)
+        {
+            var place1 = battlefield[obj1];
+            var place2 = battlefield[obj2];
+            return place1.DistanceTo(place2);
         }
     }
 }

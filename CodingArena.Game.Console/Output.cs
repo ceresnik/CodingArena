@@ -2,56 +2,55 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using static System.Console;
 
 namespace CodingArena.Game.Console
 {
     [Export(typeof(IOutput))]
     internal class Output : IOutput
     {
-        private Dictionary<string, int> winners;
-        private IList<Bot> bots;
-        private readonly Dictionary<Bot, string> actions;
+        private Dictionary<string, int> Winners { get; set; }
+        private IList<Bot> Bots { get; set; }
+        public Dictionary<Bot, string> Actions { get; }
+        private IBattlefield Battlefield { get; set; }
 
         public Output()
         {
-            System.Console.CursorVisible = false;
-            actions = new Dictionary<Bot, string>();
+            CursorVisible = false;
+            Actions = new Dictionary<Bot, string>();
         }
 
         public void StartRound()
         {
-            actions.Clear();
+            Actions.Clear();
             Update();
         }
 
         public void NextRoundIn(TimeSpan delayForNextRound)
         { 
+            Bots = new List<Bot>();
         }
 
-        public void Battlefield(Battlefield battlefield)
-        {
-        }
+        public void SetBattlefield(IBattlefield battlefield) => Battlefield = battlefield;
 
         public void NoBotsQualified()
         {
+
         }
 
         public void Qualified(Bot bot) => Qualified(new List<Bot>{bot});
 
-        public void Qualified(IList<Bot> bots)
-        {
-            this.bots = bots;
-        }
+        public void Qualified(IList<Bot> bots) => Bots = bots;
 
         public void TurnAction(Bot bot, string message)
         {
-            if (actions.ContainsKey(bot))
+            if (Actions.ContainsKey(bot))
             {
-                actions[bot] = message;
+                Actions[bot] = message;
             }
             else
             {
-                actions.Add(bot, message);
+                Actions.Add(bot, message);
             }
         }
 
@@ -61,24 +60,33 @@ namespace CodingArena.Game.Console
 
         public void MatchResult(Dictionary<string, int> winners)
         {
-            this.winners = winners;
+            Winners = winners;
             Update();
+        }
+
+        public void Error(string message)
+        {
+            var previousColor = ForegroundColor;
+            ForegroundColor = ConsoleColor.Red;
+            WriteLine(message);
+            ForegroundColor = previousColor;
+            ReadKey();
         }
 
         private void Update()
         {
-            System.Console.Clear();
+            Clear();
             int row = 0;
             DisplayRow(0, "CodingArena");
             row++;
             FullRow(row, "=");
-            System.Console.CursorTop = row;
-            System.Console.CursorLeft = 1;
-            System.Console.WriteLine(" Match ");
-            if (winners != null)
+            CursorTop = row;
+            CursorLeft = 1;
+            WriteLine(" Match ");
+            if (Winners != null)
             {
                 int number = 1;
-                foreach (var keyValuePair in winners.OrderByDescending(pair => pair.Value))
+                foreach (var keyValuePair in Winners.OrderByDescending(pair => pair.Value))
                 {
                     row++;
                     DisplayRow(row, $" {number}. {keyValuePair.Key,-30} [{keyValuePair.Value}]");
@@ -88,28 +96,36 @@ namespace CodingArena.Game.Console
 
             row++;
             FullRow(row, "=");
-            System.Console.CursorTop = row;
-            System.Console.CursorLeft = 1;
-            System.Console.WriteLine(" Round ");
+            CursorTop = row;
+            CursorLeft = 1;
+            WriteLine(" Round ");
 
-            if (bots != null)
+            if (Bots != null)
             {
-                foreach (var bot in bots)
+                if (Bots.Any())
+                {
+                    foreach (var bot in Bots)
+                    {
+                        row++;
+                        DisplayRow(row, DisplayBot(bot));
+                    }
+                }
+                else
                 {
                     row++;
-                    DisplayRow(row, DisplayBot(bot));
+                    DisplayRow(row, "No bots qualified.");
                 }
             }
 
             row++;
             FullRow(row, "=");
-            System.Console.CursorTop = row;
-            System.Console.CursorLeft = 1;
-            System.Console.WriteLine(" Actions ");
+            CursorTop = row;
+            CursorLeft = 1;
+            WriteLine(" Actions ");
 
-            if (actions != null)
+            if (Actions != null)
             {
-                foreach (var action in actions)
+                foreach (var action in Actions)
                 {
                     row++;
                     DisplayRow(row, $"{action.Value}");
@@ -120,24 +136,25 @@ namespace CodingArena.Game.Console
         private void DisplayRow(int row, string message)
         {
             FullRow(row, " ");
-            System.Console.CursorTop = row;
-            System.Console.CursorLeft = 0;
-            System.Console.WriteLine(message);
+            CursorTop = row;
+            CursorLeft = 0;
+            WriteLine(message);
         }
 
         private void FullRow(int row, string s)
         {
-            System.Console.CursorTop = row;
-            System.Console.CursorLeft = 0;
-            System.Console.WriteLine(string.Join("", Enumerable.Repeat(s, System.Console.BufferWidth - 1)));
+            CursorTop = row;
+            CursorLeft = 0;
+            WriteLine(string.Join("", Enumerable.Repeat(s, BufferWidth - 1)));
         }
 
-        private static string DisplayBot(Bot bot)
+        private string DisplayBot(Bot bot)
         {
             string position = "";
-            if (bot.Position != null)
+            if (Battlefield.Objects.Contains(bot))
             {
-                position = $"[X: {bot.Position.X,2}, Y: {bot.Position.Y,2}]";
+                var place = Battlefield[bot];
+                position = $"[X: {place.X,2}, Y: {place.Y,2}]";
             }
             return $"  * {bot.Name,-30} " +
                    $"[HP: {bot.Health,3:F0} SP: {bot.Shield,3:F0} EP: {bot.Energy,3:F0}] " +

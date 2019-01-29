@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battlefield\Size.cs" />
-    <Compile Include="Battlefield\IBattlefield.cs" />
+    <Compile Include="Battlefield\IBattlefieldView.cs" />
     <Compile Include="Battlefield\IBattlefieldPlace.cs" />
+    <Compile Include="Exceptions\BattlefieldPlaceNotFoundException.cs" />
     <Compile Include="Implement\IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
@@ -59,9 +59,7 @@
     <Compile Include="TurnActions\RechargeShield.cs" />
     <Compile Include="TurnActions\TurnAction.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="CodingArena.Player.nuspec" />
   </ItemGroup>

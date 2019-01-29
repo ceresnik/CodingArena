@@ -1,5 +1,4 @@
 ﻿using CodingArena.Player;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -11,7 +10,6 @@ namespace CodingArena.Game
         }
 
         public string Name => Bot.Name;
-        public IBattlefieldPlace Position => Bot.Position;
         public float Damage => Bot.Damage;
         public float Shield => Bot.Shield;
         private Bot Bot { get; }

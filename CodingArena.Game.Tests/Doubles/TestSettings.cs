@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Tests.Doubles
 {
@@ -9,14 +8,16 @@ namespace CodingArena.Game.Tests.Doubles
     {
         public TestSettings()
         {
-            BattlefieldSize = new Size(100, 100);
+            BattlefieldWidth = 100;
+            BattlefieldHeight = 100;
             MaxRounds = 12;
             MaxTurns = 100;
             NextRoundDelay = TimeSpan.FromMilliseconds(1);
             NextTurnActionDelay = TimeSpan.FromMilliseconds(1);
         }
 
-        public Size BattlefieldSize { get; set; }
+        public int BattlefieldWidth { get; set; }
+        public int BattlefieldHeight { get; set; }
         public int MaxRounds { get; set; }
         public int MaxTurns { get; set; }
         public TimeSpan NextRoundDelay { get; set; }

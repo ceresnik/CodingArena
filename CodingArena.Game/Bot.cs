@@ -9,9 +9,9 @@ using CodingArena.Player.TurnActions;
 
 namespace CodingArena.Game
 {
-    public class Bot : IBattlefieldObject
+    public class Bot : IBattlefieldObject, IMovableObject
     {
-        public Bot(IOutput output, IBotAI botAI, Battlefield battlefield, ISettings settings)
+        public Bot(IOutput output, IBotAI botAI, IBattlefield battlefield, ISettings settings)
         {
             Output = output;
             BotAI = botAI ?? throw new ArgumentNullException(nameof(botAI));
@@ -31,7 +31,6 @@ namespace CodingArena.Game
         public float Damage => 100 - Health;
         public float Shield => SP * 100 / (float)MaxSP;
         public float Energy => EP * 100 / (float)MaxEP;
-        public IBattlefieldPlace Position => Battlefield[this];
         public int MaxHP { get; set; }
         public int HP { get; set; }
         public float Health => HP * 100 / (float) MaxHP;
@@ -43,7 +42,7 @@ namespace CodingArena.Game
         public IEnemy OutsideView => new Enemy(this);
         private IOutput Output { get; }
         private IBotAI BotAI { get; }
-        private Battlefield Battlefield { get; }
+        private IBattlefield Battlefield { get; }
         private ISettings Settings { get; }
 
         public void ExecuteTurnAction(IReadOnlyCollection<Bot> enemies)
@@ -74,7 +73,7 @@ namespace CodingArena.Game
             }
         }
 
-        private void Execute(Move move, Battlefield battlefield)
+        private void Execute(Move move, IBattlefieldView battlefield)
         {
             if (move.Direction == Direction.None)
             {
@@ -82,24 +81,26 @@ namespace CodingArena.Game
                 return;
             }
 
-            int newX = Position.X;
-            int newY = Position.Y;
+            var place = battlefield[this];
 
-            if (move.Direction == Direction.West && Position.X > 0)
-                newX = Position.X - 1;
-            if (move.Direction == Direction.East && Position.X < Battlefield.Size.Width - 1)
-                newX = Position.X + 1;
-            if (move.Direction == Direction.North && Position.Y < Battlefield.Size.Height - 1)
-                newY = Position.Y + 1;
-            if (move.Direction == Direction.South && Position.Y > 0)
-                newY = Position.Y - 1;
+            int newX = place.X;
+            int newY = place.Y;
+
+            if (move.Direction == Direction.West && place.X > 0)
+                newX = place.X - 1;
+            if (move.Direction == Direction.East && place.X < Battlefield.Width - 1)
+                newX = place.X + 1;
+            if (move.Direction == Direction.North && place.Y < Battlefield.Height - 1)
+                newY = place.Y + 1;
+            if (move.Direction == Direction.South && place.Y > 0)
+                newY = place.Y - 1;
 
             if (EP < move.EnergyCost)
             {
                 Output.TurnAction(this, $"{Name} doesn't have enough energy to move.");
                 return;
             }
-            if (battlefield.Move(this, newX, newY))
+            if (MoveTo(new BattlefieldPlace(newX, newY)))
             {
                 EP -= move.EnergyCost;
                 Output.TurnAction(this, $"{Name} moved {move.Direction}.");
@@ -119,7 +120,10 @@ namespace CodingArena.Game
                 return;
             }
 
-            var distance = Position.DistanceTo(target.Position);
+            var place = Battlefield[this];
+            var targetPlace = Battlefield[target];
+
+            var distance = place.DistanceTo(targetPlace);
             const int maxRange = 10;
             if (distance > 10)
             {
@@ -217,6 +221,19 @@ namespace CodingArena.Game
             {
                 HP -= damage;
             }
+        }
+
+        public bool CanMoveTo(IBattlefieldPlace newPlace) => Battlefield.IsEmpty(newPlace);
+
+        public bool MoveTo(IBattlefieldPlace newPlace)
+        {
+            if (CanMoveTo(newPlace))
+            {
+                
+                return true;
+            }
+
+            return false;
         }
     }
 }

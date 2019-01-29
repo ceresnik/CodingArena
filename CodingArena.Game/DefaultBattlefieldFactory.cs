@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Composition;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -11,6 +10,7 @@ namespace CodingArena.Game
         [ImportingConstructor]
         public DefaultBattlefieldFactory(ISettings settings) => Settings = settings;
 
-        public IBattlefield Create() => new Battlefield(Settings);
+        public IBattlefield Create() => 
+            new Battlefield(Settings.BattlefieldWidth, Settings.BattlefieldHeight);
     }
 }

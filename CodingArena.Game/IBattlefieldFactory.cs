@@ -1,6 +1,4 @@
-﻿using CodingArena.Player.Battlefield;
-
-namespace CodingArena.Game
+﻿namespace CodingArena.Game
 {
     public interface IBattlefieldFactory
     {

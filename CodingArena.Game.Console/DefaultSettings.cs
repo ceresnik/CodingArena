@@ -1,26 +1,22 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Configuration;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Console
 {
     [Export(typeof(ISettings))]
     internal class DefaultSettings : ISettings
     {
-        public Size BattlefieldSize
+        public int BattlefieldWidth
         {
-            get
-            {
-                int width = int.Parse(ConfigurationManager.AppSettings["BattlefieldWidth"]);
-                int height = int.Parse(ConfigurationManager.AppSettings["BattlefieldHeight"]);
-                return new Size(width, height);
-            }
-            set
-            {
-                ConfigurationManager.AppSettings["BattlefieldWidth"] = value.Width.ToString();
-                ConfigurationManager.AppSettings["BattlefieldHeight"] = value.Height.ToString();
-            }
+            get => int.Parse(ConfigurationManager.AppSettings["BattlefieldWidth"]);
+            set => ConfigurationManager.AppSettings["BattlefieldWidth"] = value.ToString();
+        }
+
+        public int BattlefieldHeight
+        {
+            get => int.Parse(ConfigurationManager.AppSettings["BattlefieldHeight"]);
+            set => ConfigurationManager.AppSettings["BattlefieldHeight"] = value.ToString();
         }
 
         public int MaxRounds

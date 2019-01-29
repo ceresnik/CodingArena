@@ -14,7 +14,7 @@ namespace CodingArena.Game.Tests.Doubles
 
         public void NextRoundIn(TimeSpan delayForNextRound) => WriteLine($"Next round in {delayForNextRound}...");
 
-        public void Battlefield(Battlefield battlefield) => WriteLine(battlefield);
+        public void SetBattlefield(IBattlefield battlefield) => WriteLine(battlefield);
 
         public void NoBotsQualified() => WriteLine("No bots qualified.");
 
@@ -35,5 +35,6 @@ namespace CodingArena.Game.Tests.Doubles
                 : $"Winner is {roundResult.WinnerName}.");
 
         public void MatchResult(Dictionary<string, int> winners) => Winners = winners;
+        public void Error(string message) => WriteLine($"Error: {message}");
     }
 }

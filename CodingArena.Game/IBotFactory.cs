@@ -4,6 +4,6 @@ namespace CodingArena.Game
 {
     internal interface IBotFactory
     {
-        IEnumerable<Bot> CreateBots();
+        IEnumerable<Bot> CreateBots(IBattlefield battlefield);
     }
 }

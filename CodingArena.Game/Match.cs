@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -9,18 +11,27 @@ namespace CodingArena.Game
     internal class Match : IMatch
     {
         [ImportingConstructor]
-        public Match(IOutput output, ISettings settings)
+        public Match(IOutput output, ISettings settings, IBotFactory botFactory, IBattlefieldFactory battlefieldFactory)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Settings = settings;
+            BotFactory = botFactory;
+            BattlefieldFactory = battlefieldFactory;
             Winners = new Dictionary<string, int>();
         }
 
         private Dictionary<string, int> Winners { get; }
         private IOutput Output { get; }
         private ISettings Settings { get; }
+        private IBotFactory BotFactory { get; }
+        private IBattlefieldFactory BattlefieldFactory { get; }
 
-        public IRound CreateRound() => new Round(Output, Settings);
+        public IRound CreateRound()
+        {
+            var battlefield = BattlefieldFactory.Create();
+            var bots = BotFactory.CreateBots(battlefield).ToList();
+            return new Round(Output, Settings, battlefield, bots);
+        }
 
         public Task WaitForNextRoundAsync()
         {

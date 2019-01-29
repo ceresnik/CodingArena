@@ -19,6 +19,6 @@ namespace CodingArena.Player.Implement
         /// <param name="enemies">Enemy bots.</param>
         /// <param name="battlefield">Battlefield.</param>
         /// <returns>Turn action that is used in actual turn to battle against other enemy bots.</returns>
-        ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefield battlefield);
+        ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield);
     }
 }

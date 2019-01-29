@@ -9,9 +9,8 @@ namespace CodingArena.Game.Tests.DefaultSettingsTests
         [Test]
         public void BattlefieldSize()
         {
-            SUT.BattlefieldSize.Should().NotBeNull();
-            SUT.BattlefieldSize.Width.Should().Be(100);
-            SUT.BattlefieldSize.Height.Should().Be(100);
+            SUT.BattlefieldWidth.Should().Be(100);
+            SUT.BattlefieldHeight.Should().Be(100);
         }
 
         [Test]

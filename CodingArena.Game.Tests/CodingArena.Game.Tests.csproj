@@ -56,24 +56,13 @@
   <ItemGroup>
     <Compile Include="BattlefieldFactoryTests\Create.cs" />
     <Compile Include="BattlefieldFactoryTests\TestFixture.cs" />
-    <Compile Include="BotTests\Created.cs" />
-    <Compile Include="BotTests\BotAIStub.cs" />
-    <Compile Include="BotTests\ExecuteTurnAction.cs" />
-    <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
     <Compile Include="DefaultSettingsTests\DefaultValues.cs" />
     <Compile Include="DefaultSettingsTests\TestFixture.cs" />
     <Compile Include="Doubles\TestSettings.cs" />
-    <Compile Include="MatchTests\ProcessRoundResult.cs" />
-    <Compile Include="MatchTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoundTests\StartAsync.cs" />
-    <Compile Include="RoundTests\TestFixture.cs" />
-    <Compile Include="SystemTests\OneRound.cs" />
     <Compile Include="Doubles\Output.cs" />
     <Compile Include="TestFixture.cs" />
-    <Compile Include="TurnTests\StartTurn.cs" />
-    <Compile Include="TurnTests\TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CodingArena.Game.Console\App.config">
