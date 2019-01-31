@@ -160,7 +160,5 @@ namespace CodingArena.Game
         }
 
         public override string ToString() => $"Battlefield [{nameof(Width)}: {Width}, {nameof(Height)}: {Height}]";
-
-        public IBattlefieldView View => this;
     }
 }
