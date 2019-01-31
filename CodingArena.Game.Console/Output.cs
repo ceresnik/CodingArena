@@ -158,7 +158,7 @@ namespace CodingArena.Game.Console
                 position = $"[X: {place.X,2}, Y: {place.Y,2}]";
             }
             return $"  * {bot.Name,-30} " +
-                   $"[HP: {bot.Health,3:F0} SP: {bot.Shield,3:F0} EP: {bot.Energy,3:F0}] " +
+                   $"[HP: {bot.Health,3:F0}% SP: {bot.Shield,3:F0}% EP: {bot.Energy,3:F0}%] " +
                    position;
         }
     }
