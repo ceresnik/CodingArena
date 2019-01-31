@@ -57,7 +57,6 @@
     <Compile Include="IMatchFactory.cs" />
     <Compile Include="IMovableObject.cs" />
     <Compile Include="IOutput.cs" />
-    <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="MalfunctionTurnAction.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="OwnBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Round.cs" />
+    <Compile Include="RoundFactory.cs" />
     <Compile Include="RoundResult.cs" />
     <Compile Include="Turn.cs" />
   </ItemGroup>

@@ -6,6 +6,11 @@ using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
+    public interface IRound
+    {
+        Task<RoundResult> StartAsync();
+    }
+
     public class Round : IRound
     {
         private IList<Bot> Bots { get; }

@@ -7,22 +7,19 @@ namespace CodingArena.Game
     {
         private IOutput Output { get; }
         private ISettings Settings { get; }
-        private IBotFactory BotFactory { get; }
-        private IBattlefieldFactory BattlefieldFactory { get; }
+        private IRoundFactory RoundFactory { get; }
 
         [ImportingConstructor]
         public DefaultMatchFactory(
             IOutput output, 
             ISettings settings, 
-            IBotFactory botFactory, 
-            IBattlefieldFactory battlefieldFactory)
+            IRoundFactory roundFactory)
         {
             Output = output;
             Settings = settings;
-            BotFactory = botFactory;
-            BattlefieldFactory = battlefieldFactory;
+            RoundFactory = roundFactory;
         }
 
-        public IMatch Create() => new Match(Output, Settings, BotFactory, BattlefieldFactory);
+        public IMatch Create() => new Match(Output, Settings, RoundFactory);
     }
 }
