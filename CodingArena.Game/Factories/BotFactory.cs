@@ -7,8 +7,13 @@ using System.Linq;
 using System.Reflection;
 using CodingArena.Player.Implement;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Factories
 {
+    public interface IBotFactory
+    {
+        IEnumerable<Bot> CreateBots(IBattlefield battlefield);
+    }
+
     [Export(typeof(IBotFactory))]
     public sealed class BotFactory : IBotFactory
     {

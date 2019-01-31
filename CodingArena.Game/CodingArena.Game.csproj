@@ -44,27 +44,20 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattlefieldPlace.cs" />
-    <Compile Include="DefaultBattlefieldFactory.cs" />
+    <Compile Include="Factories\BattlefieldFactory.cs" />
     <Compile Include="Bot.cs" />
-    <Compile Include="BotFactory.cs" />
-    <Compile Include="DefaultMatchFactory.cs" />
+    <Compile Include="Factories\BotFactory.cs" />
+    <Compile Include="Factories\MatchFactory.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="DefaultGameEngine.cs" />
-    <Compile Include="IBattlefieldFactory.cs" />
-    <Compile Include="IBotFactory.cs" />
-    <Compile Include="IGameEngine.cs" />
-    <Compile Include="IMatch.cs" />
-    <Compile Include="IMatchFactory.cs" />
-    <Compile Include="IMovableObject.cs" />
+    <Compile Include="GameEngine.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="ISettings.cs" />
-    <Compile Include="ITurn.cs" />
-    <Compile Include="MalfunctionTurnAction.cs" />
+    <Compile Include="TurnActions\MalfunctionTurnAction.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="OwnBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Round.cs" />
-    <Compile Include="RoundFactory.cs" />
+    <Compile Include="Factories\RoundFactory.cs" />
     <Compile Include="RoundResult.cs" />
     <Compile Include="Turn.cs" />
   </ItemGroup>
@@ -74,5 +67,6 @@
       <Name>CodingArena.Player</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

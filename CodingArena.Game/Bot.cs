@@ -6,9 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using CodingArena.Game.TurnActions;
 
 namespace CodingArena.Game
 {
+    public interface IMovableObject
+    {
+        bool CanMoveTo(IBattlefieldPlace newPlace);
+        bool MoveTo(IBattlefieldPlace newPlace);
+    }
+
     public class Bot : IBattlefieldObject, IMovableObject, IEquatable<Bot>, IEquatable<IOwnBot>, IEquatable<IEnemy>
     {
         public Bot(IOutput output, IBotAI botAI, IBattlefield battlefield, ISettings settings)

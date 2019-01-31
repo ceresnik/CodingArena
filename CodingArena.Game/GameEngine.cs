@@ -1,14 +1,20 @@
 ﻿using System.ComponentModel.Composition;
+using CodingArena.Game.Factories;
 
 namespace CodingArena.Game
 {
+    public interface IGameEngine
+    {
+        IMatch CreateMatch();
+    }
+
     [Export(typeof(IGameEngine))]
-    internal class DefaultGameEngine : IGameEngine
+    internal class GameEngine : IGameEngine
     {
         private IMatchFactory MatchFactory { get; }
 
         [ImportingConstructor]
-        public DefaultGameEngine(IMatchFactory matchFactory)
+        public GameEngine(IMatchFactory matchFactory)
         {
             MatchFactory = matchFactory;
         }

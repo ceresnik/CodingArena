@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using CodingArena.Game.Factories;
 
 namespace CodingArena.Game
 {
+    public interface IMatch
+    {
+        IRound CreateRound();
+        Task WaitForNextRoundAsync();
+        void Process(RoundResult roundResult);
+    }
+
     [Export(typeof(IMatch))]
     internal class Match : IMatch
     {

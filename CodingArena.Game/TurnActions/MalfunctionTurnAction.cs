@@ -1,6 +1,6 @@
 ﻿using CodingArena.Player.TurnActions;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.TurnActions
 {
     internal class MalfunctionTurnAction : ITurnAction
     {

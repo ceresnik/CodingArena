@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Factories
 {
     public interface IRoundFactory
     {

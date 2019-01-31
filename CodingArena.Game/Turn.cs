@@ -5,6 +5,12 @@ using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
+    public interface ITurn
+    {
+        int Number { get; }
+        ITurn StartTurn();
+    }
+
     public class Turn : ITurn
     {
         public Turn(int number, ICollection<Bot> bots, IBattlefieldView battlefield)
