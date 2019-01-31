@@ -36,25 +36,13 @@ namespace CodingArena.Game
             get
             {
                 if (x < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(x), x,
-                        $"{nameof(x)} could not be less than zero.");
-                }
+                    throw new ArgumentOutOfRangeException(nameof(x), x, $"{nameof(x)} could not be less than zero.");
                 if (y < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(y), y,
-                        $"{nameof(y)} could not be less than zero.");
-                }
+                    throw new ArgumentOutOfRangeException(nameof(y), y, $"{nameof(y)} could not be less than zero.");
                 if (x > Width)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(x), x,
-                        $"{nameof(x)} could not be greater than {Width}.");
-                }
+                    throw new ArgumentOutOfRangeException(nameof(x), x, $"{nameof(x)} could not be greater than {Width}.");
                 if (y > Height)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(y), y,
-                        $"{nameof(y)} could not be greater than {Height}.");
-                }
+                    throw new ArgumentOutOfRangeException(nameof(y), y, $"{nameof(y)} could not be greater than {Height}.");
 
                 return new BattlefieldPlace(x, y);
             }
