@@ -31,8 +31,6 @@ namespace CodingArena.Game
 
         public int Height { get; }
 
-        public IReadOnlyCollection<IBattlefieldObject> Objects => Dictionary.Keys.ToList();
-
         public IBattlefieldPlace this[int x, int y]
         {
             get
