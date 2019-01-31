@@ -23,8 +23,6 @@ namespace CodingArena.Game
 
         public Task<RoundResult> StartAsync()
         {
-            if (Bots == null) throw new ArgumentNullException(nameof(Bots));
-
             Output.StartRound();
             return Bots.Any() == false
                 ? NoBotsQualified()

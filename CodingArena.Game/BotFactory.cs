@@ -51,7 +51,7 @@ namespace CodingArena.Game
             }
         }
 
-        private static string[] AssemblyFiles()
+        private static IOrderedEnumerable<string> AssemblyFiles()
         {
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var sourceDir = Path.Combine(baseDirectory, "Bots");
@@ -62,38 +62,31 @@ namespace CodingArena.Game
                     "Create directory and share it for players, " +
                     "so that they can copy their class libraries with bot implementation into it.");
             }
+
             var targetDir = Path.Combine(baseDirectory, "BotCopies");
-            if (!Directory.Exists(targetDir))
-            {
-                Directory.CreateDirectory(targetDir);
-            }
+            if (!Directory.Exists(targetDir)) Directory.CreateDirectory(targetDir);
 
-            var files = Directory.GetFiles(targetDir, "*.dll", SearchOption.AllDirectories);
+            DeleteFiles(targetDir);
 
-            if (files.Any())
+            var orderedFiles = GetOrderedFilesByAge(sourceDir);
+
+            foreach (var file in orderedFiles)
             {
-                foreach (var file in files)
+                var fileName = Path.GetFileName(file);
+                if (fileName != null)
                 {
-                    File.Delete(file);
+                    File.Copy(file, Path.Combine(targetDir, fileName));
                 }
             }
 
-            files = Directory.GetFiles(sourceDir, "*.dll", SearchOption.AllDirectories);
-
-            if (files.Any())
-            {
-                foreach (var file in files)
-                {
-                    var fileName = Path.GetFileName(file);
-                    if (fileName != null)
-                    {
-                        File.Copy(file, Path.Combine(targetDir, fileName));
-                    }
-                }
-            }
-
-            return Directory.GetFiles(targetDir, "*.dll", SearchOption.AllDirectories);
+            return GetOrderedFilesByAge(targetDir);
         }
+
+        private static void DeleteFiles(string targetDir) => 
+            Directory.GetFiles(targetDir, "*.dll", SearchOption.AllDirectories).ToList().ForEach(File.Delete);
+
+        private static IOrderedEnumerable<string> GetOrderedFilesByAge(string sourceDir) =>
+            Directory.GetFiles(sourceDir, "*.dll", SearchOption.AllDirectories).OrderBy(f => new FileInfo(f).CreationTime);
 
         private Type FindBotAIType(Assembly assembly)
         {
