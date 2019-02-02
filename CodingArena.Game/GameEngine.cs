@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using CodingArena.Game.Factories;
+﻿using CodingArena.Game.Factories;
+using System.ComponentModel.Composition;
 
 namespace CodingArena.Game
 {
     public interface IGameEngine
     {
-        IMatch CreateMatch();
+        IMatch Match { get; }
     }
 
     [Export(typeof(IGameEngine))]
@@ -13,12 +13,13 @@ namespace CodingArena.Game
     {
         private IMatchFactory MatchFactory { get; }
 
+        public IMatch Match { get; }
+
         [ImportingConstructor]
         public GameEngine(IMatchFactory matchFactory)
         {
             MatchFactory = matchFactory;
+            Match = matchFactory.Create();
         }
-
-        public IMatch CreateMatch() => MatchFactory.Create();
     }
 }

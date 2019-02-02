@@ -60,6 +60,8 @@
     <Compile Include="DefaultSettingsTests\DefaultValues.cs" />
     <Compile Include="DefaultSettingsTests\TestFixture.cs" />
     <Compile Include="Doubles\TestSettings.cs" />
+    <Compile Include="GameEngineTests\Create.cs" />
+    <Compile Include="GameEngineTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Doubles\Output.cs" />
     <Compile Include="TestFixture.cs" />
