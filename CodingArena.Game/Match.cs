@@ -13,10 +13,8 @@ namespace CodingArena.Game
         void Process(RoundResult roundResult);
     }
 
-    [Export(typeof(IMatch))]
     internal class Match : IMatch
     {
-        [ImportingConstructor]
         public Match(IOutput output, ISettings settings, IRoundFactory roundFactory)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
