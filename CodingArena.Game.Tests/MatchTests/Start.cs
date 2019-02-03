@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 
 namespace CodingArena.Game.Tests.MatchTests
 {
@@ -8,14 +9,14 @@ namespace CodingArena.Game.Tests.MatchTests
         public override void SetUp()
         {
             base.SetUp();
-            IsStartedEventRaised = false;
-            Match.Notifier.Started += (sender, args) => IsStartedEventRaised = true;
+            StartedEventArgs = null;
+            Match.Notifier.Started += (sender, args) => StartedEventArgs = args;
             Match.Controller.Start();
         }
 
-        private bool IsStartedEventRaised { get; set; }
+        private EventArgs StartedEventArgs { get; set; }
 
         [Test]
-        public void Started_IsRaised() => IsStartedEventRaised.Should().BeTrue();
+        public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
     }
 }
