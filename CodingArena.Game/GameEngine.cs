@@ -12,14 +12,14 @@ namespace CodingArena.Game
 
     public interface IGameNotifier
     {
-        event EventHandler<MatchEventArgs> Started;
+        event EventHandler<GameStartingEventArgs> Started;
     }
 
-    public class MatchEventArgs
+    public class GameStartingEventArgs
     {
         public IMatchNotifier MatchNotifier { get; }
 
-        public MatchEventArgs(IMatchNotifier matchNotifier)
+        public GameStartingEventArgs(IMatchNotifier matchNotifier)
         {
             MatchNotifier = matchNotifier;
         }
@@ -46,9 +46,9 @@ namespace CodingArena.Game
             Match = matchFactory.Create();
         }
 
-        public event EventHandler<MatchEventArgs> Started;
+        public event EventHandler<GameStartingEventArgs> Started;
 
         private void OnStarted(IMatchNotifier matchNotifier) =>
-            Started?.Invoke(this, new MatchEventArgs(matchNotifier));
+            Started?.Invoke(this, new GameStartingEventArgs(matchNotifier));
     }
 }

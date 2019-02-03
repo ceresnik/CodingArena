@@ -9,14 +9,14 @@ namespace CodingArena.Game.Tests.GameEngineTests
         public override void SetUp()
         {
             base.SetUp();
-            IsStartedEventRaised = false;
-            GameNotifier.Started += (sender, args) => IsStartedEventRaised = true;
+            StartedEventArgs = null;
+            GameNotifier.Started += (sender, args) => StartedEventArgs = args;
             GameEngine.Start();
         }
 
-        private bool IsStartedEventRaised { get; set; }
+        private GameStartingEventArgs StartedEventArgs { get; set; }
 
         [Test]
-        public void Started_IsRaised() => IsStartedEventRaised.Should().BeTrue();
+        public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
     }
 }

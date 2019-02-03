@@ -21,13 +21,13 @@ namespace CodingArena.Game
 
     public interface IRoundNotifier
     {
-        event EventHandler<TurnEventArgs> Starting;
+        event EventHandler<RoundStartingEventArgs> Starting;
         event EventHandler Started;
     }
 
-    public class RoundEventArgs : EventArgs
+    public class MatchStartingEventArgs : EventArgs
     {
-        public RoundEventArgs(IRoundNotifier roundNotifier)
+        public MatchStartingEventArgs(IRoundNotifier roundNotifier)
         {
             RoundNotifier = roundNotifier ?? throw new ArgumentNullException(nameof(roundNotifier));
         }
@@ -133,12 +133,12 @@ namespace CodingArena.Game
             OnStarted();
         }
 
-        public event EventHandler<TurnEventArgs> Starting;
+        public event EventHandler<RoundStartingEventArgs> Starting;
 
         public event EventHandler Started;
 
         private void OnStarting(ITurn turn) =>
-            Starting?.Invoke(this, new TurnEventArgs(turn.Notifier));
+            Starting?.Invoke(this, new RoundStartingEventArgs(turn.Notifier));
 
         private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
     }

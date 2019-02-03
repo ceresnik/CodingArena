@@ -15,7 +15,7 @@ namespace CodingArena.Game.Tests.MatchTests
             Match.Controller.Start();
         }
 
-        private RoundEventArgs StartingEventArgs { get; set; }
+        private MatchStartingEventArgs StartingEventArgs { get; set; }
 
         private EventArgs StartedEventArgs { get; set; }
 

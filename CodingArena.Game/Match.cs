@@ -12,7 +12,7 @@ namespace CodingArena.Game
 
     public interface IMatchNotifier
     {
-        event EventHandler<RoundEventArgs> Starting;
+        event EventHandler<MatchStartingEventArgs> Starting;
         event EventHandler Started;
     }
 
@@ -78,12 +78,12 @@ namespace CodingArena.Game
             OnStarted();
         }
 
-        public event EventHandler<RoundEventArgs> Starting;
+        public event EventHandler<MatchStartingEventArgs> Starting;
 
         public event EventHandler Started;
 
         private void OnStarting(IRound round) =>
-            Starting?.Invoke(this, new RoundEventArgs(round.Notifier));
+            Starting?.Invoke(this, new MatchStartingEventArgs(round.Notifier));
 
         private void OnStarted() =>
             Started?.Invoke(this, EventArgs.Empty);

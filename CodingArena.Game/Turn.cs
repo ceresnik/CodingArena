@@ -21,9 +21,9 @@ namespace CodingArena.Game
     {
     }
 
-    public class TurnEventArgs : EventArgs
+    public class RoundStartingEventArgs : EventArgs
     {
-        public TurnEventArgs(ITurnNotifier turnNotifier)
+        public RoundStartingEventArgs(ITurnNotifier turnNotifier)
         {
             TurnNotifier = turnNotifier ?? throw new ArgumentNullException(nameof(turnNotifier));
         }

@@ -16,7 +16,7 @@ namespace CodingArena.Game.Tests.RoundTests
             Round.Controller.Start();
         }
 
-        private TurnEventArgs StartingEventArgs { get; set; }
+        private RoundStartingEventArgs StartingEventArgs { get; set; }
 
         private EventArgs StartedEventArgs { get; set; }
 
