@@ -12,6 +12,7 @@ namespace CodingArena.Game
 
     public interface IMatchNotifier
     {
+        event EventHandler<RoundEventArgs> Starting;
         event EventHandler Started;
     }
 
@@ -69,10 +70,22 @@ namespace CodingArena.Game
             Output.MatchResult(Winners);
         }
 
-        public void Start() => OnStarted();
+        public void Start()
+        {
+            var round = RoundFactory.Create();
+            OnStarting(round);
+            round.Controller.Start();
+            OnStarted();
+        }
+
+        public event EventHandler<RoundEventArgs> Starting;
 
         public event EventHandler Started;
 
-        private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
+        private void OnStarting(IRound round) =>
+            Starting?.Invoke(this, new RoundEventArgs(round.Notifier));
+
+        private void OnStarted() =>
+            Started?.Invoke(this, EventArgs.Empty);
     }
 }

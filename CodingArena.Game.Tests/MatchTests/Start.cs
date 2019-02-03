@@ -10,11 +10,17 @@ namespace CodingArena.Game.Tests.MatchTests
         {
             base.SetUp();
             StartedEventArgs = null;
+            Match.Notifier.Starting += (sender, args) => StartingEventArgs = args;
             Match.Notifier.Started += (sender, args) => StartedEventArgs = args;
             Match.Controller.Start();
         }
 
+        private RoundEventArgs StartingEventArgs { get; set; }
+
         private EventArgs StartedEventArgs { get; set; }
+
+        [Test]
+        public void Starting_IsRaised() => StartingEventArgs.Should().NotBeNull();
 
         [Test]
         public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
