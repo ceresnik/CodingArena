@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CodingArena.Player.Battlefield;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
@@ -9,9 +9,29 @@ namespace CodingArena.Game
     {
         int Number { get; }
         ITurn StartTurn();
+        ITurnController Controller { get; }
+        ITurnNotifier Notifier { get; }
     }
 
-    public class Turn : ITurn
+    public interface ITurnController
+    {
+    }
+
+    public interface ITurnNotifier
+    {
+    }
+
+    public class TurnEventArgs : EventArgs
+    {
+        public TurnEventArgs(ITurnNotifier turnNotifier)
+        {
+            TurnNotifier = turnNotifier ?? throw new ArgumentNullException(nameof(turnNotifier));
+        }
+
+        public ITurnNotifier TurnNotifier { get; }
+    }
+
+    public class Turn : ITurn, ITurnController, ITurnNotifier
     {
         public Turn(int number, ICollection<Bot> bots, IBattlefieldView battlefield)
         {
@@ -32,7 +52,7 @@ namespace CodingArena.Game
             {
                 foreach (var bot in Bots)
                 {
-                    var enemies = Bots.Except(new[] {bot}).ToList();
+                    var enemies = Bots.Except(new[] { bot }).ToList();
                     bot.ExecuteTurnAction(enemies); // TODO: consider change to async
                 }
                 var remainingBots = Bots.Except(Bots.Where(b => b.Damage > 100f)).ToList();
@@ -40,5 +60,9 @@ namespace CodingArena.Game
             }
             return new Turn(Number + 1, Bots, Battlefield);
         }
+
+        public ITurnController Controller => this;
+
+        public ITurnNotifier Notifier => this;
     }
 }

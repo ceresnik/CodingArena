@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.Battlefield;
+﻿using CodingArena.Game.Factories;
+using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace CodingArena.Game
 
     public interface IRoundNotifier
     {
-        event EventHandler Starting;
+        event EventHandler<TurnEventArgs> Starting;
         event EventHandler Started;
     }
 
@@ -37,13 +38,15 @@ namespace CodingArena.Game
     internal sealed class Round : IRound, IRoundController, IRoundNotifier
     {
         private IList<Bot> Bots { get; }
+        private ITurnFactory TurnFactory { get; }
         private IOutput Output { get; }
         private ISettings Settings { get; }
         private IBattlefieldView Battlefield { get; }
 
-        public Round(IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots)
+        public Round(IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots, ITurnFactory turnFactory)
         {
             Bots = bots ?? throw new ArgumentNullException(nameof(bots));
+            TurnFactory = turnFactory;
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
@@ -125,15 +128,17 @@ namespace CodingArena.Game
 
         public void Start()
         {
-            OnStarting();
+            var turn = TurnFactory.Create(0, new List<Bot>(), Battlefield);
+            OnStarting(turn);
             OnStarted();
         }
 
-        public event EventHandler Starting;
+        public event EventHandler<TurnEventArgs> Starting;
 
         public event EventHandler Started;
 
-        private void OnStarting() => Starting?.Invoke(this, EventArgs.Empty);
+        private void OnStarting(ITurn turn) =>
+            Starting?.Invoke(this, new TurnEventArgs(turn.Notifier));
 
         private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
     }

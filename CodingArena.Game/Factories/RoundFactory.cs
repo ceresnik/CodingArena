@@ -15,18 +15,21 @@ namespace CodingArena.Game.Factories
         private ISettings Settings { get; }
         private IBattlefieldFactory BattlefieldFactory { get; }
         private IBotFactory BotFactory { get; }
+        private ITurnFactory TurnFactory { get; }
 
         [ImportingConstructor]
         public RoundFactory(
-            IOutput output, 
-            ISettings settings, 
+            IOutput output,
+            ISettings settings,
             IBattlefieldFactory battlefieldFactory,
-            IBotFactory botFactory)
+            IBotFactory botFactory,
+            ITurnFactory turnFactory)
         {
             Output = output;
             Settings = settings;
             BattlefieldFactory = battlefieldFactory;
             BotFactory = botFactory;
+            TurnFactory = turnFactory;
         }
 
         public IRound Create()
@@ -34,7 +37,7 @@ namespace CodingArena.Game.Factories
             var battlefield = BattlefieldFactory.Create();
             Output.SetBattlefield(battlefield);
             var bots = BotFactory.CreateBots(battlefield).ToList();
-            return new Round(Output, Settings, battlefield, bots);
+            return new Round(Output, Settings, battlefield, bots, TurnFactory);
         }
     }
 }

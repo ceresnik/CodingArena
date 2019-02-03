@@ -65,6 +65,8 @@
     <Compile Include="Factories\MatchFactoryTests\TestFixture.cs" />
     <Compile Include="Factories\RoundFactoryTests\Create.cs" />
     <Compile Include="Factories\RoundFactoryTests\TestFixture.cs" />
+    <Compile Include="Factories\TurnFactoryTests\Create.cs" />
+    <Compile Include="Factories\TurnFactoryTests\TestFixture.cs" />
     <Compile Include="GameEngineTests\Start.cs" />
     <Compile Include="GameEngineTests\TestFixture.cs" />
     <Compile Include="MatchTests\Start.cs" />
