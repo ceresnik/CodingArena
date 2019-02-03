@@ -20,6 +20,7 @@ namespace CodingArena.Game
 
     public interface IRoundNotifier
     {
+        event EventHandler Starting;
         event EventHandler Started;
     }
 
@@ -124,9 +125,15 @@ namespace CodingArena.Game
 
         public void Start()
         {
+            OnStarting();
+            OnStarted();
         }
 
+        public event EventHandler Starting;
+
         public event EventHandler Started;
+
+        private void OnStarting() => Starting?.Invoke(this, EventArgs.Empty);
 
         private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
     }
