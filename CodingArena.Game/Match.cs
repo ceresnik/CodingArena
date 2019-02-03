@@ -7,10 +7,12 @@ namespace CodingArena.Game
 {
     public interface IMatchController
     {
+        void Start();
     }
 
     public interface IMatchNotifier
     {
+        event EventHandler Started;
     }
 
     public interface IMatch
@@ -22,7 +24,7 @@ namespace CodingArena.Game
         IMatchNotifier Notifier { get; }
     }
 
-    internal class Match : IMatch, IMatchController, IMatchNotifier
+    internal sealed class Match : IMatch, IMatchController, IMatchNotifier
     {
         public Match(IOutput output, ISettings settings, IRoundFactory roundFactory)
         {
@@ -66,5 +68,11 @@ namespace CodingArena.Game
             }
             Output.MatchResult(Winners);
         }
+
+        public void Start() => OnStarted();
+
+        public event EventHandler Started;
+
+        private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
     }
 }
