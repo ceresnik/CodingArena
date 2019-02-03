@@ -20,7 +20,11 @@ namespace CodingArena.Game.Tests.MatchTests
         private EventArgs StartedEventArgs { get; set; }
 
         [Test]
-        public void Starting_IsRaised() => StartingEventArgs.Should().NotBeNull();
+        public void Starting_IsRaised()
+        {
+            StartingEventArgs.Should().NotBeNull();
+            StartingEventArgs.RoundNotifier.Should().NotBeNull(nameof(StartingEventArgs.RoundNotifier));
+        }
 
         [Test]
         public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
