@@ -61,6 +61,8 @@
     <Compile Include="DefaultSettingsTests\TestFixture.cs" />
     <Compile Include="Doubles\BotFactory.cs" />
     <Compile Include="Doubles\TestSettings.cs" />
+    <Compile Include="Factories\MatchFactoryTests\Create.cs" />
+    <Compile Include="Factories\MatchFactoryTests\TestFixture.cs" />
     <Compile Include="GameEngineTests\Start.cs" />
     <Compile Include="GameEngineTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
