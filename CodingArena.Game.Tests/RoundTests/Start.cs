@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using System;
 
 namespace CodingArena.Game.Tests.RoundTests
 {
@@ -9,21 +8,21 @@ namespace CodingArena.Game.Tests.RoundTests
         public override void SetUp()
         {
             base.SetUp();
-            StartingEventArgs = null;
-            StartedEventArgs = null;
-            Round.Notifier.Starting += (sender, args) => StartingEventArgs = args;
-            Round.Notifier.Started += (sender, args) => StartedEventArgs = args;
+            TurnStartingEventArgs = null;
+            TurnStartedEventArgs = null;
+            Round.Notifier.TurnStarting += (sender, args) => TurnStartingEventArgs = args;
+            Round.Notifier.TurnStarted += (sender, args) => TurnStartedEventArgs = args;
             Round.Controller.Start();
         }
 
-        private RoundStartingEventArgs StartingEventArgs { get; set; }
+        private TurnEventArgs TurnStartingEventArgs { get; set; }
 
-        private EventArgs StartedEventArgs { get; set; }
-
-        [Test]
-        public void Starting_IsRaised() => StartingEventArgs.Should().NotBeNull();
+        private TurnEventArgs TurnStartedEventArgs { get; set; }
 
         [Test]
-        public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
+        public void TurnStarting_IsRaised() => TurnStartingEventArgs.Should().NotBeNull();
+
+        [Test]
+        public void TurnStarted_IsRaised() => TurnStartedEventArgs.Should().NotBeNull();
     }
 }

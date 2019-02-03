@@ -21,18 +21,18 @@ namespace CodingArena.Game
 
     public interface IRoundNotifier
     {
-        event EventHandler<RoundStartingEventArgs> Starting;
-        event EventHandler Started;
+        event EventHandler<TurnEventArgs> TurnStarting;
+        event EventHandler<TurnEventArgs> TurnStarted;
     }
 
-    public class MatchStartingEventArgs : EventArgs
+    public class RoundEventArgs : EventArgs
     {
-        public MatchStartingEventArgs(IRoundNotifier roundNotifier)
+        public RoundEventArgs(IRoundNotifier roundNotifier)
         {
-            RoundNotifier = roundNotifier ?? throw new ArgumentNullException(nameof(roundNotifier));
+            Round = roundNotifier ?? throw new ArgumentNullException(nameof(roundNotifier));
         }
 
-        public IRoundNotifier RoundNotifier { get; }
+        public IRoundNotifier Round { get; }
     }
 
     internal sealed class Round : IRound, IRoundController, IRoundNotifier
@@ -86,7 +86,7 @@ namespace CodingArena.Game
             do
             {
                 turn = turn.StartTurn();
-            } while (bots.Count(b => b.HP > 0) > 1 && turn.Number < Settings.MaxTurns);
+            } while (bots.Count(b => b.HP > 0) > 1 && turn.Notifier.Number < Settings.MaxTurns);
 
             if (bots.Count(b => b.HP > 0) == 1)
             {
@@ -128,18 +128,21 @@ namespace CodingArena.Game
 
         public void Start()
         {
-            var turn = TurnFactory.Create(0, new List<Bot>(), Battlefield);
-            OnStarting(turn);
-            OnStarted();
+            for (int i = 1; i <= Settings.MaxTurns; i++)
+            {
+                var turn = TurnFactory.Create(i, new List<Bot>(), Battlefield);
+                OnTurnStarting(new TurnEventArgs(turn.Notifier));
+                turn.Controller.Start();
+                OnTurnStarted(new TurnEventArgs(turn.Notifier));
+            }
         }
 
-        public event EventHandler<RoundStartingEventArgs> Starting;
+        public event EventHandler<TurnEventArgs> TurnStarting;
 
-        public event EventHandler Started;
+        public event EventHandler<TurnEventArgs> TurnStarted;
 
-        private void OnStarting(ITurn turn) =>
-            Starting?.Invoke(this, new RoundStartingEventArgs(turn.Notifier));
+        private void OnTurnStarting(TurnEventArgs e) => TurnStarting?.Invoke(this, e);
 
-        private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
+        private void OnTurnStarted(TurnEventArgs e) => TurnStarted?.Invoke(this, e);
     }
 }

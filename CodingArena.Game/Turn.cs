@@ -7,7 +7,6 @@ namespace CodingArena.Game
 {
     public interface ITurn
     {
-        int Number { get; }
         ITurn StartTurn();
         ITurnController Controller { get; }
         ITurnNotifier Notifier { get; }
@@ -15,23 +14,27 @@ namespace CodingArena.Game
 
     public interface ITurnController
     {
+        void Start();
     }
 
     public interface ITurnNotifier
     {
+        int Number { get; }
     }
 
     public class RoundStartingEventArgs : EventArgs
     {
-        public RoundStartingEventArgs(ITurnNotifier turnNotifier)
+        public RoundStartingEventArgs(int roundNumber, ITurnNotifier turnNotifier)
         {
+            RoundNumber = roundNumber;
             TurnNotifier = turnNotifier ?? throw new ArgumentNullException(nameof(turnNotifier));
         }
 
+        public int RoundNumber { get; }
         public ITurnNotifier TurnNotifier { get; }
     }
 
-    public class Turn : ITurn, ITurnController, ITurnNotifier
+    public sealed class Turn : ITurn, ITurnController, ITurnNotifier
     {
         public Turn(int number, ICollection<Bot> bots, IBattlefieldView battlefield)
         {
@@ -64,5 +67,9 @@ namespace CodingArena.Game
         public ITurnController Controller => this;
 
         public ITurnNotifier Notifier => this;
+
+        public void Start()
+        {
+        }
     }
 }

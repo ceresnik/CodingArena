@@ -50,10 +50,13 @@
     <Compile Include="Factories\MatchFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Factories\TurnFactory.cs" />
-    <Compile Include="GameEngine.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameStartingEventArgs.cs" />
+    <Compile Include="IGame.cs" />
     <Compile Include="INewOutput.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="ISettings.cs" />
+    <Compile Include="MatchEventArgs.cs" />
     <Compile Include="TurnActions\MalfunctionTurnAction.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="OwnBot.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="Factories\RoundFactory.cs" />
     <Compile Include="RoundResult.cs" />
     <Compile Include="Turn.cs" />
+    <Compile Include="TurnEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
