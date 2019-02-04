@@ -42,6 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\IBattlefieldFactory.cs" />
+    <Compile Include="Factories\IBotFactory.cs" />
+    <Compile Include="IBattleBot.cs" />
+    <Compile Include="IBattlefield.cs" />
+    <Compile Include="Internal\Battlefield.cs" />
+    <Compile Include="Internal\BattlefieldPlace.cs" />
+    <Compile Include="Internal\BattleBot.cs" />
     <Compile Include="Internal\Game.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="ISettings.cs" />

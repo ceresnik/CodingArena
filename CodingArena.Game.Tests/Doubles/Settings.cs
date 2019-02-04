@@ -14,6 +14,8 @@ namespace CodingArena.Game.Tests.Doubles
             MaxTurns = 120;
             NextRoundDelay = TimeSpan.Zero;
             NextTurnActionDelay = TimeSpan.Zero;
+            MaxHP = 1000;
+            MaxEP = 1000;
         }
 
         public int BattlefieldWidth { get; set; }
@@ -27,5 +29,9 @@ namespace CodingArena.Game.Tests.Doubles
         public TimeSpan NextRoundDelay { get; set; }
 
         public TimeSpan NextTurnActionDelay { get; set; }
+
+        public int MaxHP { get; set; }
+
+        public int MaxEP { get; set; }
     }
 }

@@ -10,5 +10,7 @@ namespace CodingArena.Game
         int MaxTurns { get; set; }
         TimeSpan NextRoundDelay { get; set; }
         TimeSpan NextTurnActionDelay { get; set; }
+        int MaxHP { get; set; }
+        int MaxEP { get; set; }
     }
 }

@@ -50,5 +50,17 @@ namespace CodingArena.Game.Console
             }
             set => ConfigurationManager.AppSettings["NextTurnActionDelayInMilliseconds"] = ((int)value.TotalMilliseconds).ToString();
         }
+
+        public int MaxHP
+        {
+            get => int.Parse(ConfigurationManager.AppSettings["MaxHP"]);
+            set => ConfigurationManager.AppSettings["MaxHP"] = value.ToString();
+        }
+
+        public int MaxEP
+        {
+            get => int.Parse(ConfigurationManager.AppSettings["MaxEP"]);
+            set => ConfigurationManager.AppSettings["MaxEP"] = value.ToString();
+        }
     }
 }
