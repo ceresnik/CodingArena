@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0B11497-EFB8-4CD0-9D83-54B2A4C878A3}</ProjectGuid>
+    <ProjectGuid>{A039DBB3-7980-4202-A135-45B84AD26735}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodingArena.Game.Tests</RootNamespace>
-    <AssemblyName>CodingArena.Game.Tests</AssemblyName>
+    <RootNamespace>CodingArena.Game.Console.Tests</RootNamespace>
+    <AssemblyName>CodingArena.Game.Console.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,7 +41,6 @@
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -54,10 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositionContainerFactory.cs" />
-    <Compile Include="Doubles\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="SettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\CodingArena.Game.Console\App.config">
@@ -67,19 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodingArena.Game.Console\CodingArena.Game.Console.csproj">
-      <Project>{72B1F276-EB5C-4F06-A50A-84FD1E97082E}</Project>
+      <Project>{72b1f276-eb5c-4f06-a50a-84fd1e97082e}</Project>
       <Name>CodingArena.Game.Console</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CodingArena.Game\CodingArena.Game.csproj">
-      <Project>{49C54CD4-4577-405A-93E7-386BDE6D5743}</Project>
-      <Name>CodingArena.Game</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">
-      <Project>{D28A9F70-A0AD-48B3-BBD2-E08D026EDE9D}</Project>
-      <Name>CodingArena.Player</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

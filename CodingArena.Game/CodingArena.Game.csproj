@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Internal\Game.cs" />
     <Compile Include="IGame.cs" />
+    <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
