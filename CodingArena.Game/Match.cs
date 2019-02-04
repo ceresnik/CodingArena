@@ -1,22 +1,32 @@
-﻿using System;
+﻿using CodingArena.Game.Factories;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using CodingArena.Game.Factories;
 
 namespace CodingArena.Game
 {
+    public interface IMatchController
+    {
+        void Start();
+    }
+
+    public interface IMatchNotifier
+    {
+        event EventHandler<RoundEventArgs> Starting;
+        event EventHandler Started;
+    }
+
     public interface IMatch
     {
         IRound CreateRound();
         Task WaitForNextRoundAsync();
         void Process(RoundResult roundResult);
+        IMatchController Controller { get; }
+        IMatchNotifier Notifier { get; }
     }
 
-    [Export(typeof(IMatch))]
-    internal class Match : IMatch
+    internal sealed class Match : IMatch, IMatchController, IMatchNotifier
     {
-        [ImportingConstructor]
         public Match(IOutput output, ISettings settings, IRoundFactory roundFactory)
         {
             Output = output ?? throw new ArgumentNullException(nameof(output));
@@ -25,12 +35,17 @@ namespace CodingArena.Game
             Winners = new Dictionary<string, int>();
         }
 
+        public IMatchController Controller => this;
+
+        public IMatchNotifier Notifier => this;
+
         private Dictionary<string, int> Winners { get; }
         private IOutput Output { get; }
         private ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
 
         public IRound CreateRound() => RoundFactory.Create();
+
 
         public Task WaitForNextRoundAsync()
         {
@@ -54,5 +69,23 @@ namespace CodingArena.Game
             }
             Output.MatchResult(Winners);
         }
+
+        public void Start()
+        {
+            var round = RoundFactory.Create();
+            OnStarting(round);
+            round.Controller.Start();
+            OnStarted();
+        }
+
+        public event EventHandler<RoundEventArgs> Starting;
+
+        public event EventHandler Started;
+
+        private void OnStarting(IRound round) =>
+            Starting?.Invoke(this, new RoundEventArgs(round.Notifier));
+
+        private void OnStarted() =>
+            Started?.Invoke(this, EventArgs.Empty);
     }
 }

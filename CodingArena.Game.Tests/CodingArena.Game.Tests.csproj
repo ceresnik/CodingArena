@@ -59,9 +59,22 @@
     <Compile Include="CompositionContainerFactory.cs" />
     <Compile Include="DefaultSettingsTests\DefaultValues.cs" />
     <Compile Include="DefaultSettingsTests\TestFixture.cs" />
+    <Compile Include="Doubles\BotFactory.cs" />
     <Compile Include="Doubles\TestSettings.cs" />
+    <Compile Include="Factories\MatchFactoryTests\Create.cs" />
+    <Compile Include="Factories\MatchFactoryTests\TestFixture.cs" />
+    <Compile Include="Factories\RoundFactoryTests\Create.cs" />
+    <Compile Include="Factories\RoundFactoryTests\TestFixture.cs" />
+    <Compile Include="Factories\TurnFactoryTests\Create.cs" />
+    <Compile Include="Factories\TurnFactoryTests\TestFixture.cs" />
+    <Compile Include="GameEngineTests\Start.cs" />
+    <Compile Include="GameEngineTests\TestFixture.cs" />
+    <Compile Include="MatchTests\Start.cs" />
+    <Compile Include="MatchTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Doubles\Output.cs" />
+    <Compile Include="RoundTests\Start.cs" />
+    <Compile Include="RoundTests\TestFixture.cs" />
     <Compile Include="TestFixture.cs" />
   </ItemGroup>
   <ItemGroup>

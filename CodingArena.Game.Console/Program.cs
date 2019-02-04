@@ -17,7 +17,8 @@ namespace CodingArena.Game.Console
                 var output = new Output();
                 var settings = container.GetExportedValue<ISettings>();
                 var engine = container.GetExportedValue<IGameEngine>();
-                var match = engine.CreateMatch();
+                engine.Start();
+                var match = engine.Match;
 
                 for (int i = 0; i < settings.MaxRounds; i++)
                 {

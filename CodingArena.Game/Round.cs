@@ -1,30 +1,60 @@
-﻿using System;
+﻿using CodingArena.Game.Factories;
+using CodingArena.Player.Battlefield;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game
 {
     public interface IRound
     {
         Task<RoundResult> StartAsync();
+        IRoundController Controller { get; }
+        IRoundNotifier Notifier { get; }
     }
 
-    public class Round : IRound
+    public interface IRoundController
+    {
+        void Start();
+    }
+
+    public interface IRoundNotifier
+    {
+        event EventHandler<TurnEventArgs> Starting;
+        event EventHandler Started;
+    }
+
+    public class RoundEventArgs : EventArgs
+    {
+        public RoundEventArgs(IRoundNotifier roundNotifier)
+        {
+            RoundNotifier = roundNotifier ?? throw new ArgumentNullException(nameof(roundNotifier));
+        }
+
+        public IRoundNotifier RoundNotifier { get; }
+    }
+
+    internal sealed class Round : IRound, IRoundController, IRoundNotifier
     {
         private IList<Bot> Bots { get; }
+        private ITurnFactory TurnFactory { get; }
         private IOutput Output { get; }
         private ISettings Settings { get; }
         private IBattlefieldView Battlefield { get; }
 
-        public Round(IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots)
+        public Round(IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots, ITurnFactory turnFactory)
         {
             Bots = bots ?? throw new ArgumentNullException(nameof(bots));
+            TurnFactory = turnFactory;
             Output = output ?? throw new ArgumentNullException(nameof(output));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
         }
+
+        public IRoundController Controller => this;
+
+        public IRoundNotifier Notifier => this;
 
         public Task<RoundResult> StartAsync()
         {
@@ -68,7 +98,7 @@ namespace CodingArena.Game
 
         private void PlaceBotsOnBattlefield(ICollection<Bot> bots)
         {
-            var random = new Random((int) DateTime.Now.Ticks);
+            var random = new Random((int)DateTime.Now.Ticks);
 
             foreach (var bot in bots)
             {
@@ -95,5 +125,21 @@ namespace CodingArena.Game
 
             throw new InvalidOperationException("Failed to find empty place on battlefield.");
         }
+
+        public void Start()
+        {
+            var turn = TurnFactory.Create(0, new List<Bot>(), Battlefield);
+            OnStarting(turn);
+            OnStarted();
+        }
+
+        public event EventHandler<TurnEventArgs> Starting;
+
+        public event EventHandler Started;
+
+        private void OnStarting(ITurn turn) =>
+            Starting?.Invoke(this, new TurnEventArgs(turn.Notifier));
+
+        private void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
     }
 }

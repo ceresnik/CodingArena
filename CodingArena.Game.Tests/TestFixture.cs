@@ -1,22 +1,31 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.ComponentModel.Composition.Hosting;
 
 namespace CodingArena.Game.Tests
 {
-    public class TestFixture<T> where T: class
+    internal class TestFixture
     {
         [SetUp]
         public virtual void SetUp()
         {
             Container = CompositionContainerFactory.Create();
+        }
+
+        protected CompositionContainer Container { get; private set; }
+
+        protected TValue Get<TValue>() => Container.GetExportedValue<TValue>();
+    }
+
+    internal class TestFixture<T> : TestFixture where T : class
+    {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
             CreateSUT();
         }
 
-        public CompositionContainer Container { get; private set; }
-
         protected virtual void CreateSUT() => SUT = Get<T>();
-
-        public TValue Get<TValue>() => Container.GetExportedValue<TValue>();
 
         public T SUT { get; private set; }
     }

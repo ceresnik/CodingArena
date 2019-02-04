@@ -1,6 +1,6 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 
 namespace CodingArena.Game.Tests.DefaultSettingsTests
 {
@@ -14,7 +14,7 @@ namespace CodingArena.Game.Tests.DefaultSettingsTests
         }
 
         [Test]
-        public void NextRoundDelay() => 
-            SUT.NextRoundDelay.Should().Be(new TimeSpan(0, 0, 0, 10));
+        public void NextRoundDelay() =>
+            SUT.NextRoundDelay.Should().Be(TimeSpan.FromMinutes(1));
     }
 }
