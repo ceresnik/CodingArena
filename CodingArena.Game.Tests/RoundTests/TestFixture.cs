@@ -7,7 +7,7 @@ namespace CodingArena.Game.Tests.RoundTests
         public override void SetUp()
         {
             base.SetUp();
-            Round = Get<IRoundFactory>().Create();
+            Round = Get<IRoundFactory>().Create(1);
         }
 
         protected IRound Round { get; private set; }

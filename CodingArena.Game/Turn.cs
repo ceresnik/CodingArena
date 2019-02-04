@@ -22,18 +22,6 @@ namespace CodingArena.Game
         int Number { get; }
     }
 
-    public class RoundStartingEventArgs : EventArgs
-    {
-        public RoundStartingEventArgs(int roundNumber, ITurnNotifier turnNotifier)
-        {
-            RoundNumber = roundNumber;
-            TurnNotifier = turnNotifier ?? throw new ArgumentNullException(nameof(turnNotifier));
-        }
-
-        public int RoundNumber { get; }
-        public ITurnNotifier TurnNotifier { get; }
-    }
-
     public sealed class Turn : ITurn, ITurnController, ITurnNotifier
     {
         public Turn(int number, ICollection<Bot> bots, IBattlefieldView battlefield)

@@ -10,7 +10,7 @@ namespace CodingArena.Game.Tests.Factories.RoundFactoryTests
         public override void SetUp()
         {
             base.SetUp();
-            Round = SUT.Create();
+            Round = SUT.Create(1);
         }
 
         [Test]

@@ -5,7 +5,7 @@ namespace CodingArena.Game.Factories
 {
     public interface IRoundFactory
     {
-        IRound Create();
+        IRound Create(int number);
     }
 
     [Export(typeof(IRoundFactory))]
@@ -32,12 +32,12 @@ namespace CodingArena.Game.Factories
             TurnFactory = turnFactory;
         }
 
-        public IRound Create()
+        public IRound Create(int number)
         {
             var battlefield = BattlefieldFactory.Create();
             Output.SetBattlefield(battlefield);
             var bots = BotFactory.CreateBots(battlefield).ToList();
-            return new Round(Output, Settings, battlefield, bots, TurnFactory);
+            return new Round(number, Output, Settings, battlefield, bots, TurnFactory);
         }
     }
 }

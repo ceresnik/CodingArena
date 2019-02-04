@@ -16,7 +16,7 @@ namespace CodingArena.Game
         bool MoveTo(IBattlefieldPlace newPlace);
     }
 
-    public class Bot : IBattlefieldObject, IMovableObject, IEquatable<Bot>, IEquatable<IOwnBot>, IEquatable<IEnemy>
+    public class Bot : IBattlefieldObject, IMovableObject, IEquatable<Bot>, IEquatable<IOwnBot>, IEquatable<IEnemy>, IBotState
     {
         public Bot(IOutput output, IBotAI botAI, IBattlefield battlefield, ISettings settings)
         {
@@ -42,6 +42,7 @@ namespace CodingArena.Game
         public int MaxHP { get; set; }
         public int HP { get; set; }
         public float Health => HP * 100 / (float)MaxHP;
+        public IBattlefieldPlace Position => Battlefield[this];
         public int MaxSP { get; set; }
         public int SP { get; set; }
         public int MaxEP { get; set; }

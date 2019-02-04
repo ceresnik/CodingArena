@@ -9,7 +9,6 @@ namespace CodingArena.Game
 {
     public interface IRound
     {
-        Task<RoundResult> StartAsync();
         IRoundController Controller { get; }
         IRoundNotifier Notifier { get; }
     }
@@ -21,6 +20,9 @@ namespace CodingArena.Game
 
     public interface IRoundNotifier
     {
+        int Number { get; }
+        IEnumerable<IBotState> BotStates { get; }
+        IBattlefieldView Battlefield { get; }
         event EventHandler<TurnEventArgs> TurnStarting;
         event EventHandler<TurnEventArgs> TurnStarted;
     }
@@ -41,10 +43,10 @@ namespace CodingArena.Game
         private ITurnFactory TurnFactory { get; }
         private IOutput Output { get; }
         private ISettings Settings { get; }
-        private IBattlefieldView Battlefield { get; }
 
-        public Round(IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots, ITurnFactory turnFactory)
+        public Round(int number, IOutput output, ISettings settings, IBattlefieldView battlefield, IList<Bot> bots, ITurnFactory turnFactory)
         {
+            Number = number;
             Bots = bots ?? throw new ArgumentNullException(nameof(bots));
             TurnFactory = turnFactory;
             Output = output ?? throw new ArgumentNullException(nameof(output));
@@ -52,19 +54,15 @@ namespace CodingArena.Game
             Battlefield = battlefield ?? throw new ArgumentNullException(nameof(battlefield));
         }
 
+        public IBattlefieldView Battlefield { get; }
+
         public IRoundController Controller => this;
 
         public IRoundNotifier Notifier => this;
 
-        public Task<RoundResult> StartAsync()
-        {
-            Output.StartRound();
-            return Bots.Any() == false
-                ? NoBotsQualified()
-                : Bots.Count == 1
-                    ? OnlyOneBotQualified(Bots.First())
-                    : MoreThanOneBotsQualified(Bots);
-        }
+        public int Number { get; }
+
+        public IEnumerable<IBotState> BotStates => Bots;
 
         private Task<RoundResult> NoBotsQualified()
         {
