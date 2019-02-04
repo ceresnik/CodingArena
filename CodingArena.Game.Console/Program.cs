@@ -8,11 +8,7 @@ namespace CodingArena.Game.Console
         {
             try
             {
-                var container = ContainerFactory.Create();
-                var game = container.GetExportedValue<IGame>();
-                var output = container.GetExportedValue<INewOutput>();
-                output.Observe(game.Notifier);
-                game.Controller.Start();
+                ContainerFactory.Create().GetExportedValue<IGame>().Start();
             }
             catch (Exception e)
             {
