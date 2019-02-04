@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 
 namespace CodingArena.Game.Console
 {
@@ -12,12 +13,12 @@ namespace CodingArena.Game.Console
             }
             catch (Exception e)
             {
-                System.Console.WriteLine("Game is broken.");
-                System.Console.WriteLine($"Error message: {e}");
+                WriteLine("Game is broken.");
+                WriteLine($"Error message: {e}");
             }
 
-            System.Console.WriteLine("Press any key to exit...");
-            System.Console.ReadKey();
+            WriteLine("Press any key to exit...");
+            ReadKey();
         }
     }
 }
