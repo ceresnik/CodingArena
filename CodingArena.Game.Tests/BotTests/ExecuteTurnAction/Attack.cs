@@ -84,5 +84,18 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
             Verify.That(isEnemyExplodedEventRaised).IsTrue();
             Verify.That(Enemy.DestroyedBy).Is($"Destroyed by {Bot.Name}.");
         }
+
+        [Test]
+        public void OutOfEnergy()
+        {
+            Bot.PositionTo(0, 0);
+            Bot.DrainEnergy(Bot.SP);
+            Enemy.PositionTo(1, 0);
+            Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
+            Verify.That(Bot.EP).Is(0);
+            Verify.That(Enemy.HP).Is(Enemy.MaxHP);
+            Verify.That(Enemy.SP).Is(Enemy.MaxSP);
+            Verify.That(Enemy.EP).Is(Enemy.MaxEP);
+        }
     }
 }
