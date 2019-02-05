@@ -12,7 +12,9 @@ namespace CodingArena.Game.Internal
         }
 
         public string Name => BattleBot.Name;
-        public float Damage => 100 - BattleBot.HP * 100 / (float) BattleBot.MaxHP;
-        public float Shield => BattleBot.SP * 100 / (float) BattleBot.MaxSP;
+        public float Damage => 100 - BattleBot.HP * 100 / (float)BattleBot.MaxHP;
+        public float Shield => BattleBot.SP * 100 / (float)BattleBot.MaxSP;
+
+        public override string ToString() => Name;
     }
 }

@@ -3,7 +3,6 @@ using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +25,7 @@ namespace CodingArena.Game.Internal
             SP = MaxSP;
             MaxEP = Settings.MaxEP;
             EP = MaxEP;
+            OutsideView = new OutsideView(this);
         }
 
         public string Name => BotAI.BotName;
@@ -43,13 +43,11 @@ namespace CodingArena.Game.Internal
         public int SP { get; private set; }
 
         public IBattlefieldPlace Position => Battlefield[this];
-        public IEnemy OutsideView => new OutsideView(this);
 
+        public IEnemy OutsideView { get; }
+        public string DestroyedBy { get; set; }
 
-        public void PositionTo(int newX, int newY)
-        {
-            Battlefield.Set(this, newX, newY);
-        }
+        public void PositionTo(int newX, int newY) => Battlefield.Set(this, newX, newY);
 
         public void ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
         {
@@ -75,20 +73,22 @@ namespace CodingArena.Game.Internal
         {
             if (attack.EnergyCost > EP) return;
 
-            var distance = Battlefield[this].DistanceTo(Battlefield[attack.Target]);
+            var ownPlace = Battlefield[this];
+            var targetPlace = Battlefield[attack.Target];
+            var distance = ownPlace.DistanceTo(targetPlace);
             DrainEnergy(attack.EnergyCost);
             var damage = CalculateDamage(distance);
             if (damage > 0)
             {
                 var enemy = enemies.FirstOrDefault(e => e.OutsideView == attack.Target);
-                enemy?.TakeDamage(damage);
+                enemy?.TakeDamage(damage, this);
             }
         }
 
         private int CalculateDamage(double distance)
         {
-            if (distance >= Attack.MaxRange) return 0;
-            var chance = (Attack.MaxRange - distance) / Attack.MaxRange;
+            if (distance > Attack.MaxRange) return 0;
+            var chance = (Attack.MaxRange - distance + 1) / Attack.MaxRange;
             return (int)(Attack.MaxDamage * chance);
         }
 
@@ -117,7 +117,7 @@ namespace CodingArena.Game.Internal
 
             if (Battlefield.IsOutOfRange(newX, newY))
             {
-                Explode();
+                Destroy("Destroyed by battlefield force field.");
             }
             else
             {
@@ -149,25 +149,31 @@ namespace CodingArena.Game.Internal
             if (EP < 0) EP = 0;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, IBattleBot attacker)
         {
             SP -= damage;
             if (SP < 0)
             {
                 HP += SP;
                 SP = 0;
-                if (HP < 0) HP = 0;
+                if (HP <= 0)
+                {
+                    Destroy($"Destroyed by {attacker.Name}.");
+                }
             }
         }
 
-        private void Explode()
+        private void Destroy(string cause)
         {
             HP = 0;
+            DestroyedBy = cause;
             OnExploded();
         }
 
         public event EventHandler Exploded;
 
         private void OnExploded() => Exploded?.Invoke(this, EventArgs.Empty);
+
+        public override string ToString() => Name;
     }
 }

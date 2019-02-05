@@ -2,7 +2,6 @@
 using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CodingArena.Game.Internal
 {
@@ -29,9 +28,15 @@ namespace CodingArena.Game.Internal
             get
             {
                 if (enemy == null) throw new ArgumentNullException(nameof(enemy));
-                return Dictionary
-                    .Where(pair => pair.Key.OutsideView == enemy)
-                    .Select(pair => this[pair.Key]).FirstOrDefault();
+                foreach (var pair in Dictionary)
+                {
+                    if (pair.Key.OutsideView == enemy)
+                    {
+                        return pair.Value;
+                    }
+                }
+
+                return null;
             }
         }
 

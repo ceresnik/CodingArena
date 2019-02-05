@@ -1,7 +1,7 @@
-﻿using CodingArena.Player.Battlefield;
+﻿using CodingArena.Player;
+using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
-using CodingArena.Player;
 
 namespace CodingArena.Game
 {
@@ -15,10 +15,11 @@ namespace CodingArena.Game
         int SP { get; }
         IBattlefieldPlace Position { get; }
         IEnemy OutsideView { get; }
+        string DestroyedBy { get; set; }
         void PositionTo(int x, int y);
         void ExecuteTurnAction(IEnumerable<IBattleBot> enemies);
         void DrainEnergy(int energyPoints);
-        void TakeDamage(int damage);
+        void TakeDamage(int damage, IBattleBot attacker);
         event EventHandler Exploded;
     }
 }

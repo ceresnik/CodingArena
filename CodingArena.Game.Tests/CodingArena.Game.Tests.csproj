@@ -71,6 +71,7 @@
     <Compile Include="Verification\BattlefieldPlaceVerification.cs" />
     <Compile Include="Verification\BooleanVerification.cs" />
     <Compile Include="Verification\NumberVerification.cs" />
+    <Compile Include="Verification\StringVerification.cs" />
     <Compile Include="Verification\Verify.cs" />
   </ItemGroup>
   <ItemGroup>
