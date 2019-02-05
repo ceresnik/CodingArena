@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotAIs\AttackClosestBotAI.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Attack.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />
     <Compile Include="BotAIs\IdleBotAI.cs" />
@@ -66,8 +67,14 @@
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
     <Compile Include="Doubles\Settings.cs" />
+    <Compile Include="Factories\BattlefieldFactoryTests\Create.cs" />
+    <Compile Include="Factories\BattlefieldFactoryTests\TestFixture.cs" />
+    <Compile Include="Factories\TurnFactoryTests\Create.cs" />
+    <Compile Include="Factories\TurnFactoryTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="TurnTests\Start.cs" />
+    <Compile Include="TurnTests\TestFixture.cs" />
     <Compile Include="Verification\BattlefieldPlaceVerification.cs" />
     <Compile Include="Verification\BooleanVerification.cs" />
     <Compile Include="Verification\NumberVerification.cs" />
