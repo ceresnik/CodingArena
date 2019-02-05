@@ -19,6 +19,8 @@ namespace CodingArena.Game.Internal
             Settings = settings;
             MaxHP = Settings.MaxHP;
             HP = MaxHP;
+            MaxSP = Settings.MaxSP;
+            SP = MaxSP;
             MaxEP = Settings.MaxEP;
             EP = MaxEP;
         }
@@ -30,6 +32,10 @@ namespace CodingArena.Game.Internal
         public int MaxEP { get; }
 
         public int EP { get; private set; }
+
+        public int MaxSP { get; }
+
+        public int SP { get; private set; }
 
         public IBattlefieldPlace Position => Battlefield[this];
 

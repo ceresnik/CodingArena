@@ -1,6 +1,5 @@
 ﻿using CodingArena.Game.Tests.Verification;
 using CodingArena.Player.TurnActions;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move

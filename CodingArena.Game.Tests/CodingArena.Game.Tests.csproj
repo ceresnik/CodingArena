@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveOutOfBattlefield.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveFreely.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveWithNoEnergy.cs" />

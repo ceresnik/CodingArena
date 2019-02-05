@@ -9,6 +9,8 @@ namespace CodingArena.Game
         int HP { get; }
         int MaxEP { get; }
         int EP { get; }
+        int MaxSP { get; }
+        int SP { get; }
         IBattlefieldPlace Position { get; }
         void PositionTo(int x, int y);
         void ExecuteTurnAction();

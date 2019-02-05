@@ -17,5 +17,7 @@ namespace CodingArena.Game.Tests.Verification
             Place.X.Should().Be(x);
             Place.Y.Should().Be(y);
         }
+
+        public void Is(IBattlefieldPlace place) => Place.Should().Be(place);
     }
 }

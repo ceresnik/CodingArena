@@ -57,6 +57,12 @@ namespace CodingArena.Game.Console
             set => ConfigurationManager.AppSettings["MaxHP"] = value.ToString();
         }
 
+        public int MaxSP
+        {
+            get => int.Parse(ConfigurationManager.AppSettings["MaxSP"]);
+            set => ConfigurationManager.AppSettings["MaxSP"] = value.ToString();
+        }
+
         public int MaxEP
         {
             get => int.Parse(ConfigurationManager.AppSettings["MaxEP"]);

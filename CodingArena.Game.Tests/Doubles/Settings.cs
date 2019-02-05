@@ -32,6 +32,8 @@ namespace CodingArena.Game.Tests.Doubles
 
         public int MaxHP { get; set; }
 
+        public int MaxSP { get; set; }
+
         public int MaxEP { get; set; }
     }
 }

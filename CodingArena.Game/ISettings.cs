@@ -11,6 +11,7 @@ namespace CodingArena.Game
         TimeSpan NextRoundDelay { get; set; }
         TimeSpan NextTurnActionDelay { get; set; }
         int MaxHP { get; set; }
+        int MaxSP { get; set; }
         int MaxEP { get; set; }
     }
 }
