@@ -5,7 +5,20 @@ namespace CodingArena.Game.Tests.Verification
 {
     internal static class Verify
     {
+        public static NumberVerification That(int number) => new NumberVerification(number);
         public static BattlefieldPlaceVerification That(IBattlefieldPlace place) => new BattlefieldPlaceVerification(place);
+    }
+
+    internal class NumberVerification
+    {
+        private int Number { get; }
+
+        public NumberVerification(int number)
+        {
+            Number = number;
+        }
+
+        public void Is(int expectedNumber) => Number.Should().Be(expectedNumber);
     }
 
     internal class BattlefieldPlaceVerification

@@ -20,7 +20,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.East();            
             Bot.ExecuteTurnAction();
             Verify.That(Bot.Position).Is(2, 1);
-            Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
+            Verify.That(Bot.EP).Is(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.West();
             Bot.ExecuteTurnAction();
             Verify.That(Bot.Position).Is(0, 1);
-            Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
+            Verify.That(Bot.EP).Is(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.South();
             Bot.ExecuteTurnAction();
             Verify.That(Bot.Position).Is(1, 0);
-            Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
+            Verify.That(Bot.EP).Is(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.North();
             Bot.ExecuteTurnAction();
             Verify.That(Bot.Position).Is(1, 2);
-            Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
+            Verify.That(Bot.EP).Is(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
     }
 }
