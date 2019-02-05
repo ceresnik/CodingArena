@@ -51,6 +51,7 @@
     <Compile Include="Internal\BattleBot.cs" />
     <Compile Include="Internal\Game.cs" />
     <Compile Include="IGame.cs" />
+    <Compile Include="Internal\OutsideView.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

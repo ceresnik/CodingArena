@@ -1,4 +1,5 @@
-﻿using CodingArena.Game.Tests.Verification;
+﻿using System.Collections.Generic;
+using CodingArena.Game.Tests.Verification;
 using CodingArena.Player.TurnActions;
 using NUnit.Framework;
 
@@ -14,7 +15,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
             var hp = Bot.HP;
             var sp = Bot.SP;
             var ep = Bot.EP;
-            Bot.ExecuteTurnAction();
+            Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.Position).Is(position);
             Verify.That(Bot.HP).Is(hp);
             Verify.That(Bot.SP).Is(sp);

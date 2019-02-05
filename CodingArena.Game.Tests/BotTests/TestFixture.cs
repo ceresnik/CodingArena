@@ -1,4 +1,5 @@
 ﻿using CodingArena.Game.Factories;
+using CodingArena.Game.Tests.BotAIs;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests
@@ -9,6 +10,8 @@ namespace CodingArena.Game.Tests.BotTests
         protected IBattlefield Battlefield { get; private set; }
         protected IBattleBot Bot { get; private set; }
         protected bool IsExplodedEventRaised { get; private set; }
+        protected int RechargeAmount { get; set; }
+        protected int EnergyCost { get; set; }
 
         [SetUp]
         public override void SetUp()

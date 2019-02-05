@@ -4,7 +4,7 @@ using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 
-namespace CodingArena.Game.Tests.BotTests
+namespace CodingArena.Game.Tests.BotAIs
 {
     internal class TestBotAI : IBotAI
     {

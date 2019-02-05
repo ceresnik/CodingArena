@@ -3,6 +3,9 @@ using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Game.Internal
 {
@@ -25,6 +28,8 @@ namespace CodingArena.Game.Internal
             EP = MaxEP;
         }
 
+        public string Name => BotAI.BotName;
+
         public int MaxHP { get; }
 
         public int HP { get; private set; }
@@ -38,13 +43,15 @@ namespace CodingArena.Game.Internal
         public int SP { get; private set; }
 
         public IBattlefieldPlace Position => Battlefield[this];
+        public IEnemy OutsideView => new OutsideView(this);
+
 
         public void PositionTo(int newX, int newY)
         {
             Battlefield.Set(this, newX, newY);
         }
 
-        public void ExecuteTurnAction()
+        public void ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
         {
             var turnAction = BotAI.GetTurnAction(null, null, null);
             switch (turnAction)
@@ -58,7 +65,31 @@ namespace CodingArena.Game.Internal
                 case RechargeShield rechargeShield:
                     ExecuteTurnAction(rechargeShield);
                     break;
+                case Attack attack:
+                    ExecuteTurnAction(attack, enemies);
+                    break;
             }
+        }
+
+        private void ExecuteTurnAction(Attack attack, IEnumerable<IBattleBot> enemies)
+        {
+            if (attack.EnergyCost > EP) return;
+
+            var distance = Battlefield[this].DistanceTo(Battlefield[attack.Target]);
+            DrainEnergy(attack.EnergyCost);
+            var damage = CalculateDamage(distance);
+            if (damage > 0)
+            {
+                var enemy = enemies.FirstOrDefault(e => e.OutsideView == attack.Target);
+                enemy?.TakeDamage(damage);
+            }
+        }
+
+        private int CalculateDamage(double distance)
+        {
+            if (distance >= Attack.MaxRange) return 0;
+            var chance = (Attack.MaxRange - distance) / Attack.MaxRange;
+            return (int)(Attack.MaxDamage * chance);
         }
 
         private void ExecuteTurnAction(Move move)

@@ -1,4 +1,5 @@
-﻿using CodingArena.Game.Tests.Verification;
+﻿using System.Collections.Generic;
+using CodingArena.Game.Tests.Verification;
 using CodingArena.Player.TurnActions;
 using NUnit.Framework;
 
@@ -6,9 +7,6 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
 {
     internal class RechargeShield : TestFixture
     {
-        private int RechargeAmount { get; set; }
-        private int EnergyCost { get; set; }
-
         [SetUp]
         public override void SetUp()
         {
@@ -24,7 +22,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void FullShield()
         {
-            Bot.ExecuteTurnAction();
+            Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(Bot.MaxSP);
             Verify.That(Bot.EP).Is(Bot.MaxEP);
         }
@@ -34,7 +32,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         {
             var damage = Bot.MaxSP / 2;
             Bot.TakeDamage(damage);
-            Bot.ExecuteTurnAction();
+            Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(Bot.MaxSP - damage + RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
         }
@@ -43,7 +41,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public void NoShield()
         {
             Bot.TakeDamage(Bot.MaxSP);
-            Bot.ExecuteTurnAction();
+            Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
         }
@@ -53,7 +51,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         {
             Bot.TakeDamage(Bot.MaxSP);
             Bot.DrainEnergy(Bot.MaxEP);
-            Bot.ExecuteTurnAction();
+            Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(0);
             Verify.That(Bot.EP).Is(0);
         }

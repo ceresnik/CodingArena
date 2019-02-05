@@ -2,6 +2,7 @@
 using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Game.Internal
 {
@@ -23,7 +24,16 @@ namespace CodingArena.Game.Internal
 
         public IBattlefieldPlace this[IOwnBot ownBot] => throw new System.NotImplementedException();
 
-        public IBattlefieldPlace this[IEnemy enemy] => throw new System.NotImplementedException();
+        public IBattlefieldPlace this[IEnemy enemy]
+        {
+            get
+            {
+                if (enemy == null) throw new ArgumentNullException(nameof(enemy));
+                return Dictionary
+                    .Where(pair => pair.Key.OutsideView == enemy)
+                    .Select(pair => this[pair.Key]).FirstOrDefault();
+            }
+        }
 
         public bool IsEmpty(IBattlefieldPlace battlefieldPlace) => throw new System.NotImplementedException();
 
@@ -46,6 +56,8 @@ namespace CodingArena.Game.Internal
         public void Set(IBattleBot battleBot, int newX, int newY)
         {
             if (battleBot == null) throw new ArgumentNullException(nameof(battleBot));
+            if (IsOutOfRange(newX, newY)) throw new ArgumentOutOfRangeException();
+
             var newPlace = new BattlefieldPlace(newX, newY);
             if (Dictionary.ContainsKey(battleBot))
             {
