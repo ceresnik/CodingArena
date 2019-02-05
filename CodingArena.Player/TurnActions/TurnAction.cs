@@ -13,7 +13,7 @@ namespace CodingArena.Player.TurnActions
         /// <exception cref="ArgumentNullException">
         ///     Throws when <paramref name="enemy"/> is <c>null</c>.
         /// </exception>
-        public static ITurnAction Attack(IEnemy enemy) => new Attack(enemy);
+        public static Attack Attack(IEnemy enemy) => new Attack(enemy);
 
         public class Move
         {
@@ -22,28 +22,28 @@ namespace CodingArena.Player.TurnActions
             /// Make sure that north is valid place on battlefield; otherwise bot will explode.
             /// </summary>
             /// <returns>Turn action to move north.</returns>
-            public static ITurnAction North() => new TurnActions.Move(Direction.North);
+            public static TurnActions.Move North() => new TurnActions.Move(Direction.North);
 
             /// <summary>
             ///     Creates a turn action to move east. 
             /// Make sure that east is valid place on battlefield; otherwise bot will explode.
             /// </summary>
             /// <returns>Turn action to move east.</returns>
-            public static ITurnAction East() => new TurnActions.Move(Direction.East);
+            public static TurnActions.Move East() => new TurnActions.Move(Direction.East);
 
             /// <summary>
             ///     Creates a turn action to move west. 
             /// Make sure that west is valid place on battlefield; otherwise bot will explode.
             /// </summary>
             /// <returns>Turn action to move west.</returns>
-            public static ITurnAction West() => new TurnActions.Move(Direction.West);
+            public static TurnActions.Move West() => new TurnActions.Move(Direction.West);
 
             /// <summary>
             ///     Creates a turn action to move south. 
             /// Make sure that south is valid place on battlefield; otherwise bot will explode.
             /// </summary>
             /// <returns>Turn action to move south.</returns>
-            public static ITurnAction South() => new TurnActions.Move(Direction.South);
+            public static TurnActions.Move South() => new TurnActions.Move(Direction.South);
 
             /// <summary>
             ///     Creates a turn action to move towards <paramref name="from"/> 
@@ -53,7 +53,7 @@ namespace CodingArena.Player.TurnActions
             /// <exception cref="ArgumentNullException">
             ///     Throws when <paramref name="from"/> or <paramref name="to"/> is <c>null</c>.
             /// </exception>
-            public static ITurnAction Towards(IBattlefieldPlace from, IBattlefieldPlace to)
+            public static TurnActions.Move Towards(IBattlefieldPlace from, IBattlefieldPlace to)
             {
                 if (from == null) throw new ArgumentNullException(nameof(from));
                 if (to == null) throw new ArgumentNullException(nameof(to));
@@ -87,10 +87,10 @@ namespace CodingArena.Player.TurnActions
 
         public static class Recharge
         {
-            public static ITurnAction Battery() => new RechargeBattery();
-            public static ITurnAction Shield() => new RechargeShield();
+            public static RechargeBattery Battery() => new RechargeBattery();
+            public static RechargeShield Shield() => new RechargeShield();
         }
 
-        public static ITurnAction Idle() => new Idle();
+        public static Idle Idle() => new Idle();
     }
 }
