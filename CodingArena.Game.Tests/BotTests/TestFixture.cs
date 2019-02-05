@@ -7,7 +7,7 @@ namespace CodingArena.Game.Tests.BotTests
         protected TestBotAI BotAI { get; private set; }
         protected IBattlefield Battlefield { get; private set; }
         protected IBattleBot Bot { get; private set; }
-        protected bool IsExploded { get; private set; }
+        protected bool IsExplodedEventRaised { get; private set; }
 
         public override void SetUp()
         {
@@ -15,8 +15,8 @@ namespace CodingArena.Game.Tests.BotTests
             Battlefield = Get<IBattlefieldFactory>().Create();
             BotAI = new TestBotAI();
             Bot = Get<IBotFactory>().Create(BotAI, Battlefield);
-            IsExploded = false;
-            Bot.Exploded += (sender, args) => IsExploded = true;
+            IsExplodedEventRaised = false;
+            Bot.Exploded += (sender, args) => IsExplodedEventRaised = true;
         }
     }
 }

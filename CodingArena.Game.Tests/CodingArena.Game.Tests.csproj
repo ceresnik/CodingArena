@@ -63,6 +63,9 @@
     <Compile Include="Doubles\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="Verification\BattlefieldPlaceVerification.cs" />
+    <Compile Include="Verification\BooleanVerification.cs" />
+    <Compile Include="Verification\NumberVerification.cs" />
     <Compile Include="Verification\Verify.cs" />
   </ItemGroup>
   <ItemGroup>
