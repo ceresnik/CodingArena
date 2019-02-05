@@ -1,4 +1,5 @@
 ﻿using CodingArena.Game.Factories;
+using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests
 {
@@ -9,6 +10,7 @@ namespace CodingArena.Game.Tests.BotTests
         protected IBattleBot Bot { get; private set; }
         protected bool IsExplodedEventRaised { get; private set; }
 
+        [SetUp]
         public override void SetUp()
         {
             base.SetUp();

@@ -58,6 +58,7 @@
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveOutOfBattlefield.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveFreely.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveWithNoEnergy.cs" />
+    <Compile Include="BotTests\ExecuteTurnAction\RechargeBattery.cs" />
     <Compile Include="BotTests\TestBotAI.cs" />
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />

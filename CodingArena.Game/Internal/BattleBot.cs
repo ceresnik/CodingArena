@@ -52,6 +52,9 @@ namespace CodingArena.Game.Internal
                 case Move move:
                     ExecuteTurnAction(move);
                     break;
+                case RechargeBattery rechargeBattery:
+                    ExecuteTurnAction(rechargeBattery);
+                    break;
             }
         }
 
@@ -87,6 +90,14 @@ namespace CodingArena.Game.Internal
                 DrainEnergy(move.EnergyCost);
                 PositionTo(newX, newY);
             }
+        }
+
+        private void ExecuteTurnAction(RechargeBattery rechargeBattery)
+        {
+            if (rechargeBattery.EnergyCost > EP) return;
+            DrainEnergy(rechargeBattery.EnergyCost);
+            EP += rechargeBattery.RechargeAmount;
+            if (EP > MaxEP) EP = MaxEP;
         }
 
         public void DrainEnergy(int energyPoints)
