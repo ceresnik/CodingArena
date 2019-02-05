@@ -15,6 +15,7 @@ namespace CodingArena.Game
         void PositionTo(int x, int y);
         void ExecuteTurnAction();
         void DrainEnergy(int energyPoints);
+        void TakeDamage(int damage);
         event EventHandler Exploded;
     }
 }

@@ -15,6 +15,7 @@ namespace CodingArena.Game.Tests.Doubles
             NextRoundDelay = TimeSpan.Zero;
             NextTurnActionDelay = TimeSpan.Zero;
             MaxHP = 1000;
+            MaxSP = 1000;
             MaxEP = 1000;
         }
 

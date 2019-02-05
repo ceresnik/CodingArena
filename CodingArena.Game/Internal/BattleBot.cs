@@ -55,6 +55,9 @@ namespace CodingArena.Game.Internal
                 case RechargeBattery rechargeBattery:
                     ExecuteTurnAction(rechargeBattery);
                     break;
+                case RechargeShield rechargeShield:
+                    ExecuteTurnAction(rechargeShield);
+                    break;
             }
         }
 
@@ -100,10 +103,30 @@ namespace CodingArena.Game.Internal
             if (EP > MaxEP) EP = MaxEP;
         }
 
+        private void ExecuteTurnAction(RechargeShield rechargeShield)
+        {
+            if (rechargeShield.EnergyCost > EP) return;
+            if (SP == MaxSP) return;
+            DrainEnergy(rechargeShield.EnergyCost);
+            SP += rechargeShield.RechargeAmount;
+            if (SP > MaxSP) SP = MaxSP;
+        }
+
         public void DrainEnergy(int energyPoints)
         {
             EP -= energyPoints;
             if (EP < 0) EP = 0;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            SP -= damage;
+            if (SP < 0)
+            {
+                HP += SP;
+                SP = 0;
+                if (HP < 0) HP = 0;
+            }
         }
 
         private void Explode()
