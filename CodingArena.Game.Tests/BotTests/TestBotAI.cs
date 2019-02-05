@@ -8,13 +8,8 @@ namespace CodingArena.Game.Tests.BotTests
 {
     internal class TestBotAI : IBotAI
     {
-        private ITurnAction TurnAction { get; }
         public string BotName => "TestBot";
-
-        public TestBotAI(ITurnAction turnAction)
-        {
-            TurnAction = turnAction;
-        }
+        public ITurnAction TurnAction { get; set; }
 
         public ITurnAction GetTurnAction(
             IOwnBot ownBot,
