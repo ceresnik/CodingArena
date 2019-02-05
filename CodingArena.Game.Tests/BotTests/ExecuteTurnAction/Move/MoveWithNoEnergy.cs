@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.TurnActions;
+﻿using CodingArena.Game.Tests.Verification;
+using CodingArena.Player.TurnActions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
@@ -18,7 +19,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.East();            
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 1);
+            Verify.That(Bot.Position).Is(1, 1);
         }
 
         [Test]
@@ -26,7 +27,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.West();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 1);
+            Verify.That(Bot.Position).Is(1, 1);
         }
 
         [Test]
@@ -34,7 +35,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.South();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 1);
+            Verify.That(Bot.Position).Is(1, 1);
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.North();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 1);
+            Verify.That(Bot.Position).Is(1, 1);
         }
     }
 }

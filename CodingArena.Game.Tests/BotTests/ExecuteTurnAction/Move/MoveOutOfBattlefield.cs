@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.TurnActions;
+﻿using CodingArena.Game.Tests.Verification;
+using CodingArena.Player.TurnActions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -12,7 +13,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.West();
             Bot.PositionTo(0, 0);
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(0, 0);
+            Verify.That(Bot.Position).Is(0, 0);
             Bot.HP.Should().Be(0);
             IsExploded.Should().BeTrue();
         }
@@ -23,7 +24,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.South();
             Bot.PositionTo(0, 0);
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(0, 0);
+            Verify.That(Bot.Position).Is(0, 0);
             Bot.HP.Should().Be(0);
             IsExploded.Should().BeTrue();
         }
@@ -34,7 +35,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.South();
             Bot.PositionTo(Battlefield.Width - 1, 0);
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(Battlefield.Width - 1, 0);
+            Verify.That(Bot.Position).Is(Battlefield.Width - 1, 0);
             Bot.HP.Should().Be(0);
             IsExploded.Should().BeTrue();
         }
@@ -45,7 +46,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             BotAI.TurnAction = TurnAction.Move.North();
             Bot.PositionTo(0, Battlefield.Height - 1);
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(0, Battlefield.Height - 1);
+            Verify.That(Bot.Position).Is(0, Battlefield.Height - 1);
             Bot.HP.Should().Be(0);
             IsExploded.Should().BeTrue();
         }

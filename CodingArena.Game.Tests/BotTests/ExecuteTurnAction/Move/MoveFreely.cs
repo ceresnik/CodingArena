@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.TurnActions;
+﻿using CodingArena.Game.Tests.Verification;
+using CodingArena.Player.TurnActions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -18,7 +19,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.East();            
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(2, 1);
+            Verify.That(Bot.Position).Is(2, 1);
             Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
@@ -27,7 +28,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.West();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(0, 1);
+            Verify.That(Bot.Position).Is(0, 1);
             Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
@@ -36,7 +37,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.South();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 0);
+            Verify.That(Bot.Position).Is(1, 0);
             Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
 
@@ -45,7 +46,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             BotAI.TurnAction = TurnAction.Move.North();
             Bot.ExecuteTurnAction();
-            Bot.Position.Is(1, 2);
+            Verify.That(Bot.Position).Is(1, 2);
             Bot.EP.Should().Be(Bot.MaxEP - BotAI.TurnAction.EnergyCost);
         }
     }
