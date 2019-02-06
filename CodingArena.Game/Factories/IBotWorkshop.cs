@@ -4,18 +4,18 @@ using System.ComponentModel.Composition;
 
 namespace CodingArena.Game.Factories
 {
-    public interface IBotFactory
+    public interface IBotWorkshop
     {
         IBattleBot Create(IBotAI botAI, IBattlefield battlefield);
     }
 
-    [Export(typeof(IBotFactory))]
-    internal class BotFactory : IBotFactory
+    [Export(typeof(IBotWorkshop))]
+    internal class BotWorkshop : IBotWorkshop
     {
         private ISettings Settings { get; }
 
         [ImportingConstructor]
-        public BotFactory(ISettings settings)
+        public BotWorkshop(ISettings settings)
         {
             Settings = settings;
         }

@@ -12,8 +12,8 @@ namespace CodingArena.Game.Tests.TurnTests
         {
             base.SetUp();
             Turn = TurnFactory.Create();
-            AttackerBot = BotFactory.Create(TestBotAI.AttackFirstEnemy, Battlefield);
-            IdleBot = BotFactory.Create(TestBotAI.Idle, Battlefield);
+            AttackerBot = BotWorkshop.Create(TestBotAI.AttackFirstEnemy, Battlefield);
+            IdleBot = BotWorkshop.Create(TestBotAI.Idle, Battlefield);
         }
 
         private ITurn Turn { get; set; }

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\IBattlefieldFactory.cs" />
-    <Compile Include="Factories\IBotFactory.cs" />
+    <Compile Include="Factories\IBotWorkshop.cs" />
     <Compile Include="Factories\IRoundFactory.cs" />
     <Compile Include="Factories\ITurnFactory.cs" />
     <Compile Include="IBattleBot.cs" />

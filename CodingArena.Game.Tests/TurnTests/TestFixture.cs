@@ -8,12 +8,12 @@ namespace CodingArena.Game.Tests.TurnTests
         {
             base.SetUp();
             Battlefield = Get<IBattlefieldFactory>().Create();
-            BotFactory = Get<IBotFactory>();
+            BotWorkshop = Get<IBotWorkshop>();
             TurnFactory = Get<ITurnFactory>();
         }
 
         protected IBattlefield Battlefield { get; private set; }
-        protected IBotFactory BotFactory { get; private set; }
+        protected IBotWorkshop BotWorkshop { get; private set; }
         protected ITurnFactory TurnFactory { get; private set; }
     }
 }

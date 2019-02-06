@@ -15,7 +15,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public override void SetUp()
         {
             base.SetUp();
-            Enemy = Get<IBotFactory>().Create(new IdleBotAI(), Battlefield);
+            Enemy = Get<IBotWorkshop>().Create(new IdleBotAI(), Battlefield);
             var turnAction = TurnAction.Attack(Enemy.OutsideView);
             BotAI.TurnAction = turnAction;
             EnergyCost = BotAI.TurnAction.EnergyCost;

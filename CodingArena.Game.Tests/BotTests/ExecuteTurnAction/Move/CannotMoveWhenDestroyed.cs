@@ -16,7 +16,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         {
             base.SetUp();
             Bot.PositionTo(1, 1);
-            Attacker = Get<IBotFactory>().Create(TestBotAI.AttackFirstEnemy, Battlefield);
+            Attacker = Get<IBotWorkshop>().Create(TestBotAI.AttackFirstEnemy, Battlefield);
             Bot.TakeDamage(Bot.MaxHP + Bot.MaxHP, Attacker);
         }
 
