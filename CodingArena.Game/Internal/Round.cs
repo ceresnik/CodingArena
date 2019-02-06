@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
@@ -38,7 +37,7 @@ namespace CodingArena.Game.Internal
 
             foreach (var bot in bots)
             {
-                var score = new Score(bot.Name, bot.Kills, bot.Deaths);
+                var score = new Score(bot.Name) {Kills = bot.Kills, Deaths = bot.Deaths};
                 scores.Add(score);
             }
             return new RoundResult(scores);

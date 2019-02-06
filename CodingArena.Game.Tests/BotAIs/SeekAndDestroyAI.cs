@@ -9,7 +9,12 @@ namespace CodingArena.Game.Tests.BotAIs
 {
     internal class SeekAndDestroyAI : IBotAI
     {
-        public string BotName => "Seek and Destroy Bot";
+        public SeekAndDestroyAI(string botName)
+        {
+            BotName = botName;
+        }
+
+        public string BotName { get; }
         public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {
             if (enemies.Any())

@@ -11,6 +11,16 @@ namespace CodingArena.Game.Factories
     [Export(typeof(IMatchFactory))]
     internal class MatchFactory : IMatchFactory
     {
-        public IMatch Create() => new Match();
+        private ISettings Settings { get; }
+        private IRoundFactory RoundFactory { get; }
+
+        [ImportingConstructor]
+        public MatchFactory(ISettings settings, IRoundFactory roundFactory)
+        {
+            Settings = settings;
+            RoundFactory = roundFactory;
+        }
+
+        public IMatch Create() => new Match(Settings, RoundFactory);
     }
 }

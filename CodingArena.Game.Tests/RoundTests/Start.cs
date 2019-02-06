@@ -31,7 +31,7 @@ namespace CodingArena.Game.Tests.RoundTests
         [Test]
         public void TwoBots()
         {
-            var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy);
+            var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy("attacker"));
             var victim = BotWorkshop.Create(TestBotAI.Idle);
             BotFactory.Bots.Add(attacker);
             BotFactory.Bots.Add(victim);
@@ -46,11 +46,11 @@ namespace CodingArena.Game.Tests.RoundTests
         [Test]
         public void FiveBots()
         {
-            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
-            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
-            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
-            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
-            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot1")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot2")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot3")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot4")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot5")));
             var result = Round.Start();
             result.Should().NotBeNull();
             result.Scores.Should().NotBeNull();

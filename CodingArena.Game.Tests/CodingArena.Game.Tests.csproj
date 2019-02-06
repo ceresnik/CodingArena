@@ -81,6 +81,8 @@
     <Compile Include="Factories\RoundFactoryTests\TestFixture.cs" />
     <Compile Include="Factories\TurnFactoryTests\Create.cs" />
     <Compile Include="Factories\TurnFactoryTests\TestFixture.cs" />
+    <Compile Include="MatchTests\Start.cs" />
+    <Compile Include="MatchTests\TestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundTests\Start.cs" />
     <Compile Include="RoundTests\TestFixture.cs" />
@@ -113,9 +115,7 @@
       <Name>CodingArena.Player</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MatchTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

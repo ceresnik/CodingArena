@@ -1,7 +1,6 @@
 ﻿using CodingArena.Game.Tests.BotAIs;
 using NUnit.Framework;
 using System.Collections.Generic;
-using CodingArena.Game.Tests.Doubles;
 using CodingArena.Game.Tests.Verification;
 using FluentAssertions;
 
@@ -51,7 +50,7 @@ namespace CodingArena.Game.Tests.TurnTests
         [Test]
         public void ItIsPossibleToKill()
         {
-            var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy);
+            var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy("attacker"));
             var victim = BotWorkshop.Create(TestBotAI.Idle);
             var bots = new List<IBattleBot> { attacker, victim };
             attacker.PositionTo(Battlefield, 0, 0);

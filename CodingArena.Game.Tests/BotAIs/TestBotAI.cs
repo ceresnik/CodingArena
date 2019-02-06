@@ -14,7 +14,7 @@ namespace CodingArena.Game.Tests.BotAIs
         public static IBotAI Idle => new TestBotAI { TurnAction = Player.TurnActions.TurnAction.Idle() };
         public static IBotAI Exception => new ExceptionBotAI();
         public static IBotAI Slow => new SlowBotAI();
-        public static IBotAI SeekAndDestroy => new SeekAndDestroyAI();
+        public static IBotAI SeekAndDestroy(string name) => new SeekAndDestroyAI(name);
 
         public ITurnAction GetTurnAction(
             IOwnBot ownBot,
