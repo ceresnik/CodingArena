@@ -4,8 +4,10 @@ namespace CodingArena.Game
 {
     public interface IOutput
     {
-        void DisplayGameTitle();
+        void Set(IMatch match);
+        void Set(IRound round);
+        void Set(ITurn turn);
+        void Update();
         void Error(string message);
-        void DisplayMatch(IEnumerable<Score> scores);
     }
 }

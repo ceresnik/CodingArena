@@ -18,8 +18,8 @@ namespace CodingArena.Game.Internal
 
         public void Start()
         {
-            Output.DisplayGameTitle();
             var match = MatchFactory.Create();
+            Output.Set(match);
             match.Start();
         }
     }

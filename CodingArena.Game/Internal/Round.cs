@@ -10,17 +10,20 @@ namespace CodingArena.Game.Internal
         private ISettings Settings { get; }
         private ITurnFactory TurnFactory { get; }
         private IBattlefieldFactory BattlefieldFactory { get; }
+        private IOutput Output { get; }
 
         public Round(
             IBotFactory botFactory, 
             ISettings settings, 
             ITurnFactory turnFactory, 
-            IBattlefieldFactory battlefieldFactory)
+            IBattlefieldFactory battlefieldFactory,
+            IOutput output)
         {
             BotFactory = botFactory ?? throw new ArgumentNullException(nameof(botFactory));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             TurnFactory = turnFactory ?? throw new ArgumentNullException(nameof(turnFactory));
             BattlefieldFactory = battlefieldFactory ?? throw new ArgumentNullException(nameof(battlefieldFactory));
+            Output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
         public RoundResult Start()
@@ -32,6 +35,7 @@ namespace CodingArena.Game.Internal
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
                 var turn = TurnFactory.Create();
+                Output.Set(turn);
                 var turnResult = turn.Start(bots);
             }
 
@@ -40,6 +44,7 @@ namespace CodingArena.Game.Internal
                 var score = new Score(bot.Name) {Kills = bot.Kills, Deaths = bot.Deaths};
                 scores.Add(score);
             }
+
             return new RoundResult(scores);
         }
     }

@@ -23,6 +23,7 @@ namespace CodingArena.Game.Internal
             for (int i = 0; i < Settings.MaxRounds; i++)
             {
                 var round = RoundFactory.Create();
+                Output.Set(round);
                 var roundResult = round.Start();
                 foreach (var roundResultScore in roundResult.Scores)
                 {
@@ -38,8 +39,6 @@ namespace CodingArena.Game.Internal
                         scores.Add(roundResultScore);
                     }
                 }
-
-                Output.DisplayMatch(scores);
             }
 
             return new MatchResult(scores);

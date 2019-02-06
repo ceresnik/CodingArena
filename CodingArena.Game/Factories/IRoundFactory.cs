@@ -15,16 +15,23 @@ namespace CodingArena.Game.Factories
         private ISettings Settings { get; }
         private ITurnFactory TurnFactory { get; }
         private IBattlefieldFactory BattlefieldFactory { get; }
+        private IOutput Output { get; }
 
         [ImportingConstructor]
-        public RoundFactory(IBotFactory botFactory, ISettings settings, ITurnFactory turnFactory, IBattlefieldFactory battlefieldFactory)
+        public RoundFactory(
+            IBotFactory botFactory, 
+            ISettings settings, 
+            ITurnFactory turnFactory, 
+            IBattlefieldFactory battlefieldFactory,
+            IOutput output)
         {
             BotFactory = botFactory;
             Settings = settings;
             TurnFactory = turnFactory;
             BattlefieldFactory = battlefieldFactory;
+            Output = output;
         }
 
-        public IRound Create() => new Round(BotFactory, Settings, TurnFactory, BattlefieldFactory);
+        public IRound Create() => new Round(BotFactory, Settings, TurnFactory, BattlefieldFactory, Output);
     }
 }
