@@ -73,6 +73,7 @@
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
     <Compile Include="Doubles\BotFactory.cs" />
+    <Compile Include="Doubles\Output.cs" />
     <Compile Include="Doubles\Settings.cs" />
     <Compile Include="Factories\BattlefieldFactoryTests\Create.cs" />
     <Compile Include="Factories\BattlefieldFactoryTests\TestFixture.cs" />

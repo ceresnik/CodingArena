@@ -38,7 +38,10 @@ namespace CodingArena.Game.Internal
                         scores.Add(roundResultScore);
                     }
                 }
+
+                Output.DisplayMatch(scores);
             }
+
             return new MatchResult(scores);
         }
     }
