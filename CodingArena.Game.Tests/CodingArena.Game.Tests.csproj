@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotAIs\AttackFirstBotAI.cs" />
+    <Compile Include="BotAIs\ExceptionBotAI.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Attack.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Exceptional.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />

@@ -12,6 +12,7 @@ namespace CodingArena.Game.Tests.BotAIs
         public ITurnAction TurnAction { get; set; }
         public static IBotAI AttackFirstEnemy => new AttackFirstBotAI();
         public static IBotAI Idle => new TestBotAI { TurnAction = Player.TurnActions.TurnAction.Idle() };
+        public static IBotAI Exception => new ExceptionBotAI();
 
         public ITurnAction GetTurnAction(
             IOwnBot ownBot,

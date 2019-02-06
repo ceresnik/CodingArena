@@ -54,11 +54,20 @@ namespace CodingArena.Game.Internal
         public string ExecuteTurnAction(ICollection<IBattleBot> enemies)
         {
             if (HP <= 0) return $"{Name} is destroyed by {DestroyedBy}.";
-            var turnAction = BotAI.GetTurnAction(
-                InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+            ITurnAction turnAction;
+            try
+            {
+                turnAction = BotAI.GetTurnAction(
+                    InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+            }
+            catch (Exception)
+            {
+                Destroy("system malfunction");
+                return $"{Name} is destroyed by {DestroyedBy}.";
+            }
             if (turnAction == null)
             {
-                Destroy("system malfunction (Error Code: Invalid turn action)");
+                Destroy("system malfunction");
                 return $"{Name} is destroyed by {DestroyedBy}.";
             }
             switch (turnAction)
@@ -75,7 +84,7 @@ namespace CodingArena.Game.Internal
                     return $"{Name} is idle.";
             }
 
-            Destroy("system malfunction (Error Code: Invalid turn action)");
+            Destroy("system malfunction");
             return $"{Name} is destroyed by {DestroyedBy}.";
         }
 
