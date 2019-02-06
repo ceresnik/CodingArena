@@ -8,15 +8,15 @@ namespace CodingArena.Game.Tests.Doubles
     {
         public Settings()
         {
-            BattlefieldWidth = 100;
-            BattlefieldHeight = 100;
+            BattlefieldWidth = 50;
+            BattlefieldHeight = 50;
             MaxRounds = 100;
             MaxTurns = 120;
             NextRoundDelay = TimeSpan.Zero;
             NextTurnActionDelay = TimeSpan.Zero;
-            MaxHP = 1000;
-            MaxSP = 1000;
-            MaxEP = 1000;
+            MaxHP = 500;
+            MaxSP = 200;
+            MaxEP = 500;
         }
 
         public int BattlefieldWidth { get; set; }

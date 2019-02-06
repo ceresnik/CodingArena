@@ -37,7 +37,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public void Exception()
         {
             var botAI = TestBotAI.Exception;
-            var bot = Get<IBotWorkshop>().Create(botAI, Battlefield);
+            var bot = Get<IBotWorkshop>().Create(botAI);
             var result = bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(bot.HP).Is(0);
             Verify.That(bot.Deaths).Is(1);
@@ -50,7 +50,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public void Slow()
         {
             var botAI = TestBotAI.Slow;
-            var bot = Get<IBotWorkshop>().Create(botAI, Battlefield);
+            var bot = Get<IBotWorkshop>().Create(botAI);
             var result = bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(bot.HP).Is(0);
             Verify.That(bot.Deaths).Is(1);

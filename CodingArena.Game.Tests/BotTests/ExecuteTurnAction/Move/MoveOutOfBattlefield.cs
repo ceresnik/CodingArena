@@ -11,7 +11,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public void MoveWestOutOfBattlefield_Explode()
         {
             BotAI.TurnAction = TurnAction.Move.West();
-            Bot.PositionTo(0, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.Position).Is(0, 0);
             Verify.That(Bot.HP).Is(0);
@@ -23,7 +23,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public void MoveSouthOutOfBattlefield_Explode()
         {
             BotAI.TurnAction = TurnAction.Move.South();
-            Bot.PositionTo(0, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.Position).Is(0, 0);
             Verify.That(Bot.HP).Is(0);
@@ -35,7 +35,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public void MoveEastOutOfBattlefield_Explode()
         {
             BotAI.TurnAction = TurnAction.Move.South();
-            Bot.PositionTo(Battlefield.Width - 1, 0);
+            Bot.PositionTo(Battlefield, Battlefield.Width - 1, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.Position).Is(Battlefield.Width - 1, 0);
             Verify.That(Bot.HP).Is(0);
@@ -47,7 +47,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public void MoveNorthOutOfBattlefield_Explode()
         {
             BotAI.TurnAction = TurnAction.Move.North();
-            Bot.PositionTo(0, Battlefield.Height - 1);
+            Bot.PositionTo(Battlefield, 0, Battlefield.Height - 1);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.Position).Is(0, Battlefield.Height - 1);
             Verify.That(Bot.HP).Is(0);

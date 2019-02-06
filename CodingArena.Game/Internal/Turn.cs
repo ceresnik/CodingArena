@@ -5,12 +5,13 @@ namespace CodingArena.Game.Internal
 {
     internal class Turn : ITurn
     {
-        public TurnResult Start(ICollection<IBattleBot> battleBots)
+        public TurnResult Start(IEnumerable<IBattleBot> battleBots)
         {
             var botActionResults = new Dictionary<IBattleBot, string>();
-            foreach (var battleBot in battleBots)
+            var bots = battleBots.ToList();
+            foreach (var battleBot in bots)
             {
-                var enemies = battleBots.Except(new List<IBattleBot> {battleBot}).ToList();
+                var enemies = bots.Except(new List<IBattleBot> {battleBot}).ToList();
                 var botActionResult = battleBot.ExecuteTurnAction(enemies);
                 botActionResults.Add(battleBot, botActionResult);
             }

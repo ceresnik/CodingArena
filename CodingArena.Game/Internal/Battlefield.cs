@@ -2,35 +2,62 @@
 using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Game.Internal
 {
     internal class Battlefield : IBattlefield
     {
-        private IDictionary<IBattleBot, IBattlefieldPlace> Dictionary { get; }
+        private IBattlefieldPlace[,] Places { get; }
+        private Random Random { get; }
 
         public Battlefield(int width, int height)
         {
             Width = width;
             Height = height;
-            Dictionary = new Dictionary<IBattleBot, IBattlefieldPlace>();
+            Places = new IBattlefieldPlace[Width, Height];
+            Initialize();
+            Random = new Random();
+        }
+
+        private void Initialize()
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    Places[x, y] = new BattlefieldPlace(x, y);
+                }
+            }
         }
 
         public int Width { get; }
         public int Height { get; }
 
-        public IBattlefieldPlace this[int x, int y] => throw new System.NotImplementedException();
+        public IBattlefieldPlace this[int x, int y]
+        {
+            get
+            {
+                if (IsOutOfRange(x, y)) throw new ArgumentOutOfRangeException();
+                return Places[x, y];
+            }
+        }
 
         public IBattlefieldPlace this[IOwnBot ownBot]
         {
             get
             {
                 if (ownBot == null) throw new ArgumentNullException(nameof(ownBot));
-                foreach (var pair in Dictionary)
+
+                for (int y = 0; y < Height; y++)
                 {
-                    if (pair.Key.InsideView == ownBot)
+                    for (int x = 0; x < Width; x++)
                     {
-                        return pair.Value;
+                        if (Places[x, y].Object is IBattleBot battleBot && 
+                            battleBot.InsideView == ownBot)
+                        {
+                            return Places[x, y];
+                        }
                     }
                 }
 
@@ -43,19 +70,22 @@ namespace CodingArena.Game.Internal
             get
             {
                 if (enemy == null) throw new ArgumentNullException(nameof(enemy));
-                foreach (var pair in Dictionary)
+
+                for (int y = 0; y < Height; y++)
                 {
-                    if (pair.Key.OutsideView == enemy)
+                    for (int x = 0; x < Width; x++)
                     {
-                        return pair.Value;
+                        if (Places[x, y].Object is IBattleBot battleBot &&
+                            battleBot.OutsideView == enemy)
+                        {
+                            return Places[x, y];
+                        }
                     }
                 }
 
                 return null;
             }
         }
-
-        public bool IsEmpty(IBattlefieldPlace battlefieldPlace) => throw new System.NotImplementedException();
 
         public bool IsOutOfRange(int x, int y) => x < 0 || y < 0 || x > Width - 1 || y > Height - 1;
 
@@ -64,9 +94,16 @@ namespace CodingArena.Game.Internal
             get
             {
                 if (battleBot == null) throw new ArgumentNullException(nameof(battleBot));
-                if (Dictionary.ContainsKey(battleBot))
+
+                for (int y = 0; y < Height; y++)
                 {
-                    return Dictionary[battleBot];
+                    for (int x = 0; x < Width; x++)
+                    {
+                        if (Places[x, y].Object is IBattleBot bot && bot == battleBot)
+                        {
+                            return Places[x, y];
+                        }
+                    }
                 }
 
                 return null;
@@ -77,16 +114,46 @@ namespace CodingArena.Game.Internal
         {
             if (battleBot == null) throw new ArgumentNullException(nameof(battleBot));
             if (IsOutOfRange(newX, newY)) throw new ArgumentOutOfRangeException();
+            var oldPlace = this[battleBot];
+            if (oldPlace != null)
+            {
+                Places[oldPlace.X, oldPlace.Y] = new BattlefieldPlace(oldPlace.X, oldPlace.Y);
+            }
+            Places[newX, newY] = new BattlefieldPlace(newX, newY, battleBot);
+        }
 
-            var newPlace = new BattlefieldPlace(newX, newY);
-            if (Dictionary.ContainsKey(battleBot))
+        public void SetRandomly(IEnumerable<IBattleBot> bots)
+        {
+            foreach (var bot in bots)
             {
-                Dictionary[battleBot] = newPlace;
+                var emptyPlaces = GetEmptyPlaces().ToList();
+                if (emptyPlaces.Any())
+                {
+                    var index = Random.Next(emptyPlaces.Count);
+                    var place = emptyPlaces[index];
+                    bot.PositionTo(this, place.X, place.Y);
+                }
+                else
+                {
+                    throw new InvalidOperationException("No empty places found on battlefield.");
+                }
             }
-            else
+        }
+
+        private IEnumerable<IBattlefieldPlace> GetEmptyPlaces()
+        {
+            var result = new List<IBattlefieldPlace>();
+            for (int y = 0; y < Height; y++)
             {
-                Dictionary.Add(battleBot, newPlace);
+                for (int x = 0; x < Width; x++)
+                {
+                    if (Places[x, y].IsEmpty)
+                    {
+                        result.Add(Places[x, y]);
+                    }
+                }
             }
+            return result;
         }
     }
 }

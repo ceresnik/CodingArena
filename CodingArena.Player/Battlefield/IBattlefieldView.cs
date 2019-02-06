@@ -56,16 +56,6 @@ namespace CodingArena.Player.Battlefield
         IBattlefieldPlace this[IEnemy enemy] { get; }
 
         /// <summary>
-        ///     Gets a value whether specified battlefield place is empty or not.
-        /// </summary>
-        /// <param name="battlefieldPlace">A place on the battlefield.</param>
-        /// <returns><c>true</c> if place is empty; otherwise <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when <paramref name="battlefieldPlace"/> is <c>null</c>.
-        /// </exception>
-        bool IsEmpty(IBattlefieldPlace battlefieldPlace);
-
-        /// <summary>
         ///     Gets a value whether specified coordinates are out of battlefield range.
         /// </summary>
         /// <param name="x">X-axis coordinate.</param>

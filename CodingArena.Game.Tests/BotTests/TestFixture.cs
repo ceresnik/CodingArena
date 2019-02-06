@@ -19,7 +19,7 @@ namespace CodingArena.Game.Tests.BotTests
             base.SetUp();
             Battlefield = Get<IBattlefieldFactory>().Create();
             BotAI = new TestBotAI();
-            Bot = Get<IBotWorkshop>().Create(BotAI, Battlefield);
+            Bot = Get<IBotWorkshop>().Create(BotAI);
             IsExplodedEventRaised = false;
             Bot.Exploded += (sender, args) => IsExplodedEventRaised = true;
         }

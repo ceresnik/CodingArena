@@ -17,7 +17,7 @@ namespace CodingArena.Game
         IOwnBot InsideView { get; }
         IEnemy OutsideView { get; }
         string DestroyedBy { get; set; }
-        void PositionTo(int x, int y);
+        void PositionTo(IBattlefield battlefield, int x, int y);
         string ExecuteTurnAction(ICollection<IBattleBot> enemies);
         void DrainEnergy(int energyPoints);
         void TakeDamage(int damage);

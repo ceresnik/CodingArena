@@ -9,13 +9,21 @@ namespace CodingArena.Game.Internal
         IEquatable<IBattlefieldPlace>
     {
         public BattlefieldPlace(int x, int y)
+            : this(x, y, null)
+        {
+        }
+
+        public BattlefieldPlace(int x, int y, IBattlefieldObject battlefieldObject)
         {
             X = x;
             Y = y;
+            Object = battlefieldObject;
         }
 
         public int X { get; }
         public int Y { get; }
+        public bool IsEmpty => Object == null;
+        public IBattlefieldObject Object { get; }
 
         public double DistanceTo(int x, int y) =>
             Math.Sqrt(Math.Pow(x - X, 2) + Math.Pow(y - Y, 2));

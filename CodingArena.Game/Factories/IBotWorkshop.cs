@@ -6,7 +6,7 @@ namespace CodingArena.Game.Factories
 {
     public interface IBotWorkshop
     {
-        IBattleBot Create(IBotAI botAI, IBattlefield battlefield);
+        IBattleBot Create(IBotAI botAI);
     }
 
     [Export(typeof(IBotWorkshop))]
@@ -20,7 +20,7 @@ namespace CodingArena.Game.Factories
             Settings = settings;
         }
 
-        public IBattleBot Create(IBotAI botAI, IBattlefield battlefield) =>
-            new BattleBot(botAI, battlefield, Settings);
+        public IBattleBot Create(IBotAI botAI) =>
+            new BattleBot(botAI, Settings);
     }
 }

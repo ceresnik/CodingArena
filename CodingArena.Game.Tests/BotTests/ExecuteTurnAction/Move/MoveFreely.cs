@@ -11,7 +11,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public override void SetUp()
         {
             base.SetUp();
-            Bot.PositionTo(1, 1);
+            Bot.PositionTo(Battlefield, 1, 1);
         }
 
         [Test]

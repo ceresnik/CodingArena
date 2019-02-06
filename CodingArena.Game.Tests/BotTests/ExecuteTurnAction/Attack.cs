@@ -15,7 +15,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public override void SetUp()
         {
             base.SetUp();
-            Enemy = Get<IBotWorkshop>().Create(new IdleBotAI(), Battlefield);
+            Enemy = Get<IBotWorkshop>().Create(TestBotAI.Idle);
             var turnAction = TurnAction.Attack(Enemy.OutsideView);
             BotAI.TurnAction = turnAction;
             EnergyCost = BotAI.TurnAction.EnergyCost;
@@ -24,8 +24,8 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void OutOfRange()
         {
-            Bot.PositionTo(0, 0);
-            Enemy.PositionTo(11, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
+            Enemy.PositionTo(Battlefield, 11, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
             Verify.That(Enemy.HP).Is(Enemy.MaxHP);
@@ -34,19 +34,14 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         }
 
         [TestCase(1, 100)]
-        [TestCase(2, 90)]
-        [TestCase(3, 80)]
-        [TestCase(4, 70)]
-        [TestCase(5, 60)]
-        [TestCase(6, 50)]
-        [TestCase(7, 40)]
-        [TestCase(8, 30)]
-        [TestCase(9, 20)]
-        [TestCase(10, 10)]
+        [TestCase(2, 80)]
+        [TestCase(3, 60)]
+        [TestCase(4, 40)]
+        [TestCase(5, 20)]
         public void InRange(int distance, int damage)
         {
-            Bot.PositionTo(0, 0);
-            Enemy.PositionTo(distance, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
+            Enemy.PositionTo(Battlefield, distance, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
             Verify.That(Enemy.HP).Is(Enemy.MaxHP);
@@ -58,8 +53,8 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public void FullDamageOnLowShield()
         {
             const int damage = Player.TurnActions.Attack.MaxDamage;
-            Bot.PositionTo(0, 0);
-            Enemy.PositionTo(1, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
+            Enemy.PositionTo(Battlefield, 1, 0);
             Enemy.TakeDamage(Enemy.MaxSP + 1);
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
@@ -71,8 +66,8 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void DestroyEnemy()
         {
-            Bot.PositionTo(0, 0);
-            Enemy.PositionTo(1, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
+            Enemy.PositionTo(Battlefield, 1, 0);
             Enemy.TakeDamage(Enemy.MaxSP + Enemy.MaxHP - 1);
             var isEnemyExplodedEventRaised = false;
             Enemy.Exploded += (sender, args) => isEnemyExplodedEventRaised = true;
@@ -90,14 +85,32 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void OutOfEnergy()
         {
-            Bot.PositionTo(0, 0);
-            Bot.DrainEnergy(Bot.SP);
-            Enemy.PositionTo(1, 0);
+            Bot.PositionTo(Battlefield, 0, 0);
+            Bot.DrainEnergy(Bot.EP);
+            Enemy.PositionTo(Battlefield, 1, 0);
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
             Verify.That(Bot.EP).Is(0);
             Verify.That(Enemy.HP).Is(Enemy.MaxHP);
             Verify.That(Enemy.SP).Is(Enemy.MaxSP);
             Verify.That(Enemy.EP).Is(Enemy.MaxEP);
+        }
+
+        [Test]
+        public void DestroyedEnemy()
+        {
+            Bot.PositionTo(Battlefield, 0, 0);
+            Enemy.PositionTo(Battlefield, 1, 0);
+            Enemy.TakeDamage(Enemy.MaxSP + Enemy.MaxHP);
+            var isEnemyExplodedEventRaised = false;
+            Enemy.Exploded += (sender, args) => isEnemyExplodedEventRaised = true;
+            Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
+            Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
+            Verify.That(Enemy.HP).Is(0);
+            Verify.That(Enemy.SP).Is(0);
+            Verify.That(Enemy.EP).Is(Enemy.MaxEP);
+            Verify.That(isEnemyExplodedEventRaised).IsFalse();
+            Verify.That(Bot.Kills).Is(0);
+            Verify.That(Enemy.Deaths).Is(1);
         }
     }
 }

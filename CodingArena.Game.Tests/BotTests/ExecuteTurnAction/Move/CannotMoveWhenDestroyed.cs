@@ -15,8 +15,8 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
         public override void SetUp()
         {
             base.SetUp();
-            Bot.PositionTo(1, 1);
-            Attacker = Get<IBotWorkshop>().Create(TestBotAI.AttackFirstEnemy, Battlefield);
+            Bot.PositionTo(Battlefield, 1, 1);
+            Attacker = Get<IBotWorkshop>().Create(TestBotAI.AttackFirstEnemy);
             Bot.TakeDamage(Bot.MaxHP + Bot.MaxHP, Attacker);
         }
 

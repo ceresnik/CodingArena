@@ -12,10 +12,10 @@ namespace CodingArena.Game.Console.Tests
         public void SetUp() => Settings = new Settings();
 
         [Test]
-        public void BattlefieldWidth() => Settings.BattlefieldWidth.Should().Be(100);
+        public void BattlefieldWidth() => Settings.BattlefieldWidth.Should().Be(50);
 
         [Test]
-        public void BattlefieldHeight() => Settings.BattlefieldHeight.Should().Be(100);
+        public void BattlefieldHeight() => Settings.BattlefieldHeight.Should().Be(50);
 
         [Test]
         public void MaxRounds() => Settings.MaxRounds.Should().Be(100);
@@ -28,5 +28,14 @@ namespace CodingArena.Game.Console.Tests
 
         [Test]
         public void NextTurnActionDelay() => Settings.NextTurnActionDelay.Should().Be(TimeSpan.FromMilliseconds(500));
+
+        [Test]
+        public void MaxHP() => Settings.MaxHP.Should().Be(500);
+
+        [Test]
+        public void MaxSP() => Settings.MaxSP.Should().Be(200);
+
+        [Test]
+        public void MaxEP() => Settings.MaxEP.Should().Be(500);
     }
 }

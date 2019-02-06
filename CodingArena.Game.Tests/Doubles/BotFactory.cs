@@ -11,6 +11,6 @@ namespace CodingArena.Game.Tests.Doubles
 
         public List<IBattleBot> Bots { get; set; }
 
-        public IReadOnlyCollection<IBattleBot> Create() => Bots;
+        public IReadOnlyCollection<IBattleBot> Create(IBattlefield battlefield) => Bots;
     }
 }

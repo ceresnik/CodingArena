@@ -12,13 +12,12 @@ namespace CodingArena.Game.Internal
     internal sealed class BattleBot : IBattleBot
     {
         private IBotAI BotAI { get; }
-        private IBattlefield Battlefield { get; }
+        private IBattlefield Battlefield { get; set; }
         private ISettings Settings { get; }
 
-        public BattleBot(IBotAI botAI, IBattlefield battlefield, ISettings settings)
+        public BattleBot(IBotAI botAI, ISettings settings)
         {
             BotAI = botAI;
-            Battlefield = battlefield;
             Settings = settings;
             MaxHP = Settings.MaxHP;
             HP = MaxHP;
@@ -44,13 +43,17 @@ namespace CodingArena.Game.Internal
 
         public int SP { get; private set; }
 
-        public IBattlefieldPlace Position => Battlefield[this];
+        public IBattlefieldPlace Position => Battlefield?[this];
 
         public IOwnBot InsideView { get; }
         public IEnemy OutsideView { get; }
         public string DestroyedBy { get; set; }
 
-        public void PositionTo(int newX, int newY) => Battlefield.Set(this, newX, newY);
+        public void PositionTo(IBattlefield battlefield, int newX, int newY)
+        {
+            Battlefield = battlefield;
+            Battlefield.Set(this, newX, newY);
+        }
 
         public string ExecuteTurnAction(ICollection<IBattleBot> enemies)
         {
@@ -117,6 +120,9 @@ namespace CodingArena.Game.Internal
             if (enemy == null)
                 return $"{Name} wants to attack, but enemy is not found on battlefield.";
 
+            if (enemy.HP <= 0)
+                return $"{Name} attempts to attack {enemy.Name} but failed, target is already destroyed.";
+
             if (distance > Attack.MaxRange)
                 return $"{Name} attempts to attack {enemy.Name} but failed, target is out of range.";
 
@@ -170,6 +176,8 @@ namespace CodingArena.Game.Internal
             return $"{Name} moved {move.Direction}";
         }
 
+        private void PositionTo(int newX, int newY) => PositionTo(Battlefield, newX, newY);
+
         private string ExecuteTurnAction(RechargeBattery rechargeBattery)
         {
             if (rechargeBattery.EnergyCost > EP)
@@ -208,7 +216,14 @@ namespace CodingArena.Game.Internal
                 SP = 0;
                 if (HP <= 0)
                 {
-                    Destroy(attacker);
+                    if (attacker != null)
+                    {
+                        Destroy(attacker);
+                    }
+                    else
+                    {
+                        Destroy("unknown force");
+                    }
                 }
             }
         }
