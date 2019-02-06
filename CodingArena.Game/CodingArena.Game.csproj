@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Factories\IBattlefieldFactory.cs" />
     <Compile Include="Factories\IBotFactory.cs" />
+    <Compile Include="Factories\IRoundFactory.cs" />
     <Compile Include="Factories\ITurnFactory.cs" />
     <Compile Include="IBattleBot.cs" />
     <Compile Include="IBattlefield.cs" />
@@ -54,7 +55,9 @@
     <Compile Include="IGame.cs" />
     <Compile Include="Internal\InsideView.cs" />
     <Compile Include="Internal\OutsideView.cs" />
+    <Compile Include="Internal\Round.cs" />
     <Compile Include="Internal\Turn.cs" />
+    <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
