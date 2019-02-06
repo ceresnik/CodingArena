@@ -6,14 +6,29 @@ namespace CodingArena.Player
     public interface IOwnBot : IBot
     {
         /// <summary>
+        ///     Gets a value of maximum health points for own bot.
+        /// </summary>
+        int MaxHP { get; }
+
+        /// <summary>
         ///     Gets a value of current health points count for your bot.
         /// </summary>
         int HP { get; }
 
         /// <summary>
+        ///     Gets a value of maximum shield points for own bot.
+        /// </summary>
+        int MaxSP { get; }
+
+        /// <summary>
         ///     Gets a value of current shield points count for your bot.
         /// </summary>
         int SP { get; }
+
+        /// <summary>
+        ///     Gets a value of maximum energy points for own bot.
+        /// </summary>
+        int MaxEP { get; }
 
         /// <summary>
         ///     Gets a value of current energy points count for your bot.

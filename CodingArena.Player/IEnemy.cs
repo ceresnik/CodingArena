@@ -6,10 +6,18 @@ namespace CodingArena.Player
     public interface IEnemy : IBot
     {
         /// <summary>
+        ///     Gets a value of maximum health points for enemy bot.
+        /// </summary>
+        int MaxHP { get; }
+        /// <summary>
         ///     Gets a value of current health points count for enemy bot.
         /// </summary>
         int HP { get; }
 
+        /// <summary>
+        ///     Gets a value of maximum shield points for enemy bot.
+        /// </summary>
+        int MaxSP { get; }
         /// <summary>
         ///     Gets a value of current shield points count for enemy bot.
         /// </summary>

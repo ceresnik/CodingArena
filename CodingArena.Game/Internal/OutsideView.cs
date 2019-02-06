@@ -13,7 +13,9 @@ namespace CodingArena.Game.Internal
         }
 
         public string Name => BattleBot.Name;
+        public int MaxHP => BattleBot.MaxHP;
         public int HP => BattleBot.HP;
+        public int MaxSP => BattleBot.MaxSP;
         public int SP => BattleBot.SP;
         public IBattlefieldPlace Position => BattleBot.Position;
         public double DistanceTo(IEnemy enemy) => BattleBot.DistanceTo(enemy);
