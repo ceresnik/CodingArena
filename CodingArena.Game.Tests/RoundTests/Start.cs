@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.RoundTests
 {
@@ -7,7 +8,10 @@ namespace CodingArena.Game.Tests.RoundTests
         [Test]
         public void NoBots()
         {
-            
+            var result = Round.Start();
+            result.Should().NotBeNull();
+            result.Scores.Should().NotBeNull();
+            result.Scores.Should().BeEmpty();
         }
     }
 }

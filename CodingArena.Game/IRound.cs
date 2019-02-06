@@ -2,6 +2,6 @@
 {
     public interface IRound
     {
-        void Start();
+        RoundResult Start();
     }
 }

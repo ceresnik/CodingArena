@@ -5,7 +5,7 @@ namespace CodingArena.Game
 {
     public class TurnResult
     {
-        public TurnResult(IDictionary<IBattleBot, string> botActionResults)
+        internal TurnResult(IDictionary<IBattleBot, string> botActionResults)
         {
             BotActionResults = new ReadOnlyDictionary<IBattleBot, string>(botActionResults);
         }
