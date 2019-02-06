@@ -71,9 +71,12 @@ namespace CodingArena.Game.Internal
                     return ExecuteTurnAction(rechargeShield);
                 case Attack attack:
                     return ExecuteTurnAction(attack, enemies);
+                case Idle idle:
+                    return $"{Name} is idle.";
             }
 
-            return $"{Name} is idle.";
+            Destroy("system malfunction (Error Code: Invalid turn action)");
+            return $"{Name} is destroyed by {DestroyedBy}.";
         }
 
         private string ExecuteTurnAction(Attack attack, IEnumerable<IBattleBot> enemies)
