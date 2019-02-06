@@ -1,20 +1,27 @@
-﻿namespace CodingArena.Player
+﻿using CodingArena.Player.Battlefield;
+
+namespace CodingArena.Player
 {
     public interface IOwnBot : IBot
     {
         /// <summary>
-        /// Gets damage of own bot in percent (0-100%).
+        ///     Gets a value of current health points count for your bot.
         /// </summary>
-        float Damage { get; }
+        int HP { get; }
 
         /// <summary>
-        /// Gets shield status of own bot in percent (0-100%).
+        ///     Gets a value of current shield points count for your bot.
         /// </summary>
-        float Shield { get; }
+        int SP { get; }
 
         /// <summary>
-        /// Gets energy status of own bot in percent (0-100%).
+        ///     Gets a value of current energy points count for your bot.
         /// </summary>
-        float Energy { get; }
+        int EP { get; }
+
+        /// <summary>
+        ///     Gets a position on battlefield for your bot.
+        /// </summary>
+        IBattlefieldPlace Position { get; }
     }
 }

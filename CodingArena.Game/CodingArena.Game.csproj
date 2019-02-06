@@ -61,6 +61,7 @@
     <Compile Include="Internal\OutsideView.cs" />
     <Compile Include="Internal\Round.cs" />
     <Compile Include="Internal\Turn.cs" />
+    <Compile Include="IOutput.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="ITurn.cs" />

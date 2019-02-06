@@ -1,4 +1,5 @@
 ﻿using CodingArena.Player;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Game.Internal
 {
@@ -12,9 +13,9 @@ namespace CodingArena.Game.Internal
         }
 
         public string Name => BattleBot.Name;
-        public float Damage => 100 - BattleBot.HP * 100 / (float)BattleBot.MaxHP;
-        public float Shield => BattleBot.SP * 100 / (float)BattleBot.MaxSP;
-
+        public int HP => BattleBot.HP;
+        public int SP => BattleBot.SP;
+        public IBattlefieldPlace Position => BattleBot.Position;
         public override string ToString() => Name;
     }
 }
