@@ -56,6 +56,11 @@ namespace CodingArena.Game.Internal
             if (HP <= 0) return $"{Name} is destroyed by {DestroyedBy}.";
             var turnAction = BotAI.GetTurnAction(
                 InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+            if (turnAction == null)
+            {
+                Destroy("system malfunction (Error Code: Invalid turn action)");
+                return $"{Name} is destroyed by {DestroyedBy}.";
+            }
             switch (turnAction)
             {
                 case Move move:

@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BotAIs\AttackFirstBotAI.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Attack.cs" />
+    <Compile Include="BotTests\ExecuteTurnAction\Exceptional.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />
     <Compile Include="BotAIs\IdleBotAI.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\CannotMoveWhenDestroyed.cs" />
