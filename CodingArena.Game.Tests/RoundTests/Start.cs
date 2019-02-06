@@ -36,12 +36,25 @@ namespace CodingArena.Game.Tests.RoundTests
             BotFactory.Bots.Add(attacker);
             BotFactory.Bots.Add(victim);
             var result = Round.Start();
-            System.Console.WriteLine($"{victim.Name} HP={victim.HP}");
             result.Should().NotBeNull();
             result.Scores.Should().NotBeNull();
             result.Scores.Count.Should().Be(2);
             result.Scores.Single(s => s.BotName == attacker.Name).Kills.Should().Be(1);
             result.Scores.Single(s => s.BotName == victim.Name).Deaths.Should().Be(1);
+        }
+
+        [Test]
+        public void FiveBots()
+        {
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy));
+            var result = Round.Start();
+            result.Should().NotBeNull();
+            result.Scores.Should().NotBeNull();
+            result.Scores.Count.Should().Be(5);
         }
     }
 }
