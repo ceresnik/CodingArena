@@ -249,6 +249,10 @@ namespace CodingArena.Game.Internal
 
         public int Deaths { get; set; }
 
+        public double DistanceTo(IOwnBot insideView) => Position.DistanceTo(Battlefield[insideView]);
+
+        public double DistanceTo(IEnemy outsideView) => Position.DistanceTo(Battlefield[outsideView]);
+
         public override string ToString() => Name;
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="BotAIs\ExceptionBotAI.cs" />
     <Compile Include="BotAIs\SeekAndDestroyAI.cs" />
     <Compile Include="BotAIs\SlowBotAI.cs" />
+    <Compile Include="BotTests\DistanceToTests.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Attack.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Exceptional.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />

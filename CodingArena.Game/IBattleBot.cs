@@ -25,5 +25,7 @@ namespace CodingArena.Game
         event EventHandler Exploded;
         int Kills { get; set; }
         int Deaths { get; set; }
+        double DistanceTo(IOwnBot insideView);
+        double DistanceTo(IEnemy outsideView);
     }
 }

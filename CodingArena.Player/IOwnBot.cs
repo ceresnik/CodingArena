@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.Battlefield;
+﻿using System;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Player
 {
@@ -23,5 +24,15 @@ namespace CodingArena.Player
         ///     Gets a position on battlefield for your bot.
         /// </summary>
         IBattlefieldPlace Position { get; }
+
+        /// <summary>
+        ///     Gets a distance from position of your bot to specified <paramref name="enemy"/>.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <returns>A distance from own bot to specified enemy.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Throws when <paramref name="enemy"/> is <c>null</c>.
+        /// </exception>
+        double DistanceTo(IEnemy enemy);
     }
 }

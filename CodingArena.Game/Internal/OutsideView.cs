@@ -16,6 +16,7 @@ namespace CodingArena.Game.Internal
         public int HP => BattleBot.HP;
         public int SP => BattleBot.SP;
         public IBattlefieldPlace Position => BattleBot.Position;
+        public double DistanceTo(IEnemy enemy) => BattleBot.DistanceTo(enemy);
         public override string ToString() => Name;
     }
 }

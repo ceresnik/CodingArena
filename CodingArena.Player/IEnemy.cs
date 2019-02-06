@@ -1,4 +1,5 @@
-﻿using CodingArena.Player.Battlefield;
+﻿using System;
+using CodingArena.Player.Battlefield;
 
 namespace CodingArena.Player
 {
@@ -18,5 +19,15 @@ namespace CodingArena.Player
         ///     Gets a value of current energy points count for enemy bot.
         /// </summary>
         IBattlefieldPlace Position { get; }
+
+        /// <summary>
+        ///     Gets a distance from position of this enemy bot to another <paramref name="enemy"/>.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <returns>A distance from this enemy to another enemy.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Throws when <paramref name="enemy"/> is <c>null</c>.
+        /// </exception>
+        double DistanceTo(IEnemy enemy);
     }
 }
