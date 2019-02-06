@@ -11,6 +11,14 @@ namespace CodingArena.Game.Factories
     [Export(typeof(IRoundFactory))]
     internal class RoundFactory : IRoundFactory
     {
-        public IRound Create() => new Round();
+        private IBotFactory BotFactory { get; }
+
+        [ImportingConstructor]
+        public RoundFactory(IBotFactory botFactory)
+        {
+            BotFactory = botFactory;
+        }
+
+        public IRound Create() => new Round(BotFactory);
     }
 }

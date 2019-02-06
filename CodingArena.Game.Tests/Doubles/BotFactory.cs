@@ -9,7 +9,7 @@ namespace CodingArena.Game.Tests.Doubles
     {
         public BotFactory() => Bots = new List<IBattleBot>();
 
-        public List<IBattleBot> Bots { get; }
+        public List<IBattleBot> Bots { get; set; }
 
         public IReadOnlyCollection<IBattleBot> Create() => Bots;
     }
