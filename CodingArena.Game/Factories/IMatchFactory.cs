@@ -13,14 +13,16 @@ namespace CodingArena.Game.Factories
     {
         private ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
+        public IOutput Output { get; }
 
         [ImportingConstructor]
-        public MatchFactory(ISettings settings, IRoundFactory roundFactory)
+        public MatchFactory(ISettings settings, IRoundFactory roundFactory, IOutput output)
         {
             Settings = settings;
             RoundFactory = roundFactory;
+            Output = output;
         }
 
-        public IMatch Create() => new Match(Settings, RoundFactory);
+        public IMatch Create() => new Match(Settings, RoundFactory, Output);
     }
 }

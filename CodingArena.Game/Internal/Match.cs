@@ -8,11 +8,13 @@ namespace CodingArena.Game.Internal
     {
         public ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
+        private IOutput Output { get; }
 
-        public Match(ISettings settings, IRoundFactory roundFactory)
+        public Match(ISettings settings, IRoundFactory roundFactory, IOutput output)
         {
             Settings = settings;
             RoundFactory = roundFactory;
+            Output = output;
         }
 
         public MatchResult Start()

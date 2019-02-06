@@ -7,15 +7,18 @@ namespace CodingArena.Game.Internal
     internal class Game : IGame
     {
         private IMatchFactory MatchFactory { get; }
+        private IOutput Output { get; }
 
         [ImportingConstructor]
-        public Game(IMatchFactory matchFactory)
+        public Game(IMatchFactory matchFactory, IOutput output)
         {
             MatchFactory = matchFactory;
+            Output = output;
         }
 
         public void Start()
         {
+            Output.DisplayGameTitle();
             var match = MatchFactory.Create();
             match.Start();
         }
