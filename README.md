@@ -16,13 +16,13 @@ Every turn each bot chooses one turn action to be performed for specified input 
 ### TurnAction
 A bot chooses turn action (e.g. move, attack, idle). 
 
-| Turn Action     | Result       | Energy Cost |
-|:----------------|-------------:|------------:|
-| Move            | 1 place      |           5 |
-| Attack          | 0-100 damage |          10 |
-| Recharge.Shield | +20 SP       |          20 |
-| Recharge.Energy | +20 EP       |           5 |
-| Idle            | nothing      |           0 |
+| Turn Action           | Result       | Energy Cost |
+|:----------------------|-------------:|------------:|
+| Move                  | 1 place      |           5 |
+| Attack (Max Range 10) | 0-100 damage |          10 |
+| Recharge.Shield       | +20 SP       |          20 |
+| Recharge.Energy       | +20 EP       |           5 |
+| Idle                  | nothing      |           0 |
 
 #### Order of TurnActions (not implemented yet)
 Turn actions are ordered by the bot age:
