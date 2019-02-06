@@ -18,10 +18,10 @@ A bot chooses turn action (e.g. move, attack, idle).
 
 | Turn Action           | Result       | Energy Cost |
 |:----------------------|-------------:|------------:|
-| Move                  | 1 place      |           5 |
-| Attack (Max Range 10) | 0-100 damage |          10 |
-| Recharge.Shield       | +20 SP       |          20 |
-| Recharge.Energy       | +20 EP       |           5 |
+| Move                  | 1 place      |           2 |
+| Attack (Max Range 5)  | 0-100 damage |           5 |
+| Recharge.Shield       | +20 SP       |          10 |
+| Recharge.Battery      | +10 EP       |           3 |
 | Idle                  | nothing      |           0 |
 
 #### Order of TurnActions (not implemented yet)
@@ -36,7 +36,7 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 
 | Max HP | Max SP | Max EP |
 |-------:|-------:|-------:|
-|   1000 |   1000 |   1000 |
+|    500 |    200 |    500 |
 
 > HP = Health Points  
 > SP = Shield Points  
@@ -45,7 +45,7 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 ### Battlefield
 
 A battlefield is area where bots fight against each other.
-Configured battlefield size is `100 x 100`.
+Configured battlefield size is `50 x 50`.
 
 ### Game Rules
 1. Don't use `System.Console`.
