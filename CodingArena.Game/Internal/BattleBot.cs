@@ -5,6 +5,7 @@ using CodingArena.Player.TurnActions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CodingArena.Game.Internal
 {
@@ -57,8 +58,7 @@ namespace CodingArena.Game.Internal
             ITurnAction turnAction;
             try
             {
-                turnAction = BotAI.GetTurnAction(
-                    InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
+                turnAction = GetTurnAction(enemies);
             }
             catch (Exception)
             {
@@ -86,6 +86,20 @@ namespace CodingArena.Game.Internal
 
             Destroy("system malfunction");
             return $"{Name} is destroyed by {DestroyedBy}.";
+        }
+
+        private ITurnAction GetTurnAction(ICollection<IBattleBot> enemies)
+        {
+            ITurnAction result = null;
+            var task = Task.Run(() =>
+                result = BotAI.GetTurnAction(
+                    InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield));
+            var timeout = TimeSpan.FromSeconds(1);
+            var success = task.Wait(timeout);
+            if (!success)
+                throw new TimeoutException($"GetTurnAction is not complete after timeout {timeout}.");
+
+            return result;
         }
 
         private string ExecuteTurnAction(Attack attack, IEnumerable<IBattleBot> enemies)

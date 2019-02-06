@@ -33,12 +33,23 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
                 .Is($"{Bot.Name} is destroyed by system malfunction.");
         }
 
-
-
         [Test]
         public void Exception()
         {
             var botAI = TestBotAI.Exception;
+            var bot = Get<IBotFactory>().Create(botAI, Battlefield);
+            var result = bot.ExecuteTurnAction(new List<IBattleBot>());
+            Verify.That(bot.HP).Is(0);
+            Verify.That(bot.Deaths).Is(1);
+            Verify.That(bot.DestroyedBy).Is("system malfunction");
+            Verify.That(result)
+                .Is($"{bot.Name} is destroyed by system malfunction.");
+        }
+
+        [Test]
+        public void Slow()
+        {
+            var botAI = TestBotAI.Slow;
             var bot = Get<IBotFactory>().Create(botAI, Battlefield);
             var result = bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(bot.HP).Is(0);
