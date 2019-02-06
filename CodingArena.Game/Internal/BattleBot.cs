@@ -177,21 +177,31 @@ namespace CodingArena.Game.Internal
                 SP = 0;
                 if (HP <= 0)
                 {
-                    Destroy(attacker.Name);
+                    Destroy(attacker);
                 }
             }
+        }
+
+        private void Destroy(IBattleBot attacker)
+        {
+            attacker.Kills++;
+            Destroy(attacker.Name);
         }
 
         private void Destroy(string cause)
         {
             HP = 0;
+            Deaths++;
             DestroyedBy = cause;
             OnExploded();
         }
 
         public event EventHandler Exploded;
-
         private void OnExploded() => Exploded?.Invoke(this, EventArgs.Empty);
+
+        public int Kills { get; set; }
+
+        public int Deaths { get; set; }
 
         public override string ToString() => Name;
     }

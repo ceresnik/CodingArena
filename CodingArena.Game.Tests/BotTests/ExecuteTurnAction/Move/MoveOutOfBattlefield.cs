@@ -16,6 +16,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             Verify.That(Bot.Position).Is(0, 0);
             Verify.That(Bot.HP).Is(0);
             Verify.That(IsExplodedEventRaised).IsTrue();
+            Verify.That(Bot.Deaths).Is(1);
         }
 
         [Test]
@@ -27,6 +28,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             Verify.That(Bot.Position).Is(0, 0);
             Verify.That(Bot.HP).Is(0);
             Verify.That(IsExplodedEventRaised).IsTrue();
+            Verify.That(Bot.Deaths).Is(1);
         }
 
         [Test]
@@ -38,6 +40,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             Verify.That(Bot.Position).Is(Battlefield.Width - 1, 0);
             Verify.That(Bot.HP).Is(0);
             Verify.That(IsExplodedEventRaised).IsTrue();
+            Verify.That(Bot.Deaths).Is(1);
         }
 
         [Test]
@@ -49,6 +52,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction.Move
             Verify.That(Bot.Position).Is(0, Battlefield.Height - 1);
             Verify.That(Bot.HP).Is(0);
             Verify.That(IsExplodedEventRaised).IsTrue();
+            Verify.That(Bot.Deaths).Is(1);
         }
     }
 }

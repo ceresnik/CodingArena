@@ -83,6 +83,8 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
             Verify.That(Enemy.EP).Is(Enemy.MaxEP);
             Verify.That(isEnemyExplodedEventRaised).IsTrue();
             Verify.That(Enemy.DestroyedBy).Is(Bot.Name);
+            Verify.That(Bot.Kills).Is(1);
+            Verify.That(Enemy.Deaths).Is(1);
         }
 
         [Test]

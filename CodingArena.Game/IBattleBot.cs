@@ -23,5 +23,7 @@ namespace CodingArena.Game
         void TakeDamage(int damage);
         void TakeDamage(int damage, IBattleBot attacker);
         event EventHandler Exploded;
+        int Kills { get; set; }
+        int Deaths { get; set; }
     }
 }
