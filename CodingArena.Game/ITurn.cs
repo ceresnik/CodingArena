@@ -4,6 +4,6 @@ namespace CodingArena.Game
 {
     public interface ITurn
     {
-        TurnResult Start(IEnumerable<IBattleBot> battleBots);
+        TurnResult Start(ICollection<IBattleBot> battleBots);
     }
 }

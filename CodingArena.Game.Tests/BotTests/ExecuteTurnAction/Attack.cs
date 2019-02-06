@@ -60,7 +60,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
             const int damage = Player.TurnActions.Attack.MaxDamage;
             Bot.PositionTo(0, 0);
             Enemy.PositionTo(1, 0);
-            Enemy.TakeDamage(Enemy.MaxSP + 1, null);
+            Enemy.TakeDamage(Enemy.MaxSP + 1);
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
             Verify.That(Enemy.HP).Is(Enemy.MaxHP - damage - 1);
@@ -73,7 +73,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         {
             Bot.PositionTo(0, 0);
             Enemy.PositionTo(1, 0);
-            Enemy.TakeDamage(Enemy.MaxSP + Enemy.MaxHP - 1, null);
+            Enemy.TakeDamage(Enemy.MaxSP + Enemy.MaxHP - 1);
             var isEnemyExplodedEventRaised = false;
             Enemy.Exploded += (sender, args) => isEnemyExplodedEventRaised = true;
             Bot.ExecuteTurnAction(new List<IBattleBot> { Enemy });
@@ -82,7 +82,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
             Verify.That(Enemy.SP).Is(0);
             Verify.That(Enemy.EP).Is(Enemy.MaxEP);
             Verify.That(isEnemyExplodedEventRaised).IsTrue();
-            Verify.That(Enemy.DestroyedBy).Is($"Destroyed by {Bot.Name}.");
+            Verify.That(Enemy.DestroyedBy).Is(Bot.Name);
         }
 
         [Test]

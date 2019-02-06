@@ -25,6 +25,7 @@ namespace CodingArena.Game.Internal
             SP = MaxSP;
             MaxEP = Settings.MaxEP;
             EP = MaxEP;
+            InsideView = new InsideView(this);
             OutsideView = new OutsideView(this);
         }
 
@@ -44,45 +45,56 @@ namespace CodingArena.Game.Internal
 
         public IBattlefieldPlace Position => Battlefield[this];
 
+        public IOwnBot InsideView { get; }
         public IEnemy OutsideView { get; }
         public string DestroyedBy { get; set; }
 
         public void PositionTo(int newX, int newY) => Battlefield.Set(this, newX, newY);
 
-        public void ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
+        public string ExecuteTurnAction(ICollection<IBattleBot> enemies)
         {
-            var turnAction = BotAI.GetTurnAction(null, null, null);
+            if (HP <= 0) return $"{Name} is destroyed by {DestroyedBy}.";
+            var turnAction = BotAI.GetTurnAction(
+                InsideView, enemies.Select(e => e.OutsideView).ToList(), Battlefield);
             switch (turnAction)
             {
                 case Move move:
-                    ExecuteTurnAction(move);
-                    break;
+                    return ExecuteTurnAction(move);
                 case RechargeBattery rechargeBattery:
-                    ExecuteTurnAction(rechargeBattery);
-                    break;
+                    return ExecuteTurnAction(rechargeBattery);
                 case RechargeShield rechargeShield:
-                    ExecuteTurnAction(rechargeShield);
-                    break;
+                    return ExecuteTurnAction(rechargeShield);
                 case Attack attack:
-                    ExecuteTurnAction(attack, enemies);
-                    break;
+                    return ExecuteTurnAction(attack, enemies);
             }
+
+            return $"{Name} is idle.";
         }
 
-        private void ExecuteTurnAction(Attack attack, IEnumerable<IBattleBot> enemies)
+        private string ExecuteTurnAction(Attack attack, IEnumerable<IBattleBot> enemies)
         {
-            if (attack.EnergyCost > EP) return;
+            if (attack.EnergyCost > EP)
+                return $"{Name} does not have enough energy to attack.";
 
             var ownPlace = Battlefield[this];
             var targetPlace = Battlefield[attack.Target];
             var distance = ownPlace.DistanceTo(targetPlace);
             DrainEnergy(attack.EnergyCost);
             var damage = CalculateDamage(distance);
-            if (damage > 0)
-            {
-                var enemy = enemies.FirstOrDefault(e => e.OutsideView == attack.Target);
-                enemy?.TakeDamage(damage, this);
-            }
+            var enemy = enemies.FirstOrDefault(e => e.OutsideView == attack.Target);
+
+            if (enemy == null)
+                return $"{Name} wants to attack, but enemy is not found on battlefield.";
+
+            if (distance > Attack.MaxRange)
+                return $"{Name} attempts to attack {enemy.Name} but failed, target is out of range.";
+
+            if (damage <= 0)
+                return $"{Name} attacks {enemy.Name} with no damage.";
+
+            enemy.TakeDamage(damage, this);
+
+            return $"{Name} attacks {enemy.Name} with {damage} damage.";
         }
 
         private int CalculateDamage(double distance)
@@ -92,9 +104,10 @@ namespace CodingArena.Game.Internal
             return (int)(Attack.MaxDamage * chance);
         }
 
-        private void ExecuteTurnAction(Move move)
+        private string ExecuteTurnAction(Move move)
         {
-            if (move.EnergyCost > EP) return;
+            if (move.EnergyCost > EP)
+                return $"{Name} does not have enough energy to move.";
 
             int newX = Position.X;
             int newY = Position.Y;
@@ -117,30 +130,34 @@ namespace CodingArena.Game.Internal
 
             if (Battlefield.IsOutOfRange(newX, newY))
             {
-                Destroy("Destroyed by battlefield force field.");
+                Destroy("battlefield force field");
+                return $"{Name} moved into battlefield force field and exploded.";
             }
-            else
-            {
-                DrainEnergy(move.EnergyCost);
-                PositionTo(newX, newY);
-            }
+
+            DrainEnergy(move.EnergyCost);
+            PositionTo(newX, newY);
+            return $"{Name} moved {move.Direction}";
         }
 
-        private void ExecuteTurnAction(RechargeBattery rechargeBattery)
+        private string ExecuteTurnAction(RechargeBattery rechargeBattery)
         {
-            if (rechargeBattery.EnergyCost > EP) return;
+            if (rechargeBattery.EnergyCost > EP)
+                return $"{Name} does not have enough energy to recharge battery.";
             DrainEnergy(rechargeBattery.EnergyCost);
             EP += rechargeBattery.RechargeAmount;
             if (EP > MaxEP) EP = MaxEP;
+            return $"{Name} recharges battery.";
         }
 
-        private void ExecuteTurnAction(RechargeShield rechargeShield)
+        private string ExecuteTurnAction(RechargeShield rechargeShield)
         {
-            if (rechargeShield.EnergyCost > EP) return;
-            if (SP == MaxSP) return;
+            if (rechargeShield.EnergyCost > EP)
+                return $"{Name} does not have enough energy to recharge shield.";
+            if (SP == MaxSP) return $"{Name} wants to recharge shield, but it's already full.";
             DrainEnergy(rechargeShield.EnergyCost);
             SP += rechargeShield.RechargeAmount;
             if (SP > MaxSP) SP = MaxSP;
+            return $"{Name} recharges shield.";
         }
 
         public void DrainEnergy(int energyPoints)
@@ -148,6 +165,8 @@ namespace CodingArena.Game.Internal
             EP -= energyPoints;
             if (EP < 0) EP = 0;
         }
+
+        public void TakeDamage(int damage) => TakeDamage(damage, null);
 
         public void TakeDamage(int damage, IBattleBot attacker)
         {
@@ -158,7 +177,7 @@ namespace CodingArena.Game.Internal
                 SP = 0;
                 if (HP <= 0)
                 {
-                    Destroy($"Destroyed by {attacker.Name}.");
+                    Destroy(attacker.Name);
                 }
             }
         }

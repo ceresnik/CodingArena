@@ -31,7 +31,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         public void HalfShield()
         {
             var damage = Bot.MaxSP / 2;
-            Bot.TakeDamage(damage, null);
+            Bot.TakeDamage(damage);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(Bot.MaxSP - damage + RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
@@ -40,7 +40,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void NoShield()
         {
-            Bot.TakeDamage(Bot.MaxSP, null);
+            Bot.TakeDamage(Bot.MaxSP);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
@@ -49,7 +49,7 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void NoShieldNoEnergy()
         {
-            Bot.TakeDamage(Bot.MaxSP, null);
+            Bot.TakeDamage(Bot.MaxSP);
             Bot.DrainEnergy(Bot.MaxEP);
             Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(0);

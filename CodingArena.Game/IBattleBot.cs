@@ -14,11 +14,13 @@ namespace CodingArena.Game
         int MaxSP { get; }
         int SP { get; }
         IBattlefieldPlace Position { get; }
+        IOwnBot InsideView { get; }
         IEnemy OutsideView { get; }
         string DestroyedBy { get; set; }
         void PositionTo(int x, int y);
-        void ExecuteTurnAction(IEnumerable<IBattleBot> enemies);
+        string ExecuteTurnAction(ICollection<IBattleBot> enemies);
         void DrainEnergy(int energyPoints);
+        void TakeDamage(int damage);
         void TakeDamage(int damage, IBattleBot attacker);
         event EventHandler Exploded;
     }

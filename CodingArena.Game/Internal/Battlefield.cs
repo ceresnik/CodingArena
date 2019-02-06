@@ -21,7 +21,22 @@ namespace CodingArena.Game.Internal
 
         public IBattlefieldPlace this[int x, int y] => throw new System.NotImplementedException();
 
-        public IBattlefieldPlace this[IOwnBot ownBot] => throw new System.NotImplementedException();
+        public IBattlefieldPlace this[IOwnBot ownBot]
+        {
+            get
+            {
+                if (ownBot == null) throw new ArgumentNullException(nameof(ownBot));
+                foreach (var pair in Dictionary)
+                {
+                    if (pair.Key.InsideView == ownBot)
+                    {
+                        return pair.Value;
+                    }
+                }
+
+                return null;
+            }
+        }
 
         public IBattlefieldPlace this[IEnemy enemy]
         {
