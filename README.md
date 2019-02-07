@@ -62,3 +62,22 @@ return TurnAction.Attack(enemy);
 ```csharp
 return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
 ```
+* Move in specific direction:
+```csharp
+return TurnAction.Move.East();
+return TurnAction.Move.West();
+return TurnAction.Move.South();
+return TurnAction.Move.North();
+```
+* Recharge shield:
+```csharp
+return TurnAction.Recharge.Shield();
+```
+* Recharge battery:
+```csharp
+return TurnAction.Recharge.Battery();
+```
+* Stay idle:
+```csharp
+return TurnAction.Idle();
+```
