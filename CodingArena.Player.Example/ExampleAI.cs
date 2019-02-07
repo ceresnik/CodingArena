@@ -25,7 +25,7 @@ namespace CodingArena.Player.Example
                 return TurnAction.Attack(enemy);
             }
 
-            return TurnAction.Move.Towards(battlefield[ownBot], battlefield[enemy]);
+            return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
 
         }
     }

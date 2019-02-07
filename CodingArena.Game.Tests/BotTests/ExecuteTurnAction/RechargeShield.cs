@@ -22,9 +22,10 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         [Test]
         public void FullShield()
         {
-            Bot.ExecuteTurnAction(new List<IBattleBot>());
+            var result = Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(Bot.MaxSP);
             Verify.That(Bot.EP).Is(Bot.MaxEP);
+            Verify.That(result).Is($"{Bot.Name} wants to recharge shield, but it's already full.");
         }
 
         [Test]
@@ -32,18 +33,20 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         {
             var damage = Bot.MaxSP / 2;
             Bot.TakeDamage(damage);
-            Bot.ExecuteTurnAction(new List<IBattleBot>());
+            var result = Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(Bot.MaxSP - damage + RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
+            Verify.That(result).Is($"{Bot.Name} recharges shield.");
         }
 
         [Test]
         public void NoShield()
         {
             Bot.TakeDamage(Bot.MaxSP);
-            Bot.ExecuteTurnAction(new List<IBattleBot>());
+            var result = Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(RechargeAmount);
             Verify.That(Bot.EP).Is(Bot.MaxEP - EnergyCost);
+            Verify.That(result).Is($"{Bot.Name} recharges shield.");
         }
 
         [Test]
@@ -51,9 +54,10 @@ namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
         {
             Bot.TakeDamage(Bot.MaxSP);
             Bot.DrainEnergy(Bot.MaxEP);
-            Bot.ExecuteTurnAction(new List<IBattleBot>());
+            var result = Bot.ExecuteTurnAction(new List<IBattleBot>());
             Verify.That(Bot.SP).Is(0);
             Verify.That(Bot.EP).Is(0);
+            Verify.That(result).Is($"{Bot.Name} does not have enough energy to recharge shield.");
         }
     }
 }
