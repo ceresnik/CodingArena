@@ -17,11 +17,13 @@ namespace CodingArena.Game.Internal
             Settings = settings;
             RoundFactory = roundFactory;
             scores = new List<Score>();
+            NextRoundIn = TimeSpan.Zero;
         }
 
         public IRound Round { get; private set; }
 
         public IEnumerable<Score> Scores => scores;
+        public TimeSpan NextRoundIn { get; private set; }
 
         public void Start()
         {
@@ -51,14 +53,29 @@ namespace CodingArena.Game.Internal
             }
         }
 
-        private void WaitForNextRound() => Thread.Sleep(Settings.NextRoundDelay);
+        private void WaitForNextRound()
+        {
+            NextRoundIn = Settings.NextRoundDelay;
+            while (NextRoundIn > TimeSpan.Zero)
+            {
+                var poll = TimeSpan.FromSeconds(1);
+                Thread.Sleep(poll);
+                NextRoundIn -= poll;
+                OnNextRoundInUpdated();
+            }
+            NextRoundIn = TimeSpan.Zero;
+        }
 
         public event EventHandler RoundStarting;
 
         public event EventHandler RoundFinished;
 
+        public event EventHandler NextRoundInUpdated;
+
         private void OnRoundStarting() => RoundStarting?.Invoke(this, EventArgs.Empty);
 
         private void OnRoundFinished() => RoundFinished?.Invoke(this, EventArgs.Empty);
+
+        private void OnNextRoundInUpdated() => NextRoundInUpdated?.Invoke(this, EventArgs.Empty);
     }
 }

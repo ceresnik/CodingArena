@@ -21,6 +21,7 @@ namespace CodingArena.Game.Console
         {
             Settings = settings;
             MatchRow = 1;
+            CursorVisible = false;
         }
 
         public void Observe(IGame game)
@@ -34,12 +35,19 @@ namespace CodingArena.Game.Console
         {
             Game.Match.RoundStarting += OnRoundStarting;
             Game.Match.RoundFinished += OnRoundFinished;
+            Game.Match.NextRoundInUpdated += OnNextRoundInUpdated;
         }
 
         private void OnMatchFinished(object sender, EventArgs e)
         {
             Game.Match.RoundStarting -= OnRoundStarting;
             Game.Match.RoundFinished -= OnRoundFinished;
+            Game.Match.NextRoundInUpdated -= OnNextRoundInUpdated;
+        }
+
+        private void OnNextRoundInUpdated(object sender, EventArgs e)
+        {
+            Update();
         }
 
         private void OnRoundStarting(object sender, EventArgs e)
@@ -74,7 +82,7 @@ namespace CodingArena.Game.Console
 
         private void Update(IMatch match)
         {
-            DisplayHeader(MatchRow, "Match");
+            DisplayHeader(MatchRow, $"Match{GetNextRoundIn()}");
             int row = MatchRow + 1;
             foreach (var score in match.Scores.OrderByDescending(s => s.Kills))
             {
@@ -82,6 +90,24 @@ namespace CodingArena.Game.Console
                 row++;
             }
             RoundRow = MatchRow + row - 1;
+        }
+
+        private string GetNextRoundIn()
+        {
+            string result = "";
+            var timeSpan = Game.Match.NextRoundIn;
+            if (timeSpan != TimeSpan.Zero)
+            {
+                string text = string.Empty;
+                if (timeSpan.Days > 0) text += $"{timeSpan.Days}d ";
+                if (timeSpan.Hours > 0) text += $"{timeSpan.Hours}h ";
+                if (timeSpan.Minutes > 0) text += $"{timeSpan.Minutes}m ";
+                if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s ";
+                result = string.IsNullOrEmpty(text) 
+                    ? " [ Next round starting now ]" 
+                    : $" [ Next round in {text}]";
+            }
+            return result;
         }
 
         private void Update(IRound round)
