@@ -1,7 +1,14 @@
-﻿namespace CodingArena.Game
+﻿using System;
+using System.Collections.Generic;
+
+namespace CodingArena.Game
 {
     public interface IMatch
     {
-        MatchResult Start();
+        IRound Round { get; }
+        IEnumerable<Score> Scores { get; }
+        void Start();
+        event EventHandler RoundStarting;
+        event EventHandler RoundFinished;
     }
 }

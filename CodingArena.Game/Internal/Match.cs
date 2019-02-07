@@ -1,47 +1,64 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
-    internal class Match : IMatch
+    internal sealed class Match : IMatch
     {
-        public ISettings Settings { get; }
+        private readonly IList<Score> scores;
+        private ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
-        private IOutput Output { get; }
 
-        public Match(ISettings settings, IRoundFactory roundFactory, IOutput output)
+        public Match(ISettings settings, IRoundFactory roundFactory)
         {
             Settings = settings;
             RoundFactory = roundFactory;
-            Output = output;
+            scores = new List<Score>();
         }
 
-        public MatchResult Start()
+        public IRound Round { get; private set; }
+
+        public IEnumerable<Score> Scores => scores;
+
+        public void Start()
         {
-            var scores = new List<Score>();
-            for (int i = 0; i < Settings.MaxRounds; i++)
+            for (int i = 1; i <= Settings.MaxRounds; i++)
             {
-                var round = RoundFactory.Create();
-                Output.Set(round);
-                var roundResult = round.Start();
-                foreach (var roundResultScore in roundResult.Scores)
+                Round = RoundFactory.Create(i);
+                OnRoundStarting();
+                Round.Start();
+                
+                foreach (var roundScore in Round.Scores)
                 {
-                    var existingScore = scores.SingleOrDefault(s => s.BotName == roundResultScore.BotName);
+                    var existingScore = scores.FirstOrDefault(s => s.BotName == roundScore.BotName);
                     if (existingScore != null)
                     {
-
-                        existingScore.Kills += roundResultScore.Kills;
-                        existingScore.Deaths += roundResultScore.Deaths;
+                        existingScore.Kills += roundScore.Kills;
+                        existingScore.Deaths += roundScore.Deaths;
                     }
                     else
                     {
-                        scores.Add(roundResultScore);
+                        scores.Add(roundScore);
                     }
                 }
-            }
 
-            return new MatchResult(scores);
+                OnRoundFinished();
+
+                WaitForNextRound();
+            }
         }
+
+        private void WaitForNextRound() => Thread.Sleep(Settings.NextRoundDelay);
+
+        public event EventHandler RoundStarting;
+
+        public event EventHandler RoundFinished;
+
+        private void OnRoundStarting() => RoundStarting?.Invoke(this, EventArgs.Empty);
+
+        private void OnRoundFinished() => RoundFinished?.Invoke(this, EventArgs.Empty);
     }
 }

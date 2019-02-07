@@ -13,7 +13,7 @@ namespace CodingArena.Game.Tests.Doubles
             MaxRounds = 100;
             MaxTurns = 120;
             NextRoundDelay = TimeSpan.Zero;
-            NextTurnActionDelay = TimeSpan.Zero;
+            NextTurnDelay = TimeSpan.Zero;
             MaxHP = 500;
             MaxSP = 200;
             MaxEP = 500;
@@ -29,7 +29,7 @@ namespace CodingArena.Game.Tests.Doubles
 
         public TimeSpan NextRoundDelay { get; set; }
 
-        public TimeSpan NextTurnActionDelay { get; set; }
+        public TimeSpan NextTurnDelay { get; set; }
 
         public int MaxHP { get; set; }
 

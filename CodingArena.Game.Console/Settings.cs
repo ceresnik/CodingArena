@@ -41,14 +41,14 @@ namespace CodingArena.Game.Console
             set => ConfigurationManager.AppSettings["NextRoundDelayInSeconds"] = ((int)value.TotalSeconds).ToString();
         }
 
-        public TimeSpan NextTurnActionDelay
+        public TimeSpan NextTurnDelay
         {
             get
             {
-                int totalMilliseconds = int.Parse(ConfigurationManager.AppSettings["NextTurnActionDelayInMilliseconds"]);
-                return new TimeSpan(0, 0, 0, 0, totalMilliseconds);
+                int totalMilliseconds = int.Parse(ConfigurationManager.AppSettings["NextTurnDelayInMilliseconds"]);
+                return TimeSpan.FromMilliseconds(totalMilliseconds);
             }
-            set => ConfigurationManager.AppSettings["NextTurnActionDelayInMilliseconds"] = ((int)value.TotalMilliseconds).ToString();
+            set => ConfigurationManager.AppSettings["NextTurnDelayInMilliseconds"] = ((int)value.TotalMilliseconds).ToString();
         }
 
         public int MaxHP

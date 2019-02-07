@@ -5,12 +5,12 @@ namespace CodingArena.Game.Factories
 {
     public interface ITurnFactory
     {
-        ITurn Create();
+        ITurn Create(int number);
     }
 
     [Export(typeof(ITurnFactory))]
     internal class TurnFactory : ITurnFactory
     {
-        public ITurn Create() => new Turn();
+        public ITurn Create(int number) => new Turn(number);
     }
 }

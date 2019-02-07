@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CodingArena.Game.Tests.Verification;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.Factories.RoundFactoryTests
@@ -8,12 +9,15 @@ namespace CodingArena.Game.Tests.Factories.RoundFactoryTests
         public override void SetUp()
         {
             base.SetUp();
-            Round = RoundFactory.Create();
+            Round = RoundFactory.Create(1);
         }
 
         private IRound Round { get; set; }
 
         [Test]
         public void Round_NotNull() => Round.Should().NotBeNull();
+
+        [Test]
+        public void RoundNumber() => Verify.That(Round.Number).Is(1);
     }
 }

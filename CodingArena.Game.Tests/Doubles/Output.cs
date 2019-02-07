@@ -1,27 +1,14 @@
 ﻿using System.ComponentModel.Composition;
-using static System.Console;
 
 namespace CodingArena.Game.Tests.Doubles
 {
     [Export(typeof(IOutput))]
     internal class Output : IOutput
     {
-        public void Set(IMatch match)
+        public void Observe(IGame game)
         {
         }
 
-        public void Set(IRound round)
-        {
-        }
-
-        public void Set(ITurn turn)
-        {
-        }
-
-        public void Update()
-        {
-        }
-
-        public void Error(string message) => WriteLine($"Error: {message}");
+        public void Error(string message) => System.Console.WriteLine($"Error: {message}");
     }
 }

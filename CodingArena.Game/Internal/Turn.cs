@@ -5,17 +5,24 @@ namespace CodingArena.Game.Internal
 {
     internal class Turn : ITurn
     {
-        public TurnResult Start(IEnumerable<IBattleBot> battleBots)
+        public Turn(int number)
         {
-            var botActionResults = new Dictionary<IBattleBot, string>();
+            Number = number;
+            BotActions = new Dictionary<IBattleBot, string>();
+        }
+
+        public int Number { get; }
+        public IDictionary<IBattleBot, string> BotActions { get; }
+
+        public void Start(IEnumerable<IBattleBot> battleBots)
+        {
             var bots = battleBots.ToList();
             foreach (var battleBot in bots)
             {
                 var enemies = bots.Except(new List<IBattleBot> {battleBot}).ToList();
-                var botActionResult = battleBot.ExecuteTurnAction(enemies);
-                botActionResults.Add(battleBot, botActionResult);
+                var botActionResult = battleBot.ExecuteTurnAction(enemies.Where(e => e.HP > 0));
+                BotActions.Add(battleBot, botActionResult);
             }
-            return new TurnResult(botActionResults);
         }
     }
 }

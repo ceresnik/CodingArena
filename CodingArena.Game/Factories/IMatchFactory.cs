@@ -23,6 +23,6 @@ namespace CodingArena.Game.Factories
             Output = output;
         }
 
-        public IMatch Create() => new Match(Settings, RoundFactory, Output);
+        public IMatch Create() => new Match(Settings, RoundFactory);
     }
 }

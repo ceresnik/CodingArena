@@ -10,10 +10,10 @@ namespace CodingArena.Game.Tests.RoundTests
         [Test]
         public void NoBots()
         {
-            var result = Round.Start();
-            result.Should().NotBeNull();
-            result.Scores.Should().NotBeNull();
-            result.Scores.Should().BeEmpty();
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Should().BeEmpty();
         }
 
         [Test]
@@ -21,11 +21,10 @@ namespace CodingArena.Game.Tests.RoundTests
         {
             var bot = BotWorkshop.Create(TestBotAI.Idle);
             BotFactory.Bots.Add(bot);
-            var result = Round.Start();
-            result.Should().NotBeNull();
-            result.Scores.Should().NotBeNull();
-            result.Scores.Count.Should().Be(1);
-            result.Scores.First().BotName.Should().Be(bot.Name);
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(1);
+            Round.Scores.First().BotName.Should().Be(bot.Name);
         }
 
         [Test]
@@ -35,12 +34,11 @@ namespace CodingArena.Game.Tests.RoundTests
             var victim = BotWorkshop.Create(TestBotAI.Idle);
             BotFactory.Bots.Add(attacker);
             BotFactory.Bots.Add(victim);
-            var result = Round.Start();
-            result.Should().NotBeNull();
-            result.Scores.Should().NotBeNull();
-            result.Scores.Count.Should().Be(2);
-            result.Scores.Single(s => s.BotName == attacker.Name).Kills.Should().Be(1);
-            result.Scores.Single(s => s.BotName == victim.Name).Deaths.Should().Be(1);
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(2);
+            Round.Scores.Single(s => s.BotName == attacker.Name).Kills.Should().Be(1);
+            Round.Scores.Single(s => s.BotName == victim.Name).Deaths.Should().Be(1);
         }
 
         [Test]
@@ -51,10 +49,9 @@ namespace CodingArena.Game.Tests.RoundTests
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot3")));
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot4")));
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot5")));
-            var result = Round.Start();
-            result.Should().NotBeNull();
-            result.Scores.Should().NotBeNull();
-            result.Scores.Count.Should().Be(5);
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(5);
         }
     }
 }

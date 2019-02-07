@@ -8,29 +8,29 @@ namespace CodingArena.Game.Tests.TurnTests
 {
     internal class Start : TestFixture
     {
+        private ITurn Turn { get; set; }
+        private IBattleBot AttackerBot { get; set; }
+        private IBattleBot IdleBot { get; set; }
+
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
-            Turn = TurnFactory.Create();
+            Turn = TurnFactory.Create(1);
             AttackerBot = BotWorkshop.Create(TestBotAI.AttackFirstEnemy);
             IdleBot = BotWorkshop.Create(TestBotAI.Idle);
             AttackerBot.PositionTo(Battlefield, 0, 0);
             IdleBot.PositionTo(Battlefield, 1, 0);
         }
 
-        private ITurn Turn { get; set; }
-        private IBattleBot AttackerBot { get; set; }
-        private IBattleBot IdleBot { get; set; }
-
         [Test]
         public void AttackEnemy()
         {
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
-            var result = Turn.Start(bots);
-            Verify.That(result.BotActionResults[AttackerBot])
+            Turn.Start(bots);
+            Verify.That(Turn.BotActions[AttackerBot])
                 .Is($"{AttackerBot.Name} attacks {IdleBot.Name} with 100 damage.");
-            Verify.That(result.BotActionResults[IdleBot])
+            Verify.That(Turn.BotActions[IdleBot])
                 .Is($"{IdleBot.Name} is idle.");
         }
 
@@ -40,10 +40,10 @@ namespace CodingArena.Game.Tests.TurnTests
 
             IdleBot.TakeDamage(IdleBot.MaxSP + IdleBot.MaxHP - 1);
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
-            var result = Turn.Start(bots);
-            Verify.That(result.BotActionResults[AttackerBot])
+            Turn.Start(bots);
+            Verify.That(Turn.BotActions[AttackerBot])
                 .Is($"{AttackerBot.Name} attacks {IdleBot.Name} with 100 damage.");
-            Verify.That(result.BotActionResults[IdleBot])
+            Verify.That(Turn.BotActions[IdleBot])
                 .Is($"{IdleBot.Name} is destroyed by {AttackerBot.Name}.");
         }
 
@@ -57,9 +57,8 @@ namespace CodingArena.Game.Tests.TurnTests
             victim.PositionTo(Battlefield, Battlefield.Width - 1, Battlefield.Height - 1);
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
-                var turn = TurnFactory.Create();
-                var turnResult = turn.Start(bots);
-                System.Console.WriteLine($"{attacker.Name} {attacker.Position} {turnResult.BotActionResults[attacker]}");
+                var turn = TurnFactory.Create(i);
+                turn.Start(bots);
             }
 
             victim.HP.Should().Be(0);

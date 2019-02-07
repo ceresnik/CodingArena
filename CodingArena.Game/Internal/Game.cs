@@ -1,26 +1,32 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
     [Export(typeof(IGame))]
-    internal class Game : IGame
+    internal sealed class Game : IGame
     {
         private IMatchFactory MatchFactory { get; }
-        private IOutput Output { get; }
 
         [ImportingConstructor]
-        public Game(IMatchFactory matchFactory, IOutput output)
+        public Game(IMatchFactory matchFactory)
         {
             MatchFactory = matchFactory;
-            Output = output;
         }
 
         public void Start()
         {
-            var match = MatchFactory.Create();
-            Output.Set(match);
-            match.Start();
+            Match = MatchFactory.Create();
+            OnMatchStarting();
+            Match.Start();
+            OnMatchFinished();
         }
+
+        public IMatch Match { get; private set; }
+        public event EventHandler MatchStarting;
+        public event EventHandler MatchFinished;
+        private void OnMatchStarting() => MatchStarting?.Invoke(this, EventArgs.Empty);
+        private void OnMatchFinished() => MatchFinished?.Invoke(this, EventArgs.Empty);
     }
 }

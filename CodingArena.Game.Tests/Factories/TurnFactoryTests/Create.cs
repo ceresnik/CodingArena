@@ -9,7 +9,7 @@ namespace CodingArena.Game.Tests.Factories.TurnFactoryTests
         public override void SetUp()
         {
             base.SetUp();
-            Turn = TurnFactory.Create();
+            Turn = TurnFactory.Create(1);
         }
 
         private ITurn Turn { get; set; }

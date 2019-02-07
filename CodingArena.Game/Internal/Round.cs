@@ -1,51 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
-    internal class Round : IRound
+    internal sealed class Round : IRound
     {
         private IBotFactory BotFactory { get; }
         private ISettings Settings { get; }
         private ITurnFactory TurnFactory { get; }
         private IBattlefieldFactory BattlefieldFactory { get; }
-        private IOutput Output { get; }
 
         public Round(
+            int number,
             IBotFactory botFactory, 
             ISettings settings, 
             ITurnFactory turnFactory, 
-            IBattlefieldFactory battlefieldFactory,
-            IOutput output)
+            IBattlefieldFactory battlefieldFactory)
         {
+            Number = number;
             BotFactory = botFactory ?? throw new ArgumentNullException(nameof(botFactory));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             TurnFactory = turnFactory ?? throw new ArgumentNullException(nameof(turnFactory));
             BattlefieldFactory = battlefieldFactory ?? throw new ArgumentNullException(nameof(battlefieldFactory));
-            Output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
-        public RoundResult Start()
+        public int Number { get; }
+        public IEnumerable<IBattleBot> Bots { get; private set; }
+        public IBattlefield Battlefield { get; private set; }
+        public ITurn Turn { get; private set; }
+        public IEnumerable<Score> Scores { get; private set; }
+
+        public void Start()
         {
-            var battlefield = BattlefieldFactory.Create();
-            var bots = BotFactory.Create(battlefield);
-            battlefield.SetRandomly(bots);
-            var scores = new List<Score>();
+            Battlefield = BattlefieldFactory.Create();
+            Bots = BotFactory.Create(Battlefield);
+            Battlefield.SetRandomly(Bots);
+
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
-                var turn = TurnFactory.Create();
-                Output.Set(turn);
-                var turnResult = turn.Start(bots);
+                OnTurnStarting();
+                Turn = TurnFactory.Create(i);
+                Turn.Start(Bots);
+                OnTurnFinished();
+                if (Bots.Count(b => b.HP > 0) <= 1) break;
+                WaitForNextTurn();
             }
 
-            foreach (var bot in bots)
+            var scores = new List<Score>();
+            foreach (var bot in Bots)
             {
-                var score = new Score(bot.Name) {Kills = bot.Kills, Deaths = bot.Deaths};
-                scores.Add(score);
+                scores.Add(new Score(bot.Name) {Kills = bot.Kills, Deaths = bot.Deaths});
             }
-
-            return new RoundResult(scores);
+            Scores = scores;
         }
+
+        private void WaitForNextTurn() => Thread.Sleep(Settings.NextTurnDelay);
+
+        public event EventHandler TurnStarting;
+
+        public event EventHandler TurnFinished;
+
+        private void OnTurnStarting() => TurnStarting?.Invoke(this, EventArgs.Empty);
+
+        private void OnTurnFinished() => TurnFinished?.Invoke(this, EventArgs.Empty);
     }
 }

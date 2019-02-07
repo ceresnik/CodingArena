@@ -27,7 +27,7 @@ namespace CodingArena.Game.Console.Tests
         public void NextRoundDelay() => Settings.NextRoundDelay.Should().Be(TimeSpan.FromSeconds(60));
 
         [Test]
-        public void NextTurnActionDelay() => Settings.NextTurnActionDelay.Should().Be(TimeSpan.FromMilliseconds(500));
+        public void NextTurnActionDelay() => Settings.NextTurnDelay.Should().Be(TimeSpan.FromMilliseconds(500));
 
         [Test]
         public void MaxHP() => Settings.MaxHP.Should().Be(500);

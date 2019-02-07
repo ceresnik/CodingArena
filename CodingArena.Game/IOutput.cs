@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace CodingArena.Game
+﻿namespace CodingArena.Game
 {
     public interface IOutput
     {
-        void Set(IMatch match);
-        void Set(IRound round);
-        void Set(ITurn turn);
-        void Update();
+        void Observe(IGame game);
         void Error(string message);
     }
 }

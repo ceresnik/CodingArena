@@ -55,7 +55,7 @@ namespace CodingArena.Game.Internal
             Battlefield.Set(this, newX, newY);
         }
 
-        public string ExecuteTurnAction(ICollection<IBattleBot> enemies)
+        public string ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
         {
             if (HP <= 0) return $"{Name} is destroyed by {DestroyedBy}.";
             ITurnAction turnAction;
@@ -91,7 +91,7 @@ namespace CodingArena.Game.Internal
             return $"{Name} is destroyed by {DestroyedBy}.";
         }
 
-        private ITurnAction GetTurnAction(ICollection<IBattleBot> enemies)
+        private ITurnAction GetTurnAction(IEnumerable<IBattleBot> enemies)
         {
             ITurnAction result = null;
             var task = Task.Run(() =>
@@ -131,7 +131,9 @@ namespace CodingArena.Game.Internal
 
             enemy.TakeDamage(damage, this);
 
-            return $"{Name} attacks {enemy.Name} with {damage} damage.";
+            return enemy.HP <= 0 
+                ? $"{Name} destroys {enemy.Name}." 
+                : $"{Name} attacks {enemy.Name} with {damage} damage.";
         }
 
         private int CalculateDamage(double distance)
@@ -173,7 +175,7 @@ namespace CodingArena.Game.Internal
 
             DrainEnergy(move.EnergyCost);
             PositionTo(newX, newY);
-            return $"{Name} moved {move.Direction}";
+            return $"{Name} moved {move.Direction}.";
         }
 
         private void PositionTo(int newX, int newY) => PositionTo(Battlefield, newX, newY);
