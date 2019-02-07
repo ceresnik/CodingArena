@@ -13,7 +13,6 @@ namespace CodingArena.Game.Console
         private int MatchRow { get; }
         private int RoundRow { get; set; }
         private int TurnRow { get; set; }
-        private int Row { get; set; }
         private IGame Game { get; set; }
 
         [ImportingConstructor]
@@ -48,13 +47,23 @@ namespace CodingArena.Game.Console
         private void OnNextRoundInUpdated(object sender, EventArgs e)
         {
             Update();
+            if (Game.Match.NextRoundIn != TimeSpan.Zero && 
+                Game.Match.NextRoundIn < TimeSpan.FromSeconds(4))
+            {
+                ShortBeep();
+            }
         }
 
         private void OnRoundStarting(object sender, EventArgs e)
         {
             Game.Match.Round.TurnStarting += OnTurnStarting;
             Game.Match.Round.TurnFinished += OnTurnFinished;
+            LongBeep();
         }
+
+        private static void ShortBeep() => Beep(500, 200);
+
+        private static void LongBeep() => Beep(500, 1000);
 
         private void OnRoundFinished(object sender, EventArgs e)
         {
@@ -149,28 +158,11 @@ namespace CodingArena.Game.Console
             WriteLine(message);
             ForegroundColor = previousColor;
         }
-
-        public void Update(IEnumerable<IBattleBot> bots, TurnResult turnResult)
-        {
-            //Row = 1;
-            //DisplayHeader(Row, "Match");
-            //if (Scores != null)
-            //{
-            //    DisplayHeader(Row, "Match ============================= K == D");
-            //    Row++;
-            //    foreach (var score in Scores.OrderByDescending(s => s.Kills))
-            //    {
-            //        DisplayScore(Row, score);
-            //        Row++;
-            //    }
-            //}
-            //DisplayHeader(Row, "Round");
-        }
         
         private void DisplayScore(int row, Score score) =>
             DisplayRow(row,
                 $"  * {score.BotName,-30} " +
-                $"{score.Kills,4:N0} {score.Deaths,4:N0}");
+                $"K: {score.Kills,3:N0} D: {score.Deaths,3:N0}");
 
         private void DisplayHeader(int rowIndex, string text)
         {
