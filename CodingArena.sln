@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game", "CodingA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game.Console.Tests", "CodingArena.Game.Console.Tests\CodingArena.Game.Console.Tests.csproj", "{A039DBB3-7980-4202-A135-45B84AD26735}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingArena.Game.Wpf", "CodingArena.Game.Wpf\CodingArena.Game.Wpf.csproj", "{A3C6CDD6-B099-405B-8635-92CAE0F7880A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{A039DBB3-7980-4202-A135-45B84AD26735}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A039DBB3-7980-4202-A135-45B84AD26735}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A039DBB3-7980-4202-A135-45B84AD26735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3C6CDD6-B099-405B-8635-92CAE0F7880A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C6CDD6-B099-405B-8635-92CAE0F7880A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C6CDD6-B099-405B-8635-92CAE0F7880A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C6CDD6-B099-405B-8635-92CAE0F7880A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
