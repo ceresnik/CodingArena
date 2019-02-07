@@ -42,7 +42,7 @@ namespace CodingArena.Game.Tests.TurnTests
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
             Turn.Start(bots);
             Verify.That(Turn.BotActions[AttackerBot])
-                .Is($"{AttackerBot.Name} attacks {IdleBot.Name} with 100 damage.");
+                .Is($"{AttackerBot.Name} destroys {IdleBot.Name}.");
             Verify.That(Turn.BotActions[IdleBot])
                 .Is($"{IdleBot.Name} is destroyed by {AttackerBot.Name}.");
         }
