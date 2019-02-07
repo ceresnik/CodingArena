@@ -51,3 +51,14 @@ Configured battlefield size is `50 x 50`.
 1. Don't use `System.Console`.
 2. Don't use reflection.
 3. Don't try to beat the game.
+
+### How to create turn actions in your BotAI implementation
+
+* Attack enemy:
+```csharp
+return TurnAction.Attack(enemy);
+```
+* Move towards enemy:
+```csharp
+return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
+```
