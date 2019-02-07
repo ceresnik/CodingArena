@@ -1,32 +1,27 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using CodingArena.Game.Tests.BotAIs;
+using FluentAssertions;
 using NUnit.Framework;
-using System;
 
 namespace CodingArena.Game.Tests.MatchTests
 {
     internal class Start : TestFixture
     {
+        [SetUp]
         public override void SetUp()
         {
             base.SetUp();
-            StartedEventArgs = null;
-            Match.Notifier.Starting += (sender, args) => StartingEventArgs = args;
-            Match.Notifier.Started += (sender, args) => StartedEventArgs = args;
-            Match.Controller.Start();
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot1")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot2")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot3")));
+            Match.Start();
         }
 
-        private RoundEventArgs StartingEventArgs { get; set; }
-
-        private EventArgs StartedEventArgs { get; set; }
-
         [Test]
-        public void Starting_IsRaised()
+        public void Scores_Count()
         {
-            StartingEventArgs.Should().NotBeNull();
-            StartingEventArgs.RoundNotifier.Should().NotBeNull(nameof(StartingEventArgs.RoundNotifier));
+            Match.Scores.Should().NotBeNull();
+            Match.Scores.Count().Should().Be(3);
         }
-
-        [Test]
-        public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
     }
 }

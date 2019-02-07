@@ -18,6 +18,20 @@ namespace CodingArena.Player.Battlefield
         int Y { get; }
 
         /// <summary>
+        ///     Gets a value whether specified <see cref="IBattlefieldPlace"/> is empty or not;
+        /// </summary>
+        /// <returns>
+        ///     <c>true</c> if <see cref="Object"/> is <c>null</c>; otherwise <c>false</c>.
+        /// </returns>
+        bool IsEmpty { get; }
+
+        /// <summary>
+        ///     Gets an object that is standing on this <see cref="IBattlefieldPlace"/> or <c>null</c> if empty.
+        /// </summary>
+        /// <seealso cref="IsEmpty"/>
+        IBattlefieldObject Object { get; }
+
+        /// <summary>
         ///     Gets a distance from this place to other place on the battlefield specified by coordinates.
         /// </summary>
         /// <param name="x">X-axis coordinate of other place on the battlefield.</param>

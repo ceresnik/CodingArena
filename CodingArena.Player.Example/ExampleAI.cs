@@ -12,50 +12,21 @@ namespace CodingArena.Player.Example
 
         public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {
-            if (enemies.Any())
+            if (!enemies.Any()) return TurnAction.Idle();
+
+            if (ownBot.SP < 50)
             {
-                if (ownBot.Shield < 50)
-                {
-                    return TurnAction.Recharge.Shield();
-                }
-                var closestEnemy = FindClosestEnemy(ownBot, enemies, battlefield);
-
-                var minAttackDistance = 6;
-                var place = battlefield[ownBot];
-                var closestEnemyPlace = battlefield[closestEnemy];
-                if (place.DistanceTo(closestEnemyPlace) < minAttackDistance)
-                    return TurnAction.Attack(closestEnemy);
-
-                var fromPlace = battlefield[ownBot];
-                var toPlace = battlefield[closestEnemy];
-                return TurnAction.Move.Towards(fromPlace, toPlace);
+                return TurnAction.Recharge.Shield();
             }
 
-            return TurnAction.Idle();
-        }
-
-        private IEnemy FindClosestEnemy(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
-        {
-            var closestEnemy = enemies.First();
-            var minDistance = GetDistance(battlefield, ownBot, closestEnemy);
-            foreach (var enemy in enemies.Except(new[] { closestEnemy }))
+            var enemy = enemies.First();
+            if (ownBot.DistanceTo(enemy) < (double) Attack.MaxRange / 2)
             {
-                var distance = GetDistance(battlefield, ownBot, enemy);
-                if (minDistance < distance)
-                {
-                    closestEnemy = enemy;
-                    minDistance = distance;
-                }
+                return TurnAction.Attack(enemy);
             }
 
-            return closestEnemy;
-        }
+            return TurnAction.Move.Towards(battlefield[ownBot], battlefield[enemy]);
 
-        private static double GetDistance(IBattlefieldView battlefield, IOwnBot ownBot, IEnemy enemy)
-        {
-            var ownPlace = battlefield[ownBot];
-            var enemyPlace = battlefield[enemy];
-            return ownPlace.DistanceTo(enemyPlace);
         }
     }
 }

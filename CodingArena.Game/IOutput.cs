@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CodingArena.Game
+﻿namespace CodingArena.Game
 {
     public interface IOutput
     {
-        void StartRound();
-        void NextRoundIn(TimeSpan delayForNextRound);
-        void SetBattlefield(IBattlefield battlefield);
-        void NoBotsQualified();
-        void Qualified(Bot bot);
-        void Qualified(IList<Bot> bots);
-        void TurnAction(Bot bot, string message);
-        void RoundResult(RoundResult roundResult);
-        void MatchResult(Dictionary<string, int> winners);
+        void Observe(IGame game);
         void Error(string message);
     }
 }

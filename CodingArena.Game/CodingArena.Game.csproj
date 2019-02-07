@@ -42,26 +42,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battlefield.cs" />
-    <Compile Include="BattlefieldPlace.cs" />
-    <Compile Include="Factories\BattlefieldFactory.cs" />
-    <Compile Include="Bot.cs" />
-    <Compile Include="Factories\BotFactory.cs" />
-    <Compile Include="Factories\MatchFactory.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Factories\TurnFactory.cs" />
-    <Compile Include="GameEngine.cs" />
-    <Compile Include="INewOutput.cs" />
+    <Compile Include="Factories\IBattlefieldFactory.cs" />
+    <Compile Include="Factories\IBotFactory.cs" />
+    <Compile Include="Factories\IBotWorkshop.cs" />
+    <Compile Include="Factories\IMatchFactory.cs" />
+    <Compile Include="Factories\IRoundFactory.cs" />
+    <Compile Include="Factories\ITurnFactory.cs" />
+    <Compile Include="IBattleBot.cs" />
+    <Compile Include="IBattlefield.cs" />
+    <Compile Include="IMatch.cs" />
+    <Compile Include="Internal\Battlefield.cs" />
+    <Compile Include="Internal\BattlefieldPlace.cs" />
+    <Compile Include="Internal\BattleBot.cs" />
+    <Compile Include="Internal\Game.cs" />
+    <Compile Include="IGame.cs" />
+    <Compile Include="Internal\InsideView.cs" />
+    <Compile Include="Internal\Match.cs" />
+    <Compile Include="Internal\OutsideView.cs" />
+    <Compile Include="Internal\Round.cs" />
+    <Compile Include="Internal\Turn.cs" />
     <Compile Include="IOutput.cs" />
+    <Compile Include="IRound.cs" />
     <Compile Include="ISettings.cs" />
-    <Compile Include="TurnActions\MalfunctionTurnAction.cs" />
-    <Compile Include="Match.cs" />
-    <Compile Include="OwnBot.cs" />
+    <Compile Include="ITurn.cs" />
+    <Compile Include="MatchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Round.cs" />
-    <Compile Include="Factories\RoundFactory.cs" />
     <Compile Include="RoundResult.cs" />
-    <Compile Include="Turn.cs" />
+    <Compile Include="Score.cs" />
+    <Compile Include="TurnResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodingArena.Player\CodingArena.Player.csproj">

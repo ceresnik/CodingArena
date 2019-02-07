@@ -1,19 +1,16 @@
-﻿using CodingArena.Game.Factories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Tests.Doubles
 {
     [Export(typeof(IBotFactory))]
     internal class BotFactory : IBotFactory
     {
-        public BotFactory()
-        {
-            BotsToCreate = new List<Bot>();
-        }
+        public BotFactory() => Bots = new List<IBattleBot>();
 
-        public List<Bot> BotsToCreate { get; }
+        public List<IBattleBot> Bots { get; set; }
 
-        public IEnumerable<Bot> CreateBots(IBattlefield battlefield) => BotsToCreate;
+        public IReadOnlyCollection<IBattleBot> Create(IBattlefield battlefield) => Bots;
     }
 }

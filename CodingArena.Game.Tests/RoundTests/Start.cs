@@ -1,29 +1,57 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using CodingArena.Game.Tests.BotAIs;
+using FluentAssertions;
 using NUnit.Framework;
-using System;
 
 namespace CodingArena.Game.Tests.RoundTests
 {
     internal class Start : TestFixture
     {
-        public override void SetUp()
+        [Test]
+        public void NoBots()
         {
-            base.SetUp();
-            StartingEventArgs = null;
-            StartedEventArgs = null;
-            Round.Notifier.Starting += (sender, args) => StartingEventArgs = args;
-            Round.Notifier.Started += (sender, args) => StartedEventArgs = args;
-            Round.Controller.Start();
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Should().BeEmpty();
         }
 
-        private TurnEventArgs StartingEventArgs { get; set; }
-
-        private EventArgs StartedEventArgs { get; set; }
+        [Test]
+        public void OneBot()
+        {
+            var bot = BotWorkshop.Create(TestBotAI.Idle);
+            BotFactory.Bots.Add(bot);
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(1);
+            Round.Scores.First().BotName.Should().Be(bot.Name);
+        }
 
         [Test]
-        public void Starting_IsRaised() => StartingEventArgs.Should().NotBeNull();
+        public void TwoBots()
+        {
+            var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy("attacker"));
+            var victim = BotWorkshop.Create(TestBotAI.Idle);
+            BotFactory.Bots.Add(attacker);
+            BotFactory.Bots.Add(victim);
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(2);
+            Round.Scores.Single(s => s.BotName == attacker.Name).Kills.Should().Be(1);
+            Round.Scores.Single(s => s.BotName == victim.Name).Deaths.Should().Be(1);
+        }
 
         [Test]
-        public void Started_IsRaised() => StartedEventArgs.Should().NotBeNull();
+        public void FiveBots()
+        {
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot1")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot2")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot3")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot4")));
+            BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot5")));
+            Round.Start();
+            Round.Scores.Should().NotBeNull();
+            Round.Scores.Count().Should().Be(5);
+        }
     }
 }

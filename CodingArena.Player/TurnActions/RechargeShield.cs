@@ -6,7 +6,7 @@
         {
         }
 
-        public int EnergyCost => 20;
+        public int EnergyCost => 10;
 
         public int RechargeAmount => 20;
     }

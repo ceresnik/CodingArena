@@ -1,20 +1,53 @@
-﻿namespace CodingArena.Player
+﻿using System;
+using CodingArena.Player.Battlefield;
+
+namespace CodingArena.Player
 {
     public interface IOwnBot : IBot
     {
         /// <summary>
-        /// Gets damage of own bot in percent (0-100%).
+        ///     Gets a value of maximum health points for own bot.
         /// </summary>
-        float Damage { get; }
+        int MaxHP { get; }
 
         /// <summary>
-        /// Gets shield status of own bot in percent (0-100%).
+        ///     Gets a value of current health points count for your bot.
         /// </summary>
-        float Shield { get; }
+        int HP { get; }
 
         /// <summary>
-        /// Gets energy status of own bot in percent (0-100%).
+        ///     Gets a value of maximum shield points for own bot.
         /// </summary>
-        float Energy { get; }
+        int MaxSP { get; }
+
+        /// <summary>
+        ///     Gets a value of current shield points count for your bot.
+        /// </summary>
+        int SP { get; }
+
+        /// <summary>
+        ///     Gets a value of maximum energy points for own bot.
+        /// </summary>
+        int MaxEP { get; }
+
+        /// <summary>
+        ///     Gets a value of current energy points count for your bot.
+        /// </summary>
+        int EP { get; }
+
+        /// <summary>
+        ///     Gets a position on battlefield for your bot.
+        /// </summary>
+        IBattlefieldPlace Position { get; }
+
+        /// <summary>
+        ///     Gets a distance from position of your bot to specified <paramref name="enemy"/>.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <returns>A distance from own bot to specified enemy.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Throws when <paramref name="enemy"/> is <c>null</c>.
+        /// </exception>
+        double DistanceTo(IEnemy enemy);
     }
 }

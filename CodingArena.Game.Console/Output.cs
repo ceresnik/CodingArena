@@ -9,62 +9,147 @@ namespace CodingArena.Game.Console
     [Export(typeof(IOutput))]
     internal class Output : IOutput
     {
-        private Dictionary<string, int> Winners { get; set; }
-        private IList<Bot> Bots { get; set; }
-        public Dictionary<Bot, string> Actions { get; }
-        private IBattlefield Battlefield { get; set; }
+        public ISettings Settings { get; }
+        private int MatchRow { get; }
+        private int RoundRow { get; set; }
+        private int TurnRow { get; set; }
+        private IGame Game { get; set; }
 
-        public Output()
+        [ImportingConstructor]
+        public Output(ISettings settings)
         {
+            Settings = settings;
+            MatchRow = 1;
             CursorVisible = false;
-            Actions = new Dictionary<Bot, string>();
         }
 
-        public void StartRound()
+        public void Observe(IGame game)
         {
-            Actions.Clear();
+            Game = game ?? throw new ArgumentNullException(nameof(game));
+            Game.MatchStarting += OnMatchStarting;
+            Game.MatchFinished += OnMatchFinished;
+        }
+
+        private void OnMatchStarting(object sender, EventArgs e)
+        {
+            Game.Match.RoundStarting += OnRoundStarting;
+            Game.Match.RoundFinished += OnRoundFinished;
+            Game.Match.NextRoundInUpdated += OnNextRoundInUpdated;
+        }
+
+        private void OnMatchFinished(object sender, EventArgs e)
+        {
+            Game.Match.RoundStarting -= OnRoundStarting;
+            Game.Match.RoundFinished -= OnRoundFinished;
+            Game.Match.NextRoundInUpdated -= OnNextRoundInUpdated;
+        }
+
+        private void OnNextRoundInUpdated(object sender, EventArgs e)
+        {
             Update();
-        }
-
-        public void NextRoundIn(TimeSpan delayForNextRound)
-        {
-            Bots = new List<Bot>();
-        }
-
-        public void SetBattlefield(IBattlefield battlefield) => Battlefield = battlefield;
-
-        public void NoBotsQualified() => Qualified(new List<Bot>());
-
-        public void Qualified(Bot bot) => Qualified(new List<Bot> { bot });
-
-        public void Qualified(IList<Bot> bots)
-        {
-            Bots = bots;
-            Update();
-        }
-
-        public void TurnAction(Bot bot, string message)
-        {
-            if (Actions.ContainsKey(bot))
+            if (Game.Match.NextRoundIn != TimeSpan.Zero && 
+                Game.Match.NextRoundIn < TimeSpan.FromSeconds(4))
             {
-                Actions[bot] = message;
+                ShortBeep();
             }
-            else
+        }
+
+        private void OnRoundStarting(object sender, EventArgs e)
+        {
+            Game.Match.Round.TurnStarting += OnTurnStarting;
+            Game.Match.Round.TurnFinished += OnTurnFinished;
+            LongBeep();
+        }
+
+        private static void ShortBeep() => Beep(500, 200);
+
+        private static void LongBeep() => Beep(500, 1000);
+
+        private void OnRoundFinished(object sender, EventArgs e)
+        {
+            Game.Match.Round.TurnStarting -= OnTurnStarting;
+            Game.Match.Round.TurnFinished -= OnTurnFinished;
+        }
+
+        private void OnTurnStarting(object sender, EventArgs e)
+        {
+        }
+
+        private void OnTurnFinished(object sender, EventArgs e)
+        {
+            Update();
+        }
+
+        private void Update()
+        {
+            Clear();
+            DisplayHeader(0, "Coding Arena");
+            Update(Game.Match);
+            Update(Game.Match.Round);
+            Update(Game.Match.Round.Turn);
+        }
+
+        private void Update(IMatch match)
+        {
+            DisplayHeader(MatchRow, $"Match{GetNextRoundIn()}");
+            int row = MatchRow + 1;
+            foreach (var score in match.Scores.OrderByDescending(s => s.Kills))
             {
-                Actions.Add(bot, message);
+                DisplayScore(row, score);
+                row++;
             }
-            Update();
+            RoundRow = MatchRow + row - 1;
         }
 
-        public void RoundResult(RoundResult roundResult)
+        private string GetNextRoundIn()
         {
+            string result = "";
+            var timeSpan = Game.Match.NextRoundIn;
+            if (timeSpan != TimeSpan.Zero)
+            {
+                string text = string.Empty;
+                if (timeSpan.Days > 0) text += $"{timeSpan.Days}d ";
+                if (timeSpan.Hours > 0) text += $"{timeSpan.Hours}h ";
+                if (timeSpan.Minutes > 0) text += $"{timeSpan.Minutes}m ";
+                if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s ";
+                result = string.IsNullOrEmpty(text) 
+                    ? " [ Next round starting now ]" 
+                    : $" [ Next round in {text}]";
+            }
+            return result;
         }
 
-        public void MatchResult(Dictionary<string, int> winners)
+        private void Update(IRound round)
         {
-            Winners = winners;
-            Update();
+            DisplayHeader(RoundRow, $"Round ({round.Number} / {Settings.MaxRounds}) Battlefield [ {round.Battlefield.Width} x {round.Battlefield.Height} ]");
+            TurnRow = RoundRow + 1;
         }
+
+        private void Update(ITurn turn)
+        {
+            DisplayHeader(TurnRow, $"Turn  ({turn.Number} / {Settings.MaxTurns})");
+            int row = TurnRow + 1;
+
+            foreach (var bot in Game.Match.Round.Bots)
+            {
+                DisplayBot(row, bot);
+                row++;
+            }
+
+            DisplayHeader(row++, "Actions");
+
+            foreach (var pair in turn.BotActions)
+            {
+                DisplayRow(row, pair.Value);
+                row++;
+            }
+        }
+
+        private void DisplayBot(int row, IBattleBot bot) =>
+            DisplayRow(row,
+                $"  * {bot.Name,-30} " +
+                $"[HP: {bot.HP,3:F0} SP: {bot.SP,3:F0} EP: {bot.EP,3:F0}] " +
+                $"[X: {bot.Position.X,2}, Y: {bot.Position.Y,2}]");
 
         public void Error(string message)
         {
@@ -73,65 +158,18 @@ namespace CodingArena.Game.Console
             WriteLine(message);
             ForegroundColor = previousColor;
         }
+        
+        private void DisplayScore(int row, Score score) =>
+            DisplayRow(row,
+                $"  * {score.BotName,-30} " +
+                $"K: {score.Kills,3:N0} D: {score.Deaths,3:N0}");
 
-        private void Update()
+        private void DisplayHeader(int rowIndex, string text)
         {
-            Clear();
-            int row = 0;
-            DisplayRow(0, "CodingArena");
-            row++;
-            FullRow(row, "=");
-            CursorTop = row;
+            FullRow(rowIndex, "=");
+            CursorTop = rowIndex;
             CursorLeft = 1;
-            WriteLine(" Match ");
-            if (Winners != null)
-            {
-                int number = 1;
-                foreach (var keyValuePair in Winners.OrderByDescending(pair => pair.Value))
-                {
-                    row++;
-                    DisplayRow(row, $" {number}. {keyValuePair.Key,-30} [{keyValuePair.Value}]");
-                    number++;
-                }
-            }
-
-            row++;
-            FullRow(row, "=");
-            CursorTop = row;
-            CursorLeft = 1;
-            WriteLine(" Round ");
-
-            if (Bots != null)
-            {
-                if (Bots.Any())
-                {
-                    foreach (var bot in Bots)
-                    {
-                        row++;
-                        DisplayRow(row, DisplayBot(bot));
-                    }
-                }
-                else
-                {
-                    row++;
-                    DisplayRow(row, "No bots qualified.");
-                }
-            }
-
-            row++;
-            FullRow(row, "=");
-            CursorTop = row;
-            CursorLeft = 1;
-            WriteLine(" Actions ");
-
-            if (Actions != null)
-            {
-                foreach (var action in Actions)
-                {
-                    row++;
-                    DisplayRow(row, $"{action.Value}");
-                }
-            }
+            WriteLine($" {text} ");
         }
 
         private void DisplayRow(int row, string message)
@@ -147,19 +185,6 @@ namespace CodingArena.Game.Console
             CursorTop = row;
             CursorLeft = 0;
             WriteLine(string.Join("", Enumerable.Repeat(s, BufferWidth - 1)));
-        }
-
-        private string DisplayBot(Bot bot)
-        {
-            string position = "";
-            if (Battlefield != null)
-            {
-                var place = Battlefield[bot];
-                position = $"[X: {place.X,2}, Y: {place.Y,2}]";
-            }
-            return $"  * {bot.Name,-30} " +
-                   $"[HP: {bot.Health,3:F0} % SP: {bot.Shield,3:F0} % EP: {bot.Energy,3:F0} %] " +
-                   position;
         }
     }
 }

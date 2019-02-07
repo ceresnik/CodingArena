@@ -1,13 +1,14 @@
-﻿namespace CodingArena.Game
+﻿using System.Collections.Generic;
+
+namespace CodingArena.Game
 {
     public class RoundResult
     {
-        public static RoundResult NoWinner() => new RoundResult(null);
+        internal RoundResult(IReadOnlyCollection<Score> scores)
+        {
+            Scores = scores;
+        }
 
-        public static RoundResult Winner(string name) => new RoundResult(name);
-
-        private RoundResult(string name) => WinnerName = name;
-
-        public string WinnerName { get; }
+        public IReadOnlyCollection<Score> Scores { get; }
     }
 }
