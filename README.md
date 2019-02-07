@@ -1,41 +1,42 @@
 # CodingArena
-A game for programmers to compete against each other to show best skills for creativity, fast writing, testing and more by implementing bot artificial intelligence to fight against other bots.
+A game for programmers to compete against each other to show best skills for creativity, fast writing and more by implementing bot artificial intelligence to fight against other bots.
 
 ### Language
 Current version will only supports C# programming language.
 
 ### Match
-Bots are qualified at the start of the match if player's implementations (assemblies) are present at the server's location from which the game engine loads the assemblies and tries to create bot strategy objects.
+Bots are qualified at the start of the each round if players' implementations (assemblies) are present at the server's location from which the game server loads the assemblies and tries to create bots. Round results are accumulated at match level.
 
 ### Rounds
-Game consists from repeating rounds. Each round bot which remains last gain points. Player with most points wins a match.
+Match consists from multiple rounds. Each round bots fights against each other and gain points for destroying other bots. 
 
 ### Turn
-Each bot chooses which turn action will perform that turn
+Every turn each bot chooses one turn action to be performed for specified input parameters (your bot, enemies, battlefield).
 
 ### TurnAction
 A bot chooses turn action (e.g. move, attack, idle). 
 
-| Turn Action     | Result       | Energy Cost |
-|:----------------|-------------:|------------:|
-| Move            | 1 place      |           5 |
-| Attack          | 0-100 damage |          10 |
-| Recharge.Shield | +20 SP       |          20 |
-| Recharge.Energy | +20 EP       |           5 |
+| Turn Action           | Result       | Energy Cost |
+|:----------------------|-------------:|------------:|
+| Move                  | 1 place      |           2 |
+| Attack (Max Range 5)  | 0-100 damage |           5 |
+| Recharge.Shield       | +20 SP       |          10 |
+| Recharge.Battery      | +10 EP       |           3 |
+| Idle                  | nothing      |           0 |
 
 #### Order of TurnActions (not implemented yet)
 Turn actions are ordered by the bot age:
 > Oldest assembly file that contains implementation of bot AI goes first, newest goes last.
 
 ### Bot AI
-Player (a programmer) implements strategy for their bot to fight against other bot and survive as last to win the round.
+Player (a programmer) implements artificial intelligence for their bot to fight against other bots to kill most of enemies.
 
 ### Bot
 Bot acts based on the Bot AI (implemented by a player) with following starting properties:
 
 | Max HP | Max SP | Max EP |
 |-------:|-------:|-------:|
-|   1000 |   1000 |   1000 |
+|    500 |    200 |    500 |
 
 > HP = Health Points  
 > SP = Shield Points  
@@ -44,7 +45,7 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 ### Battlefield
 
 A battlefield is area where bots fight against each other.
-Configured battlefield size is `100 x 100`.
+Configured battlefield size is `50 x 50`.
 
 ### Game Rules
 1. Don't use `System.Console`.
