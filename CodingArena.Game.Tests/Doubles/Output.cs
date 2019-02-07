@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Tests.Doubles
 {

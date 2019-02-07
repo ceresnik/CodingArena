@@ -4,6 +4,7 @@ using CodingArena.Game.Tests.Verification;
 using CodingArena.Player.TurnActions;
 using NUnit.Framework;
 using System.Collections.Generic;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Tests.BotTests.ExecuteTurnAction
 {

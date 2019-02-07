@@ -1,4 +1,5 @@
-﻿using CodingArena.Game.Factories;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Factories;
 using CodingArena.Game.Tests.Doubles;
 using NUnit.Framework;
 

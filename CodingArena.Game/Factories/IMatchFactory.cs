@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using CodingArena.Game.Entities;
 using CodingArena.Game.Internal;
 
 namespace CodingArena.Game.Factories

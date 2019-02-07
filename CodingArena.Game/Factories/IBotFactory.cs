@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using CodingArena.Game.Entities;
 using CodingArena.Player.Implement;
 
 namespace CodingArena.Game.Factories

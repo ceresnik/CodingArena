@@ -1,4 +1,5 @@
 ﻿using System;
+using CodingArena.Game.Entities;
 using static System.Console;
 
 namespace CodingArena.Game.Console

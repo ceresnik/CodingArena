@@ -1,6 +1,7 @@
 ﻿using CodingArena.Game.Internal;
 using CodingArena.Player.Implement;
 using System.ComponentModel.Composition;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Factories
 {

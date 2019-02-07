@@ -1,4 +1,6 @@
-﻿namespace CodingArena.Game
+﻿using CodingArena.Game.Entities;
+
+namespace CodingArena.Game
 {
     public interface IOutput
     {

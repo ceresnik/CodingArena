@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Entities;
 using CodingArena.Game.Factories;
 using CodingArena.Game.Tests.BotAIs;
 using CodingArena.Game.Tests.Verification;

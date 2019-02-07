@@ -1,6 +1,7 @@
 ﻿using CodingArena.Game.Tests.BotAIs;
 using NUnit.Framework;
 using System.Collections.Generic;
+using CodingArena.Game.Entities;
 using CodingArena.Game.Tests.Verification;
 using FluentAssertions;
 

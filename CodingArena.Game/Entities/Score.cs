@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Entities
 {
     public class Score
     {

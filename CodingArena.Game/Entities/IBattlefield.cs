@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Entities
 {
     public interface IBattlefield : IBattlefieldView
     {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Console
 {

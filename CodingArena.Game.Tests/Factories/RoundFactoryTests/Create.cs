@@ -1,4 +1,5 @@
-﻿using CodingArena.Game.Tests.Verification;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Tests.Verification;
 using FluentAssertions;
 using NUnit.Framework;
 

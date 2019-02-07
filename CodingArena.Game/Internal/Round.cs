@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using CodingArena.Game.Entities;
 using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal

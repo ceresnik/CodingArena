@@ -3,6 +3,7 @@ using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Internal
 {

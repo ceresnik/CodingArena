@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Entities
 {
     public class TurnResult
     {

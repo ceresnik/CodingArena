@@ -1,9 +1,9 @@
-﻿using CodingArena.Player;
-using CodingArena.Player.Battlefield;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using CodingArena.Player;
+using CodingArena.Player.Battlefield;
 
-namespace CodingArena.Game
+namespace CodingArena.Game.Entities
 {
     public interface IBattleBot : IBot
     {

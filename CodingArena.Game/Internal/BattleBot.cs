@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Internal
 {

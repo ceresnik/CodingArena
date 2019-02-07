@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodingArena.Game.Entities;
 using CodingArena.Game.Tests.Verification;
 using CodingArena.Player.TurnActions;
 using NUnit.Framework;
