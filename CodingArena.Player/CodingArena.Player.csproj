@@ -44,12 +44,15 @@
     <Compile Include="Battlefield\IBattlefieldView.cs" />
     <Compile Include="Battlefield\IBattlefieldPlace.cs" />
     <Compile Include="Exceptions\BattlefieldPlaceNotFoundException.cs" />
+    <Compile Include="IEnergy.cs" />
+    <Compile Include="IHealth.cs" />
     <Compile Include="Implement\IBotAI.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="Battlefield\IBattlefieldObject.cs" />
     <Compile Include="IOwnBot.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="IShield.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnActions\Attack.cs" />
     <Compile Include="TurnActions\Idle.cs" />

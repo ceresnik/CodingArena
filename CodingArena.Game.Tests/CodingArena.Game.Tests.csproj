@@ -70,6 +70,8 @@
     <Compile Include="BotTests\ExecuteTurnAction\RechargeBattery.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\RechargeShield.cs" />
     <Compile Include="BotAIs\TestBotAI.cs" />
+    <Compile Include="BotTests\InsideViewTests.cs" />
+    <Compile Include="BotTests\OutsideViewTests.cs" />
     <Compile Include="BotTests\TestFixture.cs" />
     <Compile Include="CompositionContainerFactory.cs" />
     <Compile Include="Doubles\BotFactory.cs" />

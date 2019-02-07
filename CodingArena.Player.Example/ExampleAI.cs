@@ -14,13 +14,13 @@ namespace CodingArena.Player.Example
         {
             if (!enemies.Any()) return TurnAction.Idle();
 
-            if (ownBot.EP < 105) return TurnAction.Recharge.Battery();
+            if (ownBot.Energy.Percent < 10) return TurnAction.Recharge.Battery();
 
             var enemy = enemies.First();
 
-            if (ownBot.HP < ownBot.MaxHP && ownBot.SP < ownBot.MaxSP)
+            if (ownBot.Health.Percent < 50 && ownBot.Shield.Percent < 50)
             {
-                if (ownBot.EP > 105) return TurnAction.Recharge.Shield(100);                
+                if (ownBot.Energy.Actual > 110) return TurnAction.Recharge.Shield(100);
                 return TurnAction.Move.Towards(enemy.Position, ownBot.Position);
             }
 
