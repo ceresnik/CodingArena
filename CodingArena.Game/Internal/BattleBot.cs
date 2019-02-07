@@ -193,13 +193,32 @@ namespace CodingArena.Game.Internal
 
         private string ExecuteTurnAction(RechargeShield rechargeShield)
         {
-            if (rechargeShield.EnergyCost > EP)
+            int amount;
+            if (EP == 0)
+            {
                 return $"{Name} does not have enough energy to recharge shield.";
+            }
+            if (rechargeShield.EnergyCost > EP)
+            {
+                amount = EP;
+                DrainEnergy(EP);
+                if (SP + amount > MaxSP)
+                {
+                    amount = MaxSP - SP;
+                }
+                if (SP == MaxSP) return $"{Name} wants to recharge shield, but it's already full.";
+                SP += amount;
+                return $"{Name} recharges shield by {amount} SP.";
+            }
             if (SP == MaxSP) return $"{Name} wants to recharge shield, but it's already full.";
             DrainEnergy(rechargeShield.EnergyCost);
-            SP += rechargeShield.RechargeAmount;
-            if (SP > MaxSP) SP = MaxSP;
-            return $"{Name} recharges shield.";
+            amount = rechargeShield.RechargeAmount;
+            if (SP + amount > MaxSP)
+            {
+                amount = MaxSP - SP;
+            }
+            SP += amount;
+            return $"{Name} recharges shield by {amount} SP.";
         }
 
         public void DrainEnergy(int energyPoints)

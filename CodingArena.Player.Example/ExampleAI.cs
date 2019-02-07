@@ -14,19 +14,22 @@ namespace CodingArena.Player.Example
         {
             if (!enemies.Any()) return TurnAction.Idle();
 
-            if (ownBot.SP < 50)
-            {
-                return TurnAction.Recharge.Shield();
-            }
+            if (ownBot.EP < 105) return TurnAction.Recharge.Battery();
 
             var enemy = enemies.First();
+
+            if (ownBot.HP < ownBot.MaxHP && ownBot.SP < ownBot.MaxSP)
+            {
+                if (ownBot.EP > 105) return TurnAction.Recharge.Shield(100);                
+                return TurnAction.Move.Towards(enemy.Position, ownBot.Position);
+            }
+
             if (ownBot.DistanceTo(enemy) < (double) Attack.MaxRange / 2)
             {
                 return TurnAction.Attack(enemy);
             }
 
             return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
-
         }
     }
 }

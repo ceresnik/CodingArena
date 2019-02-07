@@ -1,13 +1,18 @@
-﻿namespace CodingArena.Player.TurnActions
+﻿using System;
+
+namespace CodingArena.Player.TurnActions
 {
     public sealed class RechargeShield : ITurnAction
     {
-        internal RechargeShield()
+        internal RechargeShield(int amount)
         {
+            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount), "Value is less then zero.");
+            RechargeAmount = amount;
+            EnergyCost = amount;
         }
 
-        public int EnergyCost => 10;
+        public int EnergyCost { get; }
 
-        public int RechargeAmount => 20;
+        public int RechargeAmount { get; }
     }
 }

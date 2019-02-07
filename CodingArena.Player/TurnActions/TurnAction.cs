@@ -85,10 +85,31 @@ namespace CodingArena.Player.TurnActions
             }
         }
 
+        /// <summary>
+        ///     An access to recharge turn actions.
+        /// </summary>
         public static class Recharge
         {
+            /// <summary>
+            ///     Gets a turn action to recharge battery.
+            /// </summary>
+            /// <returns>A turn action.</returns>
             public static ITurnAction Battery() => new RechargeBattery();
-            public static ITurnAction Shield() => new RechargeShield();
+
+            /// <summary>
+            ///     Gets a turn action to recharge shield with specified <paramref name="amount"/>.
+            /// </summary>
+            /// <param name="amount">
+            ///     An amount of shield points to be recharged. Must be positive value.
+            /// Shield points are recharged from energy points in ratio 1:1.
+            /// The <paramref name="amount"/> value is limited by current energy points. 
+            /// Be careful not to deplete all the energy points!
+            /// </param>
+            /// <returns>A turn action.</returns>
+            /// <exception cref="ArgumentOutOfRangeException">
+            ///     Throws when specified <paramref name="amount"/> is out of range.
+            /// </exception>
+            public static ITurnAction Shield(int amount) => new RechargeShield(amount);
         }
 
         public static ITurnAction Idle() => new Idle();

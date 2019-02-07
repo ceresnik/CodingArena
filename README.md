@@ -20,8 +20,8 @@ A bot chooses turn action (e.g. move, attack, idle).
 |:----------------------|-------------:|------------:|
 | Move                  | 1 place      |           2 |
 | Attack (Max Range 5)  | 0-100 damage |           5 |
-| Recharge.Shield       | +20 SP       |          10 |
-| Recharge.Battery      | +10 EP       |           3 |
+| Recharge.Shield       |  +X SP       |           X |
+| Recharge.Battery      | +20 EP       |           5 |
 | Idle                  | nothing      |           0 |
 
 #### Order of TurnActions (not implemented yet)
