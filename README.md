@@ -81,3 +81,18 @@ return TurnAction.Recharge.Battery();
 ```csharp
 return TurnAction.Idle();
 ```
+
+### Example Console Output
+```
+= Coding Arena =============================================================
+= Match [ Next round in 34s ] ==============================================
+  * Example Bot 2                  K:   1 D:   0
+  * Example Bot 1                  K:   0 D:   1
+= Round (1 / 100) Battlefield [ 50 x 50 ] ==================================
+= Turn  (22 / 120) =========================================================
+  * Example Bot 1                  [HP:   0 SP:   0 EP: 378] [X: 33, Y: 40]
+  * Example Bot 2                  [HP: 500 SP:  50 EP: 420] [X: 32, Y: 42]
+= Actions ==================================================================
+Example Bot 1 recharges shield.
+Example Bot 2 destroys Example Bot 1.
+```
