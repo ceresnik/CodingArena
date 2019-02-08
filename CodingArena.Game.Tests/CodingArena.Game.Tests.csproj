@@ -86,6 +86,7 @@
     <Compile Include="Factories\TurnFactoryTests\Create.cs" />
     <Compile Include="Factories\TurnFactoryTests\TestFixture.cs" />
     <Compile Include="GameTests\Start.cs" />
+    <Compile Include="GameTests\StartAsync.cs" />
     <Compile Include="GameTests\TestFixture.cs" />
     <Compile Include="MatchTests\Start.cs" />
     <Compile Include="MatchTests\TestFixture.cs" />

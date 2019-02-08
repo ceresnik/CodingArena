@@ -1,32 +1,33 @@
-﻿using FluentAssertions;
+﻿using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CodingArena.Game.Tests.GameTests
 {
-    internal class Start : TestFixture
+    internal class StartAsync : TestFixture
     {
         [Test]
-        public void Match_NotNull()
+        public async Task Match_NotNull()
         {
-            Game.Start();
+            await Game.StartAsync();
             Game.Match.Should().NotBeNull();
         }
 
         [Test]
-        public void MatchStarting_IsRaised()
+        public async Task MatchStarting_IsRaised()
         {
             bool isMatchStartingRaised = false;
             Game.MatchStarting += (sender, args) => isMatchStartingRaised = true;
-            Game.Start();
+            await Game.StartAsync();
             isMatchStartingRaised.Should().BeTrue();
         }
 
         [Test]
-        public void MatchFinished_IsRaised()
+        public async Task MatchFinished_IsRaised()
         {
             bool isMatchFinishedRaised = false;
             Game.MatchFinished += (sender, args) => isMatchFinishedRaised = true;
-            Game.Start();
+            await Game.StartAsync();
             isMatchFinishedRaised.Should().BeTrue();
         }
     }
