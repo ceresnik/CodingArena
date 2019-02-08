@@ -129,7 +129,8 @@ namespace CodingArena.Game.Wpf
             var sb = new StringBuilder();
             foreach (var bot in Game.Match.Round.Bots)
             {
-                sb.AppendLine(DisplayBot(bot) + " " + turn.BotActions[bot]);
+                sb.AppendLine(turn.BotActions[bot]);
+                sb.AppendLine(DisplayBot(bot));
             }
             ViewModel.TurnText = sb.ToString();
             ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
@@ -149,7 +150,6 @@ namespace CodingArena.Game.Wpf
         }
 
         private string DisplayBot(IBattleBot bot) =>
-            $"{bot.Name,-30} " +
             $"[HP: {bot.HP,3:F0}, SP: {bot.SP,3:F0}, EP: {bot.EP,3:F0}] ";
 
         public void Error(string message) => MessageBox.Show(message, "Error", MessageBoxButton.OK);
