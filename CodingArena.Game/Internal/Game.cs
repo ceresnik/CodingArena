@@ -25,7 +25,13 @@ namespace CodingArena.Game.Internal
             OnMatchFinished();
         }
 
-        public Task StartAsync() => Task.Run(() => Start());
+        public async Task StartAsync()
+        {
+            Match = MatchFactory.Create();
+            OnMatchStarting();
+            await Match.StartAsync();
+            OnMatchFinished();
+        }
 
         public IMatch Match { get; private set; }
 
