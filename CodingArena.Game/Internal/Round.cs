@@ -30,9 +30,13 @@ namespace CodingArena.Game.Internal
         }
 
         public int Number { get; }
+
         public IEnumerable<IBattleBot> Bots { get; private set; }
+
         public IBattlefield Battlefield { get; private set; }
+
         public ITurn Turn { get; private set; }
+
         public IEnumerable<Score> Scores { get; private set; }
 
         public void Start()
