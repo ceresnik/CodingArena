@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using CodingArena.Game.Entities;
 using CodingArena.Game.Factories;
 
@@ -24,10 +25,16 @@ namespace CodingArena.Game.Internal
             OnMatchFinished();
         }
 
+        public Task StartAsync() => Task.Run(() => Start());
+
         public IMatch Match { get; private set; }
+
         public event EventHandler MatchStarting;
+
         public event EventHandler MatchFinished;
+
         private void OnMatchStarting() => MatchStarting?.Invoke(this, EventArgs.Empty);
+
         private void OnMatchFinished() => MatchFinished?.Invoke(this, EventArgs.Empty);
     }
 }
