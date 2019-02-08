@@ -7,8 +7,6 @@ namespace CodingArena.Game.Entities
     {
         int Number { get; }
 
-        IDictionary<IBattleBot, string> BotActions { get; }
-
         void Start(IEnumerable<IBattleBot> battleBots);
 
         Task StartAsync(IEnumerable<IBattleBot> battleBots);

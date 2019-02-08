@@ -87,8 +87,18 @@ namespace CodingArena.Game.Wpf
         private void Update()
         {
             Update(Game.Match);
-            Update(Game.Match.Round);
-            Update(Game.Match.Round.Turn);
+            IRound round = Game.Match.Round;
+            ViewModel.BattlefieldWidth = round.Battlefield.Width;
+            ViewModel.BattlefieldHeight = round.Battlefield.Height;
+
+            var sb = new StringBuilder();
+            foreach (var bot in Game.Match.Round.Bots)
+            {
+                sb.AppendLine(bot.Action);
+                sb.AppendLine(DisplayBot(bot));
+            }
+            ViewModel.TurnText = sb.ToString();
+            ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
         }
 
         private void Update(IMatch match)
@@ -116,24 +126,6 @@ namespace CodingArena.Game.Wpf
                 result = text;
             }
             return result;
-        }
-
-        private void Update(IRound round)
-        {
-            ViewModel.BattlefieldWidth = round.Battlefield.Width;
-            ViewModel.BattlefieldHeight = round.Battlefield.Height;
-        }
-
-        private void Update(ITurn turn)
-        {
-            var sb = new StringBuilder();
-            foreach (var bot in Game.Match.Round.Bots)
-            {
-                sb.AppendLine(turn.BotActions[bot]);
-                sb.AppendLine(DisplayBot(bot));
-            }
-            ViewModel.TurnText = sb.ToString();
-            ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
         }
 
         private string GetBattlefieldText(IRound round)

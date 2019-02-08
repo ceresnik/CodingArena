@@ -22,9 +22,9 @@ namespace CodingArena.Game.Tests.TurnTests
         {
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
             Turn.Start(bots);
-            Verify.That(Turn.BotActions[AttackerBot])
+            Verify.That(AttackerBot.Action)
                 .Is($"{AttackerBot.Name} attacks {IdleBot.Name} with 100 damage.");
-            Verify.That(Turn.BotActions[IdleBot])
+            Verify.That(IdleBot.Action)
                 .Is($"{IdleBot.Name} is idle.");
         }
 
@@ -35,9 +35,9 @@ namespace CodingArena.Game.Tests.TurnTests
             IdleBot.TakeDamage(IdleBot.MaxSP + IdleBot.MaxHP - 1);
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
             Turn.Start(bots);
-            Verify.That(Turn.BotActions[AttackerBot])
+            Verify.That(AttackerBot.Action)
                 .Is($"{AttackerBot.Name} destroys {IdleBot.Name}.");
-            Verify.That(Turn.BotActions[IdleBot])
+            Verify.That(IdleBot.Action)
                 .Is($"{IdleBot.Name} is destroyed by {AttackerBot.Name}.");
         }
 

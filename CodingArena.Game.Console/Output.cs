@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CodingArena.Game.Entities;
+using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using CodingArena.Game.Entities;
 using static System.Console;
 
 namespace CodingArena.Game.Console
@@ -47,7 +47,7 @@ namespace CodingArena.Game.Console
         private void OnNextRoundInUpdated(object sender, EventArgs e)
         {
             Update();
-            if (Game.Match.NextRoundIn != TimeSpan.Zero && 
+            if (Game.Match.NextRoundIn != TimeSpan.Zero &&
                 Game.Match.NextRoundIn < TimeSpan.FromSeconds(4))
             {
                 ShortBeep();
@@ -112,8 +112,8 @@ namespace CodingArena.Game.Console
                 if (timeSpan.Hours > 0) text += $"{timeSpan.Hours}h ";
                 if (timeSpan.Minutes > 0) text += $"{timeSpan.Minutes}m ";
                 if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s ";
-                result = string.IsNullOrEmpty(text) 
-                    ? " [ Next round starting now ]" 
+                result = string.IsNullOrEmpty(text)
+                    ? " [ Next round starting now ]"
                     : $" [ Next round in {text}]";
             }
             return result;
@@ -132,16 +132,8 @@ namespace CodingArena.Game.Console
 
             foreach (var bot in Game.Match.Round.Bots)
             {
-                DisplayBot(row, bot);
-                row++;
-            }
-
-            DisplayHeader(row++, "Actions");
-
-            foreach (var pair in turn.BotActions)
-            {
-                DisplayRow(row, pair.Value);
-                row++;
+                DisplayBot(row++, bot);
+                DisplayRow(row++, bot.Action);
             }
         }
 
@@ -158,7 +150,7 @@ namespace CodingArena.Game.Console
             WriteLine(message);
             ForegroundColor = previousColor;
         }
-        
+
         private void DisplayScore(int row, Score score) =>
             DisplayRow(row,
                 $"  * {score.BotName,-30} " +

@@ -22,8 +22,8 @@ namespace CodingArena.Game.Internal
             foreach (var battleBot in bots)
             {
                 var enemies = bots.Except(new List<IBattleBot> { battleBot }).ToList();
-                var botActionResult = battleBot.ExecuteTurnAction(enemies.Where(e => e.HP > 0));
-                BotActions.Add(battleBot, botActionResult);
+                battleBot.ExecuteTurnAction(enemies.Where(e => e.HP > 0));
+                BotActions.Add(battleBot, battleBot.Action);
             }
         }
 

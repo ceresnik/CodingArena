@@ -56,9 +56,14 @@ namespace CodingArena.Game.Internal
             Battlefield.Set(this, newX, newY);
         }
 
-        public string ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
+        public void ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
         {
-            if (HP <= 0) return $"{Name} is destroyed by {DestroyedBy}.";
+            if (HP <= 0)
+            {
+                Action = $"{Name} is destroyed by {DestroyedBy}.";
+                return;
+            }
+
             ITurnAction turnAction;
             try
             {
@@ -67,29 +72,36 @@ namespace CodingArena.Game.Internal
             catch (Exception)
             {
                 Destroy("system malfunction");
-                return $"{Name} is destroyed by {DestroyedBy}.";
+                Action = $"{Name} is destroyed by {DestroyedBy}.";
+                return;
             }
             if (turnAction == null)
             {
                 Destroy("system malfunction");
-                return $"{Name} is destroyed by {DestroyedBy}.";
+                Action = $"{Name} is destroyed by {DestroyedBy}.";
+                return;
             }
             switch (turnAction)
             {
                 case Move move:
-                    return ExecuteTurnAction(move);
+                    Action = ExecuteTurnAction(move);
+                    return;
                 case RechargeBattery rechargeBattery:
-                    return ExecuteTurnAction(rechargeBattery);
+                    Action = ExecuteTurnAction(rechargeBattery);
+                    return;
                 case RechargeShield rechargeShield:
-                    return ExecuteTurnAction(rechargeShield);
+                    Action = ExecuteTurnAction(rechargeShield);
+                    return;
                 case Attack attack:
-                    return ExecuteTurnAction(attack, enemies);
+                    Action = ExecuteTurnAction(attack, enemies);
+                    return;
                 case Idle idle:
-                    return $"{Name} is idle.";
+                    Action = $"{Name} is idle.";
+                    return;
             }
 
             Destroy("system malfunction");
-            return $"{Name} is destroyed by {DestroyedBy}.";
+            Action = $"{Name} is destroyed by {DestroyedBy}.";
         }
 
         private ITurnAction GetTurnAction(IEnumerable<IBattleBot> enemies)
@@ -270,6 +282,8 @@ namespace CodingArena.Game.Internal
         public int Kills { get; set; }
 
         public int Deaths { get; set; }
+
+        public string Action { get; set; }
 
         public double DistanceTo(IOwnBot insideView) => Position.DistanceTo(Battlefield[insideView]);
 
