@@ -94,7 +94,7 @@ namespace CodingArena.Game.Wpf
         private void Update(IMatch match)
         {
             var sb = new StringBuilder();
-            foreach (var score in match.Scores.OrderByDescending(s => s.Kills))
+            foreach (var score in match.Scores.OrderByDescending(s => s.Kills - s.Deaths))
             {
                 sb.AppendLine(DisplayScore(score));
             }
