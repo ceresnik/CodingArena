@@ -1,25 +1,18 @@
-﻿using CodingArena.Game.Tests.BotAIs;
-using NUnit.Framework;
-using System.Collections.Generic;
-using CodingArena.Game.Entities;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Tests.BotAIs;
 using CodingArena.Game.Tests.Verification;
 using FluentAssertions;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace CodingArena.Game.Tests.TurnTests
 {
     internal class Start : TestFixture
     {
-        private ITurn Turn { get; set; }
-        private IBattleBot AttackerBot { get; set; }
-        private IBattleBot IdleBot { get; set; }
-
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
-            Turn = TurnFactory.Create(1);
-            AttackerBot = BotWorkshop.Create(TestBotAI.AttackFirstEnemy);
-            IdleBot = BotWorkshop.Create(TestBotAI.Idle);
             AttackerBot.PositionTo(Battlefield, 0, 0);
             IdleBot.PositionTo(Battlefield, 1, 0);
         }

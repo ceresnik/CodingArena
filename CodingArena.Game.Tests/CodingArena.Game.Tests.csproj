@@ -97,6 +97,7 @@
     <Compile Include="RoundTests\TestFixture.cs" />
     <Compile Include="TestFixtureBase.cs" />
     <Compile Include="TurnTests\Start.cs" />
+    <Compile Include="TurnTests\StartAsync.cs" />
     <Compile Include="TurnTests\TestFixture.cs" />
     <Compile Include="Verification\BattlefieldPlaceVerification.cs" />
     <Compile Include="Verification\BooleanVerification.cs" />

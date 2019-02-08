@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CodingArena.Game.Entities;
-using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
@@ -17,9 +17,9 @@ namespace CodingArena.Game.Internal
 
         public Round(
             int number,
-            IBotFactory botFactory, 
-            ISettings settings, 
-            ITurnFactory turnFactory, 
+            IBotFactory botFactory,
+            ISettings settings,
+            ITurnFactory turnFactory,
             IBattlefieldFactory battlefieldFactory)
         {
             Number = number;
@@ -54,14 +54,38 @@ namespace CodingArena.Game.Internal
             var scores = new List<Score>();
             foreach (var bot in Bots)
             {
-                scores.Add(new Score(bot.Name) {Kills = bot.Kills, Deaths = bot.Deaths});
+                scores.Add(new Score(bot.Name) { Kills = bot.Kills, Deaths = bot.Deaths });
             }
             Scores = scores;
         }
 
-        public Task StartAsync() => Task.Run(() => Start());
-
         private void WaitForNextTurn() => Thread.Sleep(Settings.NextTurnDelay);
+
+        public async Task StartAsync()
+        {
+            Battlefield = BattlefieldFactory.Create();
+            Bots = BotFactory.Create(Battlefield);
+            Battlefield.SetRandomly(Bots);
+
+            for (int i = 1; i <= Settings.MaxTurns; i++)
+            {
+                OnTurnStarting();
+                Turn = TurnFactory.Create(i);
+                await Turn.StartAsync(Bots);
+                OnTurnFinished();
+                if (Bots.Count(b => b.HP > 0) <= 1) break;
+                await WaitForNextTurnAsync();
+            }
+
+            var scores = new List<Score>();
+            foreach (var bot in Bots)
+            {
+                scores.Add(new Score(bot.Name) { Kills = bot.Kills, Deaths = bot.Deaths });
+            }
+            Scores = scores;
+        }
+
+        private Task WaitForNextTurnAsync() => Task.Delay(Settings.NextTurnDelay);
 
         public event EventHandler TurnStarting;
 

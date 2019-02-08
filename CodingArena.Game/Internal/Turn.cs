@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CodingArena.Game.Entities;
+using System.Collections.Generic;
 using System.Linq;
-using CodingArena.Game.Entities;
+using System.Threading.Tasks;
 
 namespace CodingArena.Game.Internal
 {
@@ -20,10 +21,12 @@ namespace CodingArena.Game.Internal
             var bots = battleBots.ToList();
             foreach (var battleBot in bots)
             {
-                var enemies = bots.Except(new List<IBattleBot> {battleBot}).ToList();
+                var enemies = bots.Except(new List<IBattleBot> { battleBot }).ToList();
                 var botActionResult = battleBot.ExecuteTurnAction(enemies.Where(e => e.HP > 0));
                 BotActions.Add(battleBot, botActionResult);
             }
         }
+
+        public Task StartAsync(IEnumerable<IBattleBot> battleBots) => Task.Run(() => Start(battleBots));
     }
 }
