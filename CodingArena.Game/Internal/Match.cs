@@ -55,8 +55,6 @@ namespace CodingArena.Game.Internal
             }
         }
 
-        public Task StartAsync() => Task.Run(() => Start());
-
         private void WaitForNextRound()
         {
             NextRoundIn = Settings.NextRoundDelay;
@@ -64,6 +62,47 @@ namespace CodingArena.Game.Internal
             {
                 var poll = TimeSpan.FromSeconds(1);
                 Thread.Sleep(poll);
+                NextRoundIn -= poll;
+                OnNextRoundInUpdated();
+            }
+            NextRoundIn = TimeSpan.Zero;
+        }
+
+        public async Task StartAsync()
+        {
+            for (int i = 1; i <= Settings.MaxRounds; i++)
+            {
+                Round = RoundFactory.Create(i);
+                OnRoundStarting();
+                await Round.StartAsync();
+
+                foreach (var roundScore in Round.Scores)
+                {
+                    var existingScore = scores.FirstOrDefault(s => s.BotName == roundScore.BotName);
+                    if (existingScore != null)
+                    {
+                        existingScore.Kills += roundScore.Kills;
+                        existingScore.Deaths += roundScore.Deaths;
+                    }
+                    else
+                    {
+                        scores.Add(roundScore);
+                    }
+                }
+
+                OnRoundFinished();
+
+                await WaitForNextRoundAsync();
+            }
+        }
+
+        private async Task WaitForNextRoundAsync()
+        {
+            NextRoundIn = Settings.NextRoundDelay;
+            while (NextRoundIn > TimeSpan.Zero)
+            {
+                var poll = TimeSpan.FromSeconds(1);
+                await Task.Delay(poll);
                 NextRoundIn -= poll;
                 OnNextRoundInUpdated();
             }
