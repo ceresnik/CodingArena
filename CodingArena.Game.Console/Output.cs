@@ -148,7 +148,7 @@ namespace CodingArena.Game.Console
         private void DisplayBot(int row, IBattleBot bot) =>
             DisplayRow(row,
                 $"  * {bot.Name,-30} " +
-                $"[HP: {bot.HP,3:F0} SP: {bot.SP,3:F0} EP: {bot.EP,3:F0}] " +
+                $"[HP: {bot.HP,3:F0}, SP: {bot.SP,3:F0}, EP: {bot.EP,3:F0}] " +
                 $"[X: {bot.Position.X,2}, Y: {bot.Position.Y,2}]");
 
         public void Error(string message)

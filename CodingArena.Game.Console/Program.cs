@@ -1,12 +1,13 @@
-﻿using System;
-using CodingArena.Game.Entities;
+﻿using CodingArena.Game.Entities;
+using System;
+using System.Threading.Tasks;
 using static System.Console;
 
 namespace CodingArena.Game.Console
 {
-    class Program
+    internal class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             try
             {
@@ -14,7 +15,7 @@ namespace CodingArena.Game.Console
                 var game = container.GetExportedValue<IGame>();
                 var output = container.GetExportedValue<IOutput>();
                 output.Observe(game);
-                game.Start();
+                await game.StartAsync();
             }
             catch (Exception e)
             {

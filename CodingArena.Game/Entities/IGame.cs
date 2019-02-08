@@ -5,7 +5,6 @@ namespace CodingArena.Game.Entities
 {
     public interface IGame
     {
-        void Start();
         Task StartAsync();
         IMatch Match { get; }
         event EventHandler MatchStarting;

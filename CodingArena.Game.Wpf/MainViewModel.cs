@@ -1,36 +1,32 @@
-using System;
-using System.Windows.Input;
 using CodingArena.Game.Entities;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CodingArena.Game.Wpf
 {
-    public class MainViewModel : Observable
+    [Export(typeof(IMainViewModel))]
+    internal class MainViewModel : Observable, IMainViewModel
     {
+        private IMainView View { get; }
         private string myText;
-        private IGame Game { get; set; }
 
-        public MainViewModel()
+        [ImportingConstructor]
+        public MainViewModel(IMainView view)
         {
-            StartCommand = new DelegateCommand(Start);
+            View = view;
+            View.DataContext = this;
+            StartCommand = new DelegateCommand(async () => await StartAsync());
         }
 
-        private void Start()
-        {
-            var container = ContainerFactory.Create();
-            Game = container.GetExportedValue<IGame>();
-            Game.MatchStarting += OnMatchStarting;
-            Game.Start();
-        }
+        public IGame Game { get; set; }
 
-        private void OnMatchStarting(object sender, EventArgs e)
-        {
-            myText = "Match Starting";
-        }
+        private async Task StartAsync() => await Game.StartAsync();
 
         public string Text
         {
             get => myText;
-            private set
+            set
             {
                 if (value == myText) return;
                 myText = value;
@@ -39,5 +35,7 @@ namespace CodingArena.Game.Wpf
         }
 
         public ICommand StartCommand { get; }
+
+        public void Show() => View.Show();
     }
 }
