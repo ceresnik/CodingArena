@@ -47,8 +47,8 @@ namespace CodingArena.Game.Internal
 
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
-                OnTurnStarting();
                 Turn = TurnFactory.Create(i);
+                OnTurnStarting();
                 Turn.Start(Bots);
                 OnTurnFinished();
                 if (Bots.Count(b => b.HP > 0) <= 1) break;
@@ -73,8 +73,8 @@ namespace CodingArena.Game.Internal
 
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
-                OnTurnStarting();
                 Turn = TurnFactory.Create(i);
+                OnTurnStarting();
                 await Turn.StartAsync(Bots);
                 OnTurnFinished();
                 if (Bots.Count(b => b.HP > 0) <= 1) break;

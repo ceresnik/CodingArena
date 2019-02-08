@@ -9,7 +9,16 @@ namespace CodingArena.Game.Wpf
     internal class MainViewModel : Observable, IMainViewModel
     {
         private IMainView View { get; }
-        private string myText;
+        private string myMatchText;
+        private string myTurnText;
+        private int myTurnNumber;
+        private int myMaxTurns;
+        private int myBattlefieldWidth;
+        private int myBattlefieldHeight;
+        private string myBattlefieldText;
+        private int myRoundNumber;
+        private int myMaxRounds;
+        private string myNextRoundIn;
 
         [ImportingConstructor]
         public MainViewModel(IMainView view)
@@ -21,18 +30,117 @@ namespace CodingArena.Game.Wpf
 
         public IGame Game { get; set; }
 
-        private async Task StartAsync() => await Game.StartAsync();
-
-        public string Text
+        public string MatchText
         {
-            get => myText;
+            get => myMatchText;
             set
             {
-                if (value == myText) return;
-                myText = value;
+                if (value == myMatchText) return;
+                myMatchText = value;
                 OnPropertyChanged();
             }
         }
+
+        public int RoundNumber
+        {
+            get => myRoundNumber;
+            set
+            {
+                if (value == myRoundNumber) return;
+                myRoundNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxRounds
+        {
+            get => myMaxRounds;
+            set
+            {
+                if (value == myMaxRounds) return;
+                myMaxRounds = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int BattlefieldWidth
+        {
+            get => myBattlefieldWidth;
+            set
+            {
+                if (value == myBattlefieldWidth) return;
+                myBattlefieldWidth = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int BattlefieldHeight
+        {
+            get => myBattlefieldHeight;
+            set
+            {
+                if (value == myBattlefieldHeight) return;
+                myBattlefieldHeight = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BattlefieldText
+        {
+            get => myBattlefieldText;
+            set
+            {
+                if (value == myBattlefieldText) return;
+                myBattlefieldText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int TurnNumber
+        {
+            get => myTurnNumber;
+            set
+            {
+                if (value == myTurnNumber) return;
+                myTurnNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxTurns
+        {
+            get => myMaxTurns;
+            set
+            {
+                if (value == myMaxTurns) return;
+                myMaxTurns = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string TurnText
+        {
+            get => myTurnText;
+            set
+            {
+                if (value == myTurnText) return;
+                myTurnText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string NextRoundIn
+        {
+            get => myNextRoundIn;
+            set
+            {
+                if (value.Equals(myNextRoundIn)) return;
+                myNextRoundIn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private async Task StartAsync() => await Game.StartAsync();
 
         public ICommand StartCommand { get; }
 

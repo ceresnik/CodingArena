@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingArena.Game.Wpf"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="Coding Arena" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,9 +13,91 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Start"  Command="{Binding StartCommand}" />
-        <TextBlock 
-            Grid.Row="1" 
-            Text="{Binding Text}" 
-            FontSize="26" FontFamily="Consolas" />
+        <Grid
+            Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox
+                Grid.Row="0"
+                FontSize="24">
+                <TextBlock                 
+                    Text="{Binding TurnText}" 
+                    FontSize="26" FontFamily="Consolas" />
+                <GroupBox.Header>
+                    <TextBlock>
+                        <Run Text="Round ("/>
+                        <Run Text="{Binding RoundNumber}" />
+                        <Run Text=" / " />
+                        <Run Text="{Binding MaxRounds}" />
+                        <Run Text=")" />
+                        <Run Text="Turn (" />
+                        <Run Text="{Binding TurnNumber}" />
+                        <Run Text=" / " />
+                        <Run Text="{Binding MaxTurns}" />
+                        <Run Text=")" />
+                    </TextBlock>
+                </GroupBox.Header>
+            </GroupBox>
+            <GridSplitter 
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Height="5"/>
+            <Grid
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="600" />
+                </Grid.ColumnDefinitions>
+                <GroupBox
+                    FontSize="24"
+                    Grid.Column="0">
+                    <GroupBox.Header>
+                        <TextBlock>
+                            <Run Text="Battlefield [" />
+                            <Run Text="{Binding BattlefieldWidth}" />
+                            <Run Text=" x " />
+                            <Run Text="{Binding BattlefieldHeight}" />
+                            <Run Text="]" />
+                        </TextBlock>
+                    </GroupBox.Header>
+                    <TextBlock 
+                        Text="{Binding BattlefieldText}"
+                        FontSize="26" FontFamily="Consolas"/>
+                </GroupBox>
+                <GridSplitter 
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Width="5"/>
+                <Grid
+                    Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox
+                        Grid.Row="0"
+                        Header="Match"
+                        FontSize="24">
+                        <TextBlock                         
+                            Text="{Binding MatchText}" 
+                            FontSize="26" FontFamily="Consolas" />
+                    </GroupBox>
+                    <GroupBox
+                        Grid.Row="1"
+                        Header="Next Round In:"
+                        FontSize="24">
+                        <TextBlock                         
+                            Text="{Binding NextRoundIn}" 
+                            FontSize="26" FontFamily="Consolas" />
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

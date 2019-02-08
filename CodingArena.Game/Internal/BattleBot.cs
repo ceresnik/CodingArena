@@ -1,4 +1,5 @@
-﻿using CodingArena.Player;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Internal
 {
@@ -132,8 +132,8 @@ namespace CodingArena.Game.Internal
 
             enemy.TakeDamage(damage, this);
 
-            return enemy.HP <= 0 
-                ? $"{Name} destroys {enemy.Name}." 
+            return enemy.HP <= 0
+                ? $"{Name} destroys {enemy.Name}."
                 : $"{Name} attacks {enemy.Name} with {damage} damage.";
         }
 
@@ -170,13 +170,13 @@ namespace CodingArena.Game.Internal
 
             if (Battlefield.IsOutOfRange(newX, newY))
             {
-                Destroy("battlefield force field");
-                return $"{Name} moved into battlefield force field and exploded.";
+                Destroy("force field");
+                return $"{Name} moved into force field and exploded.";
             }
 
             DrainEnergy(move.EnergyCost);
             PositionTo(newX, newY);
-            return $"{Name} moved {move.Direction}.";
+            return $"{Name} moves {move.Direction}.";
         }
 
         private void PositionTo(int newX, int newY) => PositionTo(Battlefield, newX, newY);

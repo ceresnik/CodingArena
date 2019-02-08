@@ -20,6 +20,8 @@ namespace CodingArena.Game.Wpf
         {
             Settings = settings;
             ViewModel = viewModel;
+            ViewModel.MaxTurns = Settings.MaxTurns;
+            ViewModel.MaxRounds = Settings.MaxRounds;
         }
 
         public void Observe(IGame game)
@@ -45,7 +47,7 @@ namespace CodingArena.Game.Wpf
 
         private void OnNextRoundInUpdated(object sender, EventArgs e)
         {
-            Update();
+            ViewModel.NextRoundIn = GetNextRoundIn();
             if (Game.Match.NextRoundIn != TimeSpan.Zero &&
                 Game.Match.NextRoundIn < TimeSpan.FromSeconds(4))
             {
@@ -57,6 +59,7 @@ namespace CodingArena.Game.Wpf
         {
             Game.Match.Round.TurnStarting += OnTurnStarting;
             Game.Match.Round.TurnFinished += OnTurnFinished;
+            ViewModel.RoundNumber = Game.Match.Round.Number;
             LongBeep();
         }
 
@@ -68,10 +71,12 @@ namespace CodingArena.Game.Wpf
         {
             Game.Match.Round.TurnStarting -= OnTurnStarting;
             Game.Match.Round.TurnFinished -= OnTurnFinished;
+            Update();
         }
 
         private void OnTurnStarting(object sender, EventArgs e)
         {
+            ViewModel.TurnNumber = Game.Match.Round.Turn.Number;
         }
 
         private void OnTurnFinished(object sender, EventArgs e)
@@ -81,23 +86,20 @@ namespace CodingArena.Game.Wpf
 
         private void Update()
         {
-            var sb = new StringBuilder();
-            sb.AppendLine(Update(Game.Match));
-            sb.AppendLine(Update(Game.Match.Round));
-            sb.AppendLine(Update(Game.Match.Round.Turn));
-            ViewModel.Text = sb.ToString();
+            Update(Game.Match);
+            Update(Game.Match.Round);
+            Update(Game.Match.Round.Turn);
         }
 
-        private string Update(IMatch match)
+        private void Update(IMatch match)
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"=== Match {GetNextRoundIn()}");
             foreach (var score in match.Scores.OrderByDescending(s => s.Kills))
             {
                 sb.AppendLine(DisplayScore(score));
             }
 
-            return sb.ToString();
+            ViewModel.MatchText = sb.ToString();
         }
 
         private string GetNextRoundIn()
@@ -111,44 +113,49 @@ namespace CodingArena.Game.Wpf
                 if (timeSpan.Hours > 0) text += $"{timeSpan.Hours}h ";
                 if (timeSpan.Minutes > 0) text += $"{timeSpan.Minutes}m ";
                 if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s ";
-                result = string.IsNullOrEmpty(text)
-                    ? " [ Next round starting now ]"
-                    : $" [ Next round in {text}]";
+                result = text;
             }
             return result;
         }
 
-        private string Update(IRound round) => $"=== Round ({round.Number} / {Settings.MaxRounds}) Battlefield [ {round.Battlefield.Width} x {round.Battlefield.Height} ]";
+        private void Update(IRound round)
+        {
+            ViewModel.BattlefieldWidth = round.Battlefield.Width;
+            ViewModel.BattlefieldHeight = round.Battlefield.Height;
+        }
 
-        private string Update(ITurn turn)
+        private void Update(ITurn turn)
         {
             var sb = new StringBuilder();
-            sb.AppendLine();
-            sb.AppendLine($"=== Turn  ({turn.Number} / {Settings.MaxTurns})");
             foreach (var bot in Game.Match.Round.Bots)
             {
-                sb.AppendLine(DisplayBot(bot));
+                sb.AppendLine(DisplayBot(bot) + " " + turn.BotActions[bot]);
             }
+            ViewModel.TurnText = sb.ToString();
+            ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
+        }
 
-            sb.AppendLine();
-            sb.AppendLine("=== Actions");
-            foreach (var pair in turn.BotActions)
+        private string GetBattlefieldText(IRound round)
+        {
+            var sb = new StringBuilder();
+            foreach (var bot in round.Bots)
             {
-                sb.AppendLine(pair.Value);
+                sb.AppendLine(
+                    $"{bot.Name,-30} " +
+                    $"[X: {bot.Position.X,2}, Y: {bot.Position.Y,2}]");
             }
 
             return sb.ToString();
         }
 
         private string DisplayBot(IBattleBot bot) =>
-            $"  * {bot.Name,-30} " +
-            $"[HP: {bot.HP,3:F0}, SP: {bot.SP,3:F0}, EP: {bot.EP,3:F0}] " +
-            $"[X: {bot.Position.X,2}, Y: {bot.Position.Y,2}]";
+            $"{bot.Name,-30} " +
+            $"[HP: {bot.HP,3:F0}, SP: {bot.SP,3:F0}, EP: {bot.EP,3:F0}] ";
 
         public void Error(string message) => MessageBox.Show(message, "Error", MessageBoxButton.OK);
 
         private string DisplayScore(Score score) =>
-            $"  * {score.BotName,-30} " +
+            $"{score.BotName,-20} " +
             $"K: {score.Kills,3:N0} D: {score.Deaths,3:N0}";
     }
 }
