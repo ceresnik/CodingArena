@@ -65,9 +65,26 @@
                             <Run Text="]" />
                         </TextBlock>
                     </GroupBox.Header>
-                    <TextBlock 
-                        Text="{Binding BattlefieldText}"
-                        FontSize="26" FontFamily="Consolas"/>
+                    <ItemsControl 
+                        ItemsSource="{Binding BattlefieldBots}"
+                        Width="500" Height="500" Background="BlanchedAlmond">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas>
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
+                                    </Canvas.RenderTransform>
+                                    <Rectangle Width="10" Height="10" Fill="Black" />
+                                    <Label Content="{Binding BotName}" FontSize="12" Margin="0,5,0,0" />
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </GroupBox>
                 <GridSplitter 
                     Grid.Column="1"

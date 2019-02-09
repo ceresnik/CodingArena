@@ -1,4 +1,5 @@
 using CodingArena.Game.Entities;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,6 +27,7 @@ namespace CodingArena.Game.Wpf
             View = view;
             View.DataContext = this;
             StartCommand = new DelegateCommand(async () => await StartAsync());
+            BattlefieldBots = new ObservableCollection<BattlefieldBotViewModel>();
         }
 
         public IGame Game { get; set; }
@@ -139,6 +141,8 @@ namespace CodingArena.Game.Wpf
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<BattlefieldBotViewModel> BattlefieldBots { get; }
 
         private async Task StartAsync() => await Game.StartAsync();
 

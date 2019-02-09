@@ -92,10 +92,12 @@ namespace CodingArena.Game.Wpf
             ViewModel.BattlefieldHeight = round.Battlefield.Height;
 
             var sb = new StringBuilder();
+            ViewModel.BattlefieldBots.Clear();
             foreach (var bot in Game.Match.Round.Bots)
             {
                 sb.AppendLine(bot.Action);
                 sb.AppendLine(DisplayBot(bot));
+                ViewModel.BattlefieldBots.Add(new BattlefieldBotViewModel(bot));
             }
             ViewModel.TurnText = sb.ToString();
             ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
