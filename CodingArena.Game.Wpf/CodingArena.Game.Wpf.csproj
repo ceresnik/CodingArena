@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BattlefieldBotViewModel.cs" />
+    <Compile Include="BotScoreViewModel.cs" />
+    <Compile Include="BotStateViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IMainViewModel.cs" />
@@ -116,6 +119,12 @@
       <Project>{d28a9f70-a0ad-48b3-bbd2-e08d026ede9d}</Project>
       <Name>CodingArena.Player</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="robot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="battlefield9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

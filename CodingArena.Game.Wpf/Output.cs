@@ -93,11 +93,13 @@ namespace CodingArena.Game.Wpf
 
             var sb = new StringBuilder();
             ViewModel.BattlefieldBots.Clear();
+            ViewModel.BotStates.Clear();
             foreach (var bot in Game.Match.Round.Bots)
             {
                 sb.AppendLine(bot.Action);
                 sb.AppendLine(DisplayBot(bot));
                 ViewModel.BattlefieldBots.Add(new BattlefieldBotViewModel(bot));
+                ViewModel.BotStates.Add(new BotStateViewModel(bot));
             }
             ViewModel.TurnText = sb.ToString();
             ViewModel.BattlefieldText = GetBattlefieldText(Game.Match.Round);
@@ -105,13 +107,12 @@ namespace CodingArena.Game.Wpf
 
         private void Update(IMatch match)
         {
-            var sb = new StringBuilder();
+            ViewModel.BotScores.Clear();
             foreach (var score in match.Scores.OrderByDescending(s => s.Kills - s.Deaths))
             {
-                sb.AppendLine(DisplayScore(score));
-            }
+                ViewModel.BotScores.Add(new BotScoreViewModel(score));
 
-            ViewModel.MatchText = sb.ToString();
+            }
         }
 
         private string GetNextRoundIn()
@@ -124,8 +125,8 @@ namespace CodingArena.Game.Wpf
                 if (timeSpan.Days > 0) text += $"{timeSpan.Days}d ";
                 if (timeSpan.Hours > 0) text += $"{timeSpan.Hours}h ";
                 if (timeSpan.Minutes > 0) text += $"{timeSpan.Minutes}m ";
-                if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s ";
-                result = text;
+                if (timeSpan.Seconds > 0) text += $"{timeSpan.Seconds}s";
+                result = $"Next round in {text}.";
             }
             return result;
         }

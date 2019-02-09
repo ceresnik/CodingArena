@@ -17,20 +17,8 @@ namespace CodingArena.Game.Wpf
         int MaxTurns { get; set; }
         string TurnText { get; set; }
         string NextRoundIn { get; set; }
+        ObservableCollection<BotStateViewModel> BotStates { get; }
         ObservableCollection<BattlefieldBotViewModel> BattlefieldBots { get; }
-    }
-
-    internal class BattlefieldBotViewModel
-    {
-        public BattlefieldBotViewModel(IBattleBot battleBot)
-        {
-            BotName = battleBot.Name;
-            X = battleBot.Position.X * 10;
-            Y = 500 - battleBot.Position.Y * 10 - 10;
-        }
-
-        public string BotName { get; }
-        public int X { get; }
-        public int Y { get; }
+        ObservableCollection<BotScoreViewModel> BotScores { get; }
     }
 }

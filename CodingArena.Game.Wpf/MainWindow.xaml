@@ -11,23 +11,63 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Start"  Command="{Binding StartCommand}" />
         <Grid
             Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <GroupBox
-                Grid.Row="0"
-                FontSize="24">
-                <TextBlock                 
-                    Text="{Binding TurnText}" 
-                    FontSize="26" FontFamily="Consolas" />
+                FontSize="14"
+                Grid.Column="0"
+                Background="Wheat">
                 <GroupBox.Header>
                     <TextBlock>
+                        <Run Text="Battlefield [" />
+                        <Run Text="{Binding BattlefieldWidth}" />
+                        <Run Text=" x " />
+                        <Run Text="{Binding BattlefieldHeight}" />
+                        <Run Text="]" />
+                    </TextBlock>
+                </GroupBox.Header>
+                <ItemsControl 
+                    ItemsSource="{Binding BattlefieldBots}"
+                    Width="700" Height="700">
+                    <ItemsControl.Background>
+                        <ImageBrush ImageSource="battlefield9.jpg" Stretch="UniformToFill" />
+                    </ItemsControl.Background>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas>
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
+                                </Canvas.RenderTransform>
+                                <Image Source="robot.png" Height="40" />
+                                <Label Content="{Binding BotName}" FontSize="14" Margin="0,28,0,0" />
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </GroupBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+                <GroupBox
+                    Grid.Row="0"
+                    FontSize="14">
+                    <GroupBox.Header>
+                        <TextBlock>
                         <Run Text="Round ("/>
                         <Run Text="{Binding RoundNumber}" />
                         <Run Text=" / " />
@@ -38,83 +78,92 @@
                         <Run Text=" / " />
                         <Run Text="{Binding MaxTurns}" />
                         <Run Text=")" />
-                    </TextBlock>
-                </GroupBox.Header>
-            </GroupBox>
-            <GridSplitter 
-                Grid.Row="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                Height="5"/>
-            <Grid
-                Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="600" />
-                </Grid.ColumnDefinitions>
-                <GroupBox
-                    FontSize="24"
-                    Grid.Column="0">
-                    <GroupBox.Header>
-                        <TextBlock>
-                            <Run Text="Battlefield [" />
-                            <Run Text="{Binding BattlefieldWidth}" />
-                            <Run Text=" x " />
-                            <Run Text="{Binding BattlefieldHeight}" />
-                            <Run Text="]" />
                         </TextBlock>
                     </GroupBox.Header>
-                    <ItemsControl 
-                        ItemsSource="{Binding BattlefieldBots}"
-                        Width="500" Height="500" Background="BlanchedAlmond">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
+                    <ListView 
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding BotStates}">
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Canvas>
-                                    <Canvas.RenderTransform>
-                                        <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
-                                    </Canvas.RenderTransform>
-                                    <Rectangle Width="10" Height="10" Fill="Black" />
-                                    <Label Content="{Binding BotName}" FontSize="12" Margin="0,5,0,0" />
-                                </Canvas>
+                                <Grid Width="700">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock 
+                                        Grid.Row="0" 
+                                        Text="{Binding Action}" 
+                                        HorizontalAlignment="Stretch"
+                                        FontSize="18"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="0">
+                                            <ProgressBar 
+                                                Maximum="{Binding MaxHP}" 
+                                                Value="{Binding HP, Mode=OneWay}" 
+                                                Foreground="Green"
+                                                Background="LightGray"
+                                                Height="10"/>
+                                        </Border>
+                                        <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="1">
+                                            <ProgressBar 
+                                                Maximum="{Binding MaxSP}" 
+                                                Value="{Binding SP, Mode=OneWay}" 
+                                                Foreground="Blue"
+                                                Background="LightGray"
+                                                Height="10"/>
+                                        </Border>
+                                        <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="2">
+                                            <ProgressBar 
+                                                Maximum="{Binding MaxEP}" 
+                                                Value="{Binding EP, Mode=OneWay}" 
+                                                Foreground="Red"
+                                                Background="LightGray"
+                                                Height="10"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </GroupBox>
                 <GridSplitter 
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Stretch"
-                    Width="5"/>
-                <Grid
-                    Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <GroupBox
-                        Grid.Row="0"
-                        Header="Match"
-                        FontSize="24">
-                        <TextBlock                         
-                            Text="{Binding MatchText}" 
-                            FontSize="26" FontFamily="Consolas" />
-                    </GroupBox>
-                    <GroupBox
-                        Grid.Row="1"
-                        Header="Next Round In:"
-                        FontSize="24">
-                        <TextBlock                         
-                            Text="{Binding NextRoundIn}" 
-                            FontSize="26" FontFamily="Consolas" />
-                    </GroupBox>
-                </Grid>
+                    Grid.Row="1"
+                    Height="5"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"/>
+                <GroupBox
+                    Header="Match"
+                    FontSize="14"
+                    Grid.Row="2">
+                    <DataGrid
+                        ItemsSource="{Binding BotScores}"
+                        AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>
+                            <DataGridTextColumn Header="Kills" Binding="{Binding Kills}" Width="100"/>
+                            <DataGridTextColumn Header="Deaths" Binding="{Binding Deaths}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
             </Grid>
         </Grid>
+        <StatusBar
+            Grid.Row="2">
+            <StatusBarItem Content="{Binding NextRoundIn}" FontSize="18" />
+        </StatusBar>
     </Grid>
 </Window>
