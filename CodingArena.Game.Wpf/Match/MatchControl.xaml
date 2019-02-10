@@ -1,0 +1,23 @@
+﻿<UserControl 
+    x:Class="CodingArena.Game.Wpf.Match.MatchControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:CodingArena.Game.Wpf.Match"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox
+        Header="Match"
+        FontSize="14">
+        <DataGrid
+            ItemsSource="{Binding BotScores}"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>
+                <DataGridTextColumn Header="Kills" Binding="{Binding Kills}" Width="100"/>
+                <DataGridTextColumn Header="Deaths" Binding="{Binding Deaths}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </GroupBox>
+</UserControl>

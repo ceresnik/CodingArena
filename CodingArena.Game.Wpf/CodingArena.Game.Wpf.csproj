@@ -73,7 +73,13 @@
     <Compile Include="IMainViewModel.cs" />
     <Compile Include="Common\IView.cs" />
     <Compile Include="Common\IViewModel.cs" />
+    <Compile Include="Match\MatchControl.xaml.cs">
+      <DependentUpon>MatchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Output.cs" />
+    <Compile Include="Round\RoundControl.xaml.cs">
+      <DependentUpon>RoundControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="Battlefield\BattlefieldBotControl.xaml">
       <SubType>Designer</SubType>
@@ -97,6 +103,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Match\MatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Round\RoundControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Observable.cs" />

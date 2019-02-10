@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CodingArena.Game.Wpf.Round.RoundControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodingArena.Game.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox
+                    Grid.Row="0"
+                    FontSize="14">
+        <GroupBox.Header>
+            <TextBlock>
+                        <Run Text="Round ("/>
+                        <Run Text="{Binding RoundNumber}" />
+                        <Run Text=" / " />
+                        <Run Text="{Binding MaxRounds}" />
+                        <Run Text=")" />
+                        <Run Text="Turn (" />
+                        <Run Text="{Binding TurnNumber}" />
+                        <Run Text=" / " />
+                        <Run Text="{Binding MaxTurns}" />
+                        <Run Text=")" />
+            </TextBlock>
+        </GroupBox.Header>
+        <ListView 
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding BotStates}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="700">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                                        Grid.Row="0" 
+                                        Text="{Binding Action}" 
+                                        HorizontalAlignment="Stretch"
+                                        FontSize="18"/>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="0">
+                                <ProgressBar 
+                                                Maximum="{Binding MaxHP}" 
+                                                Value="{Binding HP, Mode=OneWay}" 
+                                                Foreground="Green"
+                                                Background="LightGray"
+                                                Height="10"/>
+                            </Border>
+                            <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="1">
+                                <ProgressBar 
+                                                Maximum="{Binding MaxSP}" 
+                                                Value="{Binding SP, Mode=OneWay}" 
+                                                Foreground="Blue"
+                                                Background="LightGray"
+                                                Height="10"/>
+                            </Border>
+                            <Border 
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Grid.Column="2">
+                                <ProgressBar 
+                                                Maximum="{Binding MaxEP}" 
+                                                Value="{Binding EP, Mode=OneWay}" 
+                                                Foreground="Red"
+                                                Background="LightGray"
+                                                Height="10"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </GroupBox>
+</UserControl>

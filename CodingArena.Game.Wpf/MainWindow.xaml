@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CodingArena.Game.Wpf"
         xmlns:battlefield="clr-namespace:CodingArena.Game.Wpf.Battlefield"
+        xmlns:round="clr-namespace:CodingArena.Game.Wpf.Round"
+        xmlns:match="clr-namespace:CodingArena.Game.Wpf.Match"
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="Coding Arena" Height="450" Width="800">
@@ -28,102 +29,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <GroupBox
-                    Grid.Row="0"
-                    FontSize="14">
-                    <GroupBox.Header>
-                        <TextBlock>
-                        <Run Text="Round ("/>
-                        <Run Text="{Binding RoundNumber}" />
-                        <Run Text=" / " />
-                        <Run Text="{Binding MaxRounds}" />
-                        <Run Text=")" />
-                        <Run Text="Turn (" />
-                        <Run Text="{Binding TurnNumber}" />
-                        <Run Text=" / " />
-                        <Run Text="{Binding MaxTurns}" />
-                        <Run Text=")" />
-                        </TextBlock>
-                    </GroupBox.Header>
-                    <ListView 
-                        HorizontalAlignment="Stretch"
-                        ItemsSource="{Binding BotStates}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Width="700">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock 
-                                        Grid.Row="0" 
-                                        Text="{Binding Action}" 
-                                        HorizontalAlignment="Stretch"
-                                        FontSize="18"/>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="0">
-                                            <ProgressBar 
-                                                Maximum="{Binding MaxHP}" 
-                                                Value="{Binding HP, Mode=OneWay}" 
-                                                Foreground="Green"
-                                                Background="LightGray"
-                                                Height="10"/>
-                                        </Border>
-                                        <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="1">
-                                            <ProgressBar 
-                                                Maximum="{Binding MaxSP}" 
-                                                Value="{Binding SP, Mode=OneWay}" 
-                                                Foreground="Blue"
-                                                Background="LightGray"
-                                                Height="10"/>
-                                        </Border>
-                                        <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="2">
-                                            <ProgressBar 
-                                                Maximum="{Binding MaxEP}" 
-                                                Value="{Binding EP, Mode=OneWay}" 
-                                                Foreground="Red"
-                                                Background="LightGray"
-                                                Height="10"/>
-                                        </Border>
-                                    </Grid>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </GroupBox>
+                <round:RoundControl Grid.Row="0" />
                 <GridSplitter 
                     Grid.Row="1"
                     Height="5"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"/>
-                <GroupBox
-                    Header="Match"
-                    FontSize="14"
-                    Grid.Row="2">
-                    <DataGrid
-                        ItemsSource="{Binding BotScores}"
-                        AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>
-                            <DataGridTextColumn Header="Kills" Binding="{Binding Kills}" Width="100"/>
-                            <DataGridTextColumn Header="Deaths" Binding="{Binding Deaths}" Width="100"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </GroupBox>
+                <match:MatchControl Grid.Row="2"/>
             </Grid>
         </Grid>
         <StatusBar
