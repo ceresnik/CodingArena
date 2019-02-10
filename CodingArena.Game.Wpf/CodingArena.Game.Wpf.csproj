@@ -57,9 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BattlefieldBotViewModel.cs" />
+    <Compile Include="Battlefield\BattlefieldBotViewModel.cs" />
+    <Compile Include="Battlefield\BattlefieldViewModel.cs" />
     <Compile Include="BotScoreViewModel.cs" />
     <Compile Include="BotStateViewModel.cs" />
+    <Compile Include="Common\ViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IMainViewModel.cs" />
@@ -83,7 +85,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Observable.cs" />
+    <Compile Include="Common\Observable.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

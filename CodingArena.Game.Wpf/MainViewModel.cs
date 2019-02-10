@@ -1,4 +1,6 @@
 using CodingArena.Game.Entities;
+using CodingArena.Game.Wpf.Battlefield;
+using CodingArena.Game.Wpf.Common;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace CodingArena.Game.Wpf
         private int myRoundNumber;
         private int myMaxRounds;
         private string myNextRoundIn;
+        private BattlefieldViewModel myBattlefieldViewModel;
 
         [ImportingConstructor]
         public MainViewModel(IMainView view)
@@ -27,9 +30,19 @@ namespace CodingArena.Game.Wpf
             View = view;
             View.DataContext = this;
             StartCommand = new DelegateCommand(async () => await StartAsync());
-            BattlefieldBots = new ObservableCollection<BattlefieldBotViewModel>();
             BotStates = new ObservableCollection<BotStateViewModel>();
             BotScores = new ObservableCollection<BotScoreViewModel>();
+        }
+
+        public BattlefieldViewModel BattlefieldViewModel
+        {
+            get => myBattlefieldViewModel;
+            set
+            {
+                if (Equals(value, myBattlefieldViewModel)) return;
+                myBattlefieldViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
         public IGame Game { get; set; }

@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using CodingArena.Game.Tests.BotAIs;
+﻿using CodingArena.Game.Tests.BotAIs;
 using FluentAssertions;
 using NUnit.Framework;
+using System.Linq;
 
 namespace CodingArena.Game.Tests.RoundTests
 {
@@ -31,7 +31,9 @@ namespace CodingArena.Game.Tests.RoundTests
         public void TwoBots()
         {
             var attacker = BotWorkshop.Create(TestBotAI.SeekAndDestroy("attacker"));
+            attacker.PositionTo(Round.Battlefield, 0, 0);
             var victim = BotWorkshop.Create(TestBotAI.Idle);
+            victim.PositionTo(Round.Battlefield, 1, 0);
             BotFactory.Bots.Add(attacker);
             BotFactory.Bots.Add(victim);
             Round.Start();

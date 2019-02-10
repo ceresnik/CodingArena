@@ -1,4 +1,5 @@
 ﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Wpf.Battlefield;
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -60,6 +61,7 @@ namespace CodingArena.Game.Wpf
             Game.Match.Round.TurnStarting += OnTurnStarting;
             Game.Match.Round.TurnFinished += OnTurnFinished;
             ViewModel.RoundNumber = Game.Match.Round.Number;
+            ViewModel.BattlefieldViewModel = new BattlefieldViewModel(Game.Match.Round.Bots);
             LongBeep();
         }
 
@@ -92,13 +94,12 @@ namespace CodingArena.Game.Wpf
             ViewModel.BattlefieldHeight = round.Battlefield.Height;
 
             var sb = new StringBuilder();
-            ViewModel.BattlefieldBots.Clear();
             ViewModel.BotStates.Clear();
             foreach (var bot in Game.Match.Round.Bots)
             {
                 sb.AppendLine(bot.Action);
                 sb.AppendLine(DisplayBot(bot));
-                ViewModel.BattlefieldBots.Add(new BattlefieldBotViewModel(bot));
+                ViewModel.BattlefieldViewModel.Update(bot);
                 ViewModel.BotStates.Add(new BotStateViewModel(bot));
             }
             ViewModel.TurnText = sb.ToString();

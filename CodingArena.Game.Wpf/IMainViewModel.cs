@@ -1,4 +1,5 @@
 using CodingArena.Game.Entities;
+using CodingArena.Game.Wpf.Battlefield;
 using System.Collections.ObjectModel;
 
 namespace CodingArena.Game.Wpf
@@ -17,8 +18,8 @@ namespace CodingArena.Game.Wpf
         int MaxTurns { get; set; }
         string TurnText { get; set; }
         string NextRoundIn { get; set; }
+        BattlefieldViewModel BattlefieldViewModel { get; set; }
         ObservableCollection<BotStateViewModel> BotStates { get; }
-        ObservableCollection<BattlefieldBotViewModel> BattlefieldBots { get; }
         ObservableCollection<BotScoreViewModel> BotScores { get; }
     }
 }

@@ -34,7 +34,7 @@
                     </TextBlock>
                 </GroupBox.Header>
                 <ItemsControl 
-                    ItemsSource="{Binding BattlefieldBots}"
+                    ItemsSource="{Binding BattlefieldViewModel.Bots}"
                     Width="700" Height="700">
                     <ItemsControl.Background>
                         <ImageBrush ImageSource="battlefield9.jpg" Stretch="UniformToFill" />

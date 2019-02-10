@@ -27,6 +27,9 @@ namespace CodingArena.Game.Internal
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             TurnFactory = turnFactory ?? throw new ArgumentNullException(nameof(turnFactory));
             BattlefieldFactory = battlefieldFactory ?? throw new ArgumentNullException(nameof(battlefieldFactory));
+            Battlefield = BattlefieldFactory.Create();
+            Bots = BotFactory.Create(Battlefield);
+            Battlefield.SetRandomly(Bots);
         }
 
         public int Number { get; }
@@ -41,10 +44,6 @@ namespace CodingArena.Game.Internal
 
         public void Start()
         {
-            Battlefield = BattlefieldFactory.Create();
-            Bots = BotFactory.Create(Battlefield);
-            Battlefield.SetRandomly(Bots);
-
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
                 Turn = TurnFactory.Create(i);
@@ -67,10 +66,6 @@ namespace CodingArena.Game.Internal
 
         public async Task StartAsync()
         {
-            Battlefield = BattlefieldFactory.Create();
-            Bots = BotFactory.Create(Battlefield);
-            Battlefield.SetRandomly(Bots);
-
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
                 Turn = TurnFactory.Create(i);
