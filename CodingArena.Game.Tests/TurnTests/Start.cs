@@ -14,12 +14,12 @@ namespace CodingArena.Game.Tests.TurnTests
         {
             base.SetUp();
             AttackerBot.PositionTo(Battlefield, 0, 0);
-            IdleBot.PositionTo(Battlefield, 1, 0);
         }
 
         [Test]
         public void AttackEnemy()
         {
+            IdleBot.PositionTo(Battlefield, 1, 0);
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
             Turn.Start(bots);
             Verify.That(AttackerBot.Action)
@@ -31,7 +31,7 @@ namespace CodingArena.Game.Tests.TurnTests
         [Test]
         public void DestroyEnemy()
         {
-
+            IdleBot.PositionTo(Battlefield, 1, 0);
             IdleBot.TakeDamage(IdleBot.MaxSP + IdleBot.MaxHP - 1);
             var bots = new List<IBattleBot> { AttackerBot, IdleBot };
             Turn.Start(bots);
@@ -49,10 +49,14 @@ namespace CodingArena.Game.Tests.TurnTests
             var bots = new List<IBattleBot> { attacker, victim };
             attacker.PositionTo(Battlefield, 0, 0);
             victim.PositionTo(Battlefield, Battlefield.Width - 1, Battlefield.Height - 1);
+
             for (int i = 1; i <= Settings.MaxTurns; i++)
             {
+                System.Console.WriteLine($"Attacker: {attacker.Position}");
+                System.Console.WriteLine($"Victim:   {victim.Position}");
                 var turn = TurnFactory.Create(i);
                 turn.Start(bots);
+                System.Console.WriteLine(attacker.Action);
             }
 
             victim.HP.Should().Be(0);

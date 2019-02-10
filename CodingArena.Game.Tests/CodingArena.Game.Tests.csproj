@@ -63,6 +63,7 @@
     <Compile Include="BotTests\ExecuteTurnAction\Exceptional.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Idle.cs" />
     <Compile Include="BotAIs\IdleBotAI.cs" />
+    <Compile Include="BotTests\ExecuteTurnAction\Move\CannotMoveOnOccupiedPlace.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\CannotMoveWhenDestroyed.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveOutOfBattlefield.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveFreely.cs" />

@@ -7,6 +7,7 @@ namespace CodingArena.Game.Tests.BotTests
 {
     internal class TestFixture : TestFixtureBase
     {
+        protected IBotWorkshop BotWorkshop { get; private set; }
         protected TestBotAI BotAI { get; private set; }
         protected IBattlefield Battlefield { get; private set; }
         protected IBattleBot Bot { get; private set; }
@@ -20,7 +21,8 @@ namespace CodingArena.Game.Tests.BotTests
             base.SetUp();
             Battlefield = Get<IBattlefieldFactory>().Create();
             BotAI = new TestBotAI();
-            Bot = Get<IBotWorkshop>().Create(BotAI);
+            BotWorkshop = Get<IBotWorkshop>();
+            Bot = BotWorkshop.Create(BotAI);
             IsExplodedEventRaised = false;
             Bot.Exploded += (sender, args) => IsExplodedEventRaised = true;
         }

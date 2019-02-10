@@ -186,6 +186,11 @@ namespace CodingArena.Game.Internal
                 return $"{Name} moved into force field and exploded.";
             }
 
+            if (Battlefield[newX, newY].IsEmpty == false)
+            {
+                return $"{Name} cannot move {move.Direction}, place is occupied.";
+            }
+
             DrainEnergy(move.EnergyCost);
             PositionTo(newX, newY);
             return $"{Name} moves {move.Direction}.";
