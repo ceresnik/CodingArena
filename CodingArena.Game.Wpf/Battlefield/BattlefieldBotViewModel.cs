@@ -8,6 +8,7 @@ namespace CodingArena.Game.Wpf.Battlefield
         private string myBotName;
         private int myX;
         private int myY;
+        private string myImageSource;
 
         public BattlefieldBotViewModel(IBattleBot battleBot)
         {
@@ -47,11 +48,23 @@ namespace CodingArena.Game.Wpf.Battlefield
             }
         }
 
+        public string ImageSource
+        {
+            get => myImageSource;
+            set
+            {
+                if (value == myImageSource) return;
+                myImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void UpdateFrom(IBattleBot bot)
         {
             BotName = bot.Name;
             X = bot.Position.X * 14;
             Y = 700 - bot.Position.Y * 14 - 14;
+            ImageSource = bot.HP > 0 ? "robot.png" : "scrap.png";
         }
     }
 }
