@@ -68,7 +68,7 @@
     <Compile Include="BotScoreViewModel.cs" />
     <Compile Include="BotStateViewModel.cs" />
     <Compile Include="Common\ViewModel.cs" />
-    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IMainViewModel.cs" />
     <Compile Include="IView.cs" />

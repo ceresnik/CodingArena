@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace CodingArena.Game.Wpf
+namespace CodingArena.Game.Wpf.Common
 {
     public sealed class DelegateCommand : ICommand
     {
@@ -9,7 +9,7 @@ namespace CodingArena.Game.Wpf
         private readonly Action myExecute;
 
         public DelegateCommand(Action execute)
-            :this(() => true, execute)
+            : this(() => true, execute)
         {
         }
 
