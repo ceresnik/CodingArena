@@ -58,6 +58,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Battlefield\BattlefieldBotViewModel.cs" />
+    <Compile Include="Battlefield\BattlefieldControl.xaml.cs">
+      <DependentUpon>BattlefieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Battlefield\BattlefieldViewModel.cs" />
     <Compile Include="BotScoreViewModel.cs" />
     <Compile Include="BotStateViewModel.cs" />
@@ -69,6 +72,10 @@
     <Compile Include="IViewModel.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="Settings.cs" />
+    <Page Include="Battlefield\BattlefieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,10 +130,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="robot.png" />
+    <Resource Include="Battlefield\robot.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="battlefield9.jpg" />
+    <Resource Include="Battlefield\background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
