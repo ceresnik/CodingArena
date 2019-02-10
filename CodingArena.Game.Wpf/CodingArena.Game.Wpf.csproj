@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Battlefield\BattlefieldBotControl.xaml.cs">
+      <DependentUpon>BattlefieldBotControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Battlefield\BattlefieldBotViewModel.cs" />
     <Compile Include="Battlefield\BattlefieldControl.xaml.cs">
       <DependentUpon>BattlefieldControl.xaml</DependentUpon>
@@ -72,6 +75,10 @@
     <Compile Include="IViewModel.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="Settings.cs" />
+    <Page Include="Battlefield\BattlefieldBotControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Battlefield\BattlefieldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
