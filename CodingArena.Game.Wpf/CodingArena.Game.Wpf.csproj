@@ -71,7 +71,7 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="IMainViewModel.cs" />
-    <Compile Include="IView.cs" />
+    <Compile Include="Common\IView.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="Settings.cs" />

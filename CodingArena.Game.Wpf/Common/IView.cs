@@ -1,4 +1,4 @@
-﻿namespace CodingArena.Game.Wpf
+﻿namespace CodingArena.Game.Wpf.Common
 {
     internal interface IView
     {
