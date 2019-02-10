@@ -1,5 +1,6 @@
 using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Battlefield;
+using CodingArena.Game.Wpf.Common;
 using System.Collections.ObjectModel;
 
 namespace CodingArena.Game.Wpf

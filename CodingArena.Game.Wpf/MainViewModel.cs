@@ -158,7 +158,6 @@ namespace CodingArena.Game.Wpf
         }
 
         public ObservableCollection<BotStateViewModel> BotStates { get; }
-        public ObservableCollection<BattlefieldBotViewModel> BattlefieldBots { get; }
         public ObservableCollection<BotScoreViewModel> BotScores { get; }
 
         private async Task StartAsync() => await Game.StartAsync();
