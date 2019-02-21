@@ -84,7 +84,7 @@ return TurnAction.Idle();
 
 ### How to start implementing own bot artificial intelligence?
 
-1. Create new .NET Framework Class Library project. (Name it, e.g. CodingArena.<BotName>.csproj)
+1. Create new `.NET Framework Class Library` project. (Name it, e.g. CodingArena.<BotName>.csproj)
 2. Manage Nu-Get Packages for this project and install latest `CodingArena.Player` package.
 3. Implement `CodingArena.Player.Implement.IBotAI` interface and compile.
 4. Copy project assembly to server's bot directory (Specified by Game Master).
