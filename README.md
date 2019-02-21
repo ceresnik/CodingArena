@@ -82,7 +82,7 @@ return TurnAction.Recharge.Battery();
 return TurnAction.Idle();
 ```
 
-### How to start implementing own bot artificial intelligence?
+### How to start implementing own bot artificial intelligence
 
 1. Create new `.NET Framework Class Library` project. (Name it, e.g. CodingArena.<YourName>.csproj)
 2. Manage Nu-Get Packages for this project and install latest `CodingArena.Player` package.
