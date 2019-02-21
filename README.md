@@ -14,7 +14,7 @@ Match consists from multiple rounds. Each round bots fights against each other a
 Every turn each bot chooses one turn action to be performed for specified input parameters (your bot, enemies, battlefield).
 
 ### TurnAction
-A bot chooses turn action (e.g. move, attack, idle). 
+A bot chooses turn action (e.g. move, attack, ...). 
 
 | Turn Action           | Result       | Energy Cost |
 |:----------------------|-------------:|------------:|
