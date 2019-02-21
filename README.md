@@ -20,8 +20,8 @@ A bot chooses turn action (e.g. move, attack, idle).
 |:----------------------|-------------:|------------:|
 | Move                  | 1 place      |           2 |
 | Attack (Max Range 5)  | 0-100 damage |           5 |
-| Recharge.Shield       | +20 SP       |          10 |
-| Recharge.Battery      | +10 EP       |           3 |
+| Recharge.Shield       | +X SP        |           X |
+| Recharge.Battery      | +20 EP       |           5 |
 | Idle                  | nothing      |           0 |
 
 #### Order of TurnActions (not implemented yet)
@@ -45,12 +45,12 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 ### Battlefield
 
 A battlefield is area where bots fight against each other.
-Configured battlefield size is `50 x 50`.
+Configured battlefield size is `50 x 50`. 
+> Be careful! Battlefield boundaries are deadly!
 
 ### Game Rules
-1. Don't use `System.Console`.
-2. Don't use reflection.
-3. Don't try to beat the game.
+1. Don't use reflection.
+2. Don't try to beat the game, beat enemies instead.
 
 ### How to create turn actions in your BotAI implementation
 
@@ -80,19 +80,4 @@ return TurnAction.Recharge.Battery();
 * Stay idle:
 ```csharp
 return TurnAction.Idle();
-```
-
-### Example Console Output
-```
-= Coding Arena =============================================================
-= Match [ Next round in 34s ] ==============================================
-  * Example Bot 2                  K:   1 D:   0
-  * Example Bot 1                  K:   0 D:   1
-= Round (1 / 100) Battlefield [ 50 x 50 ] ==================================
-= Turn  (22 / 120) =========================================================
-  * Example Bot 1                  [HP:   0 SP:   0 EP: 378] [X: 33, Y: 40]
-  * Example Bot 2                  [HP: 500 SP:  50 EP: 420] [X: 32, Y: 42]
-= Actions ==================================================================
-Example Bot 1 recharges shield.
-Example Bot 2 destroys Example Bot 1.
 ```
