@@ -14,7 +14,7 @@ Match consists from multiple rounds. Each round bots fights against each other a
 Every turn each bot chooses one turn action to be performed for specified input parameters (your bot, enemies, battlefield).
 
 ### TurnAction
-A bot chooses turn action (e.g. move, attack, idle). 
+A bot chooses turn action (e.g. move, attack, ...). 
 
 | Turn Action           | Result       | Energy Cost |
 |:----------------------|-------------:|------------:|
@@ -45,12 +45,12 @@ Bot acts based on the Bot AI (implemented by a player) with following starting p
 ### Battlefield
 
 A battlefield is area where bots fight against each other.
-Configured battlefield size is `50 x 50`.
+Configured battlefield size is `50 x 50`. 
+> Be careful! Battlefield boundaries are deadly!
 
 ### Game Rules
-1. Don't use `System.Console`.
-2. Don't use reflection.
-3. Don't try to beat the game.
+1. Don't use reflection.
+2. Don't try to beat the game, beat enemies instead.
 
 ### How to create turn actions in your BotAI implementation
 
@@ -82,17 +82,11 @@ return TurnAction.Recharge.Battery();
 return TurnAction.Idle();
 ```
 
-### Example Console Output
-```
-= Coding Arena =============================================================
-= Match [ Next round in 34s ] ==============================================
-  * Example Bot 2                  K:   1 D:   0
-  * Example Bot 1                  K:   0 D:   1
-= Round (1 / 100) Battlefield [ 50 x 50 ] ==================================
-= Turn  (22 / 120) =========================================================
-  * Example Bot 1                  [HP:   0 SP:   0 EP: 378] [X: 33, Y: 40]
-  * Example Bot 2                  [HP: 500 SP:  50 EP: 420] [X: 32, Y: 42]
-= Actions ==================================================================
-Example Bot 1 recharges shield.
-Example Bot 2 destroys Example Bot 1.
-```
+### How to start implementing own bot artificial intelligence
+
+1. Create new `.NET Framework Class Library` project. (Name it, e.g. CodingArena.<YourName>.csproj)
+2. Manage Nu-Get Packages for this project and install latest `CodingArena.Player` package.
+3. Implement `CodingArena.Player.Implement.IBotAI` interface and compile.
+4. Copy project assembly to server's bot directory (Specified by Game Master).
+5. Wait for next game round to start.
+6. Repeat from step 3 to improve your bot's intelligence.
