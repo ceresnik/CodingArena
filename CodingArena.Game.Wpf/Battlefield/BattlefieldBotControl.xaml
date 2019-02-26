@@ -7,35 +7,38 @@
         </Canvas.RenderTransform>
         <Image Source="{Binding ImageSource}" Height="40" />
         <Label Content="{Binding BotName}" FontSize="14" Margin="0,28,0,0" />
-        <ProgressBar Height="5" Width="30" 
+        <ProgressBar Height="5" Width="35" 
                      Maximum="{Binding MaxSP}" 
                      Value="{Binding SP}" 
                      Visibility="{Binding ProgressBarVisibility}"
                      BorderThickness="0"
-                     Foreground="Blue">
+                     Foreground="Blue"
+                     Background="Transparent">
             <ProgressBar.RenderTransform>
-                <TranslateTransform X="6"  Y="-10"/>
+                <TranslateTransform X="0"  Y="-10"/>
             </ProgressBar.RenderTransform>
         </ProgressBar>
-        <ProgressBar Height="5" Width="30" 
+        <ProgressBar Height="5" Width="35" 
                      Maximum="{Binding MaxHP}" 
                      Value="{Binding HP}" 
                      Visibility="{Binding ProgressBarVisibility}"
                      BorderThickness="0"
-                     Foreground="Green">
+                     Foreground="Green"
+                     Background="Transparent">
             <ProgressBar.RenderTransform>
-                <TranslateTransform X="6"  Y="-5"/>
+                <TranslateTransform X="0"  Y="-5"/>
             </ProgressBar.RenderTransform>
         </ProgressBar>
-        <ProgressBar Height="5" Width="30" 
+        <ProgressBar Height="5" Width="35" 
                      Maximum="{Binding MaxEP}" 
                      Value="{Binding EP}" 
                      Visibility="{Binding ProgressBarVisibility}"
                      BorderThickness="0"
-                     Foreground="Red">
+                     Foreground="Red"
+                     Background="Transparent">
             <ProgressBar.RenderTransform>
                 <TransformGroup>
-                    <TranslateTransform X="-30"  Y="35"/>
+                    <TranslateTransform X="-35"  Y="35"/>
                     <RotateTransform Angle="-90"/>
                 </TransformGroup>
             </ProgressBar.RenderTransform>
