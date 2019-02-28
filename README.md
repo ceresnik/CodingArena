@@ -50,8 +50,7 @@ Configured battlefield size is `50 x 50`.
 > Be careful! Battlefield boundaries are deadly!
 
 ### Game Rules
-1. Don't use reflection.
-2. Don't try to beat the game, beat enemies instead.
+1. Don't try to beat the game, beat enemies instead.
 
 ### How to create turn actions in your BotAI implementation
 
