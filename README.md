@@ -77,9 +77,9 @@ return TurnAction.Move.West();
 return TurnAction.Move.South();
 return TurnAction.Move.North();
 ```
-* Recharge shield:
+* Recharge 50 shield points (energy cost 50 energy points):
 ```csharp
-return TurnAction.Recharge.Shield();
+return TurnAction.Recharge.Shield(50);
 ```
 * Recharge battery:
 ```csharp
