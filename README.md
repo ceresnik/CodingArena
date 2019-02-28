@@ -1,3 +1,4 @@
+
 # CodingArena
 A game for programmers to compete against each other to show best skills for creativity, fast writing and more by implementing bot artificial intelligence to fight against other bots.
 
@@ -18,7 +19,7 @@ A bot chooses turn action (e.g. move, attack, ...).
 
 | Turn Action           | Result       | Energy Cost |
 |:----------------------|-------------:|------------:|
-| Move                  | 1 place      |           2 |
+| Move.(East, North...) | 1 place      |           2 |
 | Attack (Max Range 5)  | 0-100 damage |           5 |
 | Recharge.Shield       |  +X SP       |           X |
 | Recharge.Battery      | +20 EP       |           5 |
@@ -60,7 +61,11 @@ return TurnAction.Attack(enemy);
 ```
 * Move towards enemy:
 ```csharp
-return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
+return TurnAction.Move.Towards(enemy.Position);
+```
+* Move away from enemy:
+```csharp
+return TurnAction.Move.AwayFrom(enemy.Position);
 ```
 * Move in specific direction:
 ```csharp
