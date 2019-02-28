@@ -58,6 +58,10 @@ Configured battlefield size is `50 x 50`.
 ```csharp
 return TurnAction.Attack(enemy);
 ```
+* To get max attack range:
+```csharp
+Attack.MaxRange
+```
 * Move towards enemy:
 ```csharp
 return TurnAction.Move.Towards(enemy.Position);
