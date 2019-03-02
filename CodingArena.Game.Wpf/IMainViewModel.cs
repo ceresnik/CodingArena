@@ -22,5 +22,6 @@ namespace CodingArena.Game.Wpf
         BattlefieldViewModel BattlefieldViewModel { get; set; }
         ObservableCollection<BotStateViewModel> BotStates { get; }
         ObservableCollection<BotScoreViewModel> BotScores { get; }
+        ObservableCollection<BotScoreViewModel> RoundBotScores { get; }
     }
 }

@@ -32,6 +32,7 @@ namespace CodingArena.Game.Wpf
             StartCommand = new DelegateCommand(async () => await StartAsync());
             BotStates = new ObservableCollection<BotStateViewModel>();
             BotScores = new ObservableCollection<BotScoreViewModel>();
+            RoundBotScores = new ObservableCollection<BotScoreViewModel>();
         }
 
         public BattlefieldViewModel BattlefieldViewModel
@@ -159,6 +160,7 @@ namespace CodingArena.Game.Wpf
 
         public ObservableCollection<BotStateViewModel> BotStates { get; }
         public ObservableCollection<BotScoreViewModel> BotScores { get; }
+        public ObservableCollection<BotScoreViewModel> RoundBotScores { get; }
 
         private async Task StartAsync() => await Game.StartAsync();
 

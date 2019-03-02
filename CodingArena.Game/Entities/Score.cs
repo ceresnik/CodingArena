@@ -4,7 +4,7 @@ namespace CodingArena.Game.Entities
 {
     public class Score
     {
-        internal Score(string botName)
+        public Score(string botName)
         {
             BotName = botName ?? throw new ArgumentNullException(nameof(botName));
         }

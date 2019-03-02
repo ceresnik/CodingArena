@@ -6,81 +6,93 @@
              xmlns:local="clr-namespace:CodingArena.Game.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox
-                    Grid.Row="0"
-                    FontSize="14">
-        <GroupBox.Header>
-            <TextBlock>
-                        <Run Text="Round ("/>
-                        <Run Text="{Binding RoundNumber}" />
-                        <Run Text=" / " />
-                        <Run Text="{Binding MaxRounds}" />
-                        <Run Text=")" />
-                        <Run Text="Turn (" />
-                        <Run Text="{Binding TurnNumber}" />
-                        <Run Text=" / " />
-                        <Run Text="{Binding MaxTurns}" />
-                        <Run Text=")" />
-            </TextBlock>
-        </GroupBox.Header>
-        <ListView 
-                        HorizontalAlignment="Stretch"
-                        ItemsSource="{Binding BotStates}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="700">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock 
-                                        Grid.Row="0" 
-                                        Text="{Binding Action}" 
-                                        HorizontalAlignment="Stretch"
-                                        FontSize="18"/>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="0">
-                                <ProgressBar 
-                                                Maximum="{Binding MaxHP}" 
-                                                Value="{Binding HP, Mode=OneWay}" 
-                                                Foreground="Green"
-                                                Background="LightGray"
-                                                Height="10"/>
-                            </Border>
-                            <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="1">
-                                <ProgressBar 
-                                                Maximum="{Binding MaxSP}" 
-                                                Value="{Binding SP, Mode=OneWay}" 
-                                                Foreground="Blue"
-                                                Background="LightGray"
-                                                Height="10"/>
-                            </Border>
-                            <Border 
-                                            BorderThickness="1"
-                                            BorderBrush="Black"
-                                            Grid.Column="2">
-                                <ProgressBar 
-                                                Maximum="{Binding MaxEP}" 
-                                                Value="{Binding EP, Mode=OneWay}" 
-                                                Foreground="Red"
-                                                Background="LightGray"
-                                                Height="10"/>
-                            </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" FontSize="14">
+            <GroupBox.Header>
+                <TextBlock>
+                <Run Text="Turn (" />
+                <Run Text="{Binding TurnNumber}" />
+                <Run Text=" / " />
+                <Run Text="{Binding MaxTurns}" />
+                <Run Text=")" />
+                </TextBlock>
+            </GroupBox.Header>
+            <ListView HorizontalAlignment="Stretch"
+                  ItemsSource="{Binding BotStates}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="700">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                   Text="{Binding Action}" 
+                                   HorizontalAlignment="Stretch"
+                                   FontSize="18"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Grid.Column="0">
+                                    <ProgressBar Maximum="{Binding MaxHP}" 
+                                             Value="{Binding HP, Mode=OneWay}" 
+                                             Foreground="Green"
+                                             Background="LightGray"
+                                             Height="10"/>
+                                </Border>
+                                <Border BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Grid.Column="1">
+                                    <ProgressBar Maximum="{Binding MaxSP}" 
+                                             Value="{Binding SP, Mode=OneWay}" 
+                                             Foreground="Blue"
+                                             Background="LightGray"
+                                             Height="10"/>
+                                </Border>
+                                <Border BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Grid.Column="2">
+                                    <ProgressBar 
+                                    Maximum="{Binding MaxEP}" 
+                                    Value="{Binding EP, Mode=OneWay}" 
+                                    Foreground="Red"
+                                    Background="LightGray"
+                                    Height="10"/>
+                                </Border>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </GroupBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </GroupBox>
+        <GroupBox Grid.Row="1" FontSize="14">
+            <GroupBox.Header>
+                <TextBlock>
+                <Run Text="Round ("/>
+                <Run Text="{Binding RoundNumber}" />
+                <Run Text=" / " />
+                <Run Text="{Binding MaxRounds}" />
+                <Run Text=")" />
+                </TextBlock>
+            </GroupBox.Header>
+            <DataGrid
+                ItemsSource="{Binding RoundBotScores}"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>
+                    <DataGridTextColumn Header="Kills" Binding="{Binding Kills}" Width="100"/>
+                    <DataGridTextColumn Header="Deaths" Binding="{Binding Deaths}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
 </UserControl>

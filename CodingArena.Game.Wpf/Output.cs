@@ -1,6 +1,7 @@
 ﻿using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Battlefield;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -112,7 +113,24 @@ namespace CodingArena.Game.Wpf
             foreach (var score in match.Scores.OrderByDescending(s => s.Kills - s.Deaths))
             {
                 ViewModel.BotScores.Add(new BotScoreViewModel(score));
+            }
 
+            var roundBotScores = new ObservableCollection<BotScoreViewModel>();
+            foreach (var bot in match.Round.Bots)
+            {
+                roundBotScores.Add(
+                    new BotScoreViewModel(
+                        new Score(bot.Name)
+                        {
+                            Kills = bot.Kills,
+                            Deaths = bot.Deaths
+                        }));
+            }
+
+            ViewModel.RoundBotScores.Clear();
+            foreach (var botScore in roundBotScores)
+            {
+                ViewModel.RoundBotScores.Add(botScore);
             }
         }
 
