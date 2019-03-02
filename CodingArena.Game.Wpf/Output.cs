@@ -128,7 +128,7 @@ namespace CodingArena.Game.Wpf
             }
 
             ViewModel.RoundBotScores.Clear();
-            foreach (var botScore in roundBotScores)
+            foreach (var botScore in roundBotScores.OrderByDescending(s => s.Kills - s.Deaths))
             {
                 ViewModel.RoundBotScores.Add(botScore);
             }
