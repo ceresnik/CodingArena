@@ -95,6 +95,12 @@ namespace CodingArena.Game.Internal
                 case Attack attack:
                     Action = ExecuteTurnAction(attack, enemies);
                     return;
+                case MoveTowards moveTowards:
+                    Action = ExecuteTurnAction(moveTowards);
+                    return;
+                case MoveAwayFrom moveAwayFrom:
+                    Action = ExecuteTurnAction(moveAwayFrom);
+                    return;
                 case Idle idle:
                     Action = $"{Name} is idle.";
                     return;
@@ -194,6 +200,117 @@ namespace CodingArena.Game.Internal
             DrainEnergy(move.EnergyCost);
             PositionTo(newX, newY);
             return $"{Name} moves {move.Direction}.";
+        }
+
+        private string ExecuteTurnAction(MoveTowards moveTowards)
+        {
+            if (moveTowards.EnergyCost > EP)
+                return $"{Name} does not have enough energy to move.";
+
+            var nearestPlaces = GetNearestPlaces();
+
+            if (nearestPlaces.Any())
+            {
+                var newPlace = nearestPlaces
+                    .OrderBy(p => p.DistanceTo(moveTowards.Place))
+                    .First();
+                var direction = GetDirectionTo(newPlace);
+
+                if (direction != Direction.None)
+                {
+                    DrainEnergy(moveTowards.EnergyCost);
+                    PositionTo(newPlace.X, newPlace.Y);
+                    return $"{Name} moves {direction}.";
+                }
+                return $"{Name} stays at current position.";
+            }
+            return $"{Name} cannot move in any direction.";
+        }
+
+        private string ExecuteTurnAction(MoveAwayFrom moveAwayFrom)
+        {
+            if (moveAwayFrom.EnergyCost > EP)
+                return $"{Name} does not have enough energy to move.";
+
+            var nearestPlaces = GetNearestPlaces();
+
+            if (nearestPlaces.Any())
+            {
+                var newPlace = nearestPlaces
+                    .OrderByDescending(p => p.DistanceTo(moveAwayFrom.Place))
+                    .First();
+                var direction = GetDirectionTo(newPlace);
+
+                if (direction != Direction.None)
+                {
+                    DrainEnergy(moveAwayFrom.EnergyCost);
+                    PositionTo(newPlace.X, newPlace.Y);
+                    return $"{Name} moves {direction}.";
+                }
+                return $"{Name} stays at current position.";
+            }
+            return $"{Name} cannot move in any direction.";
+        }
+
+        private List<IBattlefieldPlace> GetNearestPlaces()
+        {
+            var nearestPlaces = new List<IBattlefieldPlace>();
+            var x = Position.X - 1;
+            var y = Position.Y;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+
+            x = Position.X + 1;
+            y = Position.Y;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+
+            x = Position.X;
+            y = Position.Y - 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+
+            x = Position.X;
+            y = Position.Y + 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+
+            nearestPlaces.Add(Position);
+            return nearestPlaces;
+        }
+
+        private Direction GetDirectionTo(IBattlefieldPlace newPlace)
+        {
+            Direction direction = Direction.None;
+            if (newPlace.X == Position.X && newPlace.Y == Position.Y - 1)
+            {
+                direction = Direction.South;
+            }
+
+            if (newPlace.X == Position.X && newPlace.Y == Position.Y + 1)
+            {
+                direction = Direction.North;
+            }
+
+            if (newPlace.X == Position.X + 1 && newPlace.Y == Position.Y)
+            {
+                direction = Direction.East;
+            }
+
+            if (newPlace.X == Position.X - 1 && newPlace.Y == Position.Y)
+            {
+                direction = Direction.West;
+            }
+
+            return direction;
         }
 
         private void PositionTo(int newX, int newY) => PositionTo(Battlefield, newX, newY);

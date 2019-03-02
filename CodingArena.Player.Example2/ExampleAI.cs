@@ -21,7 +21,7 @@ namespace CodingArena.Player.Example2
             if (ownBot.Health.Percent < 50 && ownBot.Shield.Percent < 50)
             {
                 if (ownBot.Energy.Actual > 110) return TurnAction.Recharge.Shield(100);
-                return TurnAction.Move.Towards(enemy.Position, ownBot.Position);
+                return TurnAction.Move.AwayFrom(enemy.Position);
             }
 
             if (ownBot.DistanceTo(enemy) < (double)Attack.MaxRange / 2)
@@ -29,7 +29,7 @@ namespace CodingArena.Player.Example2
                 return TurnAction.Attack(enemy);
             }
 
-            return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
+            return TurnAction.Move.Towards(enemy.Position);
         }
     }
 }

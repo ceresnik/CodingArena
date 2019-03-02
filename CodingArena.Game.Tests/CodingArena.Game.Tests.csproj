@@ -65,8 +65,10 @@
     <Compile Include="BotAIs\IdleBotAI.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\CannotMoveOnOccupiedPlace.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\CannotMoveWhenDestroyed.cs" />
+    <Compile Include="BotTests\ExecuteTurnAction\Move\MoveAwayFrom.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveOutOfBattlefield.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveFreely.cs" />
+    <Compile Include="BotTests\ExecuteTurnAction\Move\MoveTowards.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\Move\MoveWithNoEnergy.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\RechargeBattery.cs" />
     <Compile Include="BotTests\ExecuteTurnAction\RechargeShield.cs" />

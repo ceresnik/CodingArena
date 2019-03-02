@@ -147,13 +147,15 @@ namespace CodingArena.Game.Wpf.Battlefield
         public void UpdateFrom(IBattleBot bot)
         {
             BotName = bot.Name;
-            X = bot.Position.X * 14;
-            Y = 700 - bot.Position.Y * 14 - 14;
+            X = bot.Position.X * 20;
+            Y = 1000 - bot.Position.Y * 20 - 20;
             ImageSource = bot.HP > 0 ? "robot.png" : "scrap.png";
             MaxHP = bot.MaxHP;
             HP = bot.HP;
             MaxSP = bot.MaxSP;
             SP = bot.SP;
+            MaxEP = bot.MaxEP;
+            EP = bot.EP;
             ProgressBarVisibility = HP > 0 ? Visibility.Visible : Visibility.Hidden;
         }
     }

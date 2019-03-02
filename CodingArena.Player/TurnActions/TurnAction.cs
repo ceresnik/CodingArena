@@ -46,43 +46,29 @@ namespace CodingArena.Player.TurnActions
             public static ITurnAction South() => new TurnActions.Move(Direction.South);
 
             /// <summary>
-            ///     Creates a turn action to move towards <paramref name="from"/> 
-            /// one battlefield place <paramref name="to"/> another place.
+            /// Move towards a specified target <paramref name="place"/>.
+            /// Move direction is calculated to find shortest path <paramref name="place"/>.
             /// </summary>
-            /// <returns>Turn action to move towards specified palce.</returns>
-            /// <exception cref="ArgumentNullException">
-            ///     Throws when <paramref name="from"/> or <paramref name="to"/> is <c>null</c>.
-            /// </exception>
-            public static ITurnAction Towards(IBattlefieldPlace from, IBattlefieldPlace to)
-            {
-                if (from == null) throw new ArgumentNullException(nameof(from));
-                if (to == null) throw new ArgumentNullException(nameof(to));
+            /// <param name="place">A target place to move.</param>
+            /// <returns>
+            ///     Turn action to move towards a specified <paramref name="place"/>.
+            /// </returns>
+            /// <exception cref="ArgumentNullException">If parameter <paramref name="place"/> is <c>null</c>.</exception>
+            public static ITurnAction Towards(IBattlefieldPlace place) =>
+                new MoveTowards(place);
 
-                int difX = to.X - from.X;
-                int difY = to.Y - from.Y;
-
-                if (difX == 0 && difY == 0) return new TurnActions.Move(Direction.None);
-
-                if (difX > 0 && difY == 0) return East();
-                if (difX < 0 && difY == 0) return West();
-
-                if (difX == 0 && difY > 0) return North();
-                if (difX == 0 && difY < 0) return South();
-
-                if (difX > 0 && difY > 0 && difX >= difY) return East();
-                if (difX > 0 && difY > 0 && difX <= difY) return North();
-
-                if (difX < 0 && difY > 0 && Math.Abs(difX) >= difY) return West();
-                if (difX < 0 && difY > 0 && Math.Abs(difX) <= difY) return North();
-
-                if (difX < 0 && difY < 0 && Math.Abs(difX) >= Math.Abs(difY)) return West();
-                if (difX < 0 && difY < 0 && Math.Abs(difX) <= Math.Abs(difY)) return South();
-
-                if (difX > 0 && difY < 0 && difX >= Math.Abs(difY)) return East();
-                if (difX > 0 && difY < 0 && difX <= Math.Abs(difY)) return South();
-
-                throw new NotSupportedException();
-            }
+            /// <summary>
+            /// Move away from a specified <paramref name="place"/>.
+            /// Move direction is calculated to find place
+            /// which is farthest from specified <paramref name="place"/>.
+            /// </summary>
+            /// <param name="place">A place to move away from.</param>
+            /// <returns>
+            ///     Turn action to move away from a specified <paramref name="place"/>.
+            /// </returns>
+            /// <exception cref="ArgumentNullException">If parameter <paramref name="place"/> is <c>null</c>.</exception>
+            public static ITurnAction AwayFrom(IBattlefieldPlace place) =>
+                new MoveAwayFrom(place);
         }
 
         /// <summary>

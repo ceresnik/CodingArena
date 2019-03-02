@@ -23,7 +23,7 @@ namespace CodingArena.Game.Tests.BotAIs
                 var ownPlace = battlefield[ownBot];
                 var enemyPlace = battlefield[enemy];
                 return ownPlace.DistanceTo(enemyPlace) > 3
-                    ? TurnAction.Move.Towards(ownPlace, enemyPlace)
+                    ? TurnAction.Move.Towards(enemyPlace)
                     : TurnAction.Attack(enemy);
             }
 
