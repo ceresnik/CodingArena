@@ -8,10 +8,11 @@
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="800">
     <GroupBox
-        Header="Match"
+        Header="Scores"
         FontSize="14">
         <DataGrid
             ItemsSource="{Binding BotScores}"
+            IsReadOnly="True"
             AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>

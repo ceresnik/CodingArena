@@ -1,6 +1,7 @@
 using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Battlefield;
 using CodingArena.Game.Wpf.Common;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace CodingArena.Game.Wpf
@@ -21,7 +22,8 @@ namespace CodingArena.Game.Wpf
         string NextRoundIn { get; set; }
         BattlefieldViewModel BattlefieldViewModel { get; set; }
         ObservableCollection<BotStateViewModel> BotStates { get; }
-        ObservableCollection<BotScoreViewModel> BotScores { get; }
-        ObservableCollection<BotScoreViewModel> RoundBotScores { get; }
+        ObservableCollection<Score> BotScores { get; }
+        ObservableCollection<Score> RoundBotScores { get; }
+        void UpdateScores(IEnumerable<Score> scores);
     }
 }

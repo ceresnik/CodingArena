@@ -1,8 +1,10 @@
 using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Battlefield;
 using CodingArena.Game.Wpf.Common;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -31,8 +33,9 @@ namespace CodingArena.Game.Wpf
             View.DataContext = this;
             StartCommand = new DelegateCommand(async () => await StartAsync());
             BotStates = new ObservableCollection<BotStateViewModel>();
-            BotScores = new ObservableCollection<BotScoreViewModel>();
-            RoundBotScores = new ObservableCollection<BotScoreViewModel>();
+            BotScores = new ObservableCollection<Score>();
+            RoundBotScores = new ObservableCollection<Score>();
+            LoadScores();
         }
 
         public BattlefieldViewModel BattlefieldViewModel
@@ -159,8 +162,35 @@ namespace CodingArena.Game.Wpf
         }
 
         public ObservableCollection<BotStateViewModel> BotStates { get; }
-        public ObservableCollection<BotScoreViewModel> BotScores { get; }
-        public ObservableCollection<BotScoreViewModel> RoundBotScores { get; }
+        public ObservableCollection<Score> BotScores { get; }
+        public ObservableCollection<Score> RoundBotScores { get; }
+
+        public void UpdateScores(IEnumerable<Score> scores)
+        {
+            foreach (var score in scores)
+            {
+                var existingScore = BotScores.SingleOrDefault(s => s.BotName == score.BotName);
+                if (existingScore != null)
+                {
+                    existingScore.Kills += score.Kills;
+                    existingScore.Deaths += score.Deaths;
+                }
+                else
+                {
+                    BotScores.Add(score);
+                }
+            }
+            SaveScores();
+        }
+
+        private void SaveScores()
+        {
+
+        }
+
+        private void LoadScores()
+        {
+        }
 
         private async Task StartAsync() => await Game.StartAsync();
 

@@ -57,7 +57,7 @@ namespace CodingArena.Game.Internal
             var scores = new List<Score>();
             foreach (var bot in Bots)
             {
-                scores.Add(new Score(bot.Name) { Kills = bot.Kills, Deaths = bot.Deaths });
+                scores.Add(new Score { BotName = bot.Name, Kills = bot.Kills, Deaths = bot.Deaths });
             }
             Scores = scores;
         }
@@ -79,7 +79,7 @@ namespace CodingArena.Game.Internal
             var scores = new List<Score>();
             foreach (var bot in Bots)
             {
-                scores.Add(new Score(bot.Name) { Kills = bot.Kills, Deaths = bot.Deaths });
+                scores.Add(new Score { BotName = bot.Name, Kills = bot.Kills, Deaths = bot.Deaths });
             }
             Scores = scores;
         }

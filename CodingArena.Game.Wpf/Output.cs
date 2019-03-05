@@ -75,6 +75,7 @@ namespace CodingArena.Game.Wpf
             Game.Match.Round.TurnStarting -= OnTurnStarting;
             Game.Match.Round.TurnFinished -= OnTurnFinished;
             Update();
+            ViewModel.UpdateScores(Game.Match.Scores);
         }
 
         private void OnTurnStarting(object sender, EventArgs e)
@@ -109,22 +110,16 @@ namespace CodingArena.Game.Wpf
 
         private void Update(IMatch match)
         {
-            ViewModel.BotScores.Clear();
-            foreach (var score in match.Scores.OrderByDescending(s => s.Kills - s.Deaths))
-            {
-                ViewModel.BotScores.Add(new BotScoreViewModel(score));
-            }
-
-            var roundBotScores = new ObservableCollection<BotScoreViewModel>();
+            var roundBotScores = new ObservableCollection<Score>();
             foreach (var bot in match.Round.Bots)
             {
                 roundBotScores.Add(
-                    new BotScoreViewModel(
-                        new Score(bot.Name)
-                        {
-                            Kills = bot.Kills,
-                            Deaths = bot.Deaths
-                        }));
+                    new Score
+                    {
+                        BotName = bot.Name,
+                        Kills = bot.Kills,
+                        Deaths = bot.Deaths
+                    });
             }
 
             ViewModel.RoundBotScores.Clear();

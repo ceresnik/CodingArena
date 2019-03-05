@@ -86,6 +86,7 @@
             </GroupBox.Header>
             <DataGrid
                 ItemsSource="{Binding RoundBotScores}"
+                IsReadOnly="True"
                 AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>

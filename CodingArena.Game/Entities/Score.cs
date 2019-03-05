@@ -1,15 +1,8 @@
-﻿using System;
-
-namespace CodingArena.Game.Entities
+﻿namespace CodingArena.Game.Entities
 {
     public class Score
     {
-        public Score(string botName)
-        {
-            BotName = botName ?? throw new ArgumentNullException(nameof(botName));
-        }
-
-        public string BotName { get; }
+        public string BotName { get; set; }
         public int Kills { get; set; }
         public int Deaths { get; set; }
     }
