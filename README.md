@@ -102,4 +102,11 @@ return TurnAction.Idle();
 ### Robot Models
 
 ![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
-https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png
+![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut")
+![Proto](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png "Proto")
+![Rust](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png "Rust")
+![Scrappie](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png "Scrappie")
+![Scyther](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png "Scyther")
+![Sparky](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png "Sparky")
+![Tinker](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png "Tinker")
+![Twobit](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png "Twobit")
