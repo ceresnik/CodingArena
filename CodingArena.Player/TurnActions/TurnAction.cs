@@ -25,6 +25,20 @@ namespace CodingArena.Player.TurnActions
             public static ITurnAction North() => new TurnActions.Move(Direction.North);
 
             /// <summary>
+            ///     Creates a turn action to move north-east. 
+            /// Make sure that north-east is valid place on battlefield; otherwise bot will explode.
+            /// </summary>
+            /// <returns>Turn action to move north-east.</returns>
+            public static ITurnAction NorthEast() => new TurnActions.Move(Direction.NorthEast);
+
+            /// <summary>
+            ///     Creates a turn action to move north-west. 
+            /// Make sure that north-west is valid place on battlefield; otherwise bot will explode.
+            /// </summary>
+            /// <returns>Turn action to move north-west.</returns>
+            public static ITurnAction NorthWest() => new TurnActions.Move(Direction.NorthWest);
+
+            /// <summary>
             ///     Creates a turn action to move east. 
             /// Make sure that east is valid place on battlefield; otherwise bot will explode.
             /// </summary>
@@ -44,6 +58,20 @@ namespace CodingArena.Player.TurnActions
             /// </summary>
             /// <returns>Turn action to move south.</returns>
             public static ITurnAction South() => new TurnActions.Move(Direction.South);
+
+            /// <summary>
+            ///     Creates a turn action to move south-east. 
+            /// Make sure that south-east is valid place on battlefield; otherwise bot will explode.
+            /// </summary>
+            /// <returns>Turn action to move south-east.</returns>
+            public static ITurnAction SouthEast() => new TurnActions.Move(Direction.SouthEast);
+
+            /// <summary>
+            ///     Creates a turn action to move south-west. 
+            /// Make sure that south-west is valid place on battlefield; otherwise bot will explode.
+            /// </summary>
+            /// <returns>Turn action to move south-west.</returns>
+            public static ITurnAction SouthWest() => new TurnActions.Move(Direction.SouthWest);
 
             /// <summary>
             /// Move towards a specified target <paramref name="place"/>.

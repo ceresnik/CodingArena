@@ -189,6 +189,22 @@ namespace CodingArena.Game.Internal
                 case Direction.North:
                     newY = Position.Y + 1;
                     break;
+                case Direction.NorthEast:
+                    newY = Position.Y + 1;
+                    newX = Position.X + 1;
+                    break;
+                case Direction.NorthWest:
+                    newY = Position.Y + 1;
+                    newX = Position.X - 1;
+                    break;
+                case Direction.SouthEast:
+                    newY = Position.Y - 1;
+                    newX = Position.X + 1;
+                    break;
+                case Direction.SouthWest:
+                    newY = Position.Y - 1;
+                    newX = Position.X - 1;
+                    break;
             }
 
             if (Battlefield.IsOutOfRange(newX, newY))
@@ -260,29 +276,58 @@ namespace CodingArena.Game.Internal
         private List<IBattlefieldPlace> GetNearestPlaces()
         {
             var nearestPlaces = new List<IBattlefieldPlace>();
+            // west
             var x = Position.X - 1;
             var y = Position.Y;
             if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
             {
                 nearestPlaces.Add(Battlefield[x, y]);
             }
-
+            // east
             x = Position.X + 1;
             y = Position.Y;
             if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
             {
                 nearestPlaces.Add(Battlefield[x, y]);
             }
-
+            // south
             x = Position.X;
             y = Position.Y - 1;
             if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
             {
                 nearestPlaces.Add(Battlefield[x, y]);
             }
-
+            // north
             x = Position.X;
             y = Position.Y + 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+            // north-east
+            x = Position.X + 1;
+            y = Position.Y + 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+            // north-west
+            x = Position.X - 1;
+            y = Position.Y + 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+            // south-east
+            x = Position.X + 1;
+            y = Position.Y - 1;
+            if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
+            {
+                nearestPlaces.Add(Battlefield[x, y]);
+            }
+            // south-west
+            x = Position.X - 1;
+            y = Position.Y - 1;
             if (!Battlefield.IsOutOfRange(x, y) && Battlefield[x, y].IsEmpty)
             {
                 nearestPlaces.Add(Battlefield[x, y]);
@@ -294,26 +339,31 @@ namespace CodingArena.Game.Internal
 
         private Direction GetDirectionTo(IBattlefieldPlace newPlace)
         {
-            Direction direction = Direction.None;
+            var direction = Direction.None;
+
             if (newPlace.X == Position.X && newPlace.Y == Position.Y - 1)
-            {
                 direction = Direction.South;
-            }
 
             if (newPlace.X == Position.X && newPlace.Y == Position.Y + 1)
-            {
                 direction = Direction.North;
-            }
 
             if (newPlace.X == Position.X + 1 && newPlace.Y == Position.Y)
-            {
                 direction = Direction.East;
-            }
 
             if (newPlace.X == Position.X - 1 && newPlace.Y == Position.Y)
-            {
                 direction = Direction.West;
-            }
+
+            if (newPlace.X == Position.X - 1 && newPlace.Y == Position.Y - 1)
+                direction = Direction.SouthWest;
+
+            if (newPlace.X == Position.X + 1 && newPlace.Y == Position.Y - 1)
+                direction = Direction.SouthEast;
+
+            if (newPlace.X == Position.X - 1 && newPlace.Y == Position.Y + 1)
+                direction = Direction.NorthWest;
+
+            if (newPlace.X == Position.X + 1 && newPlace.Y == Position.Y + 1)
+                direction = Direction.NorthEast;
 
             return direction;
         }
