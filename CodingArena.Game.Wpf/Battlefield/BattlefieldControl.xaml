@@ -11,7 +11,7 @@
         <GroupBox
             FontSize="14"
             Grid.Column="0"
-            Background="Wheat">
+            Background="White">
             <GroupBox.Header>
                 <TextBlock>
                     <Run Text="Battlefield [" />
@@ -24,9 +24,6 @@
             <Viewbox Stretch="Uniform">
                 <ItemsControl ItemsSource="{Binding BattlefieldViewModel.Bots}"
                               Width="1000" Height="1000">
-                    <ItemsControl.Background>
-                        <ImageBrush ImageSource="background.jpg" Stretch="UniformToFill" />
-                    </ItemsControl.Background>
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas/>

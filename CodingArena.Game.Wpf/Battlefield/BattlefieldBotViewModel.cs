@@ -149,7 +149,7 @@ namespace CodingArena.Game.Wpf.Battlefield
             BotName = bot.Name;
             X = bot.Position.X * 20;
             Y = 1000 - bot.Position.Y * 20 - 20;
-            ImageSource = bot.HP > 0 ? "robot.png" : "scrap.png";
+            ImageSource = bot.HP > 0 ? "../Images/robot_09_.png" : "../Images/robot_09_dead.png";
             MaxHP = bot.MaxHP;
             HP = bot.HP;
             MaxSP = bot.MaxSP;

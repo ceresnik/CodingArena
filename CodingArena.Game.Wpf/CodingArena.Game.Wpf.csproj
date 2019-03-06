@@ -167,18 +167,6 @@
     <Resource Include="Battlefield\box.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="robot_01.png" />
-    <Resource Include="robot_02.png" />
-    <Resource Include="robot_03.png" />
-    <Resource Include="robot_04.png" />
-    <Resource Include="robot_05.png" />
-    <Resource Include="robot_06.png" />
-    <Resource Include="robot_07.png" />
-    <Resource Include="robot_08.png" />
-    <Resource Include="robot_09.png" />
-    <Resource Include="white_1x1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\battlefield.jpg" />
     <Resource Include="Images\battlefield10.jpg" />
     <Resource Include="Images\battlefield11.jpg" />
@@ -205,6 +193,44 @@
     <Resource Include="Images\robot_08.png" />
     <Resource Include="Images\robot_09.png" />
     <Resource Include="Images\white_1x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_01_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_01_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_02_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_02_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_03_.png" />
+    <Resource Include="Images\robot_03_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_04_.png" />
+    <Resource Include="Images\robot_04_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_05_.png" />
+    <Resource Include="Images\robot_05_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_06_.png" />
+    <Resource Include="Images\robot_06_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_07_.png" />
+    <Resource Include="Images\robot_07_dead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\robot_08_.png" />
+    <Resource Include="Images\robot_08_dead.png" />
+    <Resource Include="Images\robot_09_.png" />
+    <Resource Include="Images\robot_09_dead.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
