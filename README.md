@@ -98,3 +98,8 @@ return TurnAction.Idle();
 4. Copy project assembly to server's bot directory (Specified by Game Master).
 5. Wait for next game round to start.
 6. Repeat from step 3 to improve your bot's intelligence.
+
+### Robot Models
+
+![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
+https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png
