@@ -166,5 +166,45 @@
   <ItemGroup>
     <Resource Include="Battlefield\box.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="robot_01.png" />
+    <Resource Include="robot_02.png" />
+    <Resource Include="robot_03.png" />
+    <Resource Include="robot_04.png" />
+    <Resource Include="robot_05.png" />
+    <Resource Include="robot_06.png" />
+    <Resource Include="robot_07.png" />
+    <Resource Include="robot_08.png" />
+    <Resource Include="robot_09.png" />
+    <Resource Include="white_1x1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\battlefield.jpg" />
+    <Resource Include="Images\battlefield10.jpg" />
+    <Resource Include="Images\battlefield11.jpg" />
+    <Resource Include="Images\battlefield12.jpg" />
+    <Resource Include="Images\battlefield13.jpg" />
+    <Resource Include="Images\battlefield2.jpg" />
+    <Resource Include="Images\battlefield3.jpg" />
+    <Resource Include="Images\battlefield4.jpg" />
+    <Resource Include="Images\battlefield5.jpg" />
+    <Resource Include="Images\battlefield6.jpg" />
+    <Resource Include="Images\battlefield7.jpg" />
+    <Resource Include="Images\battlefield8.jpg" />
+    <Resource Include="Images\battlefield9.jpg" />
+    <Resource Include="Images\robot.png" />
+    <Resource Include="Images\robots.png" />
+    <Resource Include="Images\robots_black.png" />
+    <Resource Include="Images\robot_01.png" />
+    <Resource Include="Images\robot_02.png" />
+    <Resource Include="Images\robot_03.png" />
+    <Resource Include="Images\robot_04.png" />
+    <Resource Include="Images\robot_05.png" />
+    <Resource Include="Images\robot_06.png" />
+    <Resource Include="Images\robot_07.png" />
+    <Resource Include="Images\robot_08.png" />
+    <Resource Include="Images\robot_09.png" />
+    <Resource Include="Images\white_1x1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

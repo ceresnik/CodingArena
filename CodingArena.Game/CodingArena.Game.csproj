@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -57,9 +60,11 @@
     <Compile Include="Internal\Game.cs" />
     <Compile Include="Entities\IGame.cs" />
     <Compile Include="Internal\InsideView.cs" />
+    <Compile Include="Entities\IScoreRepository.cs" />
     <Compile Include="Internal\Match.cs" />
     <Compile Include="Internal\OutsideView.cs" />
     <Compile Include="Internal\Round.cs" />
+    <Compile Include="Internal\ScoreRepository.cs" />
     <Compile Include="Internal\Turn.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="Entities\IRound.cs" />
@@ -77,6 +82,8 @@
       <Name>CodingArena.Player</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

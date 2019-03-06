@@ -75,7 +75,6 @@ namespace CodingArena.Game.Wpf
             Game.Match.Round.TurnStarting -= OnTurnStarting;
             Game.Match.Round.TurnFinished -= OnTurnFinished;
             Update();
-            ViewModel.UpdateScores(Game.Match.Scores);
         }
 
         private void OnTurnStarting(object sender, EventArgs e)
@@ -110,6 +109,12 @@ namespace CodingArena.Game.Wpf
 
         private void Update(IMatch match)
         {
+            ViewModel.BotScores.Clear();
+            foreach (var score in match.Scores)
+            {
+                ViewModel.BotScores.Add(score);
+            }
+
             var roundBotScores = new ObservableCollection<Score>();
             foreach (var bot in match.Round.Bots)
             {
@@ -162,9 +167,5 @@ namespace CodingArena.Game.Wpf
             $"[HP: {bot.HP,3:F0}, SP: {bot.SP,3:F0}, EP: {bot.EP,3:F0}] ";
 
         public void Error(string message) => MessageBox.Show(message, "Error", MessageBoxButton.OK);
-
-        private string DisplayScore(Score score) =>
-            $"{score.BotName,-20} " +
-            $"K: {score.Kills,3:N0} D: {score.Deaths,3:N0}";
     }
 }

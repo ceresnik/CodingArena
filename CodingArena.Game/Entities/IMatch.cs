@@ -9,7 +9,6 @@ namespace CodingArena.Game.Entities
         IRound Round { get; }
         IEnumerable<Score> Scores { get; }
         TimeSpan NextRoundIn { get; }
-        void Start();
         Task StartAsync();
         event EventHandler RoundStarting;
         event EventHandler RoundFinished;

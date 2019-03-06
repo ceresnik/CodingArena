@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using CodingArena.Game.Tests.BotAIs;
+﻿using CodingArena.Game.Tests.BotAIs;
 using FluentAssertions;
 using NUnit.Framework;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CodingArena.Game.Tests.MatchTests
 {
@@ -14,12 +15,12 @@ namespace CodingArena.Game.Tests.MatchTests
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot1")));
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot2")));
             BotFactory.Bots.Add(BotWorkshop.Create(TestBotAI.SeekAndDestroy("bot3")));
-            Match.Start();
         }
 
         [Test]
-        public void Scores_Count()
+        public async Task Scores_Count()
         {
+            await Match.StartAsync();
             Match.Scores.Should().NotBeNull();
             Match.Scores.Count().Should().Be(3);
         }

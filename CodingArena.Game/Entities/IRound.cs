@@ -16,8 +16,6 @@ namespace CodingArena.Game.Entities
 
         IEnumerable<Score> Scores { get; }
 
-        void Start();
-
         Task StartAsync();
 
         event EventHandler TurnStarting;

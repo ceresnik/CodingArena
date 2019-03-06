@@ -1,9 +1,9 @@
-﻿using CodingArena.Player;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodingArena.Game.Entities;
 
 namespace CodingArena.Game.Internal
 {
@@ -54,7 +54,7 @@ namespace CodingArena.Game.Internal
                 {
                     for (int x = 0; x < Width; x++)
                     {
-                        if (Places[x, y].Object is IBattleBot battleBot && 
+                        if (Places[x, y].Object is IBattleBot battleBot &&
                             battleBot.InsideView == ownBot)
                         {
                             return Places[x, y];

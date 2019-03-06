@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.Composition;
-using CodingArena.Game.Entities;
+﻿using CodingArena.Game.Entities;
 using CodingArena.Game.Internal;
+using System.ComponentModel.Composition;
 
 namespace CodingArena.Game.Factories
 {
@@ -14,16 +14,22 @@ namespace CodingArena.Game.Factories
     {
         private ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
-        public IOutput Output { get; }
+        private IOutput Output { get; }
+        private IScoreRepository ScoreRepository { get; }
 
         [ImportingConstructor]
-        public MatchFactory(ISettings settings, IRoundFactory roundFactory, IOutput output)
+        public MatchFactory(
+            ISettings settings,
+            IRoundFactory roundFactory,
+            IOutput output,
+            IScoreRepository scoreRepository)
         {
             Settings = settings;
             RoundFactory = roundFactory;
             Output = output;
+            ScoreRepository = scoreRepository;
         }
 
-        public IMatch Create() => new Match(Settings, RoundFactory);
+        public IMatch Create() => new Match(Settings, RoundFactory, ScoreRepository);
     }
 }

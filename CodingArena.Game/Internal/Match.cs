@@ -1,24 +1,25 @@
-﻿using System;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using CodingArena.Game.Entities;
-using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
     internal sealed class Match : IMatch
     {
-        private readonly IList<Score> scores;
+        private List<Score> scores;
         private ISettings Settings { get; }
         private IRoundFactory RoundFactory { get; }
+        private IScoreRepository ScoreRepository { get; }
 
-        public Match(ISettings settings, IRoundFactory roundFactory)
+        public Match(ISettings settings, IRoundFactory roundFactory, IScoreRepository scoreRepository)
         {
             Settings = settings;
             RoundFactory = roundFactory;
-            scores = new List<Score>();
+            ScoreRepository = scoreRepository;
+            scores = new List<Score>(ScoreRepository.Load());
             NextRoundIn = TimeSpan.Zero;
         }
 
@@ -27,47 +28,6 @@ namespace CodingArena.Game.Internal
         public IEnumerable<Score> Scores => scores;
         public TimeSpan NextRoundIn { get; private set; }
 
-        public void Start()
-        {
-            for (int i = 1; i <= Settings.MaxRounds; i++)
-            {
-                Round = RoundFactory.Create(i);
-                OnRoundStarting();
-                Round.Start();
-                
-                foreach (var roundScore in Round.Scores)
-                {
-                    var existingScore = scores.FirstOrDefault(s => s.BotName == roundScore.BotName);
-                    if (existingScore != null)
-                    {
-                        existingScore.Kills += roundScore.Kills;
-                        existingScore.Deaths += roundScore.Deaths;
-                    }
-                    else
-                    {
-                        scores.Add(roundScore);
-                    }
-                }
-
-                OnRoundFinished();
-
-                WaitForNextRound();
-            }
-        }
-
-        private void WaitForNextRound()
-        {
-            NextRoundIn = Settings.NextRoundDelay;
-            while (NextRoundIn > TimeSpan.Zero)
-            {
-                var poll = TimeSpan.FromSeconds(1);
-                Thread.Sleep(poll);
-                NextRoundIn -= poll;
-                OnNextRoundInUpdated();
-            }
-            NextRoundIn = TimeSpan.Zero;
-        }
-
         public async Task StartAsync()
         {
             for (int i = 1; i <= Settings.MaxRounds; i++)
@@ -75,25 +35,30 @@ namespace CodingArena.Game.Internal
                 Round = RoundFactory.Create(i);
                 OnRoundStarting();
                 await Round.StartAsync();
-
-                foreach (var roundScore in Round.Scores)
-                {
-                    var existingScore = scores.FirstOrDefault(s => s.BotName == roundScore.BotName);
-                    if (existingScore != null)
-                    {
-                        existingScore.Kills += roundScore.Kills;
-                        existingScore.Deaths += roundScore.Deaths;
-                    }
-                    else
-                    {
-                        scores.Add(roundScore);
-                    }
-                }
-
+                UpdateScores();
                 OnRoundFinished();
-
                 await WaitForNextRoundAsync();
             }
+        }
+
+        private void UpdateScores()
+        {
+            foreach (var roundScore in Round.Scores)
+            {
+                var existingScore = scores.FirstOrDefault(s => s.BotName == roundScore.BotName);
+                if (existingScore != null)
+                {
+                    existingScore.Kills += roundScore.Kills;
+                    existingScore.Deaths += roundScore.Deaths;
+                }
+                else
+                {
+                    scores.Add(roundScore);
+                }
+            }
+
+            scores = scores.OrderByDescending(s => s.Kills - s.Deaths).ToList();
+            ScoreRepository.Save(scores);
         }
 
         private async Task WaitForNextRoundAsync()

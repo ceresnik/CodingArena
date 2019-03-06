@@ -3,7 +3,6 @@ using CodingArena.Game.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace CodingArena.Game.Internal
@@ -41,28 +40,6 @@ namespace CodingArena.Game.Internal
         public ITurn Turn { get; private set; }
 
         public IEnumerable<Score> Scores { get; private set; }
-
-        public void Start()
-        {
-            for (int i = 1; i <= Settings.MaxTurns; i++)
-            {
-                Turn = TurnFactory.Create(i);
-                OnTurnStarting();
-                Turn.Start(Bots);
-                OnTurnFinished();
-                if (Bots.Count(b => b.HP > 0) <= 1) break;
-                WaitForNextTurn();
-            }
-
-            var scores = new List<Score>();
-            foreach (var bot in Bots)
-            {
-                scores.Add(new Score { BotName = bot.Name, Kills = bot.Kills, Deaths = bot.Deaths });
-            }
-            Scores = scores;
-        }
-
-        private void WaitForNextTurn() => Thread.Sleep(Settings.NextTurnDelay);
 
         public async Task StartAsync()
         {

@@ -5,6 +5,7 @@ using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -69,14 +70,16 @@ namespace CodingArena.Game.Internal
             {
                 turnAction = GetTurnAction(enemies);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log(e);
                 Destroy("system malfunction");
                 Action = $"{Name} is destroyed by {DestroyedBy}.";
                 return;
             }
             if (turnAction == null)
             {
+                Log("Null turn action");
                 Destroy("system malfunction");
                 Action = $"{Name} is destroyed by {DestroyedBy}.";
                 return;
@@ -399,6 +402,7 @@ namespace CodingArena.Game.Internal
         }
 
         public event EventHandler Exploded;
+
         private void OnExploded() => Exploded?.Invoke(this, EventArgs.Empty);
 
         public int Kills { get; set; }
@@ -412,5 +416,23 @@ namespace CodingArena.Game.Internal
         public double DistanceTo(IEnemy outsideView) => Position.DistanceTo(Battlefield[outsideView]);
 
         public override string ToString() => Name;
+
+        private void Log(Exception exception) => Log(exception.ToString());
+
+        private void Log(string message)
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var sourceDir = Path.Combine(baseDirectory, "Bots");
+            var filePath = Path.Combine(sourceDir, $"{Name}.log");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            using (StreamWriter sw = File.CreateText(filePath))
+            {
+                sw.WriteLine(message);
+            }
+        }
     }
 }

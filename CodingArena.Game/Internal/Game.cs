@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CodingArena.Game.Entities;
+using CodingArena.Game.Factories;
+using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using CodingArena.Game.Entities;
-using CodingArena.Game.Factories;
 
 namespace CodingArena.Game.Internal
 {
@@ -15,14 +15,6 @@ namespace CodingArena.Game.Internal
         public Game(IMatchFactory matchFactory)
         {
             MatchFactory = matchFactory;
-        }
-
-        public void Start()
-        {
-            Match = MatchFactory.Create();
-            OnMatchStarting();
-            Match.Start();
-            OnMatchFinished();
         }
 
         public async Task StartAsync()
