@@ -9,6 +9,7 @@ namespace CodingArena.Game.Tests.BotAIs
     internal class TestBotAI : IBotAI
     {
         public string BotName => "TestBot";
+        public Model Model => Model.Tinker;
         public ITurnAction TurnAction { get; set; }
         public static IBotAI AttackFirstEnemy => new AttackFirstBotAI();
         public static IBotAI Idle => new TestBotAI { TurnAction = Player.TurnActions.TurnAction.Idle() };

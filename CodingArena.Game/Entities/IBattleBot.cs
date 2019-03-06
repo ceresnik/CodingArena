@@ -7,6 +7,7 @@ namespace CodingArena.Game.Entities
 {
     public interface IBattleBot : IBot
     {
+        Model Model { get; }
         int MaxHP { get; }
         int HP { get; }
         int MaxEP { get; }

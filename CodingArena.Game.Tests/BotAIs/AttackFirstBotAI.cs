@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CodingArena.Player;
+﻿using CodingArena.Player;
 using CodingArena.Player.Battlefield;
 using CodingArena.Player.Implement;
 using CodingArena.Player.TurnActions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingArena.Game.Tests.BotAIs
 {
     internal class AttackFirstBotAI : IBotAI
     {
         public string BotName => "Attack First Enemy Bot";
+        public Model Model => Model.Tinker;
 
         public ITurnAction GetTurnAction(
             IOwnBot ownBot,

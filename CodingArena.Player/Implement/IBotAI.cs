@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using CodingArena.Player.Battlefield;
+﻿using CodingArena.Player.Battlefield;
 using CodingArena.Player.TurnActions;
+using System.Collections.Generic;
 
 namespace CodingArena.Player.Implement
 {
@@ -11,6 +11,11 @@ namespace CodingArena.Player.Implement
         /// Could not be <c>null</c>, <c>empty</c> or <c>whitespace</c>.
         /// </summary>
         string BotName { get; }
+
+        /// <summary>
+        /// Gets a robot model representation of bot.
+        /// </summary>
+        Model Model { get; }
 
         /// <summary>
         /// Returns a turn action for the specified input parameters.

@@ -9,6 +9,7 @@ namespace CodingArena.Player.Example2
     public class ExampleAI : IBotAI
     {
         public string BotName => "Example Bot 2";
+        public Model Model => Model.Proto;
 
         public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {

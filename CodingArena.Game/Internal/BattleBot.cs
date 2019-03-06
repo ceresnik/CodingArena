@@ -33,6 +33,8 @@ namespace CodingArena.Game.Internal
 
         public string Name => BotAI.BotName;
 
+        public Model Model => BotAI.Model;
+
         public int MaxHP { get; }
 
         public int HP { get; private set; }

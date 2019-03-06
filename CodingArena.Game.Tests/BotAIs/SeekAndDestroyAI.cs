@@ -15,6 +15,7 @@ namespace CodingArena.Game.Tests.BotAIs
         }
 
         public string BotName { get; }
+        public Model Model => Model.Tinker;
         public ITurnAction GetTurnAction(IOwnBot ownBot, IReadOnlyCollection<IEnemy> enemies, IBattlefieldView battlefield)
         {
             if (enemies.Any())

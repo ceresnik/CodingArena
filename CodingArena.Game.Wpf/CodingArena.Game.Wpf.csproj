@@ -195,42 +195,24 @@
     <Resource Include="Images\white_1x1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\robot_01_.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_01_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_02_.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_02_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_03_.png" />
-    <Resource Include="Images\robot_03_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_04_.png" />
-    <Resource Include="Images\robot_04_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_05_.png" />
-    <Resource Include="Images\robot_05_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_06_.png" />
-    <Resource Include="Images\robot_06_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_07_.png" />
-    <Resource Include="Images\robot_07_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\robot_08_.png" />
-    <Resource Include="Images\robot_08_dead.png" />
-    <Resource Include="Images\robot_09_.png" />
-    <Resource Include="Images\robot_09_dead.png" />
+    <Resource Include="Images\Hammer.png" />
+    <Resource Include="Images\Hammer_dead.png" />
+    <Resource Include="Images\Juggernaut.png" />
+    <Resource Include="Images\Juggernaut_dead.png" />
+    <Resource Include="Images\Proto.png" />
+    <Resource Include="Images\Proto_dead.png" />
+    <Resource Include="Images\Rust.png" />
+    <Resource Include="Images\Rust_dead.png" />
+    <Resource Include="Images\Scrappie.png" />
+    <Resource Include="Images\Scrappie_dead.png" />
+    <Resource Include="Images\Scyther.png" />
+    <Resource Include="Images\Scyther_dead.png" />
+    <Resource Include="Images\Sparky.png" />
+    <Resource Include="Images\Sparky_dead.png" />
+    <Resource Include="Images\Tinker.png" />
+    <Resource Include="Images\Tinker_dead.png" />
+    <Resource Include="Images\Twobit.png" />
+    <Resource Include="Images\Twobit_dead.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
