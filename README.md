@@ -1,3 +1,4 @@
+
 # CodingArena
 A game for programmers to compete against each other to show best skills for creativity, fast writing and more by implementing bot artificial intelligence to fight against other bots.
 
@@ -18,7 +19,7 @@ A bot chooses turn action (e.g. move, attack, ...).
 
 | Turn Action           | Result       | Energy Cost |
 |:----------------------|-------------:|------------:|
-| Move                  | 1 place      |           2 |
+| Move.(East, North...) | 1 place      |           2 |
 | Attack (Max Range 5)  | 0-100 damage |           5 |
 | Recharge.Shield       |  +X SP       |           X |
 | Recharge.Battery      | +20 EP       |           5 |
@@ -49,8 +50,7 @@ Configured battlefield size is `50 x 50`.
 > Be careful! Battlefield boundaries are deadly!
 
 ### Game Rules
-1. Don't use reflection.
-2. Don't try to beat the game, beat enemies instead.
+1. Don't try to beat the game, beat enemies instead.
 
 ### How to create turn actions in your BotAI implementation
 
@@ -58,9 +58,17 @@ Configured battlefield size is `50 x 50`.
 ```csharp
 return TurnAction.Attack(enemy);
 ```
+* To get max attack range:
+```csharp
+Attack.MaxRange
+```
 * Move towards enemy:
 ```csharp
-return TurnAction.Move.Towards(ownBot.Position, enemy.Position);
+return TurnAction.Move.Towards(enemy.Position);
+```
+* Move away from enemy:
+```csharp
+return TurnAction.Move.AwayFrom(enemy.Position);
 ```
 * Move in specific direction:
 ```csharp
@@ -69,9 +77,9 @@ return TurnAction.Move.West();
 return TurnAction.Move.South();
 return TurnAction.Move.North();
 ```
-* Recharge shield:
+* Recharge 50 shield points (energy cost 50 energy points):
 ```csharp
-return TurnAction.Recharge.Shield();
+return TurnAction.Recharge.Shield(50);
 ```
 * Recharge battery:
 ```csharp
