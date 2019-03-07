@@ -64,34 +64,34 @@ Attack.MaxRange
 ```
 * Move towards enemy:
 ```csharp
-TurnAction.Move.Towards(enemy.Position);
+return TurnAction.Move.Towards(enemy.Position);
 ```
 * Move away from enemy:
 ```csharp
-TurnAction.Move.AwayFrom(enemy.Position);
+return TurnAction.Move.AwayFrom(enemy.Position);
 ```
 * Move in specific direction:
 ```csharp
-TurnAction.Move.East();
-TurnAction.Move.West();
-TurnAction.Move.South();
-TurnAction.Move.North();
-TurnAction.Move.SouthEast();
-TurnAction.Move.SouthWest();
-TurnAction.Move.NorthEast();
-TurnAction.Move.NorthWest();
+return TurnAction.Move.East();
+return TurnAction.Move.West();
+return TurnAction.Move.South();
+return TurnAction.Move.North();
+return TurnAction.Move.SouthEast();
+return TurnAction.Move.SouthWest();
+return TurnAction.Move.NorthEast();
+return TurnAction.Move.NorthWest();
 ```
 * Recharge 50 shield points (energy cost 50 energy points):
 ```csharp
-TurnAction.Recharge.Shield(50);
+return TurnAction.Recharge.Shield(50);
 ```
 * Recharge battery:
 ```csharp
-TurnAction.Recharge.Battery();
+return TurnAction.Recharge.Battery();
 ```
 * Stay idle:
 ```csharp
-TurnAction.Idle();
+return TurnAction.Idle();
 ```
 
 ### How to start implementing own bot artificial intelligence
