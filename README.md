@@ -105,21 +105,14 @@ return TurnAction.Idle();
 
 ### Robot Models
 
-##### Hammer
-![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
-##### Juggernaut
-![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut")
-##### Proto
-![Proto](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png "Proto")
-##### Rust
-![Rust](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png "Rust")
-##### Scrappie
-![Scrappie](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png "Scrappie")
-##### Scyther
-![Scyther](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png "Scyther")
-##### Sparky
-![Sparky](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png "Sparky")
-##### Tinker
-![Tinker](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png "Tinker")
-##### Twobit
-![Twobit](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png "Twobit")
+> Hover mouse over the picture to see the robot name.
+
+![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer"){:height="100px" width="100px"}
+![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut"){:height="100px" width="100px"}
+![Proto](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png "Proto"){:height="100px" width="100px"}
+![Rust](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png "Rust"){:height="100px" width="100px"}
+![Scrappie](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png "Scrappie"){:height="100px" width="100px"}
+![Scyther](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png "Scyther"){:height="100px" width="100px"}
+![Sparky](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png "Sparky"){:height="100px" width="100px"}
+![Tinker](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png "Tinker"){:height="100px" width="100px"}
+![Twobit](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png "Twobit"){:height="100px" width="100px"}
