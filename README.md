@@ -107,12 +107,12 @@ return TurnAction.Idle();
 
 > Hover mouse over the picture to see the robot name.
 
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png" width="100" title="Hammer">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png"  width="100" title="Juggernaut">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png"  width="100" title="Proto">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png"  width="100" title="Rust">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png"  width="100" title="Scrappie">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png"  width="100" title="Scyther">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png"  width="100" title="Sparky">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png"  width="100" title="Tinker">
-<img  src="https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png"  width="100" title="Twobit">
+![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
+![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut")
+![Proto](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png "Proto")
+![Rust](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png "Rust")
+![Scrappie](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png "Scrappie")
+![Scyther](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png "Scyther")
+![Sparky](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png "Sparky")
+![Tinker](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png "Tinker")
+![Twobit](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png "Twobit")
