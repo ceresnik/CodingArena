@@ -76,6 +76,10 @@ return TurnAction.Move.East();
 return TurnAction.Move.West();
 return TurnAction.Move.South();
 return TurnAction.Move.North();
+return TurnAction.Move.SouthEast();
+return TurnAction.Move.SouthWest();
+return TurnAction.Move.NorthEast();
+return TurnAction.Move.NorthWest();
 ```
 * Recharge 50 shield points (energy cost 50 energy points):
 ```csharp
@@ -98,3 +102,24 @@ return TurnAction.Idle();
 4. Copy project assembly to server's bot directory (Specified by Game Master).
 5. Wait for next game round to start.
 6. Repeat from step 3 to improve your bot's intelligence.
+
+### Robot Models
+
+##### Hammer
+![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
+##### Juggernaut
+![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut")
+##### Proto
+![Proto](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Proto.png "Proto")
+##### Rust
+![Rust](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Rust.png "Rust")
+##### Scrappie
+![Scrappie](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scrappie.png "Scrappie")
+##### Scyther
+![Scyther](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Scyther.png "Scyther")
+##### Sparky
+![Sparky](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Sparky.png "Sparky")
+##### Tinker
+![Tinker](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Tinker.png "Tinker")
+##### Twobit
+![Twobit](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Twobit.png "Twobit")
