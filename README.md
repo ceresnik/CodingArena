@@ -105,7 +105,7 @@ return TurnAction.Idle();
 
 ### Robot Models
 
-> Hover mouse over the picture to see the robot name.
+> Hover mouse over the picture to see the robot model name.
 
 ![Hammer](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Hammer.png "Hammer")
 ![Juggernaut](https://github.com/PeterMilovcik/CodingArena/raw/master/CodingArena.Game.Wpf/Images/Juggernaut.png "Juggernaut")
