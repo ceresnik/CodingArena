@@ -5,7 +5,7 @@
         <Canvas.RenderTransform>
             <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
         </Canvas.RenderTransform>
-        <Image Source="{Binding ImageSource}" Height="40" />
+        <Image Source="{Binding ImageSource}" Height="{Binding Height}" />
         <Label Content="{Binding BotName}" FontSize="14" Margin="0,28,0,0" />
         <ProgressBar Height="5" Width="35" 
                      Maximum="{Binding MaxSP}" 
@@ -43,5 +43,10 @@
                 </TransformGroup>
             </ProgressBar.RenderTransform>
         </ProgressBar>
+        <Line X1="{Binding AttackX1}" Y1="{Binding AttackY1}"
+              X2="{Binding AttackX2}" Y2="{Binding AttackY2}"
+              Stroke="Red"
+              Visibility="{Binding AttackVisibility}"
+              StrokeThickness="2"/>
     </Canvas>
 </UserControl>

@@ -6,6 +6,9 @@ namespace CodingArena.Game.Wpf.Battlefield
 {
     internal class BattlefieldBotViewModel : ViewModel
     {
+        private readonly int myBattlefieldWidth;
+        private readonly int myBattlefieldHeight;
+        private readonly IBattlefield myBattlefield;
         private string myBotName;
         private int myX;
         private int myY;
@@ -17,10 +20,21 @@ namespace CodingArena.Game.Wpf.Battlefield
         private int myMaxEP;
         private int myEP;
         private Visibility myProgressBarVisibility;
+        private Visibility myAttackVisibility;
+        private int myAttackX1;
+        private int myAttackX2;
+        private int myAttackY1;
+        private int myAttackY2;
 
-        public BattlefieldBotViewModel(IBattleBot battleBot)
+        public BattlefieldBotViewModel(IBattleBot battleBot, int battlefieldWidth, int battlefieldHeight, IBattlefield battlefield)
         {
+            myBattlefieldWidth = battlefieldWidth;
+            myBattlefieldHeight = battlefieldHeight;
+            myBattlefield = battlefield;
+            Width = 40;
+            Height = 50;
             UpdateFrom(battleBot);
+
         }
 
         public string BotName
@@ -33,6 +47,9 @@ namespace CodingArena.Game.Wpf.Battlefield
                 OnPropertyChanged();
             }
         }
+
+        public int Width { get; }
+        public int Height { get; }
 
         public int X
         {
@@ -144,11 +161,65 @@ namespace CodingArena.Game.Wpf.Battlefield
             }
         }
 
+        public Visibility AttackVisibility
+        {
+            get => myAttackVisibility;
+            set
+            {
+                if (value == myAttackVisibility) return;
+                myAttackVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AttackX1
+        {
+            get => myAttackX1;
+            set
+            {
+                if (value == myAttackX1) return;
+                myAttackX1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AttackY1
+        {
+            get => myAttackY1;
+            set
+            {
+                if (value == myAttackY1) return;
+                myAttackY1 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AttackX2
+        {
+            get => myAttackX2;
+            set
+            {
+                if (value == myAttackX2) return;
+                myAttackX2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AttackY2
+        {
+            get => myAttackY2;
+            set
+            {
+                if (value == myAttackY2) return;
+                myAttackY2 = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void UpdateFrom(IBattleBot bot)
         {
             BotName = bot.Name;
-            X = bot.Position.X * 20;
-            Y = 1000 - bot.Position.Y * 20 - 20;
+            UpdateCoordinates(bot);
             ImageSource = bot.HP > 0
                 ? $"../Images/{bot.Model}.png"
                 : $"../Images/{bot.Model}_dead.png";
@@ -159,6 +230,37 @@ namespace CodingArena.Game.Wpf.Battlefield
             MaxEP = bot.MaxEP;
             EP = bot.EP;
             ProgressBarVisibility = HP > 0 ? Visibility.Visible : Visibility.Hidden;
+            UpdateAttack(bot);
+        }
+
+        private void UpdateAttack(IBattleBot bot)
+        {
+            if (bot.Target != null)
+            {
+                int offsetX = -Width / 2;
+                int offsetY = -Height / 2;
+                AttackX1 = 25;
+                AttackY1 = 10;
+
+                var enemyX = bot.Target.Position.X * (myBattlefieldWidth / myBattlefield.Width) + offsetX;
+                var enemyY = myBattlefieldHeight - bot.Target.Position.Y * (myBattlefieldHeight / myBattlefield.Height) - (myBattlefieldHeight / myBattlefield.Height) + offsetY;
+
+                AttackX2 = enemyX - X + 25;
+                AttackY2 = enemyY - Y + 25;
+                AttackVisibility = Visibility.Visible;
+            }
+            else
+            {
+                AttackVisibility = Visibility.Hidden;
+            }
+        }
+
+        private void UpdateCoordinates(IBattleBot bot)
+        {
+            int offsetX = -Width / 2;
+            int offsetY = -Height / 2;
+            X = bot.Position.X * (myBattlefieldWidth / myBattlefield.Width) + offsetX;
+            Y = myBattlefieldHeight - bot.Position.Y * (myBattlefieldHeight / myBattlefield.Height) - (myBattlefieldHeight / myBattlefield.Height) + offsetY;
         }
     }
 }

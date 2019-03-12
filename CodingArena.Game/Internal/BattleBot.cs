@@ -50,8 +50,12 @@ namespace CodingArena.Game.Internal
         public IBattlefieldPlace Position => Battlefield?[this];
 
         public IOwnBot InsideView { get; }
+
         public IEnemy OutsideView { get; }
+
         public string DestroyedBy { get; set; }
+
+        public IBattleBot Target { get; private set; }
 
         public void PositionTo(IBattlefield battlefield, int newX, int newY)
         {
@@ -61,6 +65,7 @@ namespace CodingArena.Game.Internal
 
         public void ExecuteTurnAction(IEnumerable<IBattleBot> enemies)
         {
+            Reset();
             if (HP <= 0)
             {
                 Action = $"{Name} is destroyed by {DestroyedBy}.";
@@ -115,6 +120,11 @@ namespace CodingArena.Game.Internal
             Action = $"{Name} is destroyed by {DestroyedBy}.";
         }
 
+        private void Reset()
+        {
+            Target = null;
+        }
+
         private ITurnAction GetTurnAction(IEnumerable<IBattleBot> enemies)
         {
             ITurnAction result = null;
@@ -154,6 +164,7 @@ namespace CodingArena.Game.Internal
                 return $"{Name} attacks {enemy.Name} with no damage.";
 
             enemy.TakeDamage(damage, this);
+            Target = enemy;
 
             return enemy.HP <= 0
                 ? $"{Name} destroys {enemy.Name}."
@@ -370,6 +381,7 @@ namespace CodingArena.Game.Internal
 
         private void PositionTo(int newX, int newY) => PositionTo(Battlefield, newX, newY);
 
+
         private string ExecuteTurnAction(RechargeBattery rechargeBattery)
         {
             if (rechargeBattery.EnergyCost > EP)
@@ -417,6 +429,7 @@ namespace CodingArena.Game.Internal
         }
 
         public void TakeDamage(int damage) => TakeDamage(damage, null);
+
 
         public void TakeDamage(int damage, IBattleBot attacker)
         {

@@ -23,7 +23,7 @@
             </GroupBox.Header>
             <Viewbox Stretch="Uniform">
                 <ItemsControl ItemsSource="{Binding BattlefieldViewModel.Bots}"
-                              Width="1000" Height="1000">
+                              Width="{Binding BattlefieldViewModel.BattlefieldWidth}" Height="{Binding BattlefieldViewModel.BattlefieldHeight}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas/>

@@ -29,5 +29,6 @@ namespace CodingArena.Game.Entities
         string Action { get; set; }
         double DistanceTo(IOwnBot insideView);
         double DistanceTo(IEnemy outsideView);
+        IBattleBot Target { get; }
     }
 }

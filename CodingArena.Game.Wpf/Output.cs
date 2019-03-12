@@ -62,7 +62,7 @@ namespace CodingArena.Game.Wpf
             Game.Match.Round.TurnStarting += OnTurnStarting;
             Game.Match.Round.TurnFinished += OnTurnFinished;
             ViewModel.RoundNumber = Game.Match.Round.Number;
-            ViewModel.BattlefieldViewModel = new BattlefieldViewModel(Game.Match.Round.Bots);
+            ViewModel.BattlefieldViewModel = new BattlefieldViewModel(Game.Match.Round);
             LongBeep();
         }
 
