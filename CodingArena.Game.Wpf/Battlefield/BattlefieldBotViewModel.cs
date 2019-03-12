@@ -1,6 +1,5 @@
 using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Common;
-using System.Media;
 using System.Windows;
 
 namespace CodingArena.Game.Wpf.Battlefield
@@ -26,7 +25,6 @@ namespace CodingArena.Game.Wpf.Battlefield
         private int myAttackX2;
         private int myAttackY1;
         private int myAttackY2;
-        private static readonly SoundPlayer mySoundPlayer = new SoundPlayer("Sounds/laser.wav");
 
         public BattlefieldBotViewModel(IBattleBot battleBot, int battlefieldWidth, int battlefieldHeight, IBattlefield battlefield)
         {
@@ -249,8 +247,6 @@ namespace CodingArena.Game.Wpf.Battlefield
                 AttackX2 = enemyX - X + 25;
                 AttackY2 = enemyY - Y + 25;
                 AttackVisibility = Visibility.Visible;
-
-                mySoundPlayer.Play();
             }
             else
             {
