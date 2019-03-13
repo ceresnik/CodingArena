@@ -64,8 +64,11 @@
     <Compile Include="TurnActions\RechargeBattery.cs" />
     <Compile Include="TurnActions\RechargeShield.cs" />
     <Compile Include="TurnActions\TurnAction.cs" />
+    <Compile Include="Weapon.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Weapons\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="CodingArena.Player.nuspec">
       <SubType>Designer</SubType>

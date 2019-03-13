@@ -1,5 +1,6 @@
 using CodingArena.Game.Entities;
 using CodingArena.Game.Wpf.Common;
+using CodingArena.Player;
 using System.Windows;
 
 namespace CodingArena.Game.Wpf.Battlefield
@@ -222,6 +223,10 @@ namespace CodingArena.Game.Wpf.Battlefield
             ImageSource = bot.HP > 0
                 ? $"../Images/{bot.Model}.png"
                 : $"../Images/{bot.Model}_dead.png";
+            if (bot.Model == Model.Twobit && bot.HP > 0)
+            {
+                ImageSource = $"../Images/{bot.Model}.gif";
+            }
             MaxHP = bot.MaxHP;
             HP = bot.HP;
             MaxSP = bot.MaxSP;
