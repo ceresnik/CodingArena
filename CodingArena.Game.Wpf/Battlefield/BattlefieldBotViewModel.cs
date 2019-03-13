@@ -26,6 +26,8 @@ namespace CodingArena.Game.Wpf.Battlefield
         private int myAttackX2;
         private int myAttackY1;
         private int myAttackY2;
+        private Visibility myShieldVisibility;
+        private Visibility myBatteryVisibility;
 
         public BattlefieldBotViewModel(IBattleBot battleBot, int battlefieldWidth, int battlefieldHeight, IBattlefield battlefield)
         {
@@ -216,6 +218,28 @@ namespace CodingArena.Game.Wpf.Battlefield
             }
         }
 
+        public Visibility ShieldVisibility
+        {
+            get => myShieldVisibility;
+            set
+            {
+                if (value == myShieldVisibility) return;
+                myShieldVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility BatteryVisibility
+        {
+            get => myBatteryVisibility;
+            set
+            {
+                if (value == myBatteryVisibility) return;
+                myBatteryVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void UpdateFrom(IBattleBot bot)
         {
             BotName = bot.Name;
@@ -226,11 +250,16 @@ namespace CodingArena.Game.Wpf.Battlefield
             if (bot.Model == Model.Twobit && bot.HP > 0)
             {
                 ImageSource = $"../Images/{bot.Model}.gif";
-                if (bot.Action != null && bot.Action.Contains("recharges shield"))
-                {
-                    ImageSource = $"../Images/{bot.Model}_shield.gif";
-                }
             }
+
+            ShieldVisibility = bot.Action != null && bot.Action.Contains("recharges shield")
+                ? Visibility.Visible
+                : Visibility.Hidden;
+
+            BatteryVisibility = bot.Action != null && bot.Action.Contains("recharges battery")
+                ? Visibility.Visible
+                : Visibility.Hidden;
+
             MaxHP = bot.MaxHP;
             HP = bot.HP;
             MaxSP = bot.MaxSP;

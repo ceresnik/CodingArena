@@ -220,6 +220,10 @@
   <ItemGroup>
     <Resource Include="Images\Twobit_shield.gif" />
     <Resource Include="Images\Twobit.gif" />
+    <Resource Include="Images\Twobit_shield.png" />
+    <Resource Include="Images\Twobit_battery.png" />
+    <Resource Include="Images\shield.png" />
+    <Resource Include="Images\red-battery.png" />
     <Content Include="Sounds\laser.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
