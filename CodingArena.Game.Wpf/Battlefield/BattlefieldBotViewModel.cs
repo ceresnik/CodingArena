@@ -226,6 +226,10 @@ namespace CodingArena.Game.Wpf.Battlefield
             if (bot.Model == Model.Twobit && bot.HP > 0)
             {
                 ImageSource = $"../Images/{bot.Model}.gif";
+                if (bot.Action != null && bot.Action.Contains("recharges shield"))
+                {
+                    ImageSource = $"../Images/{bot.Model}_shield.gif";
+                }
             }
             MaxHP = bot.MaxHP;
             HP = bot.HP;

@@ -218,6 +218,7 @@
     <Resource Include="Images\Twobit_dead.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Twobit_shield.gif" />
     <Resource Include="Images\Twobit.gif" />
     <Content Include="Sounds\laser.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

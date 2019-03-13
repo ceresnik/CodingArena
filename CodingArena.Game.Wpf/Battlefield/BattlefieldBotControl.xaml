@@ -39,7 +39,7 @@
                      Background="Transparent">
             <ProgressBar.RenderTransform>
                 <TransformGroup>
-                    <TranslateTransform X="-35"  Y="35"/>
+                    <TranslateTransform X="-35"  Y="45"/>
                     <RotateTransform Angle="-90"/>
                 </TransformGroup>
             </ProgressBar.RenderTransform>
