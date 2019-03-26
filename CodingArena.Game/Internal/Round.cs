@@ -61,7 +61,11 @@ namespace CodingArena.Game.Internal
             Scores = scores;
         }
 
-        private Task WaitForNextTurnAsync() => Task.Delay(Settings.NextTurnDelay);
+        private Task WaitForNextTurnAsync()
+        {
+            var speedUp = Bots.Any() ? new TimeSpan(Settings.NextTurnDelay.Ticks / Bots.Count(b => b.HP > 0)) : new TimeSpan();
+            return Task.Delay(Settings.NextTurnDelay - speedUp);
+        }
 
         public event EventHandler TurnStarting;
 
