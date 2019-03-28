@@ -92,6 +92,7 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding BotName}" Width="*"/>
                     <DataGridTextColumn Header="Kills" Binding="{Binding Kills}" Width="100"/>
                     <DataGridTextColumn Header="Deaths" Binding="{Binding Deaths}" Width="100"/>
+                    <DataGridTextColumn Header="+/-" Binding="{Binding PlusMinus}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
